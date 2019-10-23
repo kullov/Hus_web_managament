@@ -1,6 +1,6 @@
 <?php
   // Include config file
-  require_once "config.php";
+  require_once "../config.php";
 
   // Define variables and initialize with empty values
   $username = $password = $confirm_password = "";
@@ -14,7 +14,7 @@
       $username_err = "Please enter a username.";
     } else {
       // Prepare a select statement
-      $sql = "SELECT id FROM users WHERE username = ?";
+      $sql = "SELECT id FROM students WHERE student_id = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
@@ -29,7 +29,7 @@
           mysqli_stmt_store_result($stmt);
 
           if (mysqli_stmt_num_rows($stmt) == 1) {
-            $username_err = "This username is already taken.";
+            $username_err = "This student id is already taken.";
           } else {
             $username = trim($_POST["username"]);
           }
@@ -65,7 +65,7 @@
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
 
       // Prepare an insert statement
-      $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+      $sql = "INSERT INTO students (student_id, password) VALUES (?, ?)";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
@@ -78,7 +78,7 @@
         // Attempt to execute the prepared statement
         if (mysqli_stmt_execute($stmt)) {
           // Redirect to login page
-          header("location: login.php");
+          header("location: ../login/student.php");
         } else {
           echo "Something went wrong. Please try again later.";
         }
@@ -106,6 +106,11 @@
     span.password {
       float: right;
       padding-top: 16px;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
     }
 
     /* The Modal (background) */
@@ -160,32 +165,33 @@
 </head>
 
 <body>
-  <h4>Register Form</h4>
+  <h1>STUDENT</h1>
+  <h2>Register Form</h2>
 <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-green">Register</button>
   <div id="dialog" class="modal">
     <form class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <div class="w3-padding-large">
         <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-          <label for="userName"><b>Username</b></label>
+          <label for="userName"><b>User Name</b></label>
           <input class="w3-input w3-padding-large" type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>" required>
-          <span class="help-block"><?php echo $username_err; ?></span>
+          <span class="w3-text-red"><?php echo $username_err; ?></span>
         </div>
         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
           <label for="password"><b>Password</b></label>
           <input class="w3-input w3-padding-large" placeholder="Enter Password"  type="password" name="password" class="form-control" value="<?php echo $password; ?>" required>
-          <span class="help-block"><?php echo $password_err; ?></span>
+          <span class="w3-text-red"><?php echo $password_err; ?></span>
         </div>
         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
           <label for="password"><b>Confirm Password</b></label>
           <input class="w3-input w3-padding-large" placeholder="Enter Password"  type="password" name="confirm_password" value="<?php echo $confirm_password; ?>" required>
-          <span class="help-block"><?php echo $confirm_password_err; ?></span>
+          <span class="w3-text-red"><?php echo $confirm_password_err; ?></span>
         </div>
         <button type="submit" class="w3-button w3-blue w3-block">Register</button>
-        <p>Already have an account? <a href="login.php">Login here</a>.</p>
+        <p>Already have an account? <a href="../login/student.php">Login here</a>.</p>
       </div>
       <div class="w3-padding" style="background-color:#f1f1f1">
         <button type="reset" class="w3-btn w3-red">Reset</button>
-        <button type="button" onclick="document.getElementById('dialog').style.display='none'" class="w3-btn w3-white">Cancel</button>
+        <button type="button" onclick="document.getElementById('dialog').style.display='none'" class="w3-btn w3-blue-gray">Cancel</button>
       </div>
     </form>
   </div>

@@ -4,15 +4,15 @@
 
   // Check if the user is already logged in, if yes then redirect him to welcome page
   if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: welcome.php");
+    header("location: ../welcome.php");
     exit;
   }
 
   // Include config file
-  require_once "config.php";
+  require_once "../config.php";
 
   // Define variables and initialize with empty values
-  $username = $password = "";
+  $username = $password = "" = $name_student;
   $username_err = $password_err = "";
 
   // Processing form data when form is submitted
@@ -35,7 +35,7 @@
     // Validate credentials
     if (empty($username_err) && empty($password_err)) {
       // Prepare a select statement
-      $sql = "SELECT id, username, password FROM users WHERE username = ?";
+      $sql = "SELECT id, student_id, name_student password FROM students WHERE student_id = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
@@ -52,7 +52,7 @@
           // Check if username exists, if yes then verify password
           if (mysqli_stmt_num_rows($stmt) == 1) {
             // Bind result variables
-            mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password);
+            mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $name_student);
             if (mysqli_stmt_fetch($stmt)) {
               if (password_verify($password, $hashed_password)) {
                 // Password is correct, so start a new session
@@ -61,10 +61,11 @@
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
                 $_SESSION["id"] = $id;
-                $_SESSION["username"] = $username;
+                $_SESSION["student_id"] = $username;
+                $_SESSION["name_student"] = $name_student;
 
                 // Redirect user to welcome page
-                header("location: welcome.php");
+                header("location: ../welcome.php");
               } else {
                 // Display an error message if password is not valid
                 $password_err = "The password you entered was not valid.";
@@ -100,17 +101,7 @@
   <style>
     body {
       font-family: Arial, Helvetica, sans-serif;
-    }
-
-    /* Set a style for all buttons */
-    button {
-      background-color: rgb(1, 169, 247);
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      cursor: pointer;
-      width: 100%;
+      text-align: center;
     }
 
     button:hover {
@@ -184,29 +175,31 @@
 </head>
 
 <body>
+  <h1>STUDENT</h1>
   <h2>Login Form</h2>
-  <button onclick="document.getElementById('dialog').style.display='block'" style="width:auto;">Login</button>
+  <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-blue">Login</button>
   <div id="dialog" class="modal">
     <form class="modal-content animate"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <div class="w3-padding-large">
         <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-          <label for="userName"><b>Username</b></label>
+          <label for="userName"><b>Student ID</b></label>
           <input class="w3-input w3-padding-large" type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>" required>
-          <span class="help-block"><?php echo $username_err; ?></span>
+          <span class="w3-text-red"><?php echo $username_err; ?></span>
         </div>
         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
           <label for="password"><b>Password</b></label>
           <input class="w3-input w3-padding-large" type="password" placeholder="Enter Password" name="password" required>
-          <span class="help-block"><?php echo $password_err; ?></span>
+          <span class="w3-text-red"><?php echo $password_err; ?></span>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" class="w3-button w3-blue w3-block">Login</button>
         <!-- <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label> -->
-        <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
+        <p>Don't have an account? <a href="../register/student.php">Sign up now</a>.</p>
       </div>
       <div class="w3-padding" style="background-color:#f1f1f1">
-        <button type="button" onclick="document.getElementById('dialog').style.display='none'" class="custom-btn">Cancel</button>
+        <button type="reset" class="w3-btn w3-red">Reset</button>
+        <button type="button" onclick="document.getElementById('dialog').style.display='none'"  class="w3-btn w3-blue-gray">Cancel</button>
       </div>
     </form>
   </div>

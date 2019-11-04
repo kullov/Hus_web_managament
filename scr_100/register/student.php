@@ -161,10 +161,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Register</title>
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      text-align: center;
-    }
     span.password {
       float: right;
       padding-top: 16px;
@@ -230,14 +226,14 @@
 </head>
 
 <body>
-  <?php include("../../navigation.php"); ?>
   <div class="center-class">
-  <!-- <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-green">Register</button> -->
-  <!-- <a href="../../welcome.php" type="button" class="w3-button w3-dark">Back</a> -->
+  <h1>STUDENT</h1>
+  <h2>Register Form</h2>
+  <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-green">Register</button>
+  <a href="../../welcome.php" type="button" class="w3-button w3-dark">Back</a>
   </div>
   <div id="dialog" class="modal">
     <form class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <h4 class="w3-green w3-padding">Register Student</h4>
       <div class="w3-padding w3-row w3-margin-top w3-margin-bottom">
         <div class="w3-col s4">
           <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
@@ -295,12 +291,12 @@
             <span class="w3-text-red"><?php echo $class_name_err; ?></span>
           </div>
         </div>
-        <button type="submit" class="w3-button w3-green w3-block">Register</button>
-        <p class="center-class">Already have an account? <a class=" w3-text-green" href="../login/student.php">Login here</a>.</p>
+        <button type="submit" class="w3-button w3-blue w3-block">Register</button>
+        <p class="center-class">Already have an account? <a href="../login/student.php">Login here</a>.</p>
       </div>
       <div class="w3-padding center-class" style="background-color:#f1f1f1">
         <button type="reset" class="w3-btn w3-red center-class">Reset</button>
-        <button type="button" onclick="window.location.href='../../welcome.php'" class="w3-btn w3-blue-gray">Cancel</button>
+        <button type="button" onclick="document.getElementById('dialog').style.display='none'" class="w3-btn w3-blue-gray">Cancel</button>
       </div>
     </form>
   </div>
@@ -308,12 +304,11 @@
     // Get the modal
     var modal = document.getElementById('dialog');
     // When the user clicks anywhere outside of the modal, close it
-    // window.onclick = function(event) {
-    //   if (event.target == modal) {
-    //     modal.style.display = "none";
-    //   }
-    // }
-    document.getElementById('dialog').style.display='block';
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
   </script>
 </body>
 

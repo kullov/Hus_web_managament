@@ -52,7 +52,7 @@
           // Check if username exists, if yes then verify password
           if (mysqli_stmt_num_rows($stmt) == 1) {
             // Bind result variables
-            mysqli_stmt_bind_result($stmt, $id, $username_teacher, $phone_number, $email_teacher, $hashed_password, $name_teacher);
+            mysqli_stmt_bind_result($stmt, $id, $phone_number, $email_teacher, $hashed_password, $name_teacher, $username_teacher);
             if (mysqli_stmt_fetch($stmt)) {
               if (password_verify($password, $hashed_password)) {
                 // Password is correct, so start a new session
@@ -63,6 +63,8 @@
                 // $_SESSION["id"] = $id;
                 $_SESSION["username_teacher"] = $username_teacher;
                 $_SESSION["name_teacher"] = $name_teacher;
+                $_SESSION["phone_number_teacher"] = $phone_number;
+                $_SESSION["email_teacher"] = $email_teacher;
                 $_SESSION["role"] = "teacher";
                // $_SESSION["first_name"] = $first_name;
 

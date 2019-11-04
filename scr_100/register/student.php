@@ -1,6 +1,6 @@
 <?php
   // Include config file
-  require_once "../config.php";
+  require_once "../../config.php";
 
   // Define variables and initialize with empty values
   $username = $first_name = $last_name = $class_name = $join_date = $phone = $email = $address = $date_of_birth = $password = $confirm_password = "";
@@ -230,7 +230,7 @@
   <h1>STUDENT</h1>
   <h2>Register Form</h2>
   <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-green">Register</button>
-  <a href="../welcome.php" type="button" class="w3-button w3-dark">Back</a>
+  <a href="../../welcome.php" type="button" class="w3-button w3-dark">Back</a>
   </div>
   <div id="dialog" class="modal">
     <form class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

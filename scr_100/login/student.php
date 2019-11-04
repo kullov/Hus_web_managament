@@ -4,12 +4,12 @@
 
   // Check if the user is already logged in, if yes then redirect him to welcome page
   if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: ../welcome.php");
+    header("location: ../../welcome.php");
     exit;
   }
 
   // Include config file
-  require_once "../config.php";
+  require_once "../../config.php";
 
   // Define variables and initialize with empty values
   $username = $password = $first_name = $last_name = "";
@@ -66,7 +66,7 @@
                 $_SESSION["first_name"] = $first_name;
 
                 // Redirect user to welcome page
-                header("location: ../welcome.php");
+                header("location: ../../welcome.php");
               } else {
                 // Display an error message if password is not valid
                 $password_err = "The password you entered was not valid.";
@@ -179,7 +179,7 @@
   <h1>STUDENT</h1>
   <h2>Login Form</h2>
   <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-green">Login</button>
-  <a href="../welcome.php" type="button" class="w3-button w3-dark">Back</a>
+  <a href="../../welcome.php" type="button" class="w3-button w3-dark">Back</a>
   <div id="dialog" class="modal">
     <form class="modal-content animate"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <div class="w3-padding-large">

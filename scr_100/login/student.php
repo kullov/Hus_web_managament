@@ -190,7 +190,7 @@
       <h4 class="w3-padding w3-green">Login Student</h4>
       <div class="w3-padding-large">
         <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-          <label for="userName"><b>Student ID</b></label>
+          <label for="username"><b>Student ID</b></label>
           <input class="w3-input w3-padding-large" type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>" required>
           <span class="w3-text-red"><?php echo $username_err; ?></span>
         </div>

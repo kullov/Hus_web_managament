@@ -72,7 +72,7 @@
     
     // Validate  name
     if (empty(trim($_POST["name_teacher"]))) {
-      $name_teacher_err = "Please enter your first name!";
+      $name_teacher_err = "Please enter your name!";
     } else {
       $name_teacher = trim($_POST["name_teacher"]);
     }
@@ -210,8 +210,8 @@
       <h4 class="w3-orange w3-padding">Register Teacher</h4>
       <div class="w3-padding w3-row w3-margin-top w3-margin-bottom">
         <div class="w3-col s6">
-          <div class="form-group <?php echo (!empty($username_teacher)) ? 'has-error' : ''; ?>">
-            <label for="userName"><b>User Name</b></label>
+          <div class="form-group <?php echo (!empty($username_teacher_err)) ? 'has-error' : ''; ?>">
+            <label for="username_teacher"><b>User Name</b></label>
             <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter Username" name="username_teacher" value="<?php echo $username_teacher; ?>" required>
             <span class="w3-text-red"><?php echo $username_teacher_err; ?></span>
           </div>
@@ -221,14 +221,14 @@
             <span class="w3-text-red"><?php echo $password_err; ?></span>
           </div>
           <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-            <label for="password"><b>Confirm Password</b></label>
+            <label for="confirm_password"><b>Confirm Password</b></label>
             <input class="w3-input w3-padding-large fix-input" placeholder="Enter Password"  type="password" name="confirm_password" value="<?php echo $confirm_password; ?>" required>
             <span class="w3-text-red"><?php echo $confirm_password_err; ?></span>
           </div>
         </div>
         <div class="w3-col s6">
           <div class="form-group <?php echo (!empty($name_teacher)) ? 'has-error' : ''; ?>">
-            <label for="email_teacher"><b>Name Teacher</b></label>
+            <label for="name_teacher"><b>Name Teacher</b></label>
             <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter your name" name="name_teacher" value="<?php echo $name_teacher; ?>">
             <span class="w3-text-red"><?php echo $name_teacher_err; ?></span>
           </div>

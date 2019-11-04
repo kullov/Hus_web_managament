@@ -26,7 +26,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   <?php include("navigation.php"); ?>
   <div class="w3-container" style="margin-top:150px;">
     <h1>Welcome to our site ^^</h1>
-    <p><i>Please login your account!</i></p>
+    <!-- <p><i>Please login your account!</i></p> -->
   </div>
   <!-- <p>
     <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>

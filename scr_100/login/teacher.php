@@ -60,13 +60,14 @@
 
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
-                $_SESSION["id"] = $id;
+                // $_SESSION["id"] = $id;
                 $_SESSION["username_teacher"] = $username_teacher;
                 $_SESSION["name_teacher"] = $name_teacher;
+                $_SESSION["role"] = "teacher";
                // $_SESSION["first_name"] = $first_name;
 
-                // Redirect user to scr_1001 page
-                header("location: ../../scr_100x/teacher/scr_1001.php");
+                // Redirect user to scr_1003 page
+                header("location: ../../scr_100x/teacher/scr_1003.php");
               } else {
                 // Display an error message if password is not valid
                 $password_err = "The password you entered was not valid.";
@@ -184,7 +185,7 @@
       <h4 class="w3-padding w3-orange">Login Teacher</h4>
       <div class="w3-padding-large">
         <div class="form-group <?php echo (!empty($username_teacher_err)) ? 'has-error' : ''; ?>">
-          <label for="userName"><b>Username Teacher</b></label>
+          <label for="username_teacher"><b>Username Teacher</b></label>
           <input class="w3-input w3-padding-large" type="text" placeholder="Enter username teacher" name="username_teacher" value="<?php echo $username_teacher; ?>" required>
           <span class="w3-text-red"><?php echo $username_teacher_err; ?></span>
         </div>

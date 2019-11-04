@@ -12,7 +12,7 @@
   require_once "../config.php";
 
   // Define variables and initialize with empty values
-  $username = $password = $first_name = $last_name = "";
+  $username = $password = $name_organization = "";
   $username_err = $password_err = "";
 
   // Processing form data when form is submitted
@@ -35,7 +35,7 @@
     // Validate credentials
     if (empty($username_err) && empty($password_err)) {
       // Prepare a select statement
-      $sql = "SELECT id, intern_id, first_name, last_name, password FROM intern_profile WHERE intern_id = ?";
+      $sql = "SELECT id, username, name_organization, password FROM organization_profile WHERE id = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         
@@ -52,7 +52,7 @@
           // Check if username exists, if yes then verify password
           if (mysqli_stmt_num_rows($stmt) == 1) {
             // Bind result variables
-            mysqli_stmt_bind_result($stmt, $id, $username, $first_name, $last_name, $hashed_password);
+            mysqli_stmt_bind_result($stmt, $id, $username, $name_organization, $hashed_password);
             if (mysqli_stmt_fetch($stmt)) {
               if (password_verify($password, $hashed_password)) {
                 // Password is correct, so start a new session
@@ -61,9 +61,8 @@
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
                 $_SESSION["id"] = $id;
-                $_SESSION["intern_id"] = $username;
-                $_SESSION["last_name"] = $last_name;
-                $_SESSION["first_name"] = $first_name;
+                $_SESSION["username"] = $username;
+                $_SESSION["name_organization"] = $name_organization;
 
                 // Redirect user to welcome page
                 header("location: ../welcome.php");
@@ -176,15 +175,14 @@
 </head>
 
 <body>
-  <h1>STUDENT</h1>
+  <h1>ORGANIZATION</h1>
   <h2>Login Form</h2>
-  <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-green">Login</button>
-  <a href="../welcome.php" type="button" class="w3-button w3-dark">Back</a>
+  <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-blue">Login</button>
   <div id="dialog" class="modal">
     <form class="modal-content animate"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <div class="w3-padding-large">
         <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-          <label for="userName"><b>Student ID</b></label>
+          <label for="userName"><b>User Name</b></label>
           <input class="w3-input w3-padding-large" type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>" required>
           <span class="w3-text-red"><?php echo $username_err; ?></span>
         </div>
@@ -197,7 +195,7 @@
         <!-- <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label> -->
-        <p>Don't have an account? <a href="../register/student.php">Sign up now</a>.</p>
+        <p>Don't have an account? <a href="../register/organization.php">Sign up now</a>.</p>
       </div>
       <div class="w3-padding" style="background-color:#f1f1f1">
         <button type="reset" class="w3-btn w3-red">Reset</button>

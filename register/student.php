@@ -3,8 +3,8 @@
   require_once "../config.php";
 
   // Define variables and initialize with empty values
-  $username = $name_student = $phone = $email = $address = $birth_day = $password = $confirm_password = "";
-  $username_err = $name_student_err = $phone_err = $email_err = $address_err = $birth_day_err = $password_err = $confirm_password_err = "";
+  $username = $first_name = $last_name = $class_name = $join_date = $phone = $email = $address = $date_of_birth = $password = $confirm_password = "";
+  $username_err = $first_name_err = $last_name_err = $class_name_err = $join_date_err = $phone_err = $email_err = $address_err = $date_of_birth_err = $password_err = $confirm_password_err = "";
 
   // Processing form data when form is submitted
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -14,7 +14,7 @@
       $username_err = "Please enter a username.";
     } else {
       // Prepare a select statement
-      $sql = "SELECT id FROM students WHERE student_id = ?";
+      $sql = "SELECT id FROM intern_profile WHERE intern_id = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
@@ -70,11 +70,18 @@
       $phone = trim($_POST["phone"]);
     }
     
-    // Validate namw
-    if (empty(trim($_POST["name_student"]))) {
-      $name_student_err = "Please enter your name!";
+    // Validate first name
+    if (empty(trim($_POST["first_name"]))) {
+      $first_name_err = "Please enter your first name!";
     } else {
-      $name_student = trim($_POST["name_student"]);
+      $first_name = trim($_POST["first_name"]);
+    }
+
+    // Validate last name
+    if (empty(trim($_POST["last_name"]))) {
+      $last_name_err = "Please enter your last name!";
+    } else {
+      $last_name = trim($_POST["last_name"]);
     }
 
     // Validate email
@@ -84,29 +91,43 @@
       $email = trim($_POST["email"]);
     }
 
-    // Validate address
-    if (empty(trim($_POST["address"]))) {
-      $address_err = "Please enter your address!";
+    // Validate class_name
+    if (empty(trim($_POST["class_name"]))) {
+      $class_name_err = "Please enter your class name!";
     } else {
-      $address = trim($_POST["address"]);
+      $class_name = trim($_POST["class_name"]);
     }
 
+    // Validate address
+    // if (empty(trim($_POST["address"]))) {
+    //   $address_err = "Please enter your address!";
+    // } else {
+    //   $address = trim($_POST["address"]);
+    // }
+
     // Validate birth_day
-    if (empty(trim($_POST["birth_day"]))) {
-      $birth_day_err = "Please enter your birth_day!";
+    if (empty(trim($_POST["date_of_birth"]))) {
+      $date_of_birth_err = "Please enter your birthday!";
     } else {
-      $birth_day = trim($_POST["birth_day"]);
+      $date_of_birth = trim($_POST["date_of_birth"]);
+    }
+
+    // Validate join_date
+    if (empty(trim($_POST["join_date"]))) {
+      $join_date_err = "Please enter your join date!";
+    } else {
+      $join_date = trim($_POST["join_date"]);
     }
 
     // Check input errors before inserting in database
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
 
       // Prepare an insert statement
-      $sql = "INSERT INTO students (student_id, password, name_student, phone, email, address, birth_day) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      $sql = "INSERT INTO intern_profile (intern_id, password, first_name, last_name, phone, email, date_of_birth, join_date, class_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "sssssss", $param_username, $param_password, $name_student, $phone, $email, $address, $birth_day);
+        mysqli_stmt_bind_param($stmt, "sssssssss", $param_username, $param_password, $first_name, $last_name, $phone, $email, $date_of_birth, $join_date, $class_name);
 
         // Set parameters
         $param_username = $username;
@@ -157,10 +178,14 @@
 
     /* Modal Content/Box */
     .modal-content {
-      margin: 5% auto 15% auto;
+      margin: 2% auto 10% auto;
       /* 5% from the top, 15% from the bottom and centered */
-      width: 40%;
+      width: 50%;
       /* Could be more or less, depending on screen size */
+    }
+
+    .fix-input {
+      width: 85%;
     }
 
     /* Add Zoom Animation */
@@ -205,52 +230,65 @@
   <h1>STUDENT</h1>
   <h2>Register Form</h2>
   <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-green">Register</button>
+  <a href="../welcome.php" type="button" class="w3-button w3-dark">Back</a>
   </div>
   <div id="dialog" class="modal">
     <form class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <div class="w3-padding-large w3-row">
-        <div class="w3-col s5 w3-margin">
+      <div class="w3-padding w3-row w3-margin-top w3-margin-bottom">
+        <div class="w3-col s4">
           <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
             <label for="userName"><b>User Name</b></label>
-            <input class="w3-input w3-padding-large" type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>" required>
+            <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>" required>
             <span class="w3-text-red"><?php echo $username_err; ?></span>
-          </div>
-          <div class="form-group <?php echo (!empty($birth_day_err)) ? 'has-error' : ''; ?>">
-            <label for="birth_day"><b>Birth Day</b></label>
-            <input class="w3-input w3-padding-large" type="date" placeholder="Enter your birth day" name="birth_day" value="<?php echo $birth_day; ?>" required>
-            <span class="w3-text-red"><?php echo $birth_day_err; ?></span>
-          </div>
-          <div class="form-group <?php echo (!empty($name_student_err)) ? 'has-error' : ''; ?>">
-            <label for="name_student"><b>Student Name</b></label>
-            <input class="w3-input w3-padding-large" type="text" placeholder="Enter your name" name="name_student" value="<?php echo $name_student; ?>" required>
-            <span class="w3-text-red"><?php echo $name_student_err; ?></span>
-          </div>
-          <div class="form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
-            <label for="phone"><b>Phone</b></label>
-            <input class="w3-input w3-padding-large" type="text" placeholder="Enter your phone number" name="phone" value="<?php echo $phone; ?>">
-            <span class="w3-text-red"><?php echo $phone_err; ?></span>
-          </div>
-        </div>
-        <div class="w3-col s5 w3-margin">
-          <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-            <label for="email"><b>Email</b></label>
-            <input class="w3-input w3-padding-large" type="text" placeholder="Enter your email" name="email" value="<?php echo $email; ?>">
-            <span class="w3-text-red"><?php echo $email_err; ?></span>
-          </div>
-          <div class="form-group <?php echo (!empty($address_err)) ? 'has-error' : ''; ?>">
-            <label for="address"><b>Address</b></label>
-            <input class="w3-input w3-padding-large" type="text" placeholder="Enter your address" name="address" value="<?php echo $address; ?>">
-            <span class="w3-text-red"><?php echo $address_err; ?></span>
           </div>
           <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
             <label for="password"><b>Password</b></label>
-            <input class="w3-input w3-padding-large" placeholder="Enter Password"  type="password" name="password" class="form-control" value="<?php echo $password; ?>" required>
+            <input class="w3-input w3-padding-large fix-input" placeholder="Enter Password"  type="password" name="password" class="form-control" value="<?php echo $password; ?>" required>
             <span class="w3-text-red"><?php echo $password_err; ?></span>
           </div>
           <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
             <label for="password"><b>Confirm Password</b></label>
-            <input class="w3-input w3-padding-large" placeholder="Enter Password"  type="password" name="confirm_password" value="<?php echo $confirm_password; ?>" required>
+            <input class="w3-input w3-padding-large fix-input" placeholder="Enter Password"  type="password" name="confirm_password" value="<?php echo $confirm_password; ?>" required>
             <span class="w3-text-red"><?php echo $confirm_password_err; ?></span>
+          </div>
+          <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
+            <label for="email"><b>Email</b></label>
+            <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter your email" name="email" value="<?php echo $email; ?>">
+            <span class="w3-text-red"><?php echo $email_err; ?></span>
+          </div>
+        </div>
+        <div class="w3-col s4">
+          <div class="form-group <?php echo (!empty($last_name_err)) ? 'has-error' : ''; ?>">
+            <label for="last_name"><b>Last Name</b></label>
+            <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter your last name" name="last_name" value="<?php echo $last_name; ?>" required>
+            <span class="w3-text-red"><?php echo $last_name_err; ?></span>
+          </div>
+          <div class="form-group <?php echo (!empty($first_name_err)) ? 'has-error' : ''; ?>">
+            <label for="first_name"><b>First Name</b></label>
+            <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter your first name" name="first_name" value="<?php echo $first_name; ?>" required>
+            <span class="w3-text-red"><?php echo $first_name_err; ?></span>
+          </div>
+          <div class="form-group <?php echo (!empty($date_of_birth_err)) ? 'has-error' : ''; ?>">
+            <label for="date_of_birth"><b>Birth Day</b></label>
+            <input class="w3-input w3-padding-large fix-input" type="date" placeholder="Enter your birth day" name="date_of_birth" value="<?php echo $date_of_birth; ?>" required>
+            <span class="w3-text-red"><?php echo $date_of_birth_err; ?></span>
+          </div>
+          <div class="form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
+            <label for="phone"><b>Phone</b></label>
+            <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter your phone number" name="phone" value="<?php echo $phone; ?>">
+            <span class="w3-text-red"><?php echo $phone_err; ?></span>
+          </div>
+        </div>
+        <div class="w3-col s4">
+          <div class="form-group <?php echo (!empty($join_date_err)) ? 'has-error' : ''; ?>">
+            <label for="join_date"><b>Join date</b></label>
+            <input class="w3-input w3-padding-large fix-input" type="date" placeholder="" name="join_date" value="<?php echo $join_date; ?>">
+            <span class="w3-text-red"><?php echo $join_date_err; ?></span>
+          </div>
+          <div class="form-group <?php echo (!empty($class_name_err)) ? 'has-error' : ''; ?>">
+            <label for="class_name"><b>Class name</b></label>
+            <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter your class name" name="class_name" value="<?php echo $class_name; ?>">
+            <span class="w3-text-red"><?php echo $class_name_err; ?></span>
           </div>
         </div>
         <button type="submit" class="w3-button w3-blue w3-block">Register</button>

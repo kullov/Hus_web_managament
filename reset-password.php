@@ -4,7 +4,7 @@ session_start();
 
 // Check if the user is logged in, otherwise redirect to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-  header("location: scr_100/login/student.php");
+  header("location: login/organization.php");
   exit;
 }
 
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Check input errors before updating the database
   if (empty($new_password_err) && empty($confirm_password_err)) {
     // Prepare an update statement
-    $sql = "UPDATE students SET password = ? WHERE id = ?";
+    $sql = "UPDATE organization_profile SET password = ? WHERE id = ?";
 
     if ($stmt = mysqli_prepare($link, $sql)) {
       // Bind variables to the prepared statement as parameters
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (mysqli_stmt_execute($stmt)) {
         // Password updated successfully. Destroy the session, and redirect to login page
         session_destroy();
-        header("location: scr_100/login/student.php");
+        header("location: login/organization.php");
         exit();
       } else {
         echo "Oops! Something went wrong. Please try again later.";

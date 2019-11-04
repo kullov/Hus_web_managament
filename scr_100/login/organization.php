@@ -12,17 +12,17 @@
   require_once "../../config.php";
 
   // Define variables and initialize with empty values
-  $tax = $password = $name_organization = "";
+  $tax_number = $password = $name_organization = "";
   $tax_err = $password_err = "";
 
   // Processing form data when form is submitted
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if tax is empty
-    if (empty(trim($_POST["tax"]))) {
-      $tax_err = "Please enter tax.";
+    if (empty(trim($_POST["tax_number"]))) {
+      $tax_err = "Please enter tax number.";
     } else {
-      $tax = trim($_POST["tax"]);
+      $tax_number = trim($_POST["tax_number"]);
     }
 
     // Check if password is empty
@@ -35,7 +35,7 @@
     // Validate credentials
     if (empty($tax_err) && empty($password_err)) {
       // Prepare a select statement
-      $sql = "SELECT id, tax, name_organization, password FROM organization_profile WHERE tax = ?";
+      $sql = "SELECT id, tax_number, name_organization, password FROM organization_profile WHERE tax_number = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         
@@ -43,7 +43,7 @@
         mysqli_stmt_bind_param($stmt, "s", $param_tax);
 
         // Set parameters
-        $param_tax = $tax;
+        $param_tax = $tax_number;
 
         // Attempt to execute the prepared statement
         if (mysqli_stmt_execute($stmt)) {
@@ -52,7 +52,7 @@
           // Check if tax exists, if yes then verify password
           if (mysqli_stmt_num_rows($stmt) == 1) {
             // Bind result variables
-            mysqli_stmt_bind_result($stmt, $id, $tax, $name_organization, $hashed_password);
+            mysqli_stmt_bind_result($stmt, $id, $tax_number, $name_organization, $hashed_password);
             if (mysqli_stmt_fetch($stmt)) {
               if (password_verify($password, $hashed_password)) {
                 // Password is correct, so start a new session
@@ -61,8 +61,9 @@
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
                 $_SESSION["id"] = $id;
-                $_SESSION["tax"] = $tax;
+                $_SESSION["tax_number"] = $tax_number;
                 $_SESSION["name_organization"] = $name_organization;
+                $_SESSION["role"] = "organization";
 
                 // Redirect user to welcome page
                 header("location: ../../scr_100x/organization/scr_1002.php");
@@ -182,8 +183,8 @@
         <h4 class="w3-padding w3-blue">Login Organization</h4>
       <div class="w3-padding-large">
         <div class="form-group <?php echo (!empty($tax_err)) ? 'has-error' : ''; ?>">
-          <label for="taxName"><b>Tax Identification Number</b></label>
-          <input class="w3-input w3-padding-large" type="text" placeholder="Enter Tax Identification Number" name="tax" value="<?php echo $tax; ?>" required>
+          <label for="tax_number"><b>Tax Identification Number</b></label>
+          <input class="w3-input w3-padding-large" type="text" placeholder="Enter Tax Identification Number" name="tax_number" value="<?php echo $tax_number; ?>" required>
           <span class="w3-text-red"><?php echo $tax_err; ?></span>
         </div>
         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">

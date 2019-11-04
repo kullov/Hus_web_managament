@@ -149,6 +149,11 @@
     // Close connection
     mysqli_close($link);
   }
+
+  if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    $_SESSION["role"] = "";
+  }
+  ?>
 ?>
 
 <!DOCTYPE html>
@@ -231,10 +236,10 @@
 
 <body>
   <?php include("../../navigation.php"); ?>
-  <div class="center-class">
+  <!-- <div class="center-class"> -->
   <!-- <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-green">Register</button> -->
   <!-- <a href="../../welcome.php" type="button" class="w3-button w3-dark">Back</a> -->
-  </div>
+  <!-- </div> -->
   <div id="dialog" class="modal">
     <form class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <h4 class="w3-green w3-padding">Register Student</h4>

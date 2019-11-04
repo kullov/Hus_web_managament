@@ -129,6 +129,10 @@
     // Close connection
     mysqli_close($link);
   }
+  if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    $_SESSION["role"] = "";
+  }
+  ?>
 ?>
 
 <!DOCTYPE html>

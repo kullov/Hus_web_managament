@@ -1,6 +1,6 @@
 <?php
   // Include config file
-  require_once "../../config.php";
+  require_once "../config.php";
 
   // Define variables and initialize with empty values
   $username = $name_organization = $tax = $email = $address = $password = $confirm_password = "";
@@ -14,7 +14,7 @@
       $username_err = "Please enter a username.";
     } else {
       // Prepare a select statement
-      $sql = "SELECT id FROM orrganization_profile WHERE username = ?";
+      $sql = "SELECT id FROM organization_profile WHERE username = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
@@ -97,11 +97,11 @@
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
 
       // Prepare an insert statement
-      $sql = "INSERT INTO orrganization_profile (username, password, name_organization, tax, email, address) VALUES (?, ?, ?, ?, ?, ?)";
+      $sql = "INSERT INTO organization_profile (username, password, name_organization, tax, email, address) VALUES ( ?, ?, ?, ?, ?, ?)";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "ssssss", $param_username, $param_password, $name_organization, $tax, $email, $address);
+        mysqli_stmt_bind_param($stmt, "sssssss", $param_username, $param_password, $name_organization, $tax, $email, $address);
 
         // Set parameters
         $param_username = $username;

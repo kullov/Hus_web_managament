@@ -35,7 +35,7 @@
     // Validate credentials
     if (empty($username_err) && empty($password_err)) {
       // Prepare a select statement
-      $sql = "SELECT id, username, name_organization, password FROM organization_profile WHERE id = ?";
+      $sql = "SELECT id, username, name_organization, password FROM organization_profile WHERE username = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         

@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `organization_profile` (
   `gross_revenue` int(11) NOT NULL,
   `address` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `contact` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `tax_number` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `tax` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `email` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `password` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `name_organization` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,

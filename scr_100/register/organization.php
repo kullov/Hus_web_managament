@@ -70,7 +70,7 @@
       $tax = trim($_POST["tax"]);
     }
     
-    // Validate namw
+    // Validate name organization
     if (empty(trim($_POST["name_organization"]))) {
       $name_organization_err = "Please enter your name organization!";
     } else {
@@ -205,11 +205,6 @@
     <form class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <div class="w3-padding-large w3-row">
         <div class="w3-col s5 w3-margin">
-          <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-            <label for="userName"><b>User Name</b></label>
-            <input class="w3-input w3-padding-large" type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>" required>
-            <span class="w3-text-red"><?php echo $username_err; ?></span>
-          </div>
           <div class="form-group <?php echo (!empty($name_organization_err)) ? 'has-error' : ''; ?>">
             <label for="name_organization"><b>Organization Name</b></label>
             <input class="w3-input w3-padding-large" type="text" placeholder="Enter your name" name="name_organization" value="<?php echo $name_organization; ?>" required>
@@ -219,6 +214,11 @@
             <label for="phone"><b>Tax</b></label>
             <input class="w3-input w3-padding-large" type="text" placeholder="Enter your tax number" name="tax" value="<?php echo $tax; ?>">
             <span class="w3-text-red"><?php echo $tax_err; ?></span>
+          </div>
+          <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+            <label for="userName"><b>User Name</b></label>
+            <input class="w3-input w3-padding-large" type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>" required>
+            <span class="w3-text-red"><?php echo $username_err; ?></span>
           </div>
           <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
             <label for="email"><b>Email</b></label>

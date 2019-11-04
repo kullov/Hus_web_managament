@@ -9,7 +9,7 @@
   }
 
   // Include config file
-  require_once "../config.php";
+  require_once "../../config.php";
 
   // Define variables and initialize with empty values
   $username = $password = $name_organization = "";
@@ -63,9 +63,10 @@
                 $_SESSION["id"] = $id;
                 $_SESSION["username"] = $username;
                 $_SESSION["name_organization"] = $name_organization;
+                $_SESSION["role"] = "organization";
 
                 // Redirect user to welcome page
-                header("location: ../welcome.php");
+                header("location: ../../scr_100x/organization/scr_1002.php");
               } else {
                 // Display an error message if password is not valid
                 $password_err = "The password you entered was not valid.";
@@ -175,15 +176,15 @@
 </head>
 
 <body>
-  <h1>ORGANIZATION</h1>
-  <h2>Login Form</h2>
-  <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-blue">Login</button>
+  <?php include("../../navigation.php"); ?>
+  <!-- <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-blue">Login</button> -->
   <div id="dialog" class="modal">
     <form class="modal-content animate"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <h4 class="w3-padding w3-blue">Login Organization</h4>
       <div class="w3-padding-large">
         <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-          <label for="userName"><b>User Name</b></label>
-          <input class="w3-input w3-padding-large" type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>" required>
+          <label for="userName"><b>Tax Identification Number</b></label>
+          <input class="w3-input w3-padding-large" type="text" placeholder="Enter Tax Identification Number" name="username" value="<?php echo $username; ?>" required>
           <span class="w3-text-red"><?php echo $username_err; ?></span>
         </div>
         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
@@ -199,7 +200,7 @@
       </div>
       <div class="w3-padding" style="background-color:#f1f1f1">
         <button type="reset" class="w3-btn w3-red">Reset</button>
-        <button type="button" onclick="document.getElementById('dialog').style.display='none'"  class="w3-btn w3-blue-gray">Cancel</button>
+        <button type="button" onclick="window.location.href='../../welcome.php'" class="w3-btn w3-blue-gray">Cancel</button>
       </div>
     </form>
   </div>
@@ -207,11 +208,12 @@
     // Get the modal
     var modal = document.getElementById('dialog');
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
+    // window.onclick = function(event) {
+    //   if (event.target == modal) {
+    //     modal.style.display = "none";
+    //   }
+    // }
+    document.getElementById('dialog').style.display='block';
   </script>
 </body>
 

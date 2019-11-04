@@ -177,6 +177,11 @@
 
 <body>
   <?php include("../../navigation.php"); ?>
+  <div>
+    <div class="w3-display-container w3-animate-opacity">
+      <img src="https://www.w3schools.com/w3images/sailboat.jpg" alt="boat" style="width:100%;min-height:350px;max-height:600px;">
+    </div>
+  </div>
   <!-- <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-blue">Login</button> -->
   <div id="dialog" class="modal">
     <form class="modal-content animate"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

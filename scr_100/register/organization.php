@@ -1,6 +1,6 @@
 <?php
   // Include config file
-  require_once "../../config.php";
+  require_once "../config.php";
 
   // Define variables and initialize with empty values
   $username = $name_organization = $tax = $email = $address = $password = $confirm_password = "";
@@ -14,7 +14,7 @@
       $username_err = "Please enter a username.";
     } else {
       // Prepare a select statement
-      $sql = "SELECT id FROM orrganization_profile WHERE id = ?";
+      $sql = "SELECT id FROM organization_profile WHERE username = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
@@ -97,7 +97,7 @@
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
 
       // Prepare an insert statement
-      $sql = "INSERT INTO orrganization_profile (id, password, name_organization, tax, email, address) VALUES (?, ?, ?, ?, ?, ?)";
+      $sql = "INSERT INTO organization_profile (username, password, name_organization, tax, email, address) VALUES ( ?, ?, ?, ?, ?, ?)";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
@@ -135,10 +135,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Register</title>
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      text-align: center;
-    }
     span.password {
       float: right;
       padding-top: 16px;
@@ -156,7 +152,7 @@
 
     /* Modal Content/Box */
     .modal-content {
-      margin: 2% auto 15% auto;
+      margin: 5% auto 15% auto;
       /* 5% from the top, 15% from the bottom and centered */
       width: 40%;
       /* Could be more or less, depending on screen size */
@@ -200,14 +196,13 @@
 </head>
 
 <body>
-  <?php include("../../navigation.php"); ?>
-  <!-- <div class="center-class"> -->
-  <!-- <h1>ORGANIZATION</h1> -->
-  <!-- <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-blue">Register</button> -->
-  <!-- </div> -->
+  <div class="center-class">
+  <h1>ORGANIZATION</h1>
+  <h2>Register Form</h2>
+  <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-blue">Register</button>
+  </div>
   <div id="dialog" class="modal">
     <form class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <h4 class="w3-padding w3-blue">Register Organization</h4>
       <div class="w3-padding-large w3-row">
         <div class="w3-col s5 w3-margin">
           <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
@@ -253,7 +248,7 @@
       </div>
       <div class="w3-padding center-class" style="background-color:#f1f1f1">
         <button type="reset" class="w3-btn w3-red center-class">Reset</button>
-        <button type="button" onclick="window.location.href='../../welcome.php'" class="w3-btn w3-blue-gray">Cancel</button>
+        <button type="button" onclick="document.getElementById('dialog').style.display='none'" class="w3-btn w3-blue-gray">Cancel</button>
       </div>
     </form>
   </div>
@@ -261,12 +256,11 @@
     // Get the modal
     var modal = document.getElementById('dialog');
     // When the user clicks anywhere outside of the modal, close it
-    // window.onclick = function(event) {
-    //   if (event.target == modal) {
-    //     modal.style.display = "none";
-    //   }
-    // }
-    document.getElementById('dialog').style.display='block';
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
   </script>
 </body>
 

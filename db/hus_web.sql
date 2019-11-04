@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 04, 2019 at 05:21 PM
+-- Generation Time: Nov 04, 2019 at 06:01 PM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -195,14 +195,23 @@ CREATE TABLE IF NOT EXISTS `status` (
 
 DROP TABLE IF EXISTS `teacher_profile`;
 CREATE TABLE IF NOT EXISTS `teacher_profile` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `phone_number` int(20) NOT NULL,
   `email_teacher` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `password` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `password` varchar(150) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `name_teacher` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `username_teacher` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+--
+-- Dumping data for table `teacher_profile`
+--
+
+INSERT INTO `teacher_profile` (`id`, `phone_number`, `email_teacher`, `password`, `name_teacher`, `username_teacher`) VALUES
+(1, 1243653456, 'tam@gmail.com', '$2y$10$80AIBYcOPJc3mzMr3gjYAOm10nWszwJH50QT2zfdm5oZHY1NpLpvu', 'Tam', 'admin'),
+(2, 124145623, 'phong672006@gmail.com', '$2y$10$PXIizU2RGRqG6AJcMsc6I.g70Zyt31/fiKLlrll6cCjWUoFlQT6nG', 'Tráº§n Duy Phong', '1234567'),
+(3, 3623312, 'tt@gail.com', '$2y$10$nF/xqYoVtXOEIxDS6rbcBOZ.guz7LK21C0mOwXV8bICirUYMgiKau', 'Tran Nga', 'ngatt');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -65,8 +65,8 @@
                 $_SESSION["last_name"] = $last_name;
                 $_SESSION["first_name"] = $first_name;
 
-                // Redirect user to welcome page
-                header("location: ../../welcome.php");
+                // Redirect user to scr_1001 page
+                header("location: /demo-project/scr_100x/student/scr_1001.php");
               } else {
                 // Display an error message if password is not valid
                 $password_err = "The password you entered was not valid.";

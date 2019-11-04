@@ -65,7 +65,7 @@
                 $_SESSION["name_organization"] = $name_organization;
 
                 // Redirect user to welcome page
-                header("location: ../welcome.php");
+                header("location: ../../scr_100x/organization/scr_1002.php");
               } else {
                 // Display an error message if password is not valid
                 $password_err = "The password you entered was not valid.";

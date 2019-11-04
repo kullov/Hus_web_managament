@@ -176,12 +176,12 @@
 </head>
 
 <body>
-  <h1>STUDENT</h1>
-  <h2>Login Form</h2>
-  <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-green">Login</button>
-  <a href="../../welcome.php" type="button" class="w3-button w3-dark">Back</a>
+  <?php include("../../navigation.php"); ?>
+  <!-- <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-green">Login</!--> -->
+  <!-- <a href="../../welcome.php" type="button" class="w3-button w3-dark">Back</!--> -->
   <div id="dialog" class="modal">
     <form class="modal-content animate"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+      <h4 class="w3-padding w3-green">Login Student</h4>
       <div class="w3-padding-large">
         <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
           <label for="userName"><b>Student ID</b></label>
@@ -193,15 +193,15 @@
           <input class="w3-input w3-padding-large" type="password" placeholder="Enter Password" name="password" required>
           <span class="w3-text-red"><?php echo $password_err; ?></span>
         </div>
-        <button type="submit" class="w3-button w3-blue w3-block">Login</button>
+        <button type="submit" class="w3-button w3-green w3-block">Login</button>
         <!-- <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label> -->
-        <p>Don't have an account? <a href="../register/student.php">Sign up now</a>.</p>
+        <p>Don't have an account? <a class="w3-text-green" href="../register/student.php">Sign up now</a>.</p>
       </div>
       <div class="w3-padding" style="background-color:#f1f1f1">
         <button type="reset" class="w3-btn w3-red">Reset</button>
-        <button type="button" onclick="document.getElementById('dialog').style.display='none'"  class="w3-btn w3-blue-gray">Cancel</button>
+        <button type="button" onclick="window.location.href='../../welcome.php'" class="w3-btn w3-blue-gray">Cancel</button>
       </div>
     </form>
   </div>
@@ -209,11 +209,12 @@
     // Get the modal
     var modal = document.getElementById('dialog');
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
+    // window.onclick = function(event) {
+    //   if (event.target == modal) {
+    //     modal.style.display = "none";
+    //   }
+    // }
+    document.getElementById('dialog').style.display='block';
   </script>
 </body>
 

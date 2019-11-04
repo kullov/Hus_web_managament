@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 04, 2019 at 03:47 AM
--- Server version: 5.7.24
--- PHP Version: 7.2.14
+-- Generation Time: Nov 04, 2019 at 05:21 PM
+-- Server version: 5.7.21
+-- PHP Version: 5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -71,6 +71,7 @@ CREATE TABLE IF NOT EXISTS `intern_ability` (
 --
 -- Table structure for table `intern_profile`
 --
+
 DROP TABLE IF EXISTS `intern_profile`;
 CREATE TABLE IF NOT EXISTS `intern_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -104,15 +105,24 @@ INSERT INTO `intern_profile` (`id`, `password`, `intern_id`, `first_name`, `last
 DROP TABLE IF EXISTS `organization_profile`;
 CREATE TABLE IF NOT EXISTS `organization_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_organization` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `employee_count` int(11) NOT NULL,
   `gross_revenue` int(11) NOT NULL,
   `address` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `tax` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `contact` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `tax_number` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `email` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `password` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `name_organization` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `password` varchar(150) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+--
+-- Dumping data for table `organization_profile`
+--
+
+INSERT INTO `organization_profile` (`id`, `name_organization`, `employee_count`, `gross_revenue`, `address`, `contact`, `tax_number`, `email`, `password`) VALUES
+(1, 'ddddd', 1234, 12345, 'Báº¯c Tá»« LiÃªm', '12345', '1234567', 'ngatt', '$2y$10$80AIBYcOPJc3mzMr3gjYAOm10nWszwJH50QT2zfdm5oZHY1NpLpvu');
+
 -- --------------------------------------------------------
 
 --

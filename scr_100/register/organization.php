@@ -3,25 +3,25 @@
   require_once "../../config.php";
 
   // Define variables and initialize with empty values
-  $tax = $name_organization = $email = $employee_count = $gross_revenue = $address = $password = $confirm_password = "";
-  $employee_count_err = $gross_revenue_err = $name_organization_err = $tax_err = $email_err = $address_err = $password_err = $confirm_password_err = "";
+  $tax_number = $name_organization = $email = $employee_count = $gross_revenue = $address = $contact = $password = $confirm_password = "";
+  $employee_count_err = $gross_revenue_err = $name_organization_err = $tax_err = $email_err = $address_err = $contact_err = $password_err = $confirm_password_err = "";
 
   // Processing form data when form is submitted
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate username
-    if (empty(trim($_POST["tax"]))) {
+    if (empty(trim($_POST["tax_number"]))) {
       $tax_err = "Please enter tax number.";
     } else {
       // Prepare a select statement
-      $sql = "SELECT id FROM organization_profile WHERE tax = ?";
+      $sql = "SELECT id FROM organization_profile WHERE tax_number = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "s", $param_tax);
 
         // Set parameters
-        $param_tax = trim($_POST["tax"]);
+        $param_tax = trim($_POST["tax_number"]);
 
         // Attempt to execute the prepared statement
         if (mysqli_stmt_execute($stmt)) {
@@ -29,9 +29,9 @@
           mysqli_stmt_store_result($stmt);
 
           if (mysqli_stmt_num_rows($stmt) == 1) {
-            $tax_err = "This organization id is already taken.";
+            $tax_err = "This organization tax id is already taken.";
           } else {
-            $tax = trim($_POST["tax"]);
+            $tax_number = trim($_POST["tax_number"]);
           }
         } else {
           echo "Oops! Something went wrong. Please try again later.";
@@ -39,7 +39,7 @@
       }
 
       // Close statement
-     // mysqli_stmt_close($stmt);
+     mysqli_stmt_close($stmt);
     }
 
     // Validate $employee_count
@@ -76,7 +76,7 @@
     }
 
     
-    // Validate namw
+    // Validate name
     if (empty(trim($_POST["name_organization"]))) {
       $name_organization_err = "Please enter your name organization!";
     } else {
@@ -97,20 +97,25 @@
       $address = trim($_POST["address"]);
     }
 
-   
+    // Validate contact
+    if (empty(trim($_POST["contact"]))) {
+      $contact_err = "Please enter your contact!";
+    } else {
+      $contact = trim($_POST["contact"]);
+    }
 
     // Check input errors before inserting in database
     if (empty($tax_err) && empty($password_err) && empty($confirm_password_err)) {
 
       // Prepare an insert statement
-      $sql = "INSERT INTO organization_profile (password, name_organization, tax, email, address, employee_count, gross_revenue ) VALUES (?, ?, ?, ?, ?, ?, ?)";
+      $sql = "INSERT INTO organization_profile (password, name_organization, tax_number, email, address, employee_count, gross_revenue, contact ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "sssssss", $param_tax, $param_password, $employee_count, $gross_revenue, $address,$email, $name_organization);
+        mysqli_stmt_bind_param($stmt, "ssssssss", $param_password, $name_organization, $param_tax, $email, $address, $employee_count, $gross_revenue, $contact);
 
         // Set parameters
-        $param_tax = $tax;
+        $param_tax = $tax_number;
         $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
 
         // Attempt to execute the prepared statement
@@ -123,12 +128,16 @@
       }
 
       // Close statement
-      //mysqli_stmt_close($stmt);
+      mysqli_stmt_close($stmt);
     }
 
     // Close connection
     mysqli_close($link);
   }
+  if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+    $_SESSION["role"] = "";
+  }
+  ?>
 ?>
 
 <!DOCTYPE html>
@@ -162,9 +171,9 @@
 
     /* Modal Content/Box */
     .modal-content {
-      margin: 2% auto 15% auto;
+      margin: 1% auto 15% auto;
       /* 5% from the top, 15% from the bottom and centered */
-      width: 40%;
+      width: 50%;
       /* Could be more or less, depending on screen size */
     }
 
@@ -217,17 +226,17 @@
       <div class="w3-padding-large w3-row">
         <div class="w3-col s5 w3-margin">
           <div class="form-group <?php echo (!empty($tax_err)) ? 'has-error' : ''; ?>">
-            <label for="tarName"><b>Tax number</b></label>
-            <input class="w3-input w3-padding-large" type="text" placeholder="Enter tax number" name="tax" value="<?php echo $tax; ?>" required>
+            <label for="tax_number"><b>Tax number</b></label>
+            <input class="w3-input w3-padding-large" type="text" placeholder="Enter tax number" name="tax_number" value="<?php echo $tax_number; ?>" required>
             <span class="w3-text-red"><?php echo $tax_err; ?></span>
           </div>
           <div class="form-group <?php echo (!empty($name_organization_err)) ? 'has-error' : ''; ?>">
             <label for="name_organization"><b>Organization Name</b></label>
-            <input class="w3-input w3-padding-large" type="text" placeholder="Enter your name" name="name_organization" value="<?php echo $name_organization; ?>" required>
+            <input class="w3-input w3-padding-large" type="text" placeholder="Enter your organization name" name="name_organization" value="<?php echo $name_organization; ?>" required>
             <span class="w3-text-red"><?php echo $name_organization_err; ?></span>
           </div>
           <div class="form-group <?php echo (!empty($employee_count_err)) ? 'has-error' : ''; ?>">
-            <label for="email"><b>Employee Count</b></label>
+            <label for="employee_count"><b>Employee Count</b></label>
             <input class="w3-input w3-padding-large" type="text" placeholder="Enter your employee count" name="employee_count" value="<?php echo $employee_count; ?>">
             <span class="w3-text-red"><?php echo $employee_count_err; ?></span>
           </div>
@@ -239,7 +248,7 @@
         </div>
         <div class="w3-col s5 w3-margin">
           <div class="form-group <?php echo (!empty($gross_revenue_err)) ? 'has-error' : ''; ?>">
-            <label for="email"><b>Gross revenue</b></label>
+            <label for="gross_revenue"><b>Gross revenue</b></label>
             <input class="w3-input w3-padding-large" type="text" placeholder="Enter your gross revenue" name="gross_revenue" value="<?php echo $gross_revenue; ?>">
             <span class="w3-text-red"><?php echo $gross_revenue_err; ?></span>
           </div>
@@ -248,14 +257,19 @@
             <input class="w3-input w3-padding-large" type="text" placeholder="Enter your address" name="address" value="<?php echo $address; ?>">
             <span class="w3-text-red"><?php echo $address_err; ?></span>
           </div>
+          <div class="form-group <?php echo (!empty($contact_err)) ? 'has-error' : ''; ?>">
+            <label for="contact"><b>Contact</b></label>
+            <input class="w3-input w3-padding-large" placeholder="Enter Contact" name="contact" class="form-control" value="<?php echo $contact; ?>" required>
+            <span class="w3-text-red"><?php echo $contact_err; ?></span>
+          </div>
           <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
             <label for="password"><b>Password</b></label>
             <input class="w3-input w3-padding-large" placeholder="Enter Password"  type="password" name="password" class="form-control" value="<?php echo $password; ?>" required>
             <span class="w3-text-red"><?php echo $password_err; ?></span>
           </div>
           <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-            <label for="password"><b>Confirm Password</b></label>
-            <input class="w3-input w3-padding-large" placeholder="Enter Password"  type="password" name="confirm_password" value="<?php echo $confirm_password; ?>" required>
+            <label for="confirm_password"><b>Confirm Password</b></label>
+            <input class="w3-input w3-padding-large" placeholder="Confirm Password"  type="password" name="confirm_password" value="<?php echo $confirm_password; ?>" required>
             <span class="w3-text-red"><?php echo $confirm_password_err; ?></span>
           </div>
         </div>

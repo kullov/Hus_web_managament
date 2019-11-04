@@ -1,11 +1,9 @@
 <?php
 // Initialize the session
 session_start();
-
 // Check if the user is logged in, if not then redirect him to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-  header("location: scr_100/login/login.php");
-  exit;
+  $_SESSION["role"] = "";
 }
 ?>
 
@@ -18,21 +16,22 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <style type="text/css">
     body {
-      font: 14px sans-serif;
+      font: 16px sans-serif;
       text-align: center;
     }
   </style>
 </head>
 
 <body>
-  <div class="w3-container">
-    <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["last_name"]); ?></b></h1>
+  <?php include("navigation.php"); ?>
+  <div class="w3-container" style="margin-top:150px;">
     <h1>Welcome to our site ^^</h1>
+    <!-- <p><i>Please login your account!</i></p> -->
   </div>
-  <p>
+  <!-- <p>
     <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
     <a href="logout/logout.php" class="btn btn-danger">Sign Out of Your Account</a>
-  </p>
+  </p> -->
 </body>
 
 </html>

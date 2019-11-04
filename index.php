@@ -1,44 +1,37 @@
 <?php
-  session_start();
-
-  if (!isset($_SESSION['username'])) {
-    $_SESSION['msg'] = "You must log in first";
-    header('location: login/teacher.php');
-  }
-  if (isset($_GET['logout'])) {
-    session_destroy();
-    unset($_SESSION['username']);
-    header("location: login/teacher.php");
-  }
+// Initialize the session
+session_start();
+// Check if the user is logged in, if not then redirect him to login page
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+  $_SESSION["role"] = "";
+}
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<title>Home</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <title>Welcome</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style type="text/css">
+    body {
+      font: 16px sans-serif;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
-
-<div class="header">
-	<h2>Home Page</h2>
-</div>
-<div class="content">
-  <?php if (isset($_SESSION['success'])) : ?>
-    <div class="error success" >
-      <h3>
-        <?php
-          echo $_SESSION['success'];
-          unset($_SESSION['success']);
-        ?>
-      </h3>
-    </div>
-  <?php endif ?>
-
-  <?php  if (isset($_SESSION['username'])) : ?>
-    <p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
-    <p> <a href="index.php?logout='1'" style="color: red;">Logout</a> </p>
-  <?php endif ?>
-</div>
-
+  <?php include("navigation.php"); ?>
+  <div class="w3-container" style="margin-top:150px;">
+    <h1>Welcome to our site ^^</h1>
+    <p><i>Please login your account!</i></p>
+  </div>
+  <!-- <p>
+    <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
+    <a href="logout/logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+  </p> -->
 </body>
+
 </html>

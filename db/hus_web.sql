@@ -104,18 +104,15 @@ INSERT INTO `intern_profile` (`id`, `password`, `intern_id`, `first_name`, `last
 DROP TABLE IF EXISTS `organization_profile`;
 CREATE TABLE IF NOT EXISTS `organization_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `employee_count` int(11) NOT NULL,
   `gross_revenue` int(11) NOT NULL,
   `address` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `contact` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `tax` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `email` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `password` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `name_organization` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
 -- --------------------------------------------------------
 
 --
@@ -191,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `teacher_profile` (
   `id` int(11) NOT NULL,
   `phone_number` int(20) NOT NULL,
   `email_teacher` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `password_teacher` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `name_teacher` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `username_teacher` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   PRIMARY KEY (`id`)

@@ -12,7 +12,7 @@
   require_once "../../config.php";
 
   // Define variables and initialize with empty values
-  $username = $password = $first_name = $last_name = "";
+  $username = $password = $first_name = $last_name = $email = $phone = $date_of_birth = $class_name = $join_date = "";
   $username_err = $password_err = "";
 
   // Processing form data when form is submitted
@@ -35,7 +35,7 @@
     // Validate credentials
     if (empty($username_err) && empty($password_err)) {
       // Prepare a select statement
-      $sql = "SELECT id, intern_id, first_name, last_name, password FROM intern_profile WHERE intern_id = ?";
+      $sql = "SELECT id, intern_id, first_name, last_name, password, email, phone, date_of_birth, class_name, join_date FROM intern_profile WHERE intern_id = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         
@@ -52,7 +52,7 @@
           // Check if username exists, if yes then verify password
           if (mysqli_stmt_num_rows($stmt) == 1) {
             // Bind result variables
-            mysqli_stmt_bind_result($stmt, $id, $username, $first_name, $last_name, $hashed_password);
+            mysqli_stmt_bind_result($stmt, $id, $username, $first_name, $last_name, $hashed_password, $email, $phone, $date_of_birth, $class_name, $join_date);
             if (mysqli_stmt_fetch($stmt)) {
               if (password_verify($password, $hashed_password)) {
                 // Password is correct, so start a new session
@@ -60,10 +60,16 @@
 
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
-                $_SESSION["id"] = $id;
+                $_SESSION["id_student"] = $id;
                 $_SESSION["intern_id"] = $username;
-                $_SESSION["last_name"] = $last_name;
-                $_SESSION["first_name"] = $first_name;
+                $_SESSION["last_name_student"] = $last_name;
+                $_SESSION["first_name_student"] = $first_name;
+                $_SESSION["email_student"] = $email;
+                $_SESSION["phone_student"] = $phone;
+                $_SESSION["date_of_birth_student"] = $date_of_birth;
+                $_SESSION["class_name"] = $class_name;
+                $_SESSION["join_date_student"] = $join_date;
+                $_SESSION["role"] = "student";
 
                 // Redirect user to scr_1001 page
                 header("location: /demo-project/scr_100x/student/scr_1001.php");

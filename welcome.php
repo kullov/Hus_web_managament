@@ -1,12 +1,10 @@
 <?php
 // Initialize the session
 session_start();
-
 // Check if the user is logged in, if not then redirect him to login page
-// if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-//   header("location: scr_100/login/login.php");
-//   exit;
-// }
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+  $_SESSION["role"] = "";
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,10 +24,10 @@ session_start();
 
 <body>
   <?php include("navigation.php"); ?>
-  <!-- <div class="w3-container">
-    <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["last_name"]); ?></b></h1>
+  <div class="w3-container" style="margin-top:150px;">
     <h1>Welcome to our site ^^</h1>
-  </div> -->
+    <p><i>Please login your account!</i></p>
+  </div>
   <!-- <p>
     <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
     <a href="logout/logout.php" class="btn btn-danger">Sign Out of Your Account</a>

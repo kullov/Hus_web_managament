@@ -72,7 +72,7 @@
                 $_SESSION["role"] = "student";
 
                 // Redirect user to scr_1001 page
-                header("location: ../../scr_100x/student/scr_1001.php");
+                header("location: ../../scr_100x/scr_1001/scr_1001.php");
               } else {
                 // Display an error message if password is not valid
                 $password_err = "The password you entered was not valid.";

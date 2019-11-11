@@ -3,8 +3,8 @@
   require_once "../../config.php";
 
   // Define variables and initialize with empty values
-  $tax_number = $name_organization = $email = $employee_count = $gross_revenue = $address = $contact = $password = $confirm_password = "";
-  $employee_count_err = $gross_revenue_err = $name_organization_err = $tax_err = $email_err = $address_err = $contact_err = $password_err = $confirm_password_err = "";
+  $tax_number = $name = $email = $employee_count = $gross_revenue = $address = $contact = $password = $confirm_password = "";
+  $employee_count_err = $gross_revenue_err = $name_err = $tax_err = $email_err = $address_err = $contact_err = $password_err = $confirm_password_err = "";
 
   // Processing form data when form is submitted
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -77,10 +77,10 @@
 
     
     // Validate name
-    if (empty(trim($_POST["name_organization"]))) {
-      $name_organization_err = "Please enter your name organization!";
+    if (empty(trim($_POST["name"]))) {
+      $name_err = "Please enter your name organization!";
     } else {
-      $name_organization = trim($_POST["name_organization"]);
+      $name = trim($_POST["name"]);
     }
 
     // Validate email
@@ -108,11 +108,11 @@
     if (empty($tax_err) && empty($password_err) && empty($confirm_password_err)) {
 
       // Prepare an insert statement
-      $sql = "INSERT INTO organization_profile (password, name_organization, tax_number, email, address, employee_count, gross_revenue, contact ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      $sql = "INSERT INTO organization_profile (password, name, tax_number, email, address, employee_count, gross_revenue, contact ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "ssssssss", $param_password, $name_organization, $param_tax, $email, $address, $employee_count, $gross_revenue, $contact);
+        mysqli_stmt_bind_param($stmt, "ssssssss", $param_password, $name, $param_tax, $email, $address, $employee_count, $gross_revenue, $contact);
 
         // Set parameters
         $param_tax = $tax_number;
@@ -231,10 +231,10 @@
             <input class="w3-input w3-padding-large" type="text" placeholder="Enter tax number" name="tax_number" value="<?php echo $tax_number; ?>" required>
             <span class="w3-text-red"><?php echo $tax_err; ?></span>
           </div>
-          <div class="form-group <?php echo (!empty($name_organization_err)) ? 'has-error' : ''; ?>">
-            <label for="name_organization"><b>Organization Name</b></label>
-            <input class="w3-input w3-padding-large" type="text" placeholder="Enter your organization name" name="name_organization" value="<?php echo $name_organization; ?>" required>
-            <span class="w3-text-red"><?php echo $name_organization_err; ?></span>
+          <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
+            <label for="name"><b>Organization Name</b></label>
+            <input class="w3-input w3-padding-large" type="text" placeholder="Enter your organization name" name="name" value="<?php echo $name; ?>" required>
+            <span class="w3-text-red"><?php echo $name_err; ?></span>
           </div>
           <div class="form-group <?php echo (!empty($employee_count_err)) ? 'has-error' : ''; ?>">
             <label for="employee_count"><b>Employee Count</b></label>

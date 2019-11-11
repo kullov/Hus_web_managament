@@ -149,9 +149,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Contact Us</span></div>
       <h3>Address </h3>
       <p>334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
-      <p><i class="fa fa-map-marker w3-text-teal w3-xlarge"></i>  Hà Nội, Việt Nam</p>
-      <p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>  0349.749.393</p>
-      <p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i>  thuynt181998@gmail.com</p>
+      <p><i class="fa fa-map-marker w3-text-teal w3-xlarge"></i>Hà Nội, Việt Nam</p>
+      <p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>0349.749.393</p>
+      <p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i>thuynt181998@gmail.com</p>
     </div>
     <div class="w3-col m7">
       <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="/action_page.php" target="_blank">
@@ -186,7 +186,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   <a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i class="fa fa-google-plus"></i></a>
   <a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i class="fa fa-instagram"></i></a>
   <a class="w3-button w3-large w3-teal w3-hide-small" href="javascript:void(0)" title="Linkedin"><i class="fa fa-linkedin"></i></a>
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">Origen</a></p>
 
   <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
     <span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>   

@@ -35,7 +35,7 @@
     // Validate credentials
     if (empty($username_err) && empty($password_err)) {
       // Prepare a select statement
-      $sql = "SELECT id, intern_id, first_name, last_name, password, email, phone, date_of_birth, class_name, join_date FROM intern_profile WHERE intern_id = ?";
+      $sql = "SELECT id, code, first_name, last_name, password, email, phone, date_of_birth, class_name, join_date FROM intern_profile WHERE code = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         
@@ -61,7 +61,7 @@
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
                 $_SESSION["id_student"] = $id;
-                $_SESSION["intern_id"] = $username;
+                $_SESSION["code"] = $username;
                 $_SESSION["last_name_student"] = $last_name;
                 $_SESSION["first_name_student"] = $first_name;
                 $_SESSION["email_student"] = $email;

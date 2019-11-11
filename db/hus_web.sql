@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Nov 04, 2019 at 06:01 PM
--- Server version: 5.7.21
--- PHP Version: 5.6.35
+-- Host: 127.0.0.1
+-- Generation Time: Nov 05, 2019 at 03:36 AM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `hus_web`
 --
+CREATE DATABASE IF NOT EXISTS `hus_web` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci;
+USE `hus_web`;
 
 -- --------------------------------------------------------
 
@@ -75,26 +77,15 @@ CREATE TABLE IF NOT EXISTS `intern_ability` (
 DROP TABLE IF EXISTS `intern_profile`;
 CREATE TABLE IF NOT EXISTS `intern_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `password` varchar(150) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `intern_id` varchar(15) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `code` varchar(15) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `first_name` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `last_name` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `phone` int(11) NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `date_of_birth` date NOT NULL,
   `join_date` date NOT NULL,
   `class_name` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `avatar` varchar(200) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
---
--- Dumping data for table `intern_profile`
---
-
-INSERT INTO `intern_profile` (`id`, `password`, `intern_id`, `first_name`, `last_name`, `phone`, `email`, `date_of_birth`, `join_date`, `class_name`) VALUES
-(1, '2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824', '123456', 'Tran', 'Nga', 1222222, 'phong672006@gmail.com', '2019-11-12', '2019-11-21', 'K61A3'),
-(3, '111111', '111111', 'Tran', 'Nga', 44444, 'tt@gmail.com', '2019-11-12', '2019-11-21', 'K61A3'),
-(4, '$2y$10$qVqn6bxU7uD/VRsZ5lKyueFv73WUBShpDEKmu4Lr1h7mAl4Avgp5a', 'ngatt', 'Tráº§n', 'Phong', 1234444, 'phong672006@gmail.com', '2019-11-05', '2019-11-12', 'K61A3');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 -- --------------------------------------------------------
 
@@ -105,23 +96,14 @@ INSERT INTO `intern_profile` (`id`, `password`, `intern_id`, `first_name`, `last
 DROP TABLE IF EXISTS `organization_profile`;
 CREATE TABLE IF NOT EXISTS `organization_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name_organization` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `name` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `employee_count` int(11) NOT NULL,
   `gross_revenue` int(11) NOT NULL,
   `address` varchar(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `contact` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `tax_number` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `password` varchar(150) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
---
--- Dumping data for table `organization_profile`
---
-
-INSERT INTO `organization_profile` (`id`, `name_organization`, `employee_count`, `gross_revenue`, `address`, `contact`, `tax_number`, `email`, `password`) VALUES
-(1, 'ddddd', 1234, 12345, 'Báº¯c Tá»« LiÃªm', '12345', '1234567', 'ngatt', '$2y$10$80AIBYcOPJc3mzMr3gjYAOm10nWszwJH50QT2zfdm5oZHY1NpLpvu');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 -- --------------------------------------------------------
 
@@ -177,6 +159,27 @@ CREATE TABLE IF NOT EXISTS `request_ability` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `request_assignment`
+--
+
+DROP TABLE IF EXISTS `request_assignment`;
+CREATE TABLE IF NOT EXISTS `request_assignment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `request_id` int(11) NOT NULL,
+  `intern_id` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date DEFAULT NULL,
+  `status` int(11) NOT NULL,
+  `date_created` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `request_id` (`request_id`),
+  KEY `intern_id` (`intern_id`),
+  KEY `status` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `status`
 --
 
@@ -196,22 +199,55 @@ CREATE TABLE IF NOT EXISTS `status` (
 DROP TABLE IF EXISTS `teacher_profile`;
 CREATE TABLE IF NOT EXISTS `teacher_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `phone_number` int(20) NOT NULL,
-  `email_teacher` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `password` varchar(150) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `name_teacher` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `username_teacher` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `name` varchar(30) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `contact` varchar(20) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
--- Dumping data for table `teacher_profile`
+-- Constraints for dumped tables
 --
 
-INSERT INTO `teacher_profile` (`id`, `phone_number`, `email_teacher`, `password`, `name_teacher`, `username_teacher`) VALUES
-(1, 1243653456, 'tam@gmail.com', '$2y$10$80AIBYcOPJc3mzMr3gjYAOm10nWszwJH50QT2zfdm5oZHY1NpLpvu', 'Tam', 'admin'),
-(2, 124145623, 'phong672006@gmail.com', '$2y$10$PXIizU2RGRqG6AJcMsc6I.g70Zyt31/fiKLlrll6cCjWUoFlQT6nG', 'Tráº§n Duy Phong', '1234567'),
-(3, 3623312, 'tt@gail.com', '$2y$10$nF/xqYoVtXOEIxDS6rbcBOZ.guz7LK21C0mOwXV8bICirUYMgiKau', 'Tran Nga', 'ngatt');
+--
+-- Constraints for table `ability_dictionary`
+--
+ALTER TABLE `ability_dictionary`
+  ADD CONSTRAINT `ability_dictionary_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `ability_type` (`id`);
+
+--
+-- Constraints for table `intern_ability`
+--
+ALTER TABLE `intern_ability`
+  ADD CONSTRAINT `intern_ability_ibfk_1` FOREIGN KEY (`intern_id`) REFERENCES `intern_profile` (`id`),
+  ADD CONSTRAINT `intern_ability_ibfk_2` FOREIGN KEY (`ability_id`) REFERENCES `ability_dictionary` (`id`);
+
+--
+-- Constraints for table `register`
+--
+ALTER TABLE `register`
+  ADD CONSTRAINT `register_ibfk_1` FOREIGN KEY (`intern_id`) REFERENCES `intern_profile` (`id`),
+  ADD CONSTRAINT `register_ibfk_2` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`);
+
+--
+-- Constraints for table `request`
+--
+ALTER TABLE `request`
+  ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`organization_id`) REFERENCES `organization_profile` (`id`);
+
+--
+-- Constraints for table `request_ability`
+--
+ALTER TABLE `request_ability`
+  ADD CONSTRAINT `request_ability_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`),
+  ADD CONSTRAINT `request_ability_ibfk_2` FOREIGN KEY (`ability_id`) REFERENCES `ability_dictionary` (`id`);
+
+--
+-- Constraints for table `request_assignment`
+--
+ALTER TABLE `request_assignment`
+  ADD CONSTRAINT `request_assignment_ibfk_1` FOREIGN KEY (`request_id`) REFERENCES `request` (`id`),
+  ADD CONSTRAINT `request_assignment_ibfk_2` FOREIGN KEY (`intern_id`) REFERENCES `intern_profile` (`id`),
+  ADD CONSTRAINT `request_assignment_ibfk_3` FOREIGN KEY (`status`) REFERENCES `status` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

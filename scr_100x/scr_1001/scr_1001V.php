@@ -21,7 +21,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 .mySlides {display: none}
 </style>
 <body>
-  <?php include("../../../navigation.php"); ?>
+  <?php include("../../navigation.php"); ?>
   <div class="w3-content w3-border-left w3-border-right" style=" margin-top: 55px;">
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-light-grey w3-bar-block w3-collapse w3-top w3-center" style="z-index:3;width:250px; margin-top: 55px;" id="mySidebar">

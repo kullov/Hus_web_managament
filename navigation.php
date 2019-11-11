@@ -29,7 +29,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
           <a href="/web_management/scr_100x/scr_1001/scr_1001.php" class="w3-bar-item w3-button w3-mobile w3-padding-16 <?php if (($_SESSION["role"]) !== "student") { ?> w3-hide <?php }?> " >Student</a>
           <a href="/web_management/scr_100x/organization/scr_1002.php" class="w3-bar-item w3-button w3-mobile w3-padding-16 <?php if (($_SESSION["role"]) !== "organization") { ?> w3-hide <?php }?> ">Company</a>
           <a href="/web_management/scr_100x/teacher/scr_1003.php" class="w3-bar-item w3-button w3-mobile w3-padding-16 <?php if (($_SESSION["role"]) !== "teacher") { ?> w3-hide <?php }?> ">Teacher</a>
-          <a href="/web_management/scr_100x/scr_1001/scr_1001V.php" class="w3-padding-16 w3-bar-item w3-button w3-hide-small w3-hover-white <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> ">Detail Recruit Form</a>
+          <a href="/web_management/scr_100x/scr_1001/scr_1001A.php" class="w3-padding-16 w3-bar-item w3-button w3-hide-small w3-hover-white <?php if (($_SESSION["role"]) !== "student") { ?> w3-hide <?php }?> ">Phiếu yêu cầu thực tập</a>
+          <a href="/web_management/scr_100x/scr_1001/scr_1001V.php" class="w3-padding-16 w3-bar-item w3-button w3-hide-small w3-hover-white <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> ">Phiếu yêu cầu của doanh nghiệp</a>
         <!-- </div> -->
       <!-- </div> -->
       <div class="w3-dropdown-hover w3-hide-small w3-mobile w3-light-grey w3-right" <?php echo($_SESSION["displayLogin"]); ?>>

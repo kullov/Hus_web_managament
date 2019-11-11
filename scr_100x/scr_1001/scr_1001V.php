@@ -16,21 +16,23 @@ session_start();
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 .mySlides {display: none}
 </style>
 <body>
   <?php include("../../navigation.php"); ?>
-  <div class="w3-content w3-border-left w3-border-right" style=" margin-top: 55px;">
+  <div class="w3-content w3-border-left w3-border-right" style="margin-top: 55px;">
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-light-grey w3-bar-block w3-collapse w3-top w3-center" style="z-index:3;width:250px; margin-top: 55px;" id="mySidebar">
       <h3 class="w3-padding-64 w3-center"><b>NEWWAVE <br>Solution JSC</b></h3>
-      <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">CLOSE</a>
-      <a href="#space" onclick="w3_close()" class="w3-bar-item w3-button">SPACE</a> 
-      <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a> 
-      <a href="#subcribe" onclick="w3_close()" class="w3-bar-item w3-button">SUBCRIBE</a> 
-      <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+      <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">ĐÓNG</a>
+      <a href="#space" onclick="w3_close()" class="w3-bar-item w3-button">KHÔNG GIAN</a> 
+      <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">THÔNG TIN</a> 
+      <a href="#require" onclick="w3_close()" class="w3-bar-item w3-button">YÊU CẦU</a> 
+      <a href="#subcribe" onclick="w3_close()" class="w3-bar-item w3-button">ĐĂNG KÝ</a> 
+      <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">LIÊN HỆ</a>
     </nav>
 
     <!-- Top menu on small screens -->
@@ -51,65 +53,73 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <!-- Slideshow Header -->
       <div class="w3-container" id="space">
         <h1 class="w3-text-green">Java Job</h1>
-        <h4><strong>SPACE</strong></h4>
+        <h4><strong>KHÔNG GIAN</strong></h4>
         <div class="w3-display-container mySlides">
-          <img src="https://www.w3schools.com/w3images/livingroom.jpg" style="width:100%;margin-bottom:-6px">
+          <img src="https://we25.vn/media/images/anh3(13).jpg" style="width:100%;height:420px;margin-bottom:-6px">
           <div class="w3-display-bottomleft w3-container w3-black">
-            <p>Our Company</p>
+            <p>Công ty của chúng tôi</p>
           </div>
         </div>
         <div class="w3-display-container mySlides">
-          <img src="https://www.w3schools.com/w3images/diningroom.jpg" style="width:100%;margin-bottom:-6px">
+          <img src="https://file4.batdongsan.com.vn/resize/745x510/2019/06/10/20190610085624-b7e0_wm.jpg" style="width:100%;height:420px;margin-bottom:-6px">
           <div class="w3-display-bottomleft w3-container w3-black">
-            <p>Our Company</p>
+            <p>Công ty của chúng tôi</p>
           </div>
           </div>
         <div class="w3-display-container mySlides">
-          <img src="https://www.w3schools.com/w3images/bedroom.jpg" style="width:100%;margin-bottom:-6px">
+          <img src="https://cogo.vn/2018_cogo_contents/images/SYL_7995.jpg" style="width:100%;height:420px;margin-bottom:-6px">
           <div class="w3-display-bottomleft w3-container w3-black">
-            <p>Our Company</p>
+            <p>Công ty của chúng tôi</p>
           </div>
         </div>
         <div class="w3-display-container mySlides">
-          <img src="https://www.w3schools.com/w3images/livingroom2.jpg" style="width:100%;margin-bottom:-6px">
+          <img src="https://znews-photo.zadn.vn/w660/Uploaded/wyhktpu/2018_05_10/image007.jpg" style="width:100%;height:420px;margin-bottom:-6px">
           <div class="w3-display-bottomleft w3-container w3-black">
-            <p>Our Company</p>
+            <p>Công ty của chúng tôi</p>
           </div>
         </div>
       </div>
       <div class="w3-row-padding w3-section">
         <div class="w3-col s3">
-          <img class="demo w3-opacity w3-hover-opacity-off" src="https://www.w3schools.com/w3images/livingroom.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(1)" title="Living room">
+          <img class="demo w3-opacity w3-hover-opacity-off" src="https://we25.vn/media/images/anh3(13).jpg" style="width:100%;height:106px;cursor:pointer" onclick="currentDiv(1)" title="Living room">
         </div>
         <div class="w3-col s3">
-          <img class="demo w3-opacity w3-hover-opacity-off" src="https://www.w3schools.com/w3images/diningroom.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(2)" title="Dining room">
+          <img class="demo w3-opacity w3-hover-opacity-off" src="https://cogo.vn/2018_cogo_contents/images/SYL_7995.jpg" style="width:100%;height:106px;cursor:pointer" onclick="currentDiv(3)" title="Bedroom">
         </div>
         <div class="w3-col s3">
-          <img class="demo w3-opacity w3-hover-opacity-off" src="https://www.w3schools.com/w3images/bedroom.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(3)" title="Bedroom">
+          <img class="demo w3-opacity w3-hover-opacity-off" src="https://znews-photo.zadn.vn/w660/Uploaded/wyhktpu/2018_05_10/image007.jpg" style="width:100%;height:106px;cursor:pointer" onclick="currentDiv(4)" title="Second Living Room">
         </div>
         <div class="w3-col s3">
-          <img class="demo w3-opacity w3-hover-opacity-off" src="https://www.w3schools.com/w3images/livingroom2.jpg" style="width:100%;cursor:pointer" onclick="currentDiv(4)" title="Second Living Room">
+          <img class="demo w3-opacity w3-hover-opacity-off" src="https://file4.batdongsan.com.vn/resize/745x510/2019/06/10/20190610085624-b7e0_wm.jpg" style="width:100%;height:106px;cursor:pointer" onclick="currentDiv(2)" title="Dining room">
         </div>
       </div>
       <div id="about" class="w3-container">
         <br>
         <br>
-        <h4><strong>ABOUT</strong></h4>
+        <h4><strong>THÔNG TIN</strong></h4>
         <div class="w3-row w3-large">
           <div class="w3-col s6">
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>30</b> người</p>
-            <p><i class="fa fa-fw fa-bath"></i> Số lượng đã đăng ký: 62</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: 62</p>
             <p><i class="fa fa-fw fa-clock-o"></i> Check In: 8:30 AM</p>
+            <p><i class="fas fa-map-marker-alt"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
           </div>
           <div class="w3-col s6">
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>
-            <p><i class="fa fa-fw fa-bed"></i> Đã được phân công: 10</p>
+            <p><i class="fas fa-check-double"></i> Đã được phân công: 10</p>
             <p><i class="fa fa-fw fa-clock-o"></i> Check Out: 5:30 PM</p>
+            <p><i class="fas fa-calendar-alt"></i> Hình thức làm việc: Fulltime</p>
           </div>
         </div>
         <hr>
         
-        <h4><strong>Amenities</strong></h4>
+        <h4><strong>Mô tả công việc</strong></h4>
+        <p>• Tham gia triển khai dự án nền tảng ngân hàng số, trực tiếp lập trình và hỗ trợ các thành viên trong nhóm lập trình (Java/JavaScripts)</p>
+        <p>• Tiếp nhận chuyển giao công nghệ từ nhà cung cấp giải pháp</p>
+        <p>• Chủ động cập nhật các xu hướng, công nghệ, giải pháp mới nhằm đề xuất những ứng dụng đáp ứng tốt hơn nhu cầu của Khách hàng và các bộ phận trong Ngân hàng</p>
+        <hr>
+
+        <h4><strong>Phúc lợi</strong></h4>
         <div class="w3-row w3-large">
           <div class="w3-col s6">
             <p><i class="fa fa-fw fa-shower"></i> Playing</p>
@@ -122,35 +132,42 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
             <p><i class="fa fa-fw fa-wheelchair"></i> Accessible</p>
           </div>
         </div>
-        <hr>
-        
-        <h4><strong>Extra Info</strong></h4>
-        <p>Our apartment is really clean and we like to keep it that way. Enjoy the lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <p>We accept: <i class="fa fa-credit-card w3-large"></i> <i class="fa fa-cc-mastercard w3-large"></i> <i class="fa fa-cc-amex w3-large"></i> <i class="fa fa-cc-cc-visa w3-large"></i><i class="fa fa-cc-paypal w3-large"></i></p>
-        <hr>
-        
-        <h4><strong>Rules</strong></h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <div id="subcribe">
-          <p>Subscribe to receive updates on available dates and special offers.</p>
-          <br>
-          <p><button class="w3-button w3-green w3-third" onclick="document.getElementById('subscribe').style.display='block'">ĐĂNG KÝ</button></p>
+        <div>
+          <h4>Ngoài ra, bạn sẽ được hưởng:</h4>
+          <p>• Mức lương hỗ trợ từ 3 triệu VND trở lên</p>
+          <p>• Môi trường làm việc chuyên nghiệp</p>
+          <p>• Có cơ hội thăng tiến, đào tạo</p>
         </div>
       </div>
       <hr>
       
+      <!-- Yêu cầu -->
+      <div class="w3-container" id="require">
+        <br><br>
+        <h2>YÊU CẦU</h2>
+        <ul class="w3-ul">
+          <li>• Tốt nghiệp Đại học nước ngoài hoặc tốt nghiệp hệ kỹ sư tài năng các trường Đại học chính quy như ĐH Quốc Gia Hà Nội, ĐH Bách Khoa, ĐH Khoa học tự nhiên, Đại học FPT…</li>
+          <li>• Có kinh nghiệm lập trình về <b>Java</b></li>
+          <li>• Có thể làm việc bằng tiếng Anh với người nước ngoài – tương đương TOEFL iBT 85 điểm trở lên</li>
+          <li>• Có kỹ năng làm việc nhóm, có tinh thần trách nhiệm cao.</li>
+          <li>• Ưu tiên kinh nghiệm với AngularJS (từ 2 trở lên), CSS (SASS), HTML5, Bootstrap</li>
+          <li>• Ưu tiên kinh nghiệm với Java 8, Spring Boot, Hibernate, Rest APIs, Micro services, design patterns và TDD</li>
+          <li>• Cam kết thực tập tối thiểu 3 tháng</li>
+        </ul>
+      </div>
+
       <!-- Contact -->
       <div class="w3-container" id="contact" style="margin-bottom:120px">
-        <h2>CONTACT</h2>
+        <h2>LIÊN HỆ</h2>
         <i class="fa fa-map-marker" style="width:30px"></i> 334 Nguyễn Trãi, Thanh Xuân, Hà Nội<br>
         <i class="fa fa-phone" style="width:30px"></i> Phone: 0349.749.393<br>
         <i class="fa fa-envelope" style="width:30px"> </i> Email: tranthanhnga_t61@hus.edu.vn<br>
-        <p>Questions? Go ahead, ask them:</p>
+        <p>Bạn có câu hỏi? Hãy để lại thông tin:</p>
         <form action="/action_page.php" target="_blank">
-          <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
+          <p><input class="w3-input w3-border" type="text" placeholder="Tên của bạn" required name="Name"></p>
           <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
-        <button type="submit" class="w3-button w3-green w3-third">Send a Message</button>
+          <p><input class="w3-input w3-border" type="text" placeholder="Hãy phản hồi cho chúng tôi" required name="Message"></p>
+        <button type="submit" class="w3-button w3-green w3-third">Gửi phản hồi</button>
         </form>
       </div>
       

@@ -11,7 +11,7 @@ session_start();
 
 <!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>Student</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -64,7 +64,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <h1><b>My PROFILE</b></h1>
         <div class="w3-row-padding">
           <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
-            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Student ID: <b><?php echo($_SESSION["intern_id"]) ?></b></p>
+            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Student ID: <b><?php echo($_SESSION["code"]) ?></b></p>
             <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Date of birth: <b><?php echo($_SESSION["date_of_birth_student"]) ?></b></p>
             <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Class name: <b><?php echo($_SESSION["class_name"]) ?></b></p>
             <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Join date: <b><?php echo($_SESSION["join_date_student"]) ?></b></p>

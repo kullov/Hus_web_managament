@@ -12,7 +12,7 @@
   require_once "../../config.php";
 
   // Define variables and initialize with empty values
-  $tax_number = $password = $name_organization = "";
+  $tax_number = $password = $name = "";
   $tax_err = $password_err = "";
 
   // Processing form data when form is submitted
@@ -35,7 +35,7 @@
     // Validate credentials
     if (empty($tax_err) && empty($password_err)) {
       // Prepare a select statement
-      $sql = "SELECT id, tax_number, name_organization, password FROM organization_profile WHERE tax_number = ?";
+      $sql = "SELECT id, tax_number, name, password FROM organization_profile WHERE tax_number = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         
@@ -52,7 +52,7 @@
           // Check if tax exists, if yes then verify password
           if (mysqli_stmt_num_rows($stmt) == 1) {
             // Bind result variables
-            mysqli_stmt_bind_result($stmt, $id, $tax_number, $name_organization, $hashed_password);
+            mysqli_stmt_bind_result($stmt, $id, $tax_number, $name, $hashed_password);
             if (mysqli_stmt_fetch($stmt)) {
               if (password_verify($password, $hashed_password)) {
                 // Password is correct, so start a new session
@@ -62,7 +62,7 @@
                 $_SESSION["loggedin"] = true;
                 $_SESSION["id"] = $id;
                 $_SESSION["tax_number"] = $tax_number;
-                $_SESSION["name_organization"] = $name_organization;
+                $_SESSION["name"] = $name;
                 $_SESSION["role"] = "organization";
 
                 // Redirect user to welcome page
@@ -177,6 +177,11 @@
 
 <body>
   <?php include("../../navigation.php"); ?>
+  <div>
+    <div class="w3-display-container w3-animate-opacity">
+      <img src="https://www.w3schools.com/w3images/sailboat.jpg" alt="boat" style="width:100%;min-height:350px;max-height:600px;">
+    </div>
+  </div>
   <!-- <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-blue">Login</button> -->
   <div id="dialog" class="modal">
     <form class="modal-content animate"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

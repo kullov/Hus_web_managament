@@ -3,8 +3,8 @@
   require_once "../../config.php";
 
   // Define variables and initialize with empty values
-  $username = $first_name = $last_name = $class_name = $join_date = $phone = $email = $address = $date_of_birth = $password = $confirm_password = "";
-  $username_err = $first_name_err = $last_name_err = $class_name_err = $join_date_err = $phone_err = $email_err = $address_err = $date_of_birth_err = $password_err = $confirm_password_err = "";
+  $username = $first_name = $last_name = $class_name = $join_date = $phone = $email = $address = $date_of_birth = $password = $confirm_password = $avatar = "";
+  $username_err = $first_name_err = $last_name_err = $class_name_err = $join_date_err = $phone_err = $email_err = $address_err = $date_of_birth_err = $password_err = $confirm_password_err = $avatar_err = "";
 
   // Processing form data when form is submitted
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -14,7 +14,7 @@
       $username_err = "Please enter a username.";
     } else {
       // Prepare a select statement
-      $sql = "SELECT id FROM intern_profile WHERE intern_id = ?";
+      $sql = "SELECT id FROM intern_profile WHERE code = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
@@ -123,11 +123,11 @@
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
 
       // Prepare an insert statement
-      $sql = "INSERT INTO intern_profile (intern_id, password, first_name, last_name, phone, email, date_of_birth, join_date, class_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      $sql = "INSERT INTO intern_profile (code, password, first_name, last_name, phone, email, date_of_birth, join_date, class_name, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "sssssssss", $param_username, $param_password, $first_name, $last_name, $phone, $email, $date_of_birth, $join_date, $class_name);
+        mysqli_stmt_bind_param($stmt, "ssssssssss", $param_username, $param_password, $first_name, $last_name, $phone, $email, $date_of_birth, $join_date, $class_name, $avatar);
 
         // Set parameters
         $param_username = $username;
@@ -143,7 +143,7 @@
       }
 
       // Close statement
-      mysqli_stmt_close($stmt);
+      // mysqli_stmt_close($stmt);
     }
 
     // Close connection
@@ -236,10 +236,11 @@
 
 <body>
   <?php include("../../navigation.php"); ?>
-  <!-- <div class="center-class"> -->
-  <!-- <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-green">Register</button> -->
-  <!-- <a href="../../welcome.php" type="button" class="w3-button w3-dark">Back</a> -->
-  <!-- </div> -->
+  <div>
+    <div class="w3-display-container w3-animate-opacity">
+      <img src="https://www.w3schools.com/w3images/sailboat.jpg" alt="boat" style="width:100%;min-height:350px;max-height:600px;">
+    </div>
+  </div>
   <div id="dialog" class="modal">
     <form class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <h4 class="w3-green w3-padding">Register Student</h4>
@@ -299,6 +300,11 @@
             <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter your class name" name="class_name" value="<?php echo $class_name; ?>">
             <span class="w3-text-red"><?php echo $class_name_err; ?></span>
           </div>
+          <div class="form-group <?php echo (!empty($avatar_err)) ? 'has-error' : ''; ?>">
+            <label for="avatar"><b>Link photo</b></label>
+            <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter your link photo" name="avatar" value="<?php echo $avatar; ?>">
+            <span class="w3-text-red"><?php echo $avatar_err; ?></span>
+          </div>
         </div>
         <button type="submit" class="w3-button w3-green w3-block">Register</button>
         <p class="center-class">Already have an account? <a class=" w3-text-green" href="../login/student.php">Login here</a>.</p>
@@ -306,6 +312,7 @@
       <div class="w3-padding center-class" style="background-color:#f1f1f1">
         <button type="reset" class="w3-btn w3-red center-class">Reset</button>
         <button type="button" onclick="window.location.href='../../welcome.php'" class="w3-btn w3-blue-gray">Cancel</button>
+        <!-- <button type="button" onclick="window.location.href='../../welcome.php'" class="w3-btn w3-blue-gray">Cancel</button> -->
       </div>
     </form>
   </div>
@@ -313,11 +320,11 @@
     // Get the modal
     var modal = document.getElementById('dialog');
     // When the user clicks anywhere outside of the modal, close it
-    // window.onclick = function(event) {
-    //   if (event.target == modal) {
-    //     modal.style.display = "none";
-    //   }
-    // }
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
     document.getElementById('dialog').style.display='block';
   </script>
 </body>

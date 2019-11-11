@@ -35,7 +35,7 @@
     // Validate credentials
     if (empty($username_err) && empty($password_err)) {
       // Prepare a select statement
-      $sql = "SELECT id, intern_id, first_name, last_name, password, email, phone, date_of_birth, class_name, join_date FROM intern_profile WHERE intern_id = ?";
+      $sql = "SELECT id, code, first_name, last_name, password, email, phone, date_of_birth, class_name, join_date FROM intern_profile WHERE code = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         
@@ -61,7 +61,7 @@
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
                 $_SESSION["id_student"] = $id;
-                $_SESSION["intern_id"] = $username;
+                $_SESSION["code"] = $username;
                 $_SESSION["last_name_student"] = $last_name;
                 $_SESSION["first_name_student"] = $first_name;
                 $_SESSION["email_student"] = $email;
@@ -183,8 +183,11 @@
 
 <body>
   <?php include("../../navigation.php"); ?>
-  <!-- <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-green">Login</!--> -->
-  <!-- <a href="../../welcome.php" type="button" class="w3-button w3-dark">Back</!--> -->
+  <div>
+    <div class="w3-display-container w3-animate-opacity">
+      <img src="https://www.w3schools.com/w3images/sailboat.jpg" alt="boat" style="width:100%;min-height:350px;max-height:600px;">
+    </div>
+  </div>
   <div id="dialog" class="modal">
     <form class="modal-content animate"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <h4 class="w3-padding w3-green">Login Student</h4>

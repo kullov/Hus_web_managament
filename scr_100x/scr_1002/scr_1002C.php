@@ -186,8 +186,28 @@ ul li:hover {
         <div>
         <h6><strong>Danh sách năng lực:</strong></h6>
           <div class="w3-row-padding">
-            <div id="myDIV" class="header w3-padding w3-half">
-              <input class="w3-input w3-border" type="text" placeholder="Thêm yêu cầu" id="myInput" />
+            <div id="myDIV" class="header w3-padding w3-third">
+              <input class="w3-input w3-border" type="text" placeholder="Thêm yêu cầu" id="myInput" name="skill" list="listSkill" />
+              <datalist id="listSkill">
+                <option value="PHP">
+                <option value="JAVA">
+                <option value="HTML">
+                <option value="CSS">
+                <option value="JavaScript">
+                <option value="C/C++">
+                <option value="Python">
+                <option value="MySQL">
+                <option value="NodeJs">
+                <option value="Cấu trúc dữ liệu">
+                <option value="Trí tuệ nhân tạo">
+                <option value="Thiết kế đánh giá thuật toán">
+                <option value="Giải tích">
+                <option value="Mạng máy tính">
+                <option value="Lập trình hướng đối tượng">
+                <option value="TOEFL">
+                <option value="TOEIC">
+                <option value="IELTS">
+              </datalist>
             </div>
             <div class="w3-padding w3-half">
               <input type="button" class="w3-button w3-black" onclick="newElement()" value="Thêm" id="submitSkill" />
@@ -195,9 +215,6 @@ ul li:hover {
           </div>
           <div class="w3-padding">
             <ul class="w3-ul w3-padding" id="myUL">
-              <li class="item">Hit the gym</li>
-              <li class="item">Pay bills</li>
-              <li class="item">Meet George</li>
             </ul>
           </div>
         </div>

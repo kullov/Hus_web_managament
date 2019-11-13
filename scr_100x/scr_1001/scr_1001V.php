@@ -52,8 +52,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 
       <!-- Slideshow Header -->
       <div class="w3-container" id="space">
-        <h1 class="w3-text-green">Java Job</h1>
-        <h4><strong>KHÔNG GIAN</strong></h4>
+        <h1 class="w3-center">Phiếu yêu cầu của doanh nghiệp</h1>
+        <h2 class="w3-text-green">Java Job</h2>
+        <h5><strong>KHÔNG GIAN</strong></h5>
         <div class="w3-display-container mySlides">
           <img src="https://we25.vn/media/images/anh3(13).jpg" style="width:100%;height:420px;margin-bottom:-6px">
           <div class="w3-display-bottomleft w3-container w3-black">

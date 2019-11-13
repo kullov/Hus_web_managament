@@ -34,8 +34,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <p class="w3-text-grey"><i>Organization</i></p>
     </div>
     <div class="w3-bar-block">
-      <a href="#PROFILE" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PROFILE</a> 
-      <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a> 
+      <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>ABOUT</a> 
+      <a href="#list-require" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>DANH SÁCH PHIẾU YÊU CẦU</a> 
+      <a href="#assignment" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>BẢNG PHÂN CÔNG (SCR_1002S)</a>
+      <a href="scr_1002E.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>BIÊN TẬP PHIẾU YÊU CẦU (SCR_1002E)</a>
+      <a href="scr_1002C.php" class="w3-bar-item w3-button w3-padding">TẠO PHIẾU YÊU CẦU (SCR_1002C)</a>
       <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
     </div>
     <div class="w3-panel w3-large">
@@ -59,166 +62,224 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <a href="#"><img src="https://www.w3schools.com/w3images/mountains.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
       <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
       <div class="w3-container">
-        <br>
-        <br>
-        <h1><b>My PROFILE</b></h1>
-        <div class="w3-row-padding">
-          <!-- <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
-            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Student ID: <b><?php echo($_SESSION["code"]) ?></b></p>
-            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Date of birth: <b><?php echo($_SESSION["date_of_birth_student"]) ?></b></p>
-            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Class name: <b><?php echo($_SESSION["class_name"]) ?></b></p>
-            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Join date: <b><?php echo($_SESSION["join_date_student"]) ?></b></p>
-            </div>
-          <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
-            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Full name: <b><?php echo($_SESSION["first_name_student"]) ?> <?php echo($_SESSION["last_name_student"]) ?></b></p>
-            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Address: London, UK</p>
-            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Email: <b><?php echo($_SESSION["email_student"]) ?></p>
-            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($_SESSION["phone_student"]) ?></p>
-          </div> -->
-        </div>
+        <h1><b>My profile</b></h1>
       </div>
     </header>
-    
-    <!-- First Photo Grid-->
-    <div class="w3-row-padding">
-      <div class="w3-half w3-container w3-margin-bottom">
-        <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-        <div class="w3-container w3-white">
-          <p><b>Lorem Ipsum</b></p>
-          <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+
+    <div class="w3-container">
+      <p>Just me, myself and I, exploring the universe of unknownment. I have a heart of love and an interest of lorem ipsum and mauris neque quam blog. I want to share my world with you. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <div class="w3-container">
+        <h4><strong>KHÔNG GIAN</strong></h4>
+        <div class="w3-display-container mySlides">
+          <img src="https://we25.vn/media/images/anh3(13).jpg" style="width:100%;height:420px;margin-bottom:-6px">
+          <div class="w3-display-bottomleft w3-container w3-black">
+            <p>Công ty của chúng tôi</p>
+          </div>
+        </div>
+        <div class="w3-display-container mySlides">
+          <img src="https://file4.batdongsan.com.vn/resize/745x510/2019/06/10/20190610085624-b7e0_wm.jpg" style="width:100%;height:420px;margin-bottom:-6px">
+          <div class="w3-display-bottomleft w3-container w3-black">
+            <p>Công ty của chúng tôi</p>
+          </div>
+          </div>
+        <div class="w3-display-container mySlides">
+          <img src="https://cogo.vn/2018_cogo_contents/images/SYL_7995.jpg" style="width:100%;height:420px;margin-bottom:-6px">
+          <div class="w3-display-bottomleft w3-container w3-black">
+            <p>Công ty của chúng tôi</p>
+          </div>
+        </div>
+        <div class="w3-display-container mySlides">
+          <img src="https://znews-photo.zadn.vn/w660/Uploaded/wyhktpu/2018_05_10/image007.jpg" style="width:100%;height:420px;margin-bottom:-6px">
+          <div class="w3-display-bottomleft w3-container w3-black">
+            <p>Công ty của chúng tôi</p>
+          </div>
         </div>
       </div>
-      <div class="w3-half w3-container w3-margin-bottom">
-        <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-        <div class="w3-container w3-white">
-          <p><b>Lorem Ipsum</b></p>
-          <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <div class="w3-row-padding w3-section">
+        <div class="w3-col s3">
+          <img class="demo w3-opacity w3-hover-opacity-off" src="https://we25.vn/media/images/anh3(13).jpg" style="width:100%;height:106px;cursor:pointer" onclick="currentDiv(1)" title="Living room">
         </div>
-      </div>
-    </div>
-    
-    <!-- Second Photo Grid-->
-    <div class="w3-row-padding">
-      <div class="w3-third w3-container w3-margin-bottom">
-        <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-        <div class="w3-container w3-white">
-          <p><b>Lorem Ipsum</b></p>
-          <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+        <div class="w3-col s3">
+          <img class="demo w3-opacity w3-hover-opacity-off" src="https://cogo.vn/2018_cogo_contents/images/SYL_7995.jpg" style="width:100%;height:106px;cursor:pointer" onclick="currentDiv(3)" title="Bedroom">
         </div>
-      </div>
-      <div class="w3-third w3-container w3-margin-bottom">
-        <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-        <div class="w3-container w3-white">
-          <p><b>Lorem Ipsum</b></p>
-          <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+        <div class="w3-col s3">
+          <img class="demo w3-opacity w3-hover-opacity-off" src="https://znews-photo.zadn.vn/w660/Uploaded/wyhktpu/2018_05_10/image007.jpg" style="width:100%;height:106px;cursor:pointer" onclick="currentDiv(4)" title="Second Living Room">
         </div>
-      </div>
-      <div class="w3-third w3-container">
-        <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-        <div class="w3-container w3-white">
-          <p><b>Lorem Ipsum</b></p>
-          <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+        <div class="w3-col s3">
+          <img class="demo w3-opacity w3-hover-opacity-off" src="https://file4.batdongsan.com.vn/resize/745x510/2019/06/10/20190610085624-b7e0_wm.jpg" style="width:100%;height:106px;cursor:pointer" onclick="currentDiv(2)" title="Dining room">
         </div>
       </div>
     </div>
 
-    <div class="w3-container w3-padding-large" style="margin-bottom:32px" id="about">
-      <br>
-      <br>
-      <h4><b>About Me</b></h4>
-      <p>Just me, myself and I, exploring the universe of unknownment. I have a heart of love and an interest of lorem ipsum and mauris neque quam blog. I want to share my world with you. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+    <div id="list-require" style="padding-top:1px;">
       <hr>
-      
-      <h4>Technical Skills</h4>
-      <!-- Progress bars / Skills -->
-      <p>Photography</p>
-      <div class="w3-grey">
-        <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:95%">95%</div>
-      </div>
-      <p>Web Design</p>
-      <div class="w3-grey">
-        <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:85%">85%</div>
-      </div>
-      <p>Photoshop</p>
-      <div class="w3-grey">
-        <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:80%">80%</div>
-      </div>
-      <p>
-        <button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom">
-          <i class="fa fa-download w3-margin-right"></i>Download Resume
-        </button>
-      </p>
-      <hr>
-      
-      <h4>How much I charge</h4>
-      <!-- Pricing Tables -->
-      <div class="w3-row-padding" style="margin:0 -16px">
-        <div class="w3-third w3-margin-bottom">
-          <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
-            <li class="w3-black w3-xlarge w3-padding-32">Basic</li>
-            <li class="w3-padding-16">Web Design</li>
-            <li class="w3-padding-16">Photography</li>
-            <li class="w3-padding-16">1GB Storage</li>
-            <li class="w3-padding-16">Mail Support</li>
-            <li class="w3-padding-16">
-              <h2>$ 10</h2>
-              <span class="w3-opacity">per month</span>
-            </li>
-            <li class="w3-light-grey w3-padding-24">
-              <button class="w3-button w3-teal w3-padding-large w3-hover-black">Sign Up</button>
-            </li>
-          </ul>
+      <br>
+      <h3 class="w3-container"><b>Danh sách phiếu yêu cầu</b></h3>
+      <!-- Second Photo Grid-->
+      <div class="w3-row-padding">
+        <div class="w3-third w3-container w3-margin-bottom">
+          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+            <p><b>Lorem Ipsum</b></p>
+            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          </div>
         </div>
-        
-        <div class="w3-third w3-margin-bottom">
-          <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
-            <li class="w3-teal w3-xlarge w3-padding-32">Pro</li>
-            <li class="w3-padding-16">Web Design</li>
-            <li class="w3-padding-16">Photography</li>
-            <li class="w3-padding-16">50GB Storage</li>
-            <li class="w3-padding-16">Endless Support</li>
-            <li class="w3-padding-16">
-              <h2>$ 25</h2>
-              <span class="w3-opacity">per month</span>
-            </li>
-            <li class="w3-light-grey w3-padding-24">
-              <button class="w3-button w3-teal w3-padding-large w3-hover-black">Sign Up</button>
-            </li>
-          </ul>
+        <div class="w3-third w3-container w3-margin-bottom">
+          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+            <p><b>Lorem Ipsum</b></p>
+            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          </div>
         </div>
-        
-        <div class="w3-third">
-          <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
-            <li class="w3-black w3-xlarge w3-padding-32">Premium</li>
-            <li class="w3-padding-16">Web Design</li>
-            <li class="w3-padding-16">Photography</li>
-            <li class="w3-padding-16">Unlimited Storage</li>
-            <li class="w3-padding-16">Endless Support</li>
-            <li class="w3-padding-16">
-              <h2>$ 25</h2>
-              <span class="w3-opacity">per month</span>
-            </li>
-            <li class="w3-light-grey w3-padding-24">
-              <button class="w3-button w3-teal w3-padding-large w3-hover-black">Sign Up</button>
-            </li>
-          </ul>
+        <div class="w3-third w3-container">
+          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+            <p><b>Lorem Ipsum</b></p>
+            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Second Photo Grid-->
+      <div class="w3-row-padding">
+        <div class="w3-third w3-container w3-margin-bottom">
+          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+            <p><b>Lorem Ipsum</b></p>
+            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          </div>
+        </div>
+        <div class="w3-third w3-container w3-margin-bottom">
+          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+            <p><b>Lorem Ipsum</b></p>
+            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          </div>
+        </div>
+        <div class="w3-third w3-container">
+          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+            <p><b>Lorem Ipsum</b></p>
+            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          </div>
+        </div>
+      </div>
+      <div class="w3-center w3-padding-32">
+        <div class="w3-bar">
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+          <a href="#" class="w3-bar-item w3-black w3-button">1</a>
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
         </div>
       </div>
     </div>
     
+    <!-- Assignment -->
+    <div class="w3-container" id="assignment">
+      <hr>
+      <br>
+      <h3><b>Bảng phân công</b></h3>
+      <table class="w3-table w3-striped w3-bordered w3-centered w3-hoverable">
+        <tr>
+          <th name="organization_request_id">Mã phiếu yêu cầu</th>
+          <th name="student_id">Mã sinh viên</th>
+          <th name="name_student">Tên sinh viên</th>
+          <th name="start_date">Ngày bắt đầu thực tập</th>
+          <th name="end_date">Ngày kết thúc thực tập</th>
+          <th name="status">Trạng thái</th>
+          <th name="create_date">Thời gian phân công</th>
+        </tr>
+        <tr>
+          <td>1000</td>
+          <td>16001111</td>
+          <td>Trần Văn A</td>
+          <td>21/10/2019</td>
+          <td>01/12/2019</td>
+          <td>Đang thực hiện</td>
+          <td>15/10/2019</td>
+        </tr>
+        <tr>
+        <td>1000</td>
+          <td>16001111</td>
+          <td>Trần Văn C</td>
+          <td>21/10/2019</td>
+          <td>01/12/2019</td>
+          <td>Đang thực hiện</td>
+          <td>15/10/2019</td>
+        </tr>
+        <tr>
+        <td>1001</td>
+          <td>16001113</td>
+          <td>Trần Văn B</td>
+          <td>21/10/2019</td>
+          <td>01/12/2019</td>
+          <td>Đang thực hiện</td>
+          <td>15/10/2019</td>
+        </tr>
+        <tr>
+        <td>1002</td>
+          <td>16001115</td>
+          <td>Trần Văn M</td>
+          <td>21/10/2019</td>
+          <td>01/12/2019</td>
+          <td>Đang thực hiện</td>
+          <td>15/10/2019</td>
+        </tr>
+        <tr>
+        <td>1002</td>
+          <td>16001115</td>
+          <td>Trần Văn M</td>
+          <td>21/10/2019</td>
+          <td>01/12/2019</td>
+          <td>Đang thực hiện</td>
+          <td>15/10/2019</td>
+        </tr>
+        <tr>
+        <td>1002</td>
+          <td>16001115</td>
+          <td>Trần Văn M</td>
+          <td>21/10/2019</td>
+          <td>01/12/2019</td>
+          <td>Đang thực hiện</td>
+          <td>15/10/2019</td>
+        </tr>
+        <tr>
+        <td>1002</td>
+          <td>16001115</td>
+          <td>Trần Văn N</td>
+          <td>21/10/2019</td>
+          <td>01/12/2019</td>
+          <td>Đang thực hiện</td>
+          <td>15/10/2019</td>
+        </tr>
+      </table>
+      <!-- Pagination -->
+      <div class="w3-center w3-padding-32">
+        <div class="w3-bar">
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+          <a href="#" class="w3-bar-item w3-black w3-button">1</a>
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+        </div>
+      </div>
+    </div>
+
     <!-- Contact Section -->
     <div id="contact" class="w3-container w3-padding-large w3-grey">
       <br>
       <br>
-      <h4><b>Contact Me</b></h4>
+      <h3><b>Contact Me</b></h3>
       <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-          <p>email@email.com</p>
+          <p>tranthanhnga_t61@hus.edu.com</p>
         </div>
         <div class="w3-third w3-teal">
           <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
-          <p>Chicago, US</p>
+          <p>334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
         </div>
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
@@ -226,7 +287,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </div>
       </div>
       <hr class="w3-opacity">
-      <form action="/action_page.php" target="_blank">
+      <form action="https://www.w3schools.com/w3images/action_page.php" target="_blank">
         <div class="w3-section">
           <label>Name</label>
           <input class="w3-input w3-border" type="text" name="Name" required>
@@ -249,19 +310,19 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <div class="w3-third">
           <h3>FOOTER</h3>
           <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-          <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+          <p>Powered by <a href="#" target="_blank">Origen</a></p>
         </div>
       
         <div class="w3-third">
           <h3>BLOG POSTS</h3>
           <ul class="w3-ul w3-hoverable">
             <li class="w3-padding-16">
-              <img src="/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
+              <img src="https://www.w3schools.com/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
               <span class="w3-large">Lorem</span><br>
               <span>Sed mattis nunc</span>
             </li>
             <li class="w3-padding-16">
-              <img src="/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
+              <img src="https://www.w3schools.com/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
               <span class="w3-large">Ipsum</span><br>
               <span>Praes tinci sed</span>
             </li> 
@@ -282,7 +343,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       </div>
     </footer>
     
-    <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+    <div class="w3-black w3-center w3-padding-24">Powered by <a href="/web_management/" title="Origen" target="_blank" class="w3-hover-opacity">Origen</a></div>
 
   <!-- End page content -->
   </div>
@@ -299,6 +360,33 @@ function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
     document.getElementById("myOverlay").style.display = "none";
 }
+// Slideshow Apartment Images
+var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+      showDivs(slideIndex += n);
+    }
+
+    function currentDiv(n) {
+      showDivs(slideIndex = n);
+    }
+
+    function showDivs(n) {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("demo");
+      if (n > x.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = x.length}
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+      }
+      x[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " w3-opacity-off";
+    }
 </script>
 
 </body>

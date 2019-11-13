@@ -311,8 +311,8 @@
       </div>
       <div class="w3-padding center-class" style="background-color:#f1f1f1">
         <button type="reset" class="w3-btn w3-red center-class">Reset</button>
-        <button type="button" onclick="window.location.href='../../welcome.php'" class="w3-btn w3-blue-gray">Cancel</button>
-        <!-- <button type="button" onclick="window.location.href='../../welcome.php'" class="w3-btn w3-blue-gray">Cancel</button> -->
+        <button type="button" onclick="window.location.href='../../'" class="w3-btn w3-blue-gray">Cancel</button>
+        <!-- <button type="button" onclick="window.location.href='../../'" class="w3-btn w3-blue-gray">Cancel</button> -->
       </div>
     </form>
   </div>
@@ -320,11 +320,11 @@
     // Get the modal
     var modal = document.getElementById('dialog');
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
+    // window.onclick = function(event) {
+    //   if (event.target == modal) {
+    //     modal.style.display = "none";
+    //   }
+    // }
     document.getElementById('dialog').style.display='block';
   </script>
 </body>

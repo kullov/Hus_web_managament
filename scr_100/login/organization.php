@@ -4,7 +4,7 @@
 
   // Check if the user is already logged in, if yes then redirect him to welcome page
   if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: ../welcome.php");
+    header("location: ../");
     exit;
   }
 
@@ -66,7 +66,7 @@
                 $_SESSION["role"] = "organization";
 
                 // Redirect user to welcome page
-                header("location: ../../scr_100x/organization/scr_1002.php");
+                header("location: ../../scr_100x/scr_1002/scr_1002.php");
               } else {
                 // Display an error message if password is not valid
                 $password_err = "The password you entered was not valid.";
@@ -205,7 +205,7 @@
       </div>
       <div class="w3-padding" style="background-color:#f1f1f1">
         <button type="reset" class="w3-btn w3-red">Reset</button>
-        <button type="button" onclick="window.location.href='../../welcome.php'" class="w3-btn w3-blue-gray">Cancel</button>
+        <button type="button" onclick="window.location.href='../../'" class="w3-btn w3-blue-gray">Cancel</button>
       </div>
     </form>
   </div>
@@ -213,11 +213,11 @@
     // Get the modal
     var modal = document.getElementById('dialog');
     // When the user clicks anywhere outside of the modal, close it
-    // window.onclick = function(event) {
-    //   if (event.target == modal) {
-    //     modal.style.display = "none";
-    //   }
-    // }
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
     document.getElementById('dialog').style.display='block';
   </script>
 </body>

@@ -46,7 +46,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
         </div>
       </div>
       <div class="w3-dropdown-hover w3-hide-small w3-mobile w3-light-grey w3-right" <?php echo($_SESSION["displayLogout"]); ?>>
-        <a href="/web_management/scr_100/logout/logout.php"><button class="w3-button w3-padding-16 w3-teal">Logout <i class="glyphicon glyphicon-log-out"></i></button></a>
+        <a href="/web_management/scr_100/logout/logout.php"><button class="w3-button w3-padding-16 w3-teal">Logout <i class="fa fa-sign-out"></i></button></a>
       </div>
       
     </div>

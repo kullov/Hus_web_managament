@@ -249,7 +249,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <div class="w3-third">
           <h3>FOOTER</h3>
           <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-          <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+          <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">Origen</a></p>
         </div>
       
         <div class="w3-third">

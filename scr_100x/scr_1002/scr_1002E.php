@@ -11,7 +11,7 @@ session_start();
 
 <!DOCTYPE html>
 <html>
-<title>Biên tập phiếu yêu cầu</title>
+<title>Tạo phiếu yêu cầu</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -20,16 +20,63 @@ session_start();
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+/* Include the padding and border in an element's total width and height */
+
+/* Remove margins and padding from the list */
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the list items */
+ul li {
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background: #eee;
+  transition: 0.2s;
+  
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+ul li:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+/* Darker background-color on hover */
+ul li:hover {
+  background: #ddd;
+}
+
+/* Style the close button */
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+  color: white;
+}
+
+
+
 </style>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 <?php include("../../navigation.php"); ?>
 <div style=" margin-top: 55px;">
   <!-- Sidebar/menu -->
-  <nav class="w3-sidebar w3-light-grey w3-bar-block w3-collapse w3-top w3-center" style="z-index:3;width:250px; margin-top: 55px;" id="mySidebar">
-    <h3 class="w3-padding w3-center"><b>NEWWAVE <br>Solution JSC</b></h3>
+  <nav class="w3-sidebar w3-white w3-bar-block w3-collapse w3-top w3-center w3-padding" style="z-index:3;width:300px; margin-top: 55px;" id="mySidebar">
+    <h3><b>NEWWAVE <br>Solution JSC</b></h3>
     <p><i>Tạo mới phiếu yêu cầu của doanh nghiệp</i></p>
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">ĐÓNG</a>
-    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">THÔNG TIN</a> 
+    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">THÔNG TIN</a> 
     <a href="#require" onclick="w3_close()" class="w3-bar-item w3-button">YÊU CẦU</a> 
     <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">LIÊN HỆ</a>
   </nav>
@@ -38,11 +85,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
   <!-- !PAGE CONTENT! -->
-  <div class="w3-main" style="margin-left:250px;">
+  <div class="w3-main" style="margin-left:300px;">
 
     <form action="/action_page.php" target="_blank">
       <div id="about" class="w3-container">
-        <br><br><br>
         <h4><strong>THÔNG TIN</strong></h4>
         <div class="w3-row-padding">
           <div class="w3-padding">
@@ -105,8 +151,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <input type="button" class="w3-button w3-black" onclick="addListToDo()" value="Thêm" id="submitToDo" disabled />
           </div>
         </div>
-        <div class="results">
-          <ul id="listToDo">
+        <div class="results w3-padding">
+          <ul class="w3-ul w3-padding" id="listToDo">
           </ul>
         </div>
         <hr>
@@ -137,31 +183,68 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <div class="w3-container" id="require">
         <br><br><br>
         <h4><strong>YÊU CẦU</strong></h4>
-        <div class="w3-row-padding">
-          <div class="w3-padding w3-half">
-            <input class="w3-input w3-border" type="text" placeholder="Thêm yêu cầu" id="addRequire" onkeyup="if(this.value.length > 0) document.getElementById('submitRequire').disabled = false; else document.getElementById('submitRequire').disabled = true;" />
+        <div>
+        <h6><strong>Danh sách năng lực:</strong></h6>
+          <div class="w3-row-padding">
+            <div id="myDIV" class="header w3-padding w3-third">
+              <input class="w3-input w3-border" type="text" placeholder="Thêm yêu cầu" id="myInput" name="skill" list="listSkill" />
+              <datalist id="listSkill">
+                <option value="PHP">
+                <option value="JAVA">
+                <option value="HTML">
+                <option value="CSS">
+                <option value="JavaScript">
+                <option value="C/C++">
+                <option value="Python">
+                <option value="MySQL">
+                <option value="NodeJs">
+                <option value="Cấu trúc dữ liệu">
+                <option value="Trí tuệ nhân tạo">
+                <option value="Thiết kế đánh giá thuật toán">
+                <option value="Giải tích">
+                <option value="Mạng máy tính">
+                <option value="Lập trình hướng đối tượng">
+                <option value="TOEFL">
+                <option value="TOEIC">
+                <option value="IELTS">
+              </datalist>
+            </div>
+            <div class="w3-padding w3-half">
+              <input type="button" class="w3-button w3-black" onclick="newElement()" value="Thêm" id="submitSkill" />
+            </div>
           </div>
-          <div class="w3-padding w3-half">
-            <input type="button" class="w3-button w3-black" onclick="addListRequire()" value="Thêm" id="submitRequire" disabled />
+          <div class="w3-padding">
+            <ul class="w3-ul w3-padding" id="myUL">
+            </ul>
           </div>
         </div>
-        <div class="results">
+
+        <hr />
+        <div class="w3-row-padding">
+          <div class="w3-padding w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="Thêm yêu cầu" id="addRequire" />
+          </div>
+          <div class="w3-padding w3-half">
+            <input type="button" class="w3-button w3-black" onclick="addListRequire()" value="Thêm" id="submitRequire" />
+          </div>
+        </div>
+        <div class="w3-padding results">
           <ul id="listRequire" >
           </ul>
         </div>
-        <ul class="w3-ul">
-          <li>• Tốt nghiệp Đại học nước ngoài hoặc tốt nghiệp hệ kỹ sư tài năng các trường Đại học chính quy như ĐH Quốc Gia Hà Nội, ĐH Bách Khoa, ĐH Khoa học tự nhiên, Đại học FPT…</li>
-          <li>• Có kinh nghiệm lập trình về <b>Java</b></li>
-          <li>• Có thể làm việc bằng tiếng Anh với người nước ngoài – tương đương TOEFL iBT 85 điểm trở lên</li>
-          <li>• Có kỹ năng làm việc nhóm, có tinh thần trách nhiệm cao.</li>
-          <li>• Ưu tiên kinh nghiệm với AngularJS (từ 2 trở lên), CSS (SASS), HTML5, Bootstrap</li>
-          <li>• Ưu tiên kinh nghiệm với Java 8, Spring Boot, Hibernate, Rest APIs, Micro services, design patterns và TDD</li>
-          <li>• Cam kết thực tập tối thiểu 3 tháng</li>
+        <ul class="w3-ul w3-padding">
+          <li class="item">Tốt nghiệp Đại học nước ngoài hoặc tốt nghiệp hệ kỹ sư tài năng các trường Đại học chính quy như ĐH Quốc Gia Hà Nội, ĐH Bách Khoa, ĐH Khoa học tự nhiên, Đại học FPT…</li>
+          <li class="item">Có kinh nghiệm lập trình về <b>Java</b></li>
+          <li class="item">Có thể làm việc bằng tiếng Anh với người nước ngoài – tương đương TOEFL iBT 85 điểm trở lên</li>
+          <li class="item">Có kỹ năng làm việc nhóm, có tinh thần trách nhiệm cao.</li>
+          <li class="item">Ưu tiên kinh nghiệm với AngularJS (từ 2 trở lên), CSS (SASS), HTML5, Bootstrap</li>
+          <li class="item">Ưu tiên kinh nghiệm với Java 8, Spring Boot, Hibernate, Rest APIs, Micro services, design patterns và TDD</li>
+          <li class="item">Cam kết thực tập tối thiểu 3 tháng</li>
         </ul>
       </div>
       <p class="w3-center">
         <button type="submit" class="w3-button w3-teal">Tạo mới</button>
-        <button type="reset" class="w3-button w3-red">Làm lại</button>
+        <button type="reset" class="w3-button w3-dark-grey">Làm lại</button>
       </p>
     </form>
 
@@ -169,7 +252,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <div id="contact" class="w3-container w3-padding-large w3-grey">
       <br>
       <br>
-      <h3><b>Contact Me</b></h3>
+      <h3><b>LIÊN HỆ</b></h3>
       <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
@@ -202,6 +285,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       </form>
     </div>
 
+        
     <!-- Footer -->
     <footer class="w3-container w3-padding-32 w3-dark-grey">
       <div class="w3-row-padding">
@@ -214,12 +298,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <div class="w3-third">
           <h3>BLOG POSTS</h3>
           <ul class="w3-ul w3-hoverable">
-            <li class="w3-padding-16">
+            <li class="w3-padding-16 w3-dark-grey">
               <img src="https://www.w3schools.com/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
               <span class="w3-large">Lorem</span><br>
               <span>Sed mattis nunc</span>
             </li>
-            <li class="w3-padding-16">
+            <li class="w3-padding-16 w3-dark-grey">
               <img src="https://www.w3schools.com/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
               <span class="w3-large">Ipsum</span><br>
               <span>Praes tinci sed</span>
@@ -260,23 +344,95 @@ function w3_close() {
 }
 
 function addListToDo() {
-  var node = document.createElement("Li");
-  var text = document.getElementById("addToDo").value; 
-  var textnode=document.createTextNode(text);
-  node.appendChild(textnode);
-  document.getElementById("listToDo").appendChild(node);
-  document.getElementById("addToDo").value = null;
-  document.getElementById('submitToDo').disabled = true;
+  var li = document.createElement("li");
+  li.className = "item";
+  var inputValue = document.getElementById("addToDo").value; 
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("listToDo").appendChild(li);
+  }
+  document.getElementById("addToDo").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
 }
 
 function addListRequire() {
-  var node = document.createElement("Li");
-  var text = document.getElementById("addRequire").value; 
-  var textnode=document.createTextNode(text);
-  node.appendChild(textnode);
-  document.getElementById("listRequire").appendChild(node);
-  document.getElementById("addRequire").value = null;
-  document.getElementById('submitRequire').disabled = true;
+  var li = document.createElement("li");
+  li.className = "item";
+  var inputValue = document.getElementById("addRequire").value; 
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("listRequire").appendChild(li);
+  }
+  document.getElementById("addRequire").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+
+// Click on a close button to hide the current list item
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+// Create a new list item when clicking on the "Add" button
+function newElement() {
+  var li = document.createElement("li");
+  li.className = "item";
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
 }
 </script>
 

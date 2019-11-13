@@ -33,9 +33,9 @@ session_start();
   }
 </style>
 
-<body>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
   <?php include("../../navigation.php"); ?>
-  <div class="w3-content w3-border-left w3-border-right">
+  <div>
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-light-grey w3-collapse w3-top" style="z-index:3;width:260px;margin-top: 55px;" id="mySidebar">
       <div class="w3-container w3-display-container w3-padding-16">

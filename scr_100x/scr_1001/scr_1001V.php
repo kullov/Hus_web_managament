@@ -21,9 +21,9 @@ session_start();
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
 .mySlides {display: none}
 </style>
-<body>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
   <?php include("../../navigation.php"); ?>
-  <div class="w3-content w3-border-left w3-border-right" style="margin-top: 55px;">
+  <div style="margin-top: 55px;">
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-light-grey w3-bar-block w3-collapse w3-top w3-center" style="z-index:3;width:250px; margin-top: 55px;" id="mySidebar">
       <h3 class="w3-padding-64 w3-center"><b>NEWWAVE <br>Solution JSC</b></h3>
@@ -45,16 +45,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
     <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
     <!-- !PAGE CONTENT! -->
-    <div class="w3-main w3-white" style="margin-left:260px">
+    <div class="w3-main w3-white w3-padding" style="margin-left:260px">
 
       <!-- Push down content on small screens -->
       <div class="w3-hide-large" style="margin-top:80px"></div>
 
       <!-- Slideshow Header -->
-      <div class="w3-container" id="space">
         <h1 class="w3-center">Phiếu yêu cầu của doanh nghiệp</h1>
-        <h2 class="w3-text-green">Java Job</h2>
-        <h5><strong>KHÔNG GIAN</strong></h5>
+      <h6>Mã phiếu: <b>1012</b></h6>
+      <div class="w3-container" id="space">
+        <hr>
+        <br>
         <div class="w3-display-container mySlides">
           <img src="https://we25.vn/media/images/anh3(13).jpg" style="width:100%;height:420px;margin-bottom:-6px">
           <div class="w3-display-bottomleft w3-container w3-black">
@@ -95,8 +96,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
         </div>
       </div>
       <div id="about" class="w3-container">
-        <br>
-        <br>
+        <br><br><br>
         <h4><strong>THÔNG TIN</strong></h4>
         <div class="w3-row w3-large">
           <div class="w3-col s6">
@@ -144,7 +144,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       
       <!-- Yêu cầu -->
       <div class="w3-container" id="require">
-        <br><br>
+        <br><br><br>
         <h2>YÊU CẦU</h2>
         <ul class="w3-ul">
           <li>• Tốt nghiệp Đại học nước ngoài hoặc tốt nghiệp hệ kỹ sư tài năng các trường Đại học chính quy như ĐH Quốc Gia Hà Nội, ĐH Bách Khoa, ĐH Khoa học tự nhiên, Đại học FPT…</li>
@@ -155,6 +155,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
           <li>• Ưu tiên kinh nghiệm với Java 8, Spring Boot, Hibernate, Rest APIs, Micro services, design patterns và TDD</li>
           <li>• Cam kết thực tập tối thiểu 3 tháng</li>
         </ul>
+        <p id="subcribe">
+          <br><br><br>
+          <button class="w3-button w3-green w3-third" onclick="document.getElementById('subscribe').style.display='block'">Subscribe</button>
+        </p>
       </div>
 
       <!-- Contact -->

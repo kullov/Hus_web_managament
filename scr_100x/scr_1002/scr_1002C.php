@@ -72,7 +72,7 @@ ul li:hover {
 <?php include("../../navigation.php"); ?>
 <div style=" margin-top: 55px;">
   <!-- Sidebar/menu -->
-  <nav class="w3-sidebar w3-white w3-bar-block w3-collapse w3-top w3-center w3-padding" style="z-index:3;width:250px; margin-top: 55px;" id="mySidebar">
+  <nav class="w3-sidebar w3-white w3-bar-block w3-collapse w3-top w3-center w3-padding" style="z-index:3;width:300px; margin-top: 55px;" id="mySidebar">
     <h3><b>NEWWAVE <br>Solution JSC</b></h3>
     <p><i>Tạo mới phiếu yêu cầu của doanh nghiệp</i></p>
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">ĐÓNG</a>
@@ -85,7 +85,7 @@ ul li:hover {
   <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
   <!-- !PAGE CONTENT! -->
-  <div class="w3-main" style="margin-left:250px;">
+  <div class="w3-main" style="margin-left:300px;">
 
     <form action="/action_page.php" target="_blank">
       <div id="about" class="w3-container">
@@ -244,7 +244,7 @@ ul li:hover {
       </div>
       <p class="w3-center">
         <button type="submit" class="w3-button w3-teal">Tạo mới</button>
-        <button type="reset" class="w3-button w3-red">Làm lại</button>
+        <button type="reset" class="w3-button w3-dark-grey">Làm lại</button>
       </p>
     </form>
 
@@ -298,12 +298,12 @@ ul li:hover {
         <div class="w3-third">
           <h3>BLOG POSTS</h3>
           <ul class="w3-ul w3-hoverable">
-            <li class="w3-padding-16">
+            <li class="w3-padding-16 w3-dark-grey">
               <img src="https://www.w3schools.com/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
               <span class="w3-large">Lorem</span><br>
               <span>Sed mattis nunc</span>
             </li>
-            <li class="w3-padding-16">
+            <li class="w3-padding-16 w3-dark-grey">
               <img src="https://www.w3schools.com/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
               <span class="w3-large">Ipsum</span><br>
               <span>Praes tinci sed</span>

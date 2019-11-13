@@ -22,43 +22,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 <?php include("../../navigation.php"); ?>
 <div style=" margin-top: 55px;" class="">
-  <!-- Sidebar/menu -->
-  <nav class="w3-sidebar w3-light-grey w3-collapse w3-top" style="z-index:3;width:300px; " id="mySidebar"><br>
-    <div class="w3-container">
-      <p class="w3-center"><img src="https://www.w3schools.com/w3images/avatar_g2.jpg" style="width:45%;" class="w3-round"></p><br><br>
-			<h3>My Profile</b></h3>
-			<h5><i class="fa fa-user fa-fw w3-margin-right "></i><i><?php echo htmlspecialchars($_SESSION["last_name_student"]); ?></i></h5>
-			<h5><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> <i>London, UK</i></h5>
-			<h5><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i><i><?php echo($_SESSION["date_of_birth_student"]) ?></i></h5>
-			<h5><i class="fa fa-phone fa-fw w3-margin-right w3-large "></i><i><?php echo($_SESSION["phone_student"]) ?></i></h5>
-      <h3>Trạng thái phiếu</h3>
-    </div>
-    <div class="w3-bar-block">
-      <a href="#OPEN" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hover-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>OPEN</a> 
-      <a href="#close" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hover-teal"><i class="fa fa-close fa-fw w3-margin-right"></i>CLOSE</a> 
-    </div>
-    <div class="w3-panel w3-large">
-      <i class="fa fa-facebook-official w3-hover-opacity "></i>
-      <i class="fa fa-instagram w3-hover-opacity"></i>
-      <i class="fa fa-snapchat w3-hover-opacity"></i>
-      <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-      <i class="fa fa-twitter w3-hover-opacity"></i>
-      <i class="fa fa-linkedin w3-hover-opacity"></i>
-    </div>
-  </nav>
-
   <!-- Overlay effect when opening sidebar on small screens -->
   <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
   <!-- !PAGE CONTENT! -->
-  <div class="w3-main" style="margin-left:300px;">
+  <div class="w3-main">
 
     <!-- Header -->
     <header id="">
-      <div class="w3-container">
-        <br>
-        <br>
-        <h1><b>Danh sách phiếu yêu cầu</b></h1>
+      <div class="w3-container w3-center">
+        <h1><b>DANH SÁCH PHIẾU YÊU CẦU</b></h1>
 				<br>
 				<br>
       </div>
@@ -112,7 +85,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </div>
       </div>
       <div class="w3-half w3-container w3-margin-bottom">
-        <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+        <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%;height:350px" class="w3-hover-opacity">
         <div class="w3-container w3-white">
 				<h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
 					<h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
@@ -164,32 +137,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </div>
       </div>
     </div>
-		<div class="w3-row-padding">
-      <div class="w3-half w3-container w3-margin-bottom">
-        <img src="https://newwave.vn/wp-content/uploads/2018/12/15875037_751901071624876_248931472081814559_o.jpg" alt="Norway" style="width:100%;height:350px" class="w3-hover-opacity">
-        <div class="w3-container w3-white">
-          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
-					<h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
-          <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
-					<p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-					<p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
-					<p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-					<a href="/web_management/scr_100x/scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>				
-        </div>
-      </div>
-      <div class="w3-half w3-container w3-margin-bottom">
-        <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-        <div class="w3-container w3-white">
-				<h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
-					<h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
-          <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
-					<p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-					<p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
-					<p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-					<a href="/web_management/scr_100x/scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
-        </div>
-      </div>
-    </div>
+
 		<div class="w3-row-padding" id="close">
       <div class="w3-third w3-container w3-margin-bottom">
         <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
@@ -229,11 +177,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       </div>
     </div>
 
-    <div class="w3-container w3-padding-large" style="margin-bottom:32px" id="about">
-      <br>
-      <br>
-      
-    
     <!-- Contact Section -->
     <div id="contact" class="w3-container w3-padding-large w3-grey">
       <br>
@@ -283,13 +226,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <div class="w3-third">
           <h3>BLOG POSTS</h3>
           <ul class="w3-ul w3-hoverable">
-            <li class="w3-padding-16">
-              <img src="/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
+            <li class="w3-padding-16 w3-dark-grey">
+              <img src="https://www.w3schools.com/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
               <span class="w3-large">Lorem</span><br>
               <span>Sed mattis nunc</span>
             </li>
-            <li class="w3-padding-16">
-              <img src="/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
+            <li class="w3-padding-16 w3-dark-grey">
+              <img src="https://www.w3schools.com/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
               <span class="w3-large">Ipsum</span><br>
               <span>Praes tinci sed</span>
             </li> 
@@ -310,7 +253,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       </div>
     </footer>
     
-    <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+    <div class="w3-black w3-center w3-padding-24">Powered by <a href="/web_management/" target="_blank" class="w3-hover-opacity">Origen</a></div>
 
   <!-- End page content -->
   </div>

@@ -23,14 +23,24 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       font: 16px sans-serif;
       text-align: center;
     }
+    .mySlides {display:none;}
+    .height-line {
+    line-height: 20px;
+}
+
   </style>
 </head>
 
-<body>
+<body id="myPage">
   <?php include("navigation.php"); ?>
   <div>
-    <div class="w3-display-container w3-animate-opacity">
+    <!-- <div class="w3-display-container w3-animate-opacity">
       <img src="https://www.w3schools.com/w3images/sailboat.jpg" alt="boat" style="width:100%;min-height:350px;max-height:600px;">
+    </div> -->
+    <div class="w3-display-container w3-animate-opacity">
+      <img class="mySlides" src="http://www.pace.edu.vn/vn/uploads/ImageContent/2019/VHDN-24.04%20(1).jpg" style="width:100%;min-height:350px;max-height:600px;">
+      <img class="mySlides" src="https://khoinghiep.thuvienphapluat.vn/uploads/images/2017/10/24/khai%20quat%20doanh%20nghiep%20cong%20nghe%20cao.jpg" style="width:100%;min-height:350px;max-height:600px;">
+      <img class="mySlides" src="https://cdn.vietnambiz.vn/stores/news_dataimages/tinnv/122017/08/07/2655_nhan-vien-gan-bo-cong-ty-la-do-van-hoa-doanh-nghiep-9476-1.jpg" style="width:100%;min-height:350px;max-height:600px;"> 
     </div>
   </div>
   <div id="id01" class="w3-modal">
@@ -49,39 +59,38 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       </footer>
     </div>   
   </div>
-  <!-- Team Container
-
-  <!-- About Section -->
-  <div class="w3-container" style="padding:55px 16px" id="about">
-    <h3 class="w3-center">VỀ CHÚNG TÔI</h3>
-    <p class="w3-center w3-large">Key features of our company</p>
-    <div class="w3-row-padding w3-center" style="margin-top:64px">
+  <!-- Team Container -->
+<div class="w3-container w3-center w3-pale-blue" id="team">
+  <br><br>
+  <h3 class="w3-center">VỀ CHÚNG TÔI</h3>
+    <div class="w3-row-padding w3-center" style="margin-top:30px">
       <div class="w3-quarter">
-        <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
+        <i class="fa fa-desktop w3-margin-bottom w3-xxlarge w3-center"></i>
         <p class="w3-large">Responsive</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
       </div>
       <div class="w3-quarter">
-        <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
+        <i class="fa fa-heart w3-margin-bottom w3-xxlarge"></i>
         <p class="w3-large">Passion</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
       </div>
       <div class="w3-quarter">
-        <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
+        <i class="fa fa-diamond w3-margin-bottom w3-xxlarge"></i>
         <p class="w3-large">Design</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
       </div>
       <div class="w3-quarter">
-        <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
+        <i class="fa fa-cog w3-margin-bottom w3-xxlarge"></i>
         <p class="w3-large">Support</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
       </div>
     </div>
-<div class="w3-container w3-padding-64 w3-center" id="team">
-  <h2>Đội ngũ phát triển</h2>
-  <div class="w3-row"><br>
+  <h4 class="w3-center">Đội ngũ phát triển</h4>
+
+  <div class="w3-row w3-pale-blue"><br>
+
     <div class="w3-col w3-third">
-      <img src="https://www.w3schools.com/w3images/avatar.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+      <img src="https://www.w3schools.com/w3images/avatar.jpg" alt="Boss" style="width:25%" class="w3-circle w3-hover-opacity">
       <h3>Trần Thanh Nga</h3>
       <p>Lập trình viên</p>
       <p>
@@ -92,7 +101,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </div>
 
     <div class="w3-col w3-third" w3-third style="width:%">
-      <img src="https://www.w3schools.com/w3images/avatar.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+      <img src="https://www.w3schools.com/w3images/avatar.jpg" alt="Boss" style="width:25%" class="w3-circle w3-hover-opacity">
       <h3>Nguyễn Thị Thủy</h3>
       <p>Lập trình viên</p>
       <p>
@@ -103,7 +112,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </div>
 
     <div class="w3-col w3-third" w3-third style="width:%">
-      <img src="https://www.w3schools.com/w3images/avatar.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+      <img src="https://www.w3schools.com/w3images/avatar.jpg" alt="Boss" style="width:25%" class="w3-circle w3-hover-opacity">
       <h3>Đặng Đình Tài</h3>
       <p>Lập trình viên</p>
       <p>
@@ -119,8 +128,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
   <div class="w3-quarter">
     <h2>Giới thiệu chung</h2>
-    <p>Năm bắt được nhu cầu tuyển dụng nhân lực trẻ, năng động, hăng hái học hỏi kinh nghiệm của các doanh nghiệp hay nhu cầu tìm kiếm việc làm của sinh viên, chúng tôi đã xây dựng một website để đáp ứng những yêu cầu trên.</p>
-    <p>Đó là sàn giao dịch thực tập sinh. Sàn giao dịch thực tập sinh là nơi cung cấp dịch vụ an toàn, tiện ích, nhanh chóng về tuyển dụng cũng như tìm kiếm việc làm cho sinh viên và các doanh nghiệp. Website không chỉ hữu ích cho sinh viên và doanh nghiệp mà còn mang lại lợi ích cho cả giáo viên. Giáo viên có thể giới thiệu những công việc tốt và phù hợp với từng sinh viên hay giới thiệu cho doanh nghiệp các sinh viên ưu tú, có kinh nghiệm, phù hợp với nhu cầu của họ.</p>
+    <p class="height-line">Năm bắt được nhu cầu tuyển dụng nhân lực trẻ, năng động, hăng hái học hỏi kinh nghiệm của các doanh nghiệp hay nhu cầu tìm kiếm việc làm của sinh viên, chúng tôi đã xây dựng một website để đáp ứng những yêu cầu trên.</p>
+    <p class="height-line">Đó là sàn giao dịch thực tập sinh. Sàn giao dịch thực tập sinh là nơi cung cấp dịch vụ an toàn, tiện ích, nhanh chóng về tuyển dụng cũng như tìm kiếm việc làm cho sinh viên và các doanh nghiệp. Website không chỉ hữu ích cho sinh viên và doanh nghiệp mà còn mang lại lợi ích cho cả giáo viên. Giáo viên có thể giới thiệu những công việc tốt và phù hợp với từng sinh viên hay giới thiệu cho doanh nghiệp các sinh viên ưu tú, có kinh nghiệm, phù hợp với nhu cầu của họ.</p>
     <!-- <p>Khi mà phương thức tuyển dụng hay tìm kiếm việc làm truyền thống đã không được truyền đến mọi người một cách kịp thời đúng lúc thì website của chúng tôi ra đời hứa hẹn sẽ giải quyết vấn đề này một cách tối ưu nhất.</p> -->
   </div>
 
@@ -152,7 +161,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div class="w3-container">
       <h3>Giáo viên</h3>
       <h4></h4>
-      <p>Cung cấp thông tin hữu ích về việc làm cho sinh viên và doanh nghiệp. Nắm bắt cơ hội việc làm của sinh viên.</p>
+      <p>Cung cấp thông tin hữu ích về việc làm cho sinh viên và doanh nghiệp. Nắm bắt được cơ hội việc làm của sinh viên .</p>
     </div>
   </div>
 </div>
@@ -178,21 +187,22 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </div>
     <div class="w3-col m7">
       <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="/action_page.php" target="_blank">
+        <h2 class="w3-center">Liên hệ</h2>
         <div class="w3-section">      
-          <label>Name</label>
-          <input class="w3-input" type="text" name="Name" required>
+          <label style="float: left;"><i class="w3-large fa fa-user"></i>   Họ và tên *</label>
+          <input class="w3-input " type="text" name="Name" placeholder="" required>
         </div>
         <div class="w3-section">      
-          <label>Email</label>
-          <input class="w3-input" type="text" name="Email" required>
+          <label style="float: left;"><i class="w3-large fa fa-envelope-o"></i>   Email *</label>
+          <input class="w3-input w3-animate-input" type="text" name="Email"required>
         </div>
         <div class="w3-section">      
-          <label>Message</label>
+          <label style="float: left;"><i class="w3-large fa fa-pencil"></i>   Message *</label>
           <input class="w3-input" type="text" name="Message" required>
         </div>  
         <input class="w3-check" type="checkbox" checked name="Like">
-        <label>I Like it!</label>
-        <button type="submit" class="w3-button w3-right w3-theme">Send</button>
+        <label >I Like it!</label>
+        <button type="submit" class="w3-button w3-right  w3-teal">Send</button>
       </form>
     </div>
   </div>
@@ -220,25 +230,39 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 <script>
 // Script for side navigation
-function w3_open() {
-  var x = document.getElementById("mySidebar");
-  x.style.width = "300px";
-  x.style.paddingTop = "10%";
-  x.style.display = "block";
-}
-// Close side navigation
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-}
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
+  function w3_open() {
+    var x = document.getElementById("mySidebar");
+    x.style.width = "300px";
+    x.style.paddingTop = "10%";
+    x.style.display = "block";
   }
-}
+  // Close side navigation
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+  }
+  // Used to toggle the menu on smaller screens when clicking on the menu button
+  function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+      x.className += " w3-show";
+    } else { 
+      x.className = x.className.replace(" w3-show", "");
+    }
+  }
+  var myIndex = 0;
+  carousel();
+
+  function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 2000); // Change image every 2 seconds
+  }
 </script>
   <!-- <p>
     <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>

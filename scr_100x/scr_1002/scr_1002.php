@@ -116,53 +116,84 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <br>
       <h3 class="w3-container"><b>Danh sách phiếu yêu cầu</b></h3>
       <!-- Second Photo Grid-->
-      <div class="w3-row-padding">
+      <div class="w3-row-padding" id="OPEN">
         <div class="w3-third w3-container w3-margin-bottom">
           <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
           <div class="w3-container w3-white">
-            <p><b>Lorem Ipsum</b></p>
-            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
+            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
+            <a href="/web_management/scr_100x/scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
         </div>
         <div class="w3-third w3-container w3-margin-bottom">
           <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
           <div class="w3-container w3-white">
-            <p><b>Lorem Ipsum</b></p>
-            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
+            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
+            <a href="/web_management/scr_100x/scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
         </div>
         <div class="w3-third w3-container">
           <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
           <div class="w3-container w3-white">
-            <p><b>Lorem Ipsum</b></p>
-            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
+            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
+            <a href="/web_management/scr_100x/scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
         </div>
       </div>
       <!-- Second Photo Grid-->
-      <div class="w3-row-padding">
+      <div class="w3-row-padding" id="OPEN">
         <div class="w3-third w3-container w3-margin-bottom">
           <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
           <div class="w3-container w3-white">
-            <p><b>Lorem Ipsum</b></p>
-            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
+            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
+            <a href="/web_management/scr_100x/scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
         </div>
         <div class="w3-third w3-container w3-margin-bottom">
           <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
           <div class="w3-container w3-white">
-            <p><b>Lorem Ipsum</b></p>
-            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
+            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
+            <a href="/web_management/scr_100x/scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
         </div>
         <div class="w3-third w3-container">
           <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
           <div class="w3-container w3-white">
-            <p><b>Lorem Ipsum</b></p>
-            <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
+            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
+            <a href="/web_management/scr_100x/scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
         </div>
       </div>
+
       <div class="w3-center w3-padding-32">
         <div class="w3-bar">
           <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>

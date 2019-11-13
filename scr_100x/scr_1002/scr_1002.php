@@ -126,7 +126,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
             <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-            <a href="/web_management/scr_100x/scr_1002/scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+            <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
         </div>
         <div class="w3-third w3-container w3-margin-bottom">
@@ -138,7 +138,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
             <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-            <a href="/web_management/scr_100x/scr_1002/scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+            <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
         </div>
         <div class="w3-third w3-container">
@@ -150,7 +150,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
             <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-            <a href="/web_management/scr_100x/scr_1002/scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+            <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
         </div>
       </div>
@@ -165,7 +165,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
             <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-            <a href="/web_management/scr_100x/scr_1002/scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+            <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
         </div>
         <div class="w3-third w3-container w3-margin-bottom">
@@ -177,7 +177,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
             <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-            <a href="/web_management/scr_100x/scr_1002/scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+            <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
         </div>
         <div class="w3-third w3-container">
@@ -189,7 +189,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
             <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-            <a href="/web_management/scr_100x/scr_1002/scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+            <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
         </div>
       </div>

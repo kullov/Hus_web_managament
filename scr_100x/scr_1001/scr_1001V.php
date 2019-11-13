@@ -178,8 +178,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       </div>
       
       <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by 
-        <a href="https://www.w3schools.com/w3css/default.asp" title="Origen" target="_blank" class="w3-hover-text-green">Origen</a>
-        <a class="w3-button w3-green w3-right" href="/web_management/scr_100x/scr_1001/scr_1001B.php">Trở về</a>
+        <a href="/web_management/" title="Origen" target="_blank" class="w3-hover-text-green">Origen</a>
+        <a class="w3-button w3-green w3-right" href="scr_1001B.php">Trở về</a>
       </footer>
 
     <!-- End page content -->

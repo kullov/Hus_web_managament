@@ -52,7 +52,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       </header>
       <div class="w3-container">
         <p>Cool huh? Ok, enough teasing around..</p>
-        <p>Go to our <a class="w3-text-teal" href="/w3css/default.asp">W3.CSS Tutorial</a> to learn more!</p>
+        <p>Go to our <a class="w3-text-teal" href="#">Origen</a> to know more!</p>
       </div>
       <footer class="w3-container w3-teal">
         <p>Modal footer</p>
@@ -90,9 +90,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   <div class="w3-row w3-pale-blue"><br>
 
     <div class="w3-col w3-third">
-      <img src="https://www.w3schools.com/w3images/avatar.jpg" alt="Boss" style="width:25%" class="w3-circle w3-hover-opacity">
+      <img src="https://www.w3schools.com/w3images/girl_train.jpg" alt="Boss" style="width:110px;height:110px" class="w3-circle w3-hover-opacity">
       <h3>Trần Thanh Nga</h3>
-      <p>Lập trình viên</p>
+      <p>Lập trình viên FULLSTACK</p>
       <p>
         <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
         <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
@@ -101,9 +101,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </div>
 
     <div class="w3-col w3-third" w3-third style="width:%">
-      <img src="https://www.w3schools.com/w3images/avatar.jpg" alt="Boss" style="width:25%" class="w3-circle w3-hover-opacity">
+      <img src="https://www.w3schools.com/w3images/girl.jpg" alt="Boss" style="width:110px;height:110px" class="w3-circle w3-hover-opacity">
       <h3>Nguyễn Thị Thủy</h3>
-      <p>Lập trình viên</p>
+      <p>Lập trình viên FULLSTACK</p>
       <p>
         <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
         <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
@@ -112,9 +112,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </div>
 
     <div class="w3-col w3-third" w3-third style="width:%">
-      <img src="https://www.w3schools.com/w3images/avatar.jpg" alt="Boss" style="width:25%" class="w3-circle w3-hover-opacity">
+      <img src="https://www.w3schools.com/w3images/boy.jpg" alt="Boss" style="width:110px;height:110px" class="w3-circle w3-hover-opacity">
       <h3>Đặng Đình Tài</h3>
-      <p>Lập trình viên</p>
+      <p>Lập trình viên DATABASE</p>
       <p>
         <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
         <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
@@ -218,7 +218,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   <a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i class="fa fa-google-plus"></i></a>
   <a class="w3-button w3-large w3-teal" href="javascript:void(0)" title="Google +"><i class="fa fa-instagram"></i></a>
   <a class="w3-button w3-large w3-teal w3-hide-small" href="javascript:void(0)" title="Linkedin"><i class="fa fa-linkedin"></i></a>
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">Origen</a></p>
+  <p>Powered by <a href="/web_management/" target="_blank">Origen</a></p>
 
   <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
     <span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>   

@@ -18,7 +18,7 @@ session_start();
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+/* body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif} */
 </style>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 <?php include("../../navigation.php"); ?>
@@ -34,8 +34,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <p class="w3-text-grey"><i>Teacher</i></p>
     </div>
     <div class="w3-bar-block">
-      <a href="#PROFILE" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PROFILE</a> 
-      <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a> 
+      <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PROFILE</a> 
+      <a href="#list-require" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>DANH SÁCH PHIẾU YÊU CẦU</a> 
+      <a href="scr_1003S.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>BẢNG PHÂN CÔNG (SCR_1002S)</a>
       <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
     </div>
     <div class="w3-panel w3-large">
@@ -59,21 +60,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <a href="#"><img src="https://www.w3schools.com/w3images/mountains.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
       <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
       <div class="w3-container">
-        <br>
-        <br>
-        <h1><b>My PROFILE</b></h1>
+        <h4><b>THÔNG TIN</b></h1>
         <div class="w3-row-padding">
           <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
             <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Teacher username: <b><?php echo($_SESSION["username_teacher"]) ?></b></p>
-            <!-- <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Date of birth: <b><?php echo($_SESSION["date_of_birth_student"]) ?></b></p> -->
-            <!-- <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Class name: <b><?php echo($_SESSION["class_name"]) ?></b></p> -->
-            <!-- <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Join date: <b><?php echo($_SESSION["join_date_student"]) ?></b></p> -->
-            </div>
+            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Address: London, UK</p>
+            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Email: <b><?php echo($_SESSION["email_teacher"]) ?></b></p>
+          </div>
           <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
             <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Full name: <b><?php echo($_SESSION["name_teacher"]) ?></b></p>
-            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Address: London, UK</p>
-            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Email: <b><?php echo($_SESSION["email_teacher"]) ?></p>
-            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($_SESSION["phone_number_teacher"]) ?></p>
+            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($_SESSION["phone_number_teacher"]) ?></b></p>
+            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($_SESSION["phone_number_teacher"]) ?></b></p>
           </div>
         </div>
       </div>
@@ -122,86 +119,97 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       </div>
     </div>
 
-    <div class="w3-container w3-padding-large" style="margin-bottom:32px" id="about">
-      <br>
-      <br>
-      <h4><b>About Me</b></h4>
-      <p>Just me, myself and I, exploring the universe of unknownment. I have a heart of love and an interest of lorem ipsum and mauris neque quam blog. I want to share my world with you. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+    <div id="list-require" style="padding-top:1px;">
       <hr>
-      
-      <h4>Technical Skills</h4>
-      <!-- Progress bars / Skills -->
-      <p>Photography</p>
-      <div class="w3-grey">
-        <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:95%">95%</div>
-      </div>
-      <p>Web Design</p>
-      <div class="w3-grey">
-        <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:85%">85%</div>
-      </div>
-      <p>Photoshop</p>
-      <div class="w3-grey">
-        <div class="w3-container w3-dark-grey w3-padding w3-center" style="width:80%">80%</div>
-      </div>
-      <p>
-        <button class="w3-button w3-dark-grey w3-padding-large w3-margin-top w3-margin-bottom">
-          <i class="fa fa-download w3-margin-right"></i>Download Resume
-        </button>
-      </p>
-      <hr>
-      
-      <h4>How much I charge</h4>
-      <!-- Pricing Tables -->
-      <div class="w3-row-padding" style="margin:0 -16px">
-        <div class="w3-third w3-margin-bottom">
-          <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
-            <li class="w3-black w3-xlarge w3-padding-32">Basic</li>
-            <li class="w3-padding-16">Web Design</li>
-            <li class="w3-padding-16">Photography</li>
-            <li class="w3-padding-16">1GB Storage</li>
-            <li class="w3-padding-16">Mail Support</li>
-            <li class="w3-padding-16">
-              <h2>$ 10</h2>
-              <span class="w3-opacity">per month</span>
-            </li>
-            <li class="w3-light-grey w3-padding-24">
-              <button class="w3-button w3-teal w3-padding-large w3-hover-black">Sign Up</button>
-            </li>
-          </ul>
+      <br>
+      <h3 class="w3-container"><b>Danh sách phiếu yêu cầu</b></h3>
+      <!-- Second Photo Grid-->
+      <div class="w3-row-padding" id="OPEN">
+        <div class="w3-third w3-container w3-margin-bottom">
+          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
+            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
+            <a href="../scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+          </div>
         </div>
-        
-        <div class="w3-third w3-margin-bottom">
-          <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
-            <li class="w3-teal w3-xlarge w3-padding-32">Pro</li>
-            <li class="w3-padding-16">Web Design</li>
-            <li class="w3-padding-16">Photography</li>
-            <li class="w3-padding-16">50GB Storage</li>
-            <li class="w3-padding-16">Endless Support</li>
-            <li class="w3-padding-16">
-              <h2>$ 25</h2>
-              <span class="w3-opacity">per month</span>
-            </li>
-            <li class="w3-light-grey w3-padding-24">
-              <button class="w3-button w3-teal w3-padding-large w3-hover-black">Sign Up</button>
-            </li>
-          </ul>
+        <div class="w3-third w3-container w3-margin-bottom">
+          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
+            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
+            <a href="../scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+          </div>
         </div>
-        
-        <div class="w3-third">
-          <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
-            <li class="w3-black w3-xlarge w3-padding-32">Premium</li>
-            <li class="w3-padding-16">Web Design</li>
-            <li class="w3-padding-16">Photography</li>
-            <li class="w3-padding-16">Unlimited Storage</li>
-            <li class="w3-padding-16">Endless Support</li>
-            <li class="w3-padding-16">
-              <h2>$ 25</h2>
-              <span class="w3-opacity">per month</span>
-            </li>
-            <li class="w3-light-grey w3-padding-24">
-              <button class="w3-button w3-teal w3-padding-large w3-hover-black">Sign Up</button>
-            </li>
-          </ul>
+        <div class="w3-third w3-container">
+          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
+            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
+            <a href="../scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+          </div>
+        </div>
+      </div>
+      <!-- Second Photo Grid-->
+      <div class="w3-row-padding" id="OPEN">
+        <div class="w3-third w3-container w3-margin-bottom">
+          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
+            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
+            <a href="../scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+          </div>
+        </div>
+        <div class="w3-third w3-container w3-margin-bottom">
+          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
+            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
+            <a href="../scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+          </div>
+        </div>
+        <div class="w3-third w3-container">
+          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+          <div class="w3-container w3-white">
+          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
+            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
+            <a href="../scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+          </div>
+        </div>
+      </div>
+
+      <div class="w3-center w3-padding-32">
+        <div class="w3-bar">
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
+          <a href="#" class="w3-bar-item w3-black w3-button">1</a>
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
+          <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
         </div>
       </div>
     </div>
@@ -249,7 +257,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <div class="w3-third">
           <h3>FOOTER</h3>
           <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-          <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+          <p>Powered by <a href="/web_management/" target="_blank">Origen</a></p>
         </div>
       
         <div class="w3-third">
@@ -282,7 +290,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       </div>
     </footer>
     
-    <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+    <div class="w3-black w3-center w3-padding-24">Powered by <a href="/web_management/" title="Origen" target="_blank" class="w3-hover-opacity">Origen</a></div>
 
   <!-- End page content -->
   </div>

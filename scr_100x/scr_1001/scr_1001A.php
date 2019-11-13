@@ -37,7 +37,7 @@ session_start();
   <?php include("../../navigation.php"); ?>
   <div>
     <!-- Sidebar/menu -->
-    <nav class="w3-sidebar w3-light-grey w3-collapse w3-top" style="z-index:3;width:260px;margin-top: 55px;" id="mySidebar">
+    <nav class="w3-sidebar w3-light-grey w3-collapse w3-top" style="z-index:3;width:300px;margin-top: 55px;" id="mySidebar">
       <div class="w3-container w3-display-container w3-padding-16">
         <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
         <h3 class="w3-center">PHIẾU YÊU CẦU</h3>
@@ -59,10 +59,9 @@ session_start();
             <button type="submit" class="w3-button w3-dark-grey w3-block">Sửa</button>
           </p>
         </form>
-      </div>
-      <div class="w3-bar-block">
-        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-16" onclick="document.getElementById('subscribe').style.display='block'"><i class="fa fa-rss"></i> Subscribe</a>
-        <a href="#contact" class="w3-bar-item w3-button w3-padding-16"><i class="fa fa-envelope"></i> Liên hệ</a>
+        <p class="w3-center">
+          <a href="scr_1001.php" onclick="w3_close()" class="w3-bar-item w3-button">TRỞ VỂ</a>
+        </p>
       </div>
     </nav>
 
@@ -76,7 +75,7 @@ session_start();
     <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
     <!-- !PAGE CONTENT! -->
-    <div class="w3-main w3-white" style="margin-left:260px; margin-top: 55px;">
+    <div class="w3-main w3-white" style="margin-left:300px; margin-top: 55px;">
 
       <!-- Push down content on small screens -->
       <div class="w3-hide-large" style="margin-top:80px"></div>
@@ -203,8 +202,8 @@ session_start();
       </div>
       
       <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by 
-        <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">Origen</a>
-        <button class="w3-button w3-green w3-right" onclick="document.getElementById('subscribe').style.display='block'">Trở về</button>
+        <a href="/web_management/" title="Origen" target="_blank" class="w3-hover-text-green">Origen</a>
+        <a href="scr_1001.php" class="w3-button w3-green w3-right" onclick="document.getElementById('subscribe').style.display='block'">Trở về</a>
       </footer>
 
     <!-- End page content -->

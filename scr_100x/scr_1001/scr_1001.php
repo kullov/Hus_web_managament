@@ -35,8 +35,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </div>
     <div class="w3-bar-block">
       <a href="#PROFILE" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PROFILE</a> 
-      <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a> 
-      <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
+      <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>THÔNG TIN</a>
+      <a href="scr_1001A.php" class="w3-bar-item w3-button w3-padding">ĐĂNG KÝ YÊU CẦU THỰC TẬP</a> 
+      <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-envelope fa-fw w3-margin-right"></i>LIÊN HỆ</a>
     </div>
     <div class="w3-panel w3-large">
       <i class="fa fa-facebook-official w3-hover-opacity"></i>
@@ -59,9 +60,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <a href="#"><img src="https://www.w3schools.com/w3images/mountains.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
       <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
       <div class="w3-container">
-        <br>
-        <br>
-        <h1><b>My PROFILE</b></h1>
+        <h4><b>Sơ yếu lý lịch</b></h4>
         <div class="w3-row-padding">
           <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
             <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Student ID: <b><?php echo($_SESSION["code"]) ?></b></p>
@@ -72,8 +71,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
             <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Full name: <b><?php echo($_SESSION["first_name_student"]) ?> <?php echo($_SESSION["last_name_student"]) ?></b></p>
             <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Address: London, UK</p>
-            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Email: <b><?php echo($_SESSION["email_student"]) ?></p>
-            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($_SESSION["phone_student"]) ?></p>
+            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Email: <b><?php echo($_SESSION["email_student"]) ?></b></p>
+            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($_SESSION["phone_student"]) ?></b></p>
           </div>
         </div>
       </div>
@@ -150,62 +149,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       </p>
       <hr>
       
-      <h4>How much I charge</h4>
-      <!-- Pricing Tables -->
-      <div class="w3-row-padding" style="margin:0 -16px">
-        <div class="w3-third w3-margin-bottom">
-          <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
-            <li class="w3-black w3-xlarge w3-padding-32">Basic</li>
-            <li class="w3-padding-16">Web Design</li>
-            <li class="w3-padding-16">Photography</li>
-            <li class="w3-padding-16">1GB Storage</li>
-            <li class="w3-padding-16">Mail Support</li>
-            <li class="w3-padding-16">
-              <h2>$ 10</h2>
-              <span class="w3-opacity">per month</span>
-            </li>
-            <li class="w3-light-grey w3-padding-24">
-              <button class="w3-button w3-teal w3-padding-large w3-hover-black">Sign Up</button>
-            </li>
-          </ul>
-        </div>
-        
-        <div class="w3-third w3-margin-bottom">
-          <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
-            <li class="w3-teal w3-xlarge w3-padding-32">Pro</li>
-            <li class="w3-padding-16">Web Design</li>
-            <li class="w3-padding-16">Photography</li>
-            <li class="w3-padding-16">50GB Storage</li>
-            <li class="w3-padding-16">Endless Support</li>
-            <li class="w3-padding-16">
-              <h2>$ 25</h2>
-              <span class="w3-opacity">per month</span>
-            </li>
-            <li class="w3-light-grey w3-padding-24">
-              <button class="w3-button w3-teal w3-padding-large w3-hover-black">Sign Up</button>
-            </li>
-          </ul>
-        </div>
-        
-        <div class="w3-third">
-          <ul class="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
-            <li class="w3-black w3-xlarge w3-padding-32">Premium</li>
-            <li class="w3-padding-16">Web Design</li>
-            <li class="w3-padding-16">Photography</li>
-            <li class="w3-padding-16">Unlimited Storage</li>
-            <li class="w3-padding-16">Endless Support</li>
-            <li class="w3-padding-16">
-              <h2>$ 25</h2>
-              <span class="w3-opacity">per month</span>
-            </li>
-            <li class="w3-light-grey w3-padding-24">
-              <button class="w3-button w3-teal w3-padding-large w3-hover-black">Sign Up</button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    
     <!-- Contact Section -->
     <div id="contact" class="w3-container w3-padding-large w3-grey">
       <br>
@@ -249,12 +192,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <div class="w3-third">
           <h3>FOOTER</h3>
           <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-          <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">Origen</a></p>
+          <p>Powered by <a href="/web_management/" target="_blank">Origen</a></p>
         </div>
       
         <div class="w3-third">
           <h3>BLOG POSTS</h3>
-          <ul class="w3-ul w3-hoverable">
+          <ul class="w3-ul w3-hoverable"></ul>
             <li class="w3-padding-16">
               <img src="/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
               <span class="w3-large">Lorem</span><br>
@@ -282,7 +225,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       </div>
     </footer>
     
-    <div class="w3-black w3-center w3-padding-24">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></div>
+    <div class="w3-black w3-center w3-padding-24">Powered by <a href="/web_management/" title="W3.CSS" target="_blank" class="w3-hover-opacity">Origen</a></div>
 
   <!-- End page content -->
   </div>

@@ -79,6 +79,7 @@ ul li:hover {
     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">THÔNG TIN</a> 
     <a href="#require" onclick="w3_close()" class="w3-bar-item w3-button">YÊU CẦU</a> 
     <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">LIÊN HỆ</a>
+    <a href="scr_1002.php" onclick="w3_close()" class="w3-bar-item w3-button">TRỞ VỂ</a>
   </nav>
 
   <!-- Overlay effect when opening sidebar on small screens -->

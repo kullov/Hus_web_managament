@@ -110,7 +110,7 @@
       }
 
       // Close statement
-      mysqli_stmt_close($stmt);
+      // mysqli_stmt_close($stmt);
     }
 
     // Close connection

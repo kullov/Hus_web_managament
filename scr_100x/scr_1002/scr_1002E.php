@@ -16,8 +16,8 @@ session_start();
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 /* Include the padding and border in an element's total width and height */
@@ -79,6 +79,7 @@ ul li:hover {
     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">THÔNG TIN</a> 
     <a href="#require" onclick="w3_close()" class="w3-bar-item w3-button">YÊU CẦU</a> 
     <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">LIÊN HỆ</a>
+    <a href="scr_1002.php" onclick="w3_close()" class="w3-bar-item w3-button">TRỞ VỂ</a>
   </nav>
 
   <!-- Overlay effect when opening sidebar on small screens -->

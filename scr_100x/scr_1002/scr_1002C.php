@@ -20,6 +20,53 @@ session_start();
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+/* Include the padding and border in an element's total width and height */
+
+/* Remove margins and padding from the list */
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style the list items */
+ul li {
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background: #eee;
+  transition: 0.2s;
+  
+  /* make the list items unselectable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+ul li:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+/* Darker background-color on hover */
+ul li:hover {
+  background: #ddd;
+}
+
+/* Style the close button */
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+  color: white;
+}
+
+
+
 </style>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 <?php include("../../navigation.php"); ?>
@@ -104,8 +151,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <input type="button" class="w3-button w3-black" onclick="addListToDo()" value="Thêm" id="submitToDo" disabled />
           </div>
         </div>
-        <div class="results">
-          <ul id="listToDo">
+        <div class="results w3-padding">
+          <ul class="w3-ul w3-padding" id="listToDo">
           </ul>
         </div>
         <hr>
@@ -137,44 +184,45 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <br><br><br>
         <h4><strong>YÊU CẦU</strong></h4>
         <div>
-          <h6><strong>Danh sách năng lực:</strong></h6>
-          <div id="myDIV" class="header">
-            <h2 style="margin:5px">My To Do List</h2>
-            <input type="text" id="myInput" placeholder="Title...">
-            <span onclick="newElement()" class="addBtn">Add</span>
+        <h6><strong>Danh sách năng lực:</strong></h6>
+          <div class="w3-row-padding">
+            <div id="myDIV" class="header w3-padding w3-half">
+              <input class="w3-input w3-border" type="text" placeholder="Thêm yêu cầu" id="myInput" />
+            </div>
+            <div class="w3-padding w3-half">
+              <input type="button" class="w3-button w3-black" onclick="newElement()" value="Thêm" id="submitSkill" />
+            </div>
           </div>
-
-          <ul id="myUL">
-            <li>Hit the gym</li>
-            <li class="checked">Pay bills</li>
-            <li>Meet George</li>
-            <li>Buy eggs</li>
-            <li>Read a book</li>
-            <li>Organize office</li>
-          </ul>
+          <div class="w3-padding">
+            <ul class="w3-ul w3-padding" id="myUL">
+              <li class="item">Hit the gym</li>
+              <li class="item">Pay bills</li>
+              <li class="item">Meet George</li>
+            </ul>
+          </div>
         </div>
 
         <hr />
         <div class="w3-row-padding">
           <div class="w3-padding w3-half">
-            <input class="w3-input w3-border" type="text" placeholder="Thêm yêu cầu" id="addRequire" onkeyup="if(this.value.length > 0) document.getElementById('submitRequire').disabled = false; else document.getElementById('submitRequire').disabled = true;" />
+            <input class="w3-input w3-border" type="text" placeholder="Thêm yêu cầu" id="addRequire" />
           </div>
           <div class="w3-padding w3-half">
-            <input type="button" class="w3-button w3-black" onclick="addListRequire()" value="Thêm" id="submitRequire" disabled />
+            <input type="button" class="w3-button w3-black" onclick="addListRequire()" value="Thêm" id="submitRequire" />
           </div>
         </div>
-        <div class="results">
+        <div class="w3-padding results">
           <ul id="listRequire" >
           </ul>
         </div>
-        <ul class="w3-ul">
-          <li>• Tốt nghiệp Đại học nước ngoài hoặc tốt nghiệp hệ kỹ sư tài năng các trường Đại học chính quy như ĐH Quốc Gia Hà Nội, ĐH Bách Khoa, ĐH Khoa học tự nhiên, Đại học FPT…</li>
-          <li>• Có kinh nghiệm lập trình về <b>Java</b></li>
-          <li>• Có thể làm việc bằng tiếng Anh với người nước ngoài – tương đương TOEFL iBT 85 điểm trở lên</li>
-          <li>• Có kỹ năng làm việc nhóm, có tinh thần trách nhiệm cao.</li>
-          <li>• Ưu tiên kinh nghiệm với AngularJS (từ 2 trở lên), CSS (SASS), HTML5, Bootstrap</li>
-          <li>• Ưu tiên kinh nghiệm với Java 8, Spring Boot, Hibernate, Rest APIs, Micro services, design patterns và TDD</li>
-          <li>• Cam kết thực tập tối thiểu 3 tháng</li>
+        <ul class="w3-ul w3-padding">
+          <li class="item">Tốt nghiệp Đại học nước ngoài hoặc tốt nghiệp hệ kỹ sư tài năng các trường Đại học chính quy như ĐH Quốc Gia Hà Nội, ĐH Bách Khoa, ĐH Khoa học tự nhiên, Đại học FPT…</li>
+          <li class="item">Có kinh nghiệm lập trình về <b>Java</b></li>
+          <li class="item">Có thể làm việc bằng tiếng Anh với người nước ngoài – tương đương TOEFL iBT 85 điểm trở lên</li>
+          <li class="item">Có kỹ năng làm việc nhóm, có tinh thần trách nhiệm cao.</li>
+          <li class="item">Ưu tiên kinh nghiệm với AngularJS (từ 2 trở lên), CSS (SASS), HTML5, Bootstrap</li>
+          <li class="item">Ưu tiên kinh nghiệm với Java 8, Spring Boot, Hibernate, Rest APIs, Micro services, design patterns và TDD</li>
+          <li class="item">Cam kết thực tập tối thiểu 3 tháng</li>
         </ul>
       </div>
       <p class="w3-center">
@@ -220,6 +268,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       </form>
     </div>
 
+        
     <!-- Footer -->
     <footer class="w3-container w3-padding-32 w3-dark-grey">
       <div class="w3-row-padding">
@@ -278,34 +327,57 @@ function w3_close() {
 }
 
 function addListToDo() {
-  var node = document.createElement("Li");
-  var text = document.getElementById("addToDo").value; 
-  var textnode=document.createTextNode(text);
-  node.appendChild(textnode);
-  document.getElementById("listToDo").appendChild(node);
-  document.getElementById("addToDo").value = null;
-  document.getElementById('submitToDo').disabled = true;
-}
+  var li = document.createElement("li");
+  li.className = "item";
+  var inputValue = document.getElementById("addToDo").value; 
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("listToDo").appendChild(li);
+  }
+  document.getElementById("addToDo").value = "";
 
-function addListRequire() {
-  var node = document.createElement("Li");
-  var text = document.getElementById("addRequire").value; 
-  var textnode=document.createTextNode(text);
-  node.appendChild(textnode);
-  document.getElementById("listRequire").appendChild(node);
-  document.getElementById("addRequire").value = null;
-  document.getElementById('submitRequire').disabled = true;
-}
-
-// Create a "close" button and append it to each list item
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");
   span.className = "close";
   span.appendChild(txt);
-  myNodelist[i].appendChild(span);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+
+function addListRequire() {
+  var li = document.createElement("li");
+  li.className = "item";
+  var inputValue = document.getElementById("addRequire").value; 
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("listRequire").appendChild(li);
+  }
+  document.getElementById("addRequire").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
 }
 
 // Click on a close button to hide the current list item
@@ -318,17 +390,10 @@ for (i = 0; i < close.length; i++) {
   }
 }
 
-// Add a "checked" symbol when clicking on a list item
-var list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false);
-
 // Create a new list item when clicking on the "Add" button
 function newElement() {
   var li = document.createElement("li");
+  li.className = "item";
   var inputValue = document.getElementById("myInput").value;
   var t = document.createTextNode(inputValue);
   li.appendChild(t);

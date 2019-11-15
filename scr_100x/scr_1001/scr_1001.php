@@ -31,13 +31,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
         <i class="fa fa-remove"></i>
       </a>
-      <img src="https://www.w3schools.com/w3images/avatar_g2.jpg" style="width:45%;" class="w3-round"><br><br>
+      <img src="<?php echo htmlspecialchars($_SESSION["avatar"]); ?>" style="width:45%;" class="w3-round"><br><br>
       <h3><b><?php echo htmlspecialchars($_SESSION["last_name_student"]); ?></b></h3>
       <p class="w3-text-grey"><i>Student</i></p>
     </div>
     <div class="w3-bar-block">
       <a href="#PROFILE" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PROFILE</a> 
       <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>THÔNG TIN</a>
+      <a href="scr_1001D.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>SỬA THÔNG TIN</a>
       <a href="scr_1001A.php" class="w3-bar-item w3-button w3-padding">ĐĂNG KÝ YÊU CẦU THỰC TẬP</a> 
       <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-envelope fa-fw w3-margin-right"></i>LIÊN HỆ</a>
     </div>
@@ -65,13 +66,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <h4><b>Sơ yếu lý lịch</b></h4>
         <div class="w3-row-padding">
           <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
-            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Student ID: <b><?php echo($_SESSION["code"]) ?></b></p>
-            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Date of birth: <b><?php echo($_SESSION["date_of_birth_student"]) ?></b></p>
-            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Class name: <b><?php echo($_SESSION["class_name"]) ?></b></p>
-            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Join date: <b><?php echo($_SESSION["join_date_student"]) ?></b></p>
+            <p><i class="far fa-address-card w3-margin-right w3-large w3-text-teal"></i>Student ID: <b><?php echo($_SESSION["code"]) ?></b></p>
+            <p><i class="fa fa-birthday-cake w3-margin-right w3-large w3-text-teal"></i>Date of birth: <b><?php echo($_SESSION["date_of_birth_student"]) ?></b></p>
+            <p><i class="fas fa-graduation-cap w3-margin-right w3-large w3-text-teal"></i>Class name: <b><?php echo($_SESSION["class_name"]) ?></b></p>
+            <p><i class="fa fa-calendar-check-o w3-margin-right w3-large w3-text-teal"></i>Join date: <b><?php echo($_SESSION["join_date_student"]) ?></b></p>
             </div>
           <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
-            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Full name: <b><?php echo($_SESSION["first_name_student"]) ?> <?php echo($_SESSION["last_name_student"]) ?></b></p>
+            <p><i class="far fa-address-card w3-margin-right w3-large w3-text-teal"></i>Full name: <b><?php echo($_SESSION["first_name_student"]) ?> <?php echo($_SESSION["last_name_student"]) ?></b></p>
             <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Address: London, UK</p>
             <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Email: <b><?php echo($_SESSION["email_student"]) ?></b></p>
             <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($_SESSION["phone_student"]) ?></b></p>
@@ -127,7 +128,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <br>
       <br>
       <h4><b>About Me</b></h4>
-      <p>Just me, myself and I, exploring the universe of unknownment. I have a heart of love and an interest of lorem ipsum and mauris neque quam blog. I want to share my world with you. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <p><?php echo htmlspecialchars($_SESSION["description_student"]); ?></p>
       <hr>
       
       <h4>Technical Skills</h4>
@@ -201,12 +202,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <h3>BLOG POSTS</h3>
           <ul class="w3-ul w3-hoverable"></ul>
             <li class="w3-padding-16">
-              <img src="/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
+              <img src="https://www.w3schools.com/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
               <span class="w3-large">Lorem</span><br>
               <span>Sed mattis nunc</span>
             </li>
             <li class="w3-padding-16">
-              <img src="/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
+              <img src="https://www.w3schools.com/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
               <span class="w3-large">Ipsum</span><br>
               <span>Praes tinci sed</span>
             </li> 

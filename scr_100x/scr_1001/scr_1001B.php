@@ -72,7 +72,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     
     <!-- First Photo Grid-->
     <div class="w3-row-padding" id="OPEN">
-      <div class="w3-half w3-container w3-margin-bottom">
+      <div class="w3-half w3-container w3-margin-bottom w3-card">
         <img src="https://newwave.vn/wp-content/uploads/2018/12/15875037_751901071624876_248931472081814559_o.jpg" alt="Norway" style="width:100%;height:350px" class="w3-hover-opacity">
         <div class="w3-container w3-white">
           <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
@@ -81,10 +81,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 					<p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
 					<p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
 					<p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>				
+					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?>"><button type="submit" class="w3-button w3-right w3-green">Chi tiết</button></a>
+          <a href="scr_1001A.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-left w3-blue">Đăng kí</button></a>			
         </div>
       </div>
-      <div class="w3-half w3-container w3-margin-bottom">
+      <div class="w3-half w3-container w3-margin-bottom w3-card">
         <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%;height:350px" class="w3-hover-opacity">
         <div class="w3-container w3-white">
 				<h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
@@ -93,14 +94,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 					<p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
 					<p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
 					<p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>
+          <a href="scr_1001A.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-left w3-blue">Đăng kí</button></a>	
         </div>
       </div>
     </div>
     
     <!-- Second Photo Grid-->
     <div class="w3-row-padding" id="OPEN">
-      <div class="w3-third w3-container w3-margin-bottom">
+      <div class="w3-third w3-container w3-margin-bottom w3-card">
         <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
         <div class="w3-container w3-white">
 				<h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
@@ -109,10 +111,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 					<p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
 					<p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
 					<p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>
+          <a href="scr_1001A.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-left w3-blue">Đăng kí</button></a>	
         </div>
       </div>
-      <div class="w3-third w3-container w3-margin-bottom">
+      <div class="w3-third w3-container w3-margin-bottom w3-card">
         <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
         <div class="w3-container w3-white">
 				<h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
@@ -121,10 +124,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 					<p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
 					<p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
 					<p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>
+          <a href="scr_1001A.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-left w3-blue">Đăng kí</button></a>	
         </div>
       </div>
-      <div class="w3-third w3-container">
+      <div class="w3-third w3-container w3-card">
         <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
         <div class="w3-container w3-white">
 				<h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
@@ -133,13 +137,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 					<p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
 					<p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
 					<p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>
+          <a href="scr_1001A.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-left w3-blue">Đăng kí</button></a>	
         </div>
       </div>
     </div>
 
 		<div class="w3-row-padding" id="close">
-      <div class="w3-third w3-container w3-margin-bottom">
+      <div class="w3-third w3-container w3-margin-bottom w3-card">
         <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
         <div class="w3-container w3-white">
 				<h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
@@ -148,10 +153,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 					<p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
 					<p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
 					<p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>
+          <a href="scr_1001A.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-left w3-blue">Đăng kí</button></a>	
         </div>
       </div>
-      <div class="w3-third w3-container w3-margin-bottom">
+      <div class="w3-third w3-container w3-margin-bottom w3-card">
         <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
         <div class="w3-container w3-white">
 				<h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
@@ -160,10 +166,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 					<p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
 					<p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
 					<p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>
+          <a href="scr_1001A.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-left w3-blue">Đăng kí</button></a>	
         </div>
       </div>
-      <div class="w3-third w3-container">
+      <div class="w3-third w3-container w3-card">
         <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
         <div class="w3-container w3-white">
 				<h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
@@ -172,7 +179,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 					<p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
 					<p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
 					<p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
+					<a href="scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>
+          <a href="scr_1001A.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-left w3-blue">Đăng kí</button></a>	
         </div>
       </div>
     </div>

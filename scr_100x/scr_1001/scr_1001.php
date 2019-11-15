@@ -7,6 +7,39 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
   header("location: ../../");
   exit;
 }
+
+// Include config file
+require "../../config.php";
+// Define variables and initialize with empty values
+$first_name = $last_name = $class_name = $join_date = $phone = $email = $address = $date_of_birth = $avatar = $description = "";
+$first_name_err = $last_name_err = $class_name_err = $join_date_err = $phone_err = $email_err = $address_err = $date_of_birth_err = $avatar_err = "";
+
+$username = $_SESSION["code"];
+// Prepare a select statement
+// Câu SQL lấy danh sách
+$sql = "SELECT id, first_name, last_name, email, phone, date_of_birth, class_name, join_date, avatar, description FROM intern_profile WHERE code = ?";
+
+if ($stmt = mysqli_prepare($link, $sql)) {
+  
+  // Bind variables to the prepared statement as parameters
+  mysqli_stmt_bind_param($stmt, "s", $username);
+
+  // Attempt to execute the prepared statement
+  if (mysqli_stmt_execute($stmt)) {
+    // Store result
+    mysqli_stmt_store_result($stmt);
+    // Check if username exists, if yes then verify password
+    if (mysqli_stmt_num_rows($stmt) == 1) {
+      // Bind result variables
+      mysqli_stmt_bind_result($stmt, $id, $first_name, $last_name, $email, $phone, $date_of_birth, $class_name, $join_date, $avatar, $description);
+      mysqli_stmt_fetch($stmt);
+    }
+  } else {
+    echo "Oops! Something went wrong. Please try again later.";
+  }
+  // Close statement
+  mysqli_stmt_close($stmt);
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,12 +60,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <div style=" margin-top: 55px;">
   <!-- Sidebar/menu -->
   <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px; " id="mySidebar"><br>
-    <div class="w3-container">
+    <div class="w3-container w3-center">
       <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
         <i class="fa fa-remove"></i>
       </a>
-      <img src="<?php echo htmlspecialchars($_SESSION["avatar"]); ?>" style="width:45%;" class="w3-round"><br><br>
-      <h3><b><?php echo htmlspecialchars($_SESSION["last_name_student"]); ?></b></h3>
+      <img src="<?php echo htmlspecialchars($avatar); ?>" style="width:45%;" class="w3-round"><br><br>
+      <h3><b><?php echo htmlspecialchars($last_name); ?></b></h3>
       <p class="w3-text-grey"><i>Student</i></p>
     </div>
     <div class="w3-bar-block">
@@ -60,22 +93,22 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
     <!-- Header -->
     <header id="PROFILE">
-      <a href="#"><img src="https://www.w3schools.com/w3images/mountains.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+      <img src="https://www.w3schools.com/w3images/mountains.jpg" style="width:65px;" class="w3-circle w3-center w3-margin w3-hide-large w3-hover-opacity">
       <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
       <div class="w3-container">
         <h4><b>Sơ yếu lý lịch</b></h4>
         <div class="w3-row-padding">
           <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
-            <p><i class="far fa-address-card w3-margin-right w3-large w3-text-teal"></i>Student ID: <b><?php echo($_SESSION["code"]) ?></b></p>
-            <p><i class="fa fa-birthday-cake w3-margin-right w3-large w3-text-teal"></i>Date of birth: <b><?php echo($_SESSION["date_of_birth_student"]) ?></b></p>
-            <p><i class="fas fa-graduation-cap w3-margin-right w3-large w3-text-teal"></i>Class name: <b><?php echo($_SESSION["class_name"]) ?></b></p>
-            <p><i class="fa fa-calendar-check-o w3-margin-right w3-large w3-text-teal"></i>Join date: <b><?php echo($_SESSION["join_date_student"]) ?></b></p>
+            <p><i class="far fa-address-card w3-margin-right w3-large w3-text-teal"></i>Student ID: <b><?php echo($username) ?></b></p>
+            <p><i class="fa fa-birthday-cake w3-margin-right w3-large w3-text-teal"></i>Date of birth: <b><?php echo($date_of_birth) ?></b></p>
+            <p><i class="fas fa-graduation-cap w3-margin-right w3-large w3-text-teal"></i>Class name: <b><?php echo($class_name) ?></b></p>
+            <p><i class="fa fa-calendar-check-o w3-margin-right w3-large w3-text-teal"></i>Join date: <b><?php echo($join_date) ?></b></p>
             </div>
           <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
-            <p><i class="far fa-address-card w3-margin-right w3-large w3-text-teal"></i>Full name: <b><?php echo($_SESSION["first_name_student"]) ?> <?php echo($_SESSION["last_name_student"]) ?></b></p>
+            <p><i class="far fa-address-card w3-margin-right w3-large w3-text-teal"></i>Full name: <b><?php echo($first_name) ?> <?php echo($last_name) ?></b></p>
             <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Address: London, UK</p>
-            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Email: <b><?php echo($_SESSION["email_student"]) ?></b></p>
-            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($_SESSION["phone_student"]) ?></b></p>
+            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Email: <b><?php echo($email) ?></b></p>
+            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($phone) ?></b></p>
           </div>
         </div>
       </div>
@@ -128,7 +161,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <br>
       <br>
       <h4><b>About Me</b></h4>
-      <p><?php echo htmlspecialchars($_SESSION["description_student"]); ?></p>
+      <p><?php echo htmlspecialchars($description); ?></p>
       <hr>
       
       <h4>Technical Skills</h4>
@@ -156,11 +189,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <div id="contact" class="w3-container w3-padding-large w3-grey">
       <br>
       <br>
-      <h4><b>Contact Us</b></h4>
+      <h4><b>Contact Me</b></h4>
       <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-          <p>email@email.com</p>
+          <p><?php echo htmlspecialchars($email); ?></p>
         </div>
         <div class="w3-third w3-teal">
           <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
@@ -168,7 +201,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </div>
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
-          <p>512312311</p>
+          <p><?php echo htmlspecialchars($phone); ?></p>
         </div>
       </div>
       <hr class="w3-opacity">

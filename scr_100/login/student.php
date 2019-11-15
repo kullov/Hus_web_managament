@@ -62,15 +62,6 @@
                 $_SESSION["loggedin"] = true;
                 $_SESSION["id"] = $id;
                 $_SESSION["code"] = $username;
-                $_SESSION["last_name_student"] = $last_name;
-                $_SESSION["first_name_student"] = $first_name;
-                $_SESSION["email_student"] = $email;
-                $_SESSION["phone_student"] = $phone;
-                $_SESSION["date_of_birth_student"] = $date_of_birth;
-                $_SESSION["class_name"] = $class_name;
-                $_SESSION["join_date_student"] = $join_date;
-                $_SESSION["avatar"] = $avatar;
-                $_SESSION["description_student"] = $description_student;
                 $_SESSION["role"] = "student";
 
                 // Redirect user to scr_1001 page

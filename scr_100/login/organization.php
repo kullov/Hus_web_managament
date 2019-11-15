@@ -60,13 +60,8 @@
 
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
-                $_SESSION["id_organization"] = $id;
+                $_SESSION["id"] = $id;
                 $_SESSION["tax_number"] = $tax_number;
-                $_SESSION["name_organization"] = $name_organization;
-                $_SESSION["description_organization"] = $description_organization;
-                $_SESSION["address_organization"] = $address_organization;
-                $_SESSION["email_organization"] = $email_organization;
-                $_SESSION["contact_organization"] = $contact_organization;
                 $_SESSION["role"] = "organization";
 
                 // Redirect user to welcome page

@@ -7,6 +7,40 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
   header("location: ../../");
   exit;
 }
+
+// Include config file
+require_once "../../config.php";
+
+// Define variables and initialize with empty values
+$tax_number = $name = $address = $email = $contact = $description = "";
+$id = $_SESSION["id"];
+// Prepare a select statement
+$sql = "SELECT id, tax_number, name, address, email, contact, description FROM organization_profile WHERE id = ?";
+
+if ($stmt = mysqli_prepare($link, $sql)) {
+  
+  // Bind variables to the prepared statement as parameters
+  mysqli_stmt_bind_param($stmt, "s", $id);
+
+  // Attempt to execute the prepared statement
+  if (mysqli_stmt_execute($stmt)) {
+    // Store result
+    mysqli_stmt_store_result($stmt);
+    // Check if tax exists, if yes then verify password
+    if (mysqli_stmt_num_rows($stmt) == 1) {
+      // Bind result variables
+      mysqli_stmt_bind_result($stmt, $id, $tax_number, $name, $address, $email, $contact, $description);
+      mysqli_stmt_fetch($stmt);
+    }
+  } else {
+    echo "Oops! Something went wrong. Please try again later.";
+  }
+  // Close statement
+  mysqli_stmt_close($stmt);
+}
+
+// Close connection
+mysqli_close($link);
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,12 +58,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <div style=" margin-top: 55px;">
   <!-- Sidebar/menu -->
   <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px; " id="mySidebar"><br>
-    <div class="w3-container">
+    <div class="w3-container w3-center">
       <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
         <i class="fa fa-remove"></i>
       </a>
       <img src="https://www.w3schools.com/w3images/avatar_g2.jpg" style="width:45%;" class="w3-round"><br><br>
-      <h3><b><?php echo htmlspecialchars($_SESSION["name_organization"]); ?></b></h3>
+      <h3><b><?php echo htmlspecialchars($name); ?></b></h3>
       <p class="w3-text-grey"><i>Organization</i></p>
     </div>
     
@@ -67,7 +101,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </header>
 
     <div class="w3-container">
-      <p><?php echo htmlspecialchars($_SESSION["description_organization"]); ?></p>
+      <p><?php echo htmlspecialchars($description); ?></p>
       <div class="w3-container">
         <h4><strong>KHÔNG GIAN</strong></h4>
         <div class="w3-display-container mySlides">
@@ -308,15 +342,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-          <p><?php echo htmlspecialchars($_SESSION["email_organization"]); ?></p>
+          <p><?php echo htmlspecialchars($email); ?></p>
         </div>
         <div class="w3-third w3-teal">
           <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
-          <p><?php echo htmlspecialchars($_SESSION["address_organization"]); ?></p>
+          <p><?php echo htmlspecialchars($address); ?></p>
         </div>
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
-          <p><?php echo htmlspecialchars($_SESSION["contact_organization"]); ?></p>
+          <p><?php echo htmlspecialchars($contact); ?></p>
         </div>
       </div>
       <hr class="w3-opacity">

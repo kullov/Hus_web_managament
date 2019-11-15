@@ -8,15 +8,16 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
   exit;
 }
   // Include config file
-  require_once "../../config.php";
+  require "../../config.php";
 // Define variables and initialize with empty values
 $first_name = $last_name = $class_name = $join_date = $phone = $email = $address = $date_of_birth = $avatar = $description = "";
 $first_name_err = $last_name_err = $class_name_err = $join_date_err = $phone_err = $email_err = $address_err = $date_of_birth_err = $avatar_err = "";
 
 $username = $_SESSION["code"];
 // Prepare a select statement
+// Câu SQL lấy danh sách
 $sql = "SELECT id, first_name, last_name, email, phone, date_of_birth, class_name, join_date, avatar, description FROM intern_profile WHERE code = ?";
-
+ 
 if ($stmt = mysqli_prepare($link, $sql)) {
   
   // Bind variables to the prepared statement as parameters
@@ -30,8 +31,8 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     if (mysqli_stmt_num_rows($stmt) == 1) {
       // Bind result variables
       mysqli_stmt_bind_result($stmt, $id, $first_name, $last_name, $email, $phone, $date_of_birth, $class_name, $join_date, $avatar, $description);
+      mysqli_stmt_fetch($stmt);
     }
-      
   } else {
     echo "Oops! Something went wrong. Please try again later.";
   }
@@ -95,20 +96,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date_of_birth = trim($_POST["date_of_birth"]);
   }
 
+  $avatar = trim($_POST["avatar"]);
+  $description = trim($_POST["description"]);
+
   // Prepare an insert statement
-  $sql = "UPDATE `intern_profile` (first_name, last_name, phone, email, date_of_birth, class_name, avatar, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+  $sql = "UPDATE `intern_profile` SET `first_name` = ?, `last_name` = ?, `date_of_birth` = ?, `class_name` = ?, `avatar` = ?, `email` = ?, `phone` = ?, `description` = ? WHERE `intern_profile`.`code` = ?;";
 
   if ($stmt = mysqli_prepare($link, $sql)) {
     // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param($stmt, "ssssssss", $first_name, $last_name, $phone, $email, $date_of_birth, $class_name, $avatar, $description);
-
+    mysqli_stmt_bind_param($stmt, "sssssssss", $first_name, $last_name, $date_of_birth, $class_name, $avatar, $email, $phone, $description, $username);
     // Attempt to execute the prepared statement
     if (mysqli_stmt_execute($stmt)) {
       // Redirect to login page
-      header("location: ../../scr_100x/scr_1001/scr_1001.php");
+      header("location: scr_1001.php");
     } else {
       echo "Something went wrong. Please try again later.";
     }
+    mysqli_stmt_close($stmt);
   }
   // Close connection
   mysqli_close($link);
@@ -193,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <!-- !PAGE CONTENT! -->
   <div class="w3-main" style="margin-left:250px;">
 
-    <form action="#">
+    <form action="scr_1001D.php" method="post">
       <div id="about" class="w3-container">
         <h4><strong>THÔNG TIN</strong></h4>
         <div class="w3-row-padding w3-center">
@@ -202,45 +206,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
         </div>
         <div class="w3-row-padding">
-          <div class="w3-half w3-padding form-group <?php echo (!empty($first_name_err)) ? 'has-error' : ''; ?>"">
+          <div class="w3-half w3-padding form-group <?php echo (!empty($first_name_err)) ? 'has-error' : ''; ?>">
             <p style="width:30%; display: inline-block"><i class='far fa-address-card'></i> First name:</p>
-            <input class="w3-input w3-margin-top" style="width:60%" type="text" placeholder="" value="<?php echo $first_name; ?>" />
+            <input class="w3-input w3-margin-top" style="width:60%" type="text" name="first_name" placeholder="" value="<?php echo $first_name; ?>" />
             <span class="w3-text-red"><?php echo $first_name_err; ?></span>
           </div>
-          <div class="w3-half w3-padding form-group <?php echo (!empty($last_name_err)) ? 'has-error' : ''; ?>"">
+          <div class="w3-half w3-padding form-group <?php echo (!empty($last_name_err)) ? 'has-error' : ''; ?>">
             <p style="width:30%; display: inline-block"><i class='far fa-address-card'></i> Last name</p>
-            <input class="w3-input w3-margin-top" style="width:60%" type="text" placeholder="" value="<?php echo $last_name; ?>" />
+            <input class="w3-input w3-margin-top" style="width:60%" type="text" name="last_name" placeholder="" value="<?php echo $last_name; ?>" />
             <span class="w3-text-red"><?php echo $last_name_err; ?></span>
           </div>
         </div>
         <div class="w3-row-padding">
-          <div class="w3-half w3-padding form-group <?php echo (!empty($date_of_birth_err)) ? 'has-error' : ''; ?>"">
+          <div class="w3-half w3-padding form-group <?php echo (!empty($date_of_birth_err)) ? 'has-error' : ''; ?>">
             <p style="width:30%; display: inline-block"><i class="fa fa-birthday-cake"></i> Ngày sinh</p>
-            <input class="w3-input w3-margin-top" type="date" placeholder="" style="width:60%" value="<?php echo $date_of_birth; ?>" />
+            <input class="w3-input w3-margin-top" type="date" placeholder="" name="date_of_birth" style="width:60%" value="<?php echo $date_of_birth; ?>" />
             <span class="w3-text-red"><?php echo $date_of_birth_err; ?></span>
           </div>
-          <div class="w3-half w3-padding form-group <?php echo (!empty($class_name_err)) ? 'has-error' : ''; ?>"">
+          <div class="w3-half w3-padding form-group <?php echo (!empty($class_name_err)) ? 'has-error' : ''; ?>">
             <p style="width:30%; display: inline-block"><i class="fas fa-graduation-cap"></i> Lớp</p>
-            <input class="w3-input w3-margin-top" type="text" placeholder="" style="width:60%" value="<?php echo $class_name; ?>" />
+            <input class="w3-input w3-margin-top" type="text" placeholder="" name="class_name" style="width:60%" value="<?php echo $class_name; ?>" />
             <span class="w3-text-red"><?php echo $class_name_err; ?></span>
           </div>
         </div>
         <div class="w3-row-padding">
-          <div class="w3-half w3-padding form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>"">
+          <div class="w3-half w3-padding form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
             <p style="width:30%; display: inline-block"><i class="fa fa-phone"></i> Số điện thoại</p>
-            <input class="w3-input w3-margin-top" type="text" placeholder="" style="width:60%" value="<?php echo $phone; ?>" />
+            <input class="w3-input w3-margin-top" type="text" placeholder="" name="phone" style="width:60%" value="<?php echo $phone; ?>" />
             <span class="w3-text-red"><?php echo $phone_err; ?></span>
           </div>
-          <div class="w3-half w3-padding form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>"">
+          <div class="w3-half w3-padding form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
             <p style="width:30%; display: inline-block"><i class="fa fa-envelope fa-fw"></i> Email</p>
-            <input class="w3-input w3-margin-top" type="text" placeholder="" style="width:60%" value="<?php echo $email; ?>" />
+            <input class="w3-input w3-margin-top" type="text" placeholder="" name="email" style="width:60%" value="<?php echo $email; ?>" />
             <span class="w3-text-red"><?php echo $email_err; ?></span>
+          </div>
+        </div>
+        <div class="w3-row-padding">
+          <div class="w3-half w3-padding form-group <?php echo (!empty($avatar_err)) ? 'has-error' : ''; ?>">
+            <p style="width:30%; display: inline-block"><i class="fa fa-user"></i> Ảnh đại diện</p>
+            <input class="w3-input w3-margin-top" type="text" placeholder="" name="avatar" style="width:60%" value="<?php echo $avatar; ?>" />
+            <span class="w3-text-red"><?php echo $avatar_err; ?></span>
+          </div>
+          <div class="w3-half w3-padding form-group">
+            <p style="width:30%; display: inline-block"><i class="fa fa-calendar fa-fw"></i> Ngày bắt đầu</p>
+            <input class="w3-input w3-margin-top" type="text" placeholder="" disabled style="width:60%" value="<?php echo $join_date; ?>" />
           </div>
         </div>
         <div class="w3-row-padding">
           <div class="w3-padding">
             <p><i class="fa fa-info-circle"></i> Thông tin thêm:</p>
-            <textarea class="w3-input w3-margin-top" type="textarea" placeholder="" style="width:95.5%; height:200px"><?php echo $description; ?></textarea>
+            <textarea class="w3-input w3-margin-top" type="textarea" placeholder="" name="description" style="width:95.5%; height:200px"><?php echo $description; ?></textarea>
           </div>
         </div>
       </div>
@@ -251,7 +266,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div>
           <div class="w3-row-padding">
             <div id="myDIV" class="header w3-padding w3-third">
-              <input class="w3-input w3-border" type="text" placeholder="Thêm năng lực" id="myInput" name="skill" list="listSkill" />
+              <input class="w3-input w3-border" type="text" placeholder="Thêm năng lực" id="myInput" list="listSkill" />
               <datalist id="listSkill">
                 <option value="PHP">
                 <option value="JAVA">

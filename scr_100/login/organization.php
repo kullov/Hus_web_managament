@@ -95,9 +95,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <title>Login</title>
   <style>
     body {
@@ -122,44 +126,17 @@
     }
 
     /* The Modal (background) */
-    .modal {
-      background-color: rgba(0, 0, 0, 0.4);
-      /* Black w/ opacity */
+    .login-btn {
+      font-family: Poppins-Medium;
+      border-radius: 25px;
+      font-size: 16px;  
+      text-transform: uppercase;  
+      justify-content: center;     
+      padding: 0 20px;
+      height: 50px;
     }
+    
 
-    /* Modal Content/Box */
-    .modal-content {
-      margin: 5% auto 15% auto;
-      /* 5% from the top, 15% from the bottom and centered */
-      width: 40%;
-      /* Could be more or less, depending on screen size */
-    }
-
-    /* Add Zoom Animation */
-    .animate {
-      -webkit-animation: animatezoom 0.6s;
-      animation: animatezoom 0.6s
-    }
-
-    @-webkit-keyframes animatezoom {
-      from {
-        -webkit-transform: scale(0)
-      }
-
-      to {
-        -webkit-transform: scale(1)
-      }
-    }
-
-    @keyframes animatezoom {
-      from {
-        transform: scale(0)
-      }
-
-      to {
-        transform: scale(1)
-      }
-    }
 
     /* Change styles for span and cancel button on extra small screens */
     @media screen and (max-width: 300px) {
@@ -172,40 +149,69 @@
         width: 100%;
       }
     }
+    body{
+	margin:0;
+	color:#6a6f8c;
+	background:#c8c8c8;
+	font:600 16px/18px 'Open Sans',sans-serif;
+}
+
+
+.login-wrap{
+	width:100%;
+  margin: auto;
+	max-width:525px;
+	min-height:550px;
+	position:relative;
+	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+.login-html{
+	width:100%;
+	height:100%;
+	position:absolute;
+	padding:90px 70px 50px 70px;
+	background:rgba(50,50,99,.6);
+}
+.login-form .group{
+	margin-bottom:40px;
+}
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button{
+	width:100%;
+	color:#fff;
+	display:block;
+}
+.login-form .group .input{
+	border:none;
+	padding:15px 20px;
+	border-radius:25px;
+	background:rgba(255,255,255,.1);
+}
   </style>
 </head>
 
 <body>
-  <div>
-    <div class="w3-display-container w3-animate-opacity">
-      <img src="https://www.w3schools.com/w3images/sailboat.jpg" alt="boat" style="width:100%;min-height:350px;max-height:600px;">
-    </div>
-  </div>
-  <!-- <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-blue">Login</button> -->
-  <div id="dialog" class="modal">
-    <form class="modal-content animate"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <h4 class="w3-padding w3-blue">Login Organization</h4>
-      <div class="w3-padding-large">
-        <div class="form-group <?php echo (!empty($tax_err)) ? 'has-error' : ''; ?>">
-          <label for="tax_number"><b>Tax Identification Number</b></label>
-          <input class="w3-input w3-padding-large" type="text" placeholder="Enter Tax Identification Number" name="tax_number" value="<?php echo $tax_number; ?>" required>
+  <div class="login-wrap" style="margin-top: 75px;" >
+    <form class="login-html " action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+      <h2 for="" class="text-white mb-4" style="font-family: Poppins-Medium;">LOGIN ORGANIZATION</h2>
+      <div class="login-form">
+        <div class="group <?php echo (!empty($tax_err)) ? 'has-error' : ''; ?>">
+          <label for="username" class="w3-left text-white" style="font-family: Poppins-Medium;">Tax Identification Number</label>
+          <input class="input w3-padding-large " type="text" placeholder="Enter Tax Identification Number" name="username" value="<?php echo $tax_number; ?>" required>
           <span class="w3-text-red"><?php echo $tax_err; ?></span>
         </div>
-        <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-          <label for="password"><b>Password</b></label>
-          <input class="w3-input w3-padding-large" type="password" placeholder="Enter Password" name="password" required>
+        <div class="group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+          <label for="password" class="w3-left text-white" style="font-family: Poppins-Medium;">Password</label>
+          <input class="input w3-padding-large" type="password" placeholder="Enter Password" name="password" required>
           <span class="w3-text-red"><?php echo $password_err; ?></span>
         </div>
-        <button type="submit" class="w3-button w3-blue w3-block">Login</button>
-        <!-- <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label> -->
-        <p>Don't have an account? <a href="../register/organization.php">Sign up now</a>.</p>
-      </div>
-      <div class="w3-padding" style="background-color:#f1f1f1">
-        <button type="reset" class="w3-btn w3-red">Reset</button>
-        <button type="button" onclick="window.location.href='../../'" class="w3-btn w3-blue-gray">Cancel</button>
-      </div>
+        <button type="submit" class="w3-button w3-blue w3-block login-btn mb-2">Login</button>
+        <p class="text-white" style="font-family: Poppins-Medium;">Don't have an account? <a class="w3-text-green" href="../register/organization.php">Sign up now</a>.</p>
+        <button type="reset" class="w3-btn w3-red btn">Reset</button>
+        <button type="button" onclick="window.location.href='../../'" class="w3-btn w3-blue-gray btn">Cancel</button>
+      </div>	
     </form>
   </div>
   <script>

@@ -12,17 +12,17 @@
   require_once "../../config.php";
 
   // Define variables and initialize with empty values
-  $username_teacher = $password = $name_teacher = "";
-  $username_teacher_err = $password_err = "";
+  $email_teacher = $password = $name_teacher = $address_teacher = $phone_number = "";
+  $email_teacher_err = $password_err = "";
 
   // Processing form data when form is submitted
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check if username is empty
-    if (empty(trim($_POST["username_teacher"]))) {
-      $username_teacher_err = "Please enter username teacher.";
+    if (empty(trim($_POST["email_teacher"]))) {
+      $email_teacher_err = "Please enter your email!";
     } else {
-      $username_teacher = trim($_POST["username_teacher"]);
+      $email_teacher = trim($_POST["email_teacher"]);
     }
 
     // Check if password is empty
@@ -33,17 +33,17 @@
     }
 
     // Validate credentials
-    if (empty($username_teacher_err) && empty($password_err)) {
+    if (empty($email_teacher_err) && empty($password_err)) {
       // Prepare a select statement
-      $sql = "SELECT id, phone_number, email_teacher, password, name_teacher, username_teacher FROM teacher_profile WHERE username_teacher = ?";
+      $sql = "SELECT id, contact, email, password, name, address FROM teacher_profile WHERE email = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "s", $param_username_teacher);
+        mysqli_stmt_bind_param($stmt, "s", $param_email_teacher);
 
         // Set parameters
-        $param_username_teacher = $username_teacher;
+        $param_email_teacher = $email_teacher;
 
         // Attempt to execute the prepared statement
         if (mysqli_stmt_execute($stmt)) {
@@ -52,7 +52,7 @@
           // Check if username exists, if yes then verify password
           if (mysqli_stmt_num_rows($stmt) == 1) {
             // Bind result variables
-            mysqli_stmt_bind_result($stmt, $id, $phone_number, $email_teacher, $hashed_password, $name_teacher, $username_teacher);
+            mysqli_stmt_bind_result($stmt, $id, $phone_number, $email_teacher, $hashed_password, $name_teacher, $address_teacher);
             if (mysqli_stmt_fetch($stmt)) {
               if (password_verify($password, $hashed_password)) {
                 // Password is correct, so start a new session
@@ -61,9 +61,9 @@
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
                 // $_SESSION["id"] = $id;
-                $_SESSION["username_teacher"] = $username_teacher;
+                $_SESSION["address_teacher"] = $address_teacher;
                 $_SESSION["name_teacher"] = $name_teacher;
-                $_SESSION["phone_number_teacher"] = $phone_number;
+                $_SESSION["phone_teacher"] = $phone_number;
                 $_SESSION["email_teacher"] = $email_teacher;
                 $_SESSION["role"] = "teacher";
                // $_SESSION["first_name"] = $first_name;
@@ -77,7 +77,7 @@
             }
           } else {
             // Display an error message if username doesn't exist
-            $username_teacher_err = "No account found with that username teacher.";
+            $email_teacher_err = "No account found with that your email!";
           }
         } else {
           echo "Oops! Something went wrong. Please try again later.";
@@ -202,7 +202,10 @@
         <div class="group <?php echo (!empty($username_teacher_err)) ? 'has-error' : ''; ?>">
           <label for="username" class="w3-left text-white" style="font-family: Poppins-Medium;">Username Teacher</label>
           <input class="input w3-padding-large " type="text" placeholder="Enter username teacher" name="username" value="<?php echo $username_teacher; ?>" required>
-          <span class="w3-text-red"><?php echo $username_teacher_err; ?></span>
+        <div class="form-group <?php echo (!empty($email_teacher_err)) ? 'has-error' : ''; ?>">
+          <label for="email_teacher"><b>Email Teacher</b></label>
+          <input class="w3-input w3-padding-large" type="text" placeholder="Enter your email" name="email_teacher" value="<?php echo $email_teacher; ?>" required>
+          <span class="w3-text-red"><?php echo $email_teacher_err; ?></span>
         </div>
         <div class="group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
           <label for="password" class="w3-left text-white" style="font-family: Poppins-Medium;">Password</label>

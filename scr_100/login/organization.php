@@ -12,7 +12,7 @@
   require_once "../../config.php";
 
   // Define variables and initialize with empty values
-  $tax_number = $password = $name = "";
+  $password = $tax_number = $name_organization = $address_organization = $email_organization = $contact_organization = $description_organization = "";
   $tax_err = $password_err = "";
 
   // Processing form data when form is submitted
@@ -35,7 +35,7 @@
     // Validate credentials
     if (empty($tax_err) && empty($password_err)) {
       // Prepare a select statement
-      $sql = "SELECT id, tax_number, name, password FROM organization_profile WHERE tax_number = ?";
+      $sql = "SELECT id, tax_number, name, password, address, email, contact, description FROM organization_profile WHERE tax_number = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         
@@ -52,7 +52,7 @@
           // Check if tax exists, if yes then verify password
           if (mysqli_stmt_num_rows($stmt) == 1) {
             // Bind result variables
-            mysqli_stmt_bind_result($stmt, $id, $tax_number, $name, $hashed_password);
+            mysqli_stmt_bind_result($stmt, $id, $tax_number, $name_organization, $hashed_password, $address_organization, $email_organization, $contact_organization, $description_organization);
             if (mysqli_stmt_fetch($stmt)) {
               if (password_verify($password, $hashed_password)) {
                 // Password is correct, so start a new session
@@ -60,9 +60,13 @@
 
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
-                $_SESSION["id"] = $id;
+                $_SESSION["id_organization"] = $id;
                 $_SESSION["tax_number"] = $tax_number;
-                $_SESSION["name"] = $name;
+                $_SESSION["name_organization"] = $name_organization;
+                $_SESSION["description_organization"] = $description_organization;
+                $_SESSION["address_organization"] = $address_organization;
+                $_SESSION["email_organization"] = $email_organization;
+                $_SESSION["contact_organization"] = $contact_organization;
                 $_SESSION["role"] = "organization";
 
                 // Redirect user to welcome page
@@ -198,7 +202,7 @@
       <h2 for="" class="text-white mb-4" style="font-family: Poppins-Medium;">LOGIN ORGANIZATION</h2>
       <div class="login-form">
         <div class="group <?php echo (!empty($tax_err)) ? 'has-error' : ''; ?>">
-          <label for="username" class="w3-left text-white" style="font-family: Poppins-Medium;">Tax Identification Number</label>
+  
           <input class="input w3-padding-large " type="text" placeholder="Enter Tax Identification Number" name="username" value="<?php echo $tax_number; ?>" required>
           <span class="w3-text-red"><?php echo $tax_err; ?></span>
         </div>

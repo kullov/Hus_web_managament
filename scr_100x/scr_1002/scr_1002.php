@@ -8,7 +8,6 @@ session_start();
 //   exit;
 // }
 ?>
-
 <!DOCTYPE html>
 <html>
 <title>Organization</title>
@@ -30,9 +29,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <i class="fa fa-remove"></i>
       </a>
       <img src="https://www.w3schools.com/w3images/avatar_g2.jpg" style="width:45%;" class="w3-round"><br><br>
-      <h3><b><?php echo htmlspecialchars($_SESSION["name"]); ?></b></h3>
+      <h3><b><?php echo htmlspecialchars($_SESSION["name_organization"]); ?></b></h3>
       <p class="w3-text-grey"><i>Organization</i></p>
     </div>
+    
     <div class="w3-bar-block">
       <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>ABOUT</a> 
       <a href="#list-require" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>DANH SÁCH PHIẾU YÊU CẦU</a> 
@@ -67,7 +67,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </header>
 
     <div class="w3-container">
-      <p>Just me, myself and I, exploring the universe of unknownment. I have a heart of love and an interest of lorem ipsum and mauris neque quam blog. I want to share my world with you. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <p><?php echo htmlspecialchars($_SESSION["description_organization"]); ?></p>
       <div class="w3-container">
         <h4><strong>KHÔNG GIAN</strong></h4>
         <div class="w3-display-container mySlides">
@@ -218,6 +218,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <th name="name_student">Tên sinh viên</th>
           <th name="start_date">Ngày bắt đầu thực tập</th>
           <th name="end_date">Ngày kết thúc thực tập</th>
+          <th name="position">Vị trí thực tập</th>
           <th name="status">Trạng thái</th>
           <th name="create_date">Thời gian phân công</th>
         </tr>
@@ -227,6 +228,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <td>Trần Văn A</td>
           <td>21/10/2019</td>
           <td>01/12/2019</td>
+          <td>Java WEB</td>
           <td>Đang thực hiện</td>
           <td>15/10/2019</td>
         </tr>
@@ -236,6 +238,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <td>Trần Văn C</td>
           <td>21/10/2019</td>
           <td>01/12/2019</td>
+          <td>Java WEB</td>
           <td>Đang thực hiện</td>
           <td>15/10/2019</td>
         </tr>
@@ -245,6 +248,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <td>Trần Văn B</td>
           <td>21/10/2019</td>
           <td>01/12/2019</td>
+          <td>Java WEB</td>
           <td>Đang thực hiện</td>
           <td>15/10/2019</td>
         </tr>
@@ -254,6 +258,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <td>Trần Văn M</td>
           <td>21/10/2019</td>
           <td>01/12/2019</td>
+          <td>Java WEB</td>
           <td>Đang thực hiện</td>
           <td>15/10/2019</td>
         </tr>
@@ -263,6 +268,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <td>Trần Văn M</td>
           <td>21/10/2019</td>
           <td>01/12/2019</td>
+          <td>Java WEB</td>
           <td>Đang thực hiện</td>
           <td>15/10/2019</td>
         </tr>
@@ -272,6 +278,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <td>Trần Văn M</td>
           <td>21/10/2019</td>
           <td>01/12/2019</td>
+          <td>Java WEB</td>
           <td>Đang thực hiện</td>
           <td>15/10/2019</td>
         </tr>
@@ -281,6 +288,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <td>Trần Văn N</td>
           <td>21/10/2019</td>
           <td>01/12/2019</td>
+          <td>Java WEB</td>
           <td>Đang thực hiện</td>
           <td>15/10/2019</td>
         </tr>
@@ -306,15 +314,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-          <p>tranthanhnga_t61@hus.edu.com</p>
+          <p><?php echo htmlspecialchars($_SESSION["email_organization"]); ?></p>
         </div>
         <div class="w3-third w3-teal">
           <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
-          <p>334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+          <p><?php echo htmlspecialchars($_SESSION["address_organization"]); ?></p>
         </div>
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
-          <p>512312311</p>
+          <p><?php echo htmlspecialchars($_SESSION["contact_organization"]); ?></p>
         </div>
       </div>
       <hr class="w3-opacity">

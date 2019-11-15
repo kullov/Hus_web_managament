@@ -18,8 +18,8 @@ if ($_SERVER["PHP_SELF"] == "/web_management/index.php") {
 <html lang="en">
 <head>
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script
     src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script
@@ -46,7 +46,7 @@ if ($_SERVER["PHP_SELF"] == "/web_management/index.php") {
         <!-- </div> -->
       <!-- </div> -->
       <div class="w3-dropdown-hover w3-hide-small w3-mobile w3-light-grey w3-right" <?php echo($displayLogin); ?>>
-        <button class="w3-button w3-padding-16 w3-teal">Login <i class="fa fa-caret-down"></i></button>
+        <button class="w3-button w3-padding-16 w3-teal"> <i class="fa fa-sign-in"></i> Login</button>
         <div class="w3-dropdown-content w3-bar-block w3-light-grey">
           <a href="/web_management/scr_100/login/student.php" class="w3-bar-item w3-button w3-mobile w3-padding-16">Student</a>
           <a href="/web_management/scr_100/login/organization.php" class="w3-bar-item w3-button w3-mobile w3-padding-16">Company</a>
@@ -54,7 +54,7 @@ if ($_SERVER["PHP_SELF"] == "/web_management/index.php") {
         </div>
       </div>
       <div class="w3-dropdown-hover w3-hide-small w3-mobile w3-light-grey w3-right" <?php echo($displayLogout); ?>>
-        <a href="/web_management/scr_100/logout/logout.php"><button class="w3-button w3-padding-16 w3-teal">Logout <i class="fa fa-arrow-right"></i></button></a>
+      <a href="/web_management/scr_100/logout/logout.php"><button class="w3-button w3-padding-16 w3-teal">Logout <i class="fa fa-sign-out"></i></button></a>
       </div>
       
     </div>

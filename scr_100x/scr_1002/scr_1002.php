@@ -3,10 +3,10 @@
 session_start();
 
 // Check if the user is logged in, if not then redirect him to login page
-// if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-//   header("location: scr_100/login/login.php");
-//   exit;
-// }
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["role"] !== "organization") {
+  header("location: ../../");
+  exit;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -124,7 +124,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
             <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
@@ -136,7 +135,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
             <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
@@ -148,7 +146,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
             <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
@@ -163,7 +160,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
             <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
@@ -175,7 +171,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
             <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
@@ -187,7 +182,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
             <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>

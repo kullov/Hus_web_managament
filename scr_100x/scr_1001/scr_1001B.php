@@ -3,10 +3,10 @@
 session_start();
 
 // Check if the user is logged in, if not then redirect him to login page
-// if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-//   header("location: scr_100/login/login.php");
-//   exit;
-// }
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+  header("location: ../../");
+  exit;
+}
 ?><!DOCTYPE html>
 <html>
 <title>Danh sach phieu yeu cau</title>

@@ -175,6 +175,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
           <p><input class="w3-input w3-border" type="text" placeholder="Hãy phản hồi cho chúng tôi" required name="Message"></p>
         <button type="submit" class="w3-button w3-green w3-third">Gửi phản hồi</button>
         </form>
+        <a href="scr_1001A.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-red w3-third w3-right" style="width: 100px">Đăng kí</button></a>
       </div>
       
       <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by 

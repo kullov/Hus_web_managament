@@ -129,7 +129,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   <div class="w3-quarter">
     <h2>Giới thiệu chung</h2>
     <p class="height-line">Năm bắt được nhu cầu tuyển dụng nhân lực trẻ, năng động, hăng hái học hỏi kinh nghiệm của các doanh nghiệp hay nhu cầu tìm kiếm việc làm của sinh viên, chúng tôi đã xây dựng một website để đáp ứng những yêu cầu trên.</p>
-    <p class="height-line">Đó là sàn giao dịch thực tập sinh. Sàn giao dịch thực tập sinh là nơi cung cấp dịch vụ an toàn, tiện ích, nhanh chóng về tuyển dụng cũng như tìm kiếm việc làm cho sinh viên và các doanh nghiệp. Website không chỉ hữu ích cho sinh viên và doanh nghiệp mà còn mang lại lợi ích cho cả giáo viên. Giáo viên có thể giới thiệu những công việc tốt và phù hợp với từng sinh viên hay giới thiệu cho doanh nghiệp các sinh viên ưu tú, có kinh nghiệm, phù hợp với nhu cầu của họ.</p>
+    <p class="height-line">Đó là sàn giao dịch thực tập sinh - nơi cung cấp dịch vụ an toàn, tiện ích, nhanh chóng về tuyển dụng cũng như tìm kiếm việc làm cho sinh viên và các doanh nghiệp. Website không chỉ hữu ích cho sinh viên và doanh nghiệp mà còn mang lại lợi ích cho cả giáo viên. Giáo viên có thể giới thiệu những công việc tốt và phù hợp với từng sinh viên hay giới thiệu cho doanh nghiệp các sinh viên ưu tú, có kinh nghiệm, phù hợp với nhu cầu của họ.</p>
   </div>
 
 <div class="w3-quarter w3-padding-16">

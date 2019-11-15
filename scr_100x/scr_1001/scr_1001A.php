@@ -197,8 +197,9 @@ session_start();
           <p><input class="w3-input w3-border" type="text" placeholder="Tên của bạn" required name="Name"></p>
           <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
           <p><input class="w3-input w3-border" type="text" placeholder="Hãy phản hồi cho chúng tôi" required name="Message"></p>
-        <button type="submit" class="w3-button w3-green w3-third">Gửi phản hồi</button>
+        <button type="submit" class="w3-button w3-green w3-third" >Gửi phản hồi</button>
         </form>
+        <button type="submit" class="w3-button w3-red w3-third w3-right" style="width: 100px">Đăng kí</button>
       </div>
       
       <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by 

@@ -257,15 +257,15 @@ ul li:hover {
       <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-          <p>tranthanhnga_t61@hus.edu.com</p>
+          <p><?php echo htmlspecialchars($_SESSION["email_organization"]); ?></p>
         </div>
         <div class="w3-third w3-teal">
           <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
-          <p>334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
+          <p><?php echo htmlspecialchars($_SESSION["address_organization"]); ?></p>
         </div>
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
-          <p>512312311</p>
+          <p><?php echo htmlspecialchars($_SESSION["contact_organization"]); ?></p>
         </div>
       </div>
       <hr class="w3-opacity">

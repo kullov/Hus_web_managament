@@ -63,14 +63,12 @@ session_start();
         <h4><b>THÔNG TIN</b></h1>
         <div class="w3-row-padding">
           <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
-            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Teacher username: <b><?php echo($_SESSION["username_teacher"]) ?></b></p>
-            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Address: London, UK</p>
-            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Email: <b><?php echo($_SESSION["email_teacher"]) ?></b></p>
+            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Full name: <b><?php echo($_SESSION["name_teacher"]) ?></b></p>
+            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($_SESSION["phone_teacher"]) ?></b></p>
           </div>
           <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
-            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Full name: <b><?php echo($_SESSION["name_teacher"]) ?></b></p>
-            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($_SESSION["phone_number_teacher"]) ?></b></p>
-            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($_SESSION["phone_number_teacher"]) ?></b></p>
+            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Email: <b><?php echo($_SESSION["email_teacher"]) ?></b></p>
+            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Address: <b><?php echo($_SESSION["address_teacher"]) ?></b></p>
           </div>
         </div>
       </div>
@@ -222,15 +220,15 @@ session_start();
       <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-          <p>email@email.com</p>
+          <p><?php echo htmlspecialchars($_SESSION["email_teacher"]); ?></p>
         </div>
         <div class="w3-third w3-teal">
           <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
-          <p>Chicago, US</p>
+          <p><?php echo htmlspecialchars($_SESSION["address_teacher"]); ?></p>
         </div>
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
-          <p>512312311</p>
+          <p><?php echo htmlspecialchars($_SESSION["phone_teacher"]); ?> </p>
         </div>
       </div>
       <hr class="w3-opacity">

@@ -29,12 +29,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   <!-- Sidebar/menu -->
   <nav class="w3-sidebar w3-white w3-bar-block w3-collapse w3-top w3-center w3-padding" style="z-index:3;width:300px; margin-top: 55px;" id="mySidebar">
     <br>
-    <h2><b>BẢNG PHÂN CÔNG</b></h2>
+    <h2><b>DANH SÁCH SINH VIÊN</b></h2>
     <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">ĐÓNG</a>
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button">DANH SÁCH ĐÃ PHÂN CÔNG</a> 
-    <a href="#notAssigned" onclick="w3_close()" class="w3-bar-item w3-button">DANH SÁCH CHƯA PHÂN CÔNG</a> 
-    <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">LIÊN HỆ</a>
-    <a href="scr_1003.php" onclick="w3_close()" class="w3-bar-item w3-button">TRỞ VỂ</a>
+    <a href="scr_1003S.php" onclick="w3_close()" class="w3-bar-item w3-button">TRỞ VỂ</a>
   </nav>
 
   <!-- Overlay effect when opening sidebar on small screens -->
@@ -47,107 +44,84 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <div class="w3-container" id="notAssigned">
       <br>
       <br>
-      <h3 class="w3-container w3-center"><i>Danh sách chưa phân công</i></h3>
-      <a href="scr_1003S2.php" class="w3-button w3-teal w3-margin-bottom w3-right"><i class="fas fa-user-plus w3-margin-right"></i>Thêm sinh viên</a>
+      <h3 class="w3-container w3-center"><i>Danh sách sinh viên chưa được phân công</i></h3>
       <table class="w3-table w3-striped w3-bordered w3-centered w3-hoverable">
         <tr>
-          <th name="organization_request_id">Mã phiếu yêu cầu</th>
           <th name="student_id">Mã sinh viên</th>
           <th name="name_student">Tên sinh viên</th>
+          <th name="organization_request_id">Mã phiếu đã đăng ký</th>
+          <th name="date_of_birth">Ngày sinh</th>
+          <th name="email">Email</th>
           <th name="class_name">Lớp</th>
-          <th name="status">Trạng thái</th>
+          <th>Thao tác</th>
         </tr>
         <tr>
-          <td>1000</td>
           <td>16001111</td>
           <td>Trần Văn A</td>
+          <td>1000</td>
+          <td>21/10/1998</td>
+          <td>abc@gmail.com</td>
           <td>K61A3</td>
-          <td>Chưa phân công</td>
+          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
         </tr>
         <tr>
-          <td>1000</td>
           <td>16001111</td>
           <td>Trần Văn C</td>
+          <td>1000</td>
+          <td>21/10/1998</td>
+          <td>abc@gmail.com</td>
           <td>K61A3</td>
-          <td>Chưa phân công</td>
+          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
         </tr>
         <tr>
-          <td>1001</td>
           <td>16001113</td>
           <td>Trần Văn B</td>
+          <td>1000</td>
+          <td>21/10/1998</td>
+          <td>abc@gmail.com</td>
           <td>K61A3</td>
-          <td>Chưa phân công</td>
+          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
         </tr>
         <tr>
-          <td>1002</td>
           <td>16001115</td>
           <td>Trần Văn M</td>
+          <td>1000</td>
+          <td>21/10/1998</td>
+          <td>abc@gmail.com</td>
           <td>K61A3</td>
-          <td>Chưa phân công</td>
+          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
         </tr>
         <tr>
-          <td>1002</td>
-          <td>16001115</td>
-          <td>Trần Văn B</td>
-          <td>K61A3</td>
-          <td>Chưa phân công</td>
-        </tr>
-        <tr>
-          <td>1002</td>
           <td>16001115</td>
           <td>Trần Văn M</td>
+          <td>1000</td>
+          <td>21/10/1998</td>
+          <td>abc@gmail.com</td>
           <td>K61A3</td>
-          <td>Chưa phân công</td>
+          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
         </tr>
         <tr>
-          <td>1002</td>
+          <td>16001115</td>
+          <td>Trần Văn M</td>
+          <td>1000</td>
+          <td>21/10/1998</td>
+          <td>abc@gmail.com</td>
+          <td>K61A3</td>
+          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
+        </tr>
+        <tr>
           <td>16001115</td>
           <td>Trần Văn N</td>
+          <td>1000</td>
+          <td>21/10/1998</td>
+          <td>abc@gmail.com</td>
           <td>K61A3</td>
-          <td>Chưa phân công</td>
+          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
         </tr>
       </table>
     </div>
-    <!-- Contact Section -->
-    <div id="contact" class="w3-container w3-padding-large w3-grey">
-      <br>
-      <br>
-      <h3><b>LIÊN HỆ</b></h3>
-      <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
-        <div class="w3-third w3-dark-grey">
-          <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-          <p>tranthanhnga_t61@hus.edu.com</p>
-        </div>
-        <div class="w3-third w3-teal">
-          <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
-          <p>334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
-        </div>
-        <div class="w3-third w3-dark-grey">
-          <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
-          <p>512312311</p>
-        </div>
-      </div>
-      <hr class="w3-opacity">
-      <form action="https://www.w3schools.com/w3images/action_page.php" target="_blank">
-        <div class="w3-section">
-          <label>Name</label>
-          <input class="w3-input w3-border" type="text" name="Name" required>
-        </div>
-        <div class="w3-section">
-          <label>Email</label>
-          <input class="w3-input w3-border" type="text" name="Email" required>
-        </div>
-        <div class="w3-section">
-          <label>Message</label>
-          <input class="w3-input w3-border" type="text" name="Message" required>
-        </div>
-        <button type="submit" class="w3-button w3-black w3-margin-bottom"><i class="fa fa-paper-plane w3-margin-right"></i>Send Message</button>
-      </form>
-    </div>
-
-        
     <!-- Footer -->
-    <footer class="w3-container w3-padding-32 w3-dark-grey">
+    <footer class="w3-container w3-padding-32 w3-dark-grey" style="margin-top:170px">
       <div class="w3-row-padding">
         <div class="w3-third">
           <h3>FOOTER</h3>

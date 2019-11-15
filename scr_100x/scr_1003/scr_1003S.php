@@ -44,6 +44,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   <div class="w3-main" style="margin-left:300px;">
     <!-- DANH SÁCH ĐÃ PHÂN CÔNG -->
     <div class="w3-container">
+      <br>
+      <br>
       <h3 class="w3-container w3-center"><i>Danh sách đã phân công</i></h3>
       <a href="scr_1003S1.php" class="w3-button w3-teal w3-margin-bottom w3-right"><i class="fas fa-user-plus w3-margin-right"></i>Thêm sinh viên</a>
       <table class="w3-table w3-striped w3-bordered w3-centered w3-hoverable">
@@ -194,6 +196,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <td>Chưa phân công</td>
         </tr>
       </table>
+      <hr>
     </div>
     <!-- Contact Section -->
     <div id="contact" class="w3-container w3-padding-large w3-grey">

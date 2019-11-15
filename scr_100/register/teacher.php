@@ -3,25 +3,25 @@
   require_once "../../config.php";
 
   // Define variables and initialize with empty values
-  $username_teacher = $phone_number = $email_teacher = $password = $name_teacher = $confirm_password = "";
-  $username_teacher_err = $phone_number_err = $email_teacher_err = $name_teacher_err = $password_err = $confirm_password_err = "";
+  $address = $phone_number = $email_teacher = $password = $name_teacher = $confirm_password = "";
+  $address_err = $phone_number_err = $email_teacher_err = $name_teacher_err = $password_err = $confirm_password_err = "";
 
   // Processing form data when form is submitted
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Validate username
-    if (empty(trim($_POST["username_teacher"]))) {
-      $username_teacher_err = "Please enter a username teacher.";
+    // Validate email
+    if (empty(trim($_POST["email_teacher"]))) {
+      $email_teacher_err = "Please enter your email.";
     } else {
       // Prepare a select statement
-      $sql = "SELECT id FROM teacher_profile WHERE username_teacher = ?";
+      $sql = "SELECT id FROM teacher_profile WHERE email = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "s", $param_username_teacher);
+        mysqli_stmt_bind_param($stmt, "s", $param_email_teacher);
 
         // Set parameters
-        $param_username_teacher = trim($_POST["username_teacher"]);
+        $param_email_teacher = trim($_POST["email_teacher"]);
 
         // Attempt to execute the prepared statement
         if (mysqli_stmt_execute($stmt)) {
@@ -29,9 +29,9 @@
           mysqli_stmt_store_result($stmt);
 
           if (mysqli_stmt_num_rows($stmt) == 1) {
-            $username_teacher_err = "This teacher id is already taken.";
+            $email_teacher_err = "This teacher id is already taken.";
           } else {
-            $username_teacher = trim($_POST["username_teacher"]);
+            $email_teacher = trim($_POST["email_teacher"]);
           }
         } else {
           echo "Oops! Something went wrong. Please try again later.";
@@ -78,26 +78,18 @@
     }
 
 
-    // Validate email
-    if (empty(trim($_POST["email_teacher"]))) {
-      $email_teacher_err = "Please enter your email!";
-    } else {
-      $email_teacher = trim($_POST["email_teacher"]);
-    }
-
-
     // Check input errors before inserting in database
-    if (empty($username_teacher_err) && empty($password_err) && empty($confirm_password_err)) {
+    if (empty($email_teacher_err) && empty($password_err) && empty($confirm_password_err)) {
 
       // Prepare an insert statement
-      $sql = "INSERT INTO teacher_profile (username_teacher, password, phone_number, email_teacher, name_teacher) VALUES (?, ?, ?, ?, ?)";
+      $sql = "INSERT INTO teacher_profile (address, password, contact, email, name) VALUES (?, ?, ?, ?, ?)";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "sssss", $param_username_teacher, $param_password, $phone_number, $email_teacher, $name_teacher);
+        mysqli_stmt_bind_param($stmt, "sssss", $address, $param_password, $phone_number, $param_email_teacher, $name_teacher);
 
         // Set parameters
-        $param_username_teacher = $username_teacher;
+        $param_email_teacher = $email_teacher;
         $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
 
         // Attempt to execute the prepared statement
@@ -211,10 +203,10 @@
       <h4 class="w3-orange w3-padding">Register Teacher</h4>
       <div class="w3-padding w3-row w3-margin-top w3-margin-bottom">
         <div class="w3-col s6">
-          <div class="form-group <?php echo (!empty($username_teacher_err)) ? 'has-error' : ''; ?>">
-            <label for="username_teacher"><b>User Name</b></label>
-            <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter Username" name="username_teacher" value="<?php echo $username_teacher; ?>" required>
-            <span class="w3-text-red"><?php echo $username_teacher_err; ?></span>
+          <div class="form-group <?php echo (!empty($email_teacher_err)) ? 'has-error' : ''; ?>">
+            <label for="email_teacher"><b>Email</b></label>
+            <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter your email" name="email_teacher" value="<?php echo $email_teacher; ?>" required>
+            <span class="w3-text-red"><?php echo $email_teacher_err; ?></span>
           </div>
           <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
             <label for="password"><b>Password</b></label>
@@ -233,10 +225,10 @@
             <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter your name" name="name_teacher" value="<?php echo $name_teacher; ?>">
             <span class="w3-text-red"><?php echo $name_teacher_err; ?></span>
           </div>
-          <div class="form-group <?php echo (!empty($email_teacher)) ? 'has-error' : ''; ?>">
-            <label for="email_teacher"><b>Email</b></label>
-            <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter your email" name="email_teacher" value="<?php echo $email_teacher; ?>">
-            <span class="w3-text-red"><?php echo $email_teacher_err; ?></span>
+          <div class="form-group <?php echo (!empty($address)) ? 'has-error' : ''; ?>">
+            <label for="address"><b>Address</b></label>
+            <input class="w3-input w3-padding-large fix-input" type="text" placeholder="Enter your address" name="address" value="<?php echo $address; ?>">
+            <span class="w3-text-red"><?php echo $address_err; ?></span>
           </div>
           <div class="form-group <?php echo (!empty($phone_number)) ? 'has-error' : ''; ?>">
             <label for="phone_number"><b>Phone Number</b></label>

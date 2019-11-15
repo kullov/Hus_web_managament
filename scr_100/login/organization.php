@@ -97,138 +97,147 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   <title>Login</title>
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      text-align: center;
+    *, *:before, *:after {
+      box-sizing: border-box;
     }
 
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    .container_1 {
+      padding: 1px 0;
+      height: 100%;
+      width: 100%;
+      background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/226578/campnou(optimized).jpg");
+      background-size: cover;
+      color: #fff;
+      font-family: "Comfortaa", "Helvetica", sans-serif;
+    }
+    .login {
+      max-width: 400px;
+      min-height: 600px;
+      margin: 30px auto;
+      background-color: rgba(10,10,10,.68);
+    }
+    .login-icon-field {
+      height: 120px;
+      width: 100%;
+    }
+    .login-icon {
+      margin: 50px 65px;
+    }
+    .login-form {
+      padding: 20px 20px 20px;
+      height: 120px;
+      width: 400px;
+    }
+    input {
+      position: absolute;
+      width: 250px;
+      height: 40px;
+      margin: 10px 0;
+      background: transparent;
+      color: rgba(255,255,255,.4);
+      border: none;
+      border-bottom: 1px solid white;
+      border-color: white;   
+    }
+    button {
+      display: block;
+      width: 276px;
+      height: 40px;
+      padding: 0;
+      margin: 10px 20px 10px;
+      font-weight: 700;
+      background-color: #22c08a;
+      border: none;
+      border-radius: 20px;     
+    }
     button:hover {
-      opacity: 0.8;
+      background-color: #26d69a;
     }
-
-    /* Extra styles for the cancel button */
-    .custom-btn {
-      width: auto;
-      padding: 10px 18px;
-      background-color: #f44336;
+    button:active {
+      background-color: #1eaa7a;
     }
-
-    span.password {
-      float: right;
-      padding-top: 16px;
+    p {
+      display: inline-block;
+      width: 300px;
+      margin: 0 20px;
+      font-size: 17px;
+      color: rgba(255,255,255,.4);
     }
-
-    /* The Modal (background) */
-    .login-btn {
-      font-family: Poppins-Medium;
-      border-radius: 25px;
-      font-size: 16px;  
-      text-transform: uppercase;  
-      justify-content: center;     
-      padding: 0 20px;
-      height: 50px;
-    }
-    
-
-
-    /* Change styles for span and cancel button on extra small screens */
-    @media screen and (max-width: 300px) {
-      span.password {
-        display: block;
-        float: none;
-      }
-
-      .custom-btn {
-        width: 100%;
+    @-webkit-keyframes dash {
+      to {
+        stroke-dashoffset: 0;
       }
     }
-    body{
-	margin:0;
-	color:#6a6f8c;
-	background:#c8c8c8;
-	font:600 16px/18px 'Open Sans',sans-serif;
-}
-
-
-.login-wrap{
-	width:100%;
-  margin: auto;
-	max-width:525px;
-	min-height:550px;
-	position:relative;
-	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
-	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
-}
-.login-html{
-	width:100%;
-	height:100%;
-	position:absolute;
-	padding:90px 70px 50px 70px;
-	background:rgba(50,50,99,.6);
-}
-.login-form .group{
-	margin-bottom:40px;
-}
-.login-form .group .label,
-.login-form .group .input,
-.login-form .group .button{
-	width:100%;
-	color:#fff;
-	display:block;
-}
-.login-form .group .input{
-	border:none;
-	padding:15px 20px;
-	border-radius:25px;
-	background:rgba(255,255,255,.1);
-}
+    @keyframes dash {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    .row-btn {
+      width: 110px;
+      border-radius: 10px;
+    }
   </style>
 </head>
 
 <body>
-  <div class="login-wrap" style="margin-top: 75px;" >
-    <form class="login-html " action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <h2 for="" class="text-white mb-4" style="font-family: Poppins-Medium;">LOGIN ORGANIZATION</h2>
+
+<div class="container_1">
+  <div id="login" class="login">
+    <div class="login-icon-field w3-center">
+      <div><i class="fab fa-galactic-republic w3-jumbo login-icon w3-center"></i></div>
+    </div>
+    <div class="login-form">
+    <form class="login-html" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+      <h2 for="" class="text-white w3-center" style="font-family: Poppins-Medium;">LOGIN ORGANIZATION</h2>
       <div class="login-form">
-        <div class="group <?php echo (!empty($tax_err)) ? 'has-error' : ''; ?>">
-  
-          <input class="input w3-padding-large " type="text" placeholder="Enter Tax Identification Number" name="username" value="<?php echo $tax_number; ?>" required>
-          <span class="w3-text-red"><?php echo $tax_err; ?></span>
+        <div class=" mb-4 form-group <?php echo (!empty($tax_err)) ? 'has-error' : ''; ?>">
+          <label for="tax_number" class=" mt-3 pr-3" style="font-family: Poppins-Medium;"><i class="fa fa-user w3-xlarge w3-left"></i></label>
+          <input class="mb-4" type="text" placeholder="Enter your tax number" name="tax_number" value="<?php echo $tax_number; ?>" required>
         </div>
-        <div class="group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-          <label for="password" class="w3-left text-white" style="font-family: Poppins-Medium;">Password</label>
-          <input class="input w3-padding-large" type="password" placeholder="Enter Password" name="password" required>
-          <span class="w3-text-red"><?php echo $password_err; ?></span>
+        <hr style="color:white;">
+        <div class="mt-3 mb-5 group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+          <label for="password" class="mt-3 pr-3 text-white" style="font-family: Poppins-Medium;"><i class="fa fa-plane w3-xlarge w3-left"></i></label>
+          <input class="" type="password" placeholder="Enter Password" name="password" required>
         </div>
-        <button type="submit" class="w3-button w3-blue w3-block login-btn mb-2">Login</button>
-        <p class="text-white" style="font-family: Poppins-Medium;">Don't have an account? <a class="w3-text-green" href="../register/organization.php">Sign up now</a>.</p>
-        <button type="reset" class="w3-btn w3-red btn">Reset</button>
-        <button type="button" onclick="window.location.href='../../'" class="w3-btn w3-blue-gray btn">Cancel</button>
+        <span class="w3-text-red"><?php echo $password_err; ?></span>
+        <div class="call-to-action ">
+          <button id="login-button" type="submit">Log In</button>
+        </div>
+        <div class="row">
+          <p>
+            <button type="reset" class="row-btn w3-button w3-red ">Reset</button>
+            <button type="button" onclick="window.location.href='../../'" class="row-btn  w3-blue-gray w3-right ">Cancel</button>
+          </p>
+          <p class="text-white w3-center" style="font-family: Poppins-Medium;">Don't have an account? <a class="w3-text-blue" href="../register/organization.php">Sign up now</a>.</p>
+        </div>
       </div>	
-    </form>
+      </form>
+    </div>
+    
   </div>
-  <script>
-    // Get the modal
-    var modal = document.getElementById('dialog');
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-    document.getElementById('dialog').style.display='block';
-  </script>
+</div>
+<script>
+  // Get the modal
+  
+</script>
 </body>
 
 </html>

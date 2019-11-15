@@ -1,50 +1,40 @@
 <?php
   // Initialize the session
   session_start();
-
   // Check if the user is already logged in, if yes then redirect him to welcome page
   if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     header("location: ../../");
     exit;
   }
-
   // Include config file
   require_once "../../config.php";
-
   // Define variables and initialize with empty values
   $email_teacher = $password = $name_teacher = $address_teacher = $phone_number = "";
   $email_teacher_err = $password_err = "";
-
   // Processing form data when form is submitted
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     // Check if username is empty
     if (empty(trim($_POST["email_teacher"]))) {
       $email_teacher_err = "Please enter your email!";
     } else {
       $email_teacher = trim($_POST["email_teacher"]);
     }
-
     // Check if password is empty
     if (empty(trim($_POST["password"]))) {
       $password_err = "Please enter your password.";
     } else {
       $password = trim($_POST["password"]);
     }
-
     // Validate credentials
     if (empty($email_teacher_err) && empty($password_err)) {
       // Prepare a select statement
       $sql = "SELECT id, contact, email, password, name, address FROM teacher_profile WHERE email = ?";
-
       if ($stmt = mysqli_prepare($link, $sql)) {
         
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "s", $param_email_teacher);
-
         // Set parameters
         $param_email_teacher = $email_teacher;
-
         // Attempt to execute the prepared statement
         if (mysqli_stmt_execute($stmt)) {
           // Store result
@@ -57,7 +47,6 @@
               if (password_verify($password, $hashed_password)) {
                 // Password is correct, so start a new session
                 session_start();
-
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
                 // $_SESSION["id"] = $id;
@@ -67,7 +56,6 @@
                 $_SESSION["email_teacher"] = $email_teacher;
                 $_SESSION["role"] = "teacher";
                // $_SESSION["first_name"] = $first_name;
-
                 // Redirect user to scr_1003 page
                 header("location: ../../scr_100x/scr_1003/scr_1003.php");
               } else {
@@ -86,17 +74,17 @@
         mysqli_stmt_close($stmt);
       }
     }
-
     // Close connection
     mysqli_close($link);
   }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -104,132 +92,138 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Login</title>
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      text-align: center;
+    *, *:before, *:after {
+      box-sizing: border-box;
     }
 
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    .container_1 {
+      padding: 1px 0;
+      height: 100%;
+      width: 100%;
+      background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/226578/campnou(optimized).jpg");
+      background-size: cover;
+      color: #fff;
+      font-family: "Comfortaa", "Helvetica", sans-serif;
+    }
+    .login {
+      max-width: 400px;
+      min-height: 600px;
+      margin: 30px auto;
+      background-color: rgba(10,10,10,.68);
+    }
+    .login-icon-field {
+      height: 120px;
+      width: 100%;
+    }
+    .login-icon {
+      margin: 50px 65px;
+    }
+    .login-form {
+      padding: 20px 20px 20px;
+      height: 120px;
+      width: 400px;
+    }
+    input {
+      position: absolute;
+      width: 250px;
+      height: 40px;
+      margin: 10px 0;
+      background: transparent;
+      color: rgba(255,255,255,.4);
+      border: none;
+      border-bottom: 1px solid white;
+      border-color: white;   
+    }
+    button {
+      display: block;
+      width: 276px;
+      height: 40px;
+      padding: 0;
+      margin: 10px 20px 10px;
+      font-weight: 700;
+      background-color: #22c08a;
+      border: none;
+      border-radius: 20px;     
+    }
     button:hover {
-      opacity: 0.8;
+      background-color: #26d69a;
     }
-
-    /* Extra styles for the cancel button */
-    .custom-btn {
-      width: auto;
-      padding: 10px 18px;
-      background-color: #f44336;
+    button:active {
+      background-color: #1eaa7a;
     }
-
-    span.password {
-      float: right;
-      padding-top: 16px;
+    p {
+      display: inline-block;
+      width: 300px;
+      margin: 0 20px;
+      font-size: 17px;
+      color: rgba(255,255,255,.4);
     }
-
-    /* The Modal (background) */
-    .login-btn {
-      font-family: Poppins-Medium;
-      border-radius: 25px;
-      font-size: 16px;  
-      text-transform: uppercase;  
-      justify-content: center;     
-      padding: 0 20px;
-      height: 50px;
-    }
-    
-
-
-    /* Change styles for span and cancel button on extra small screens */
-    @media screen and (max-width: 300px) {
-      span.password {
-        display: block;
-        float: none;
-      }
-
-      .custom-btn {
-        width: 100%;
+    @-webkit-keyframes dash {
+      to {
+        stroke-dashoffset: 0;
       }
     }
-    body{
-      margin:0;
-      color:#6a6f8c;
-      background:#c8c8c8;
-      font:600 16px/18px 'Open Sans',sans-serif;
+    @keyframes dash {
+      to {
+        stroke-dashoffset: 0;
+      }
     }
-
-
-    .login-wrap{
-      width:100%;
-      margin: auto;
-      max-width:525px;
-      min-height:550px;
-      position:relative;
-      background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
-      box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
-    }
-    .login-html{
-      width:100%;
-      height:100%;
-      position:absolute;
-      padding:90px 70px 50px 70px;
-      background:rgba(50,50,99,.6);
-    }
-    .login-form .group{
-      margin-bottom:40px;
-    }
-    .login-form .group .label,
-    .login-form .group .input,
-    .login-form .group .button{
-      width:100%;
-      color:#fff;
-      display:block;
-    }
-    .login-form .group .input{
-      border:none;
-      padding:15px 20px;
-      border-radius:25px;
-      background:rgba(255,255,255,.1);
+    .row-btn {
+      width: 110px;
+      border-radius: 10px;
     }
   </style>
 </head>
 
 <body>
-  <div class="login-wrap" style="margin-top: 75px;" >
-    <form class="login-html " action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <h2 for="" class="text-white mb-4" style="font-family: Poppins-Medium;">LOGIN TEACHER</h2>
+<div class="container_1">
+  <div id="login" class="login">
+    <div class="login-icon-field w3-center">
+      <div><i class="fa fa-users w3-jumbo login-icon w3-center"></i></div>
+    </div>
+    <div class="login-form">
+    <form class="login-html" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+      <h2 for="" class="text-white w3-center" style="font-family: Poppins-Medium;">LOGIN TEACHER</h2>
       <div class="login-form">
-        <div class="group <?php echo (!empty($username_teacher_err)) ? 'has-error' : ''; ?>">
-          <label for="username" class="w3-left text-white" style="font-family: Poppins-Medium;">Username Teacher</label>
-          <input class="input w3-padding-large " type="text" placeholder="Enter username teacher" name="username" value="<?php echo $username_teacher; ?>" required>
-        <div class="form-group <?php echo (!empty($email_teacher_err)) ? 'has-error' : ''; ?>">
-          <label for="email_teacher"><b>Email Teacher</b></label>
-          <input class="w3-input w3-padding-large" type="text" placeholder="Enter your email" name="email_teacher" value="<?php echo $email_teacher; ?>" required>
-          <span class="w3-text-red"><?php echo $email_teacher_err; ?></span>
+        <div class=" mb-4 form-group <?php echo (!empty($email_teacher_err)) ? 'has-error' : ''; ?>">
+          <label for="username" class=" mt-3 pr-3" style="font-family: Poppins-Medium;"><i class="fa fa-user w3-xlarge w3-left"></i></label>
+          <input class="mb-4" type="text" placeholder="Enter your email" name="email_teacher" value="<?php echo $email_teacher; ?>" required>
         </div>
-        <div class="group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-          <label for="password" class="w3-left text-white" style="font-family: Poppins-Medium;">Password</label>
-          <input class="input w3-padding-large" type="password" placeholder="Enter Password" name="password" required>
-          <span class="w3-text-red"><?php echo $password_err; ?></span>
+        <span class="w3-text-red w3-center"><?php echo $email_teacher_err; ?></span>
+        <hr style="color:white;">
+        <div class="mt-3 mb-5 group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+          <label for="password" class="mt-3 pr-3 text-white" style="font-family: Poppins-Medium;"><i class="fa fa-plane w3-xlarge w3-left"></i></label>
+          <input class="" type="password" placeholder="Enter Password" name="password" required>
         </div>
-        <button type="submit" class="w3-button w3-blue w3-block login-btn mb-2">Login</button>
-        <p class="text-white" style="font-family: Poppins-Medium;">Don't have an account? <a class="w3-text-green" href="../register/teacher.php">Sign up now</a>.</p>
-        <button type="reset" class="w3-btn w3-red btn">Reset</button>
-        <button type="button" onclick="window.location.href='../../'" class="w3-btn w3-blue-gray btn">Cancel</button>
+        <span class="w3-text-red"><?php echo $password_err; ?></span>
+        <div class="call-to-action ">
+          <button id="login-button" type="submit">Log In</button>
+        </div>
+        <div class="row">
+          <p>
+            <button type="reset" class="row-btn w3-button w3-red ">Reset</button>
+            <button type="button" onclick="window.location.href='../../'" class="row-btn  w3-blue-gray w3-right ">Cancel</button>
+          </p>
+          <p class="text-white w3-center" style="font-family: Poppins-Medium;">Don't have an account? <a class="w3-text-blue" href="../register/teacher.php">Sign up now</a>.</p>
+        </div>
       </div>	
-    </form>
+      </form>
+    </div>
+    
   </div>
-  <script>
-    // Get the modal
-    var modal = document.getElementById('dialog');
-    // When the user clicks anywhere outside of the modal, close it
-    // window.onclick = function(event) {
-    //   if (event.target == modal) {
-    //     modal.style.display = "none";
-    //   }
-    // }
-    document.getElementById('dialog').style.display='block';
-  </script>
+</div>
+<script>
+  // Get the modal
+  
+</script>
 </body>
 
 </html>

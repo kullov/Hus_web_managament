@@ -63,6 +63,9 @@
                 $_SESSION["id"] = $id;
                 $_SESSION["tax_number"] = $tax_number;
                 $_SESSION["role"] = "organization";
+                $_SESSION["email_organization"] = $email_organization;
+                $_SESSION["address_organization"] = $address_organization;
+                $_SESSION["contact_organization"] = $contact_organization;
 
                 // Redirect user to welcome page
                 header("location: ../../scr_100x/scr_1002/scr_1002.php");

@@ -17,6 +17,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style type="text/css">
     body {
       font: 16px sans-serif;
@@ -39,8 +40,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div class="w3-display-container w3-animate-opacity">
       <img class="mySlides" src="http://www.pace.edu.vn/vn/uploads/ImageContent/2019/VHDN-24.04%20(1).jpg" style="width:100%;min-height:350px;height:600px;">
       <img class="mySlides" src="https://khoinghiep.thuvienphapluat.vn/uploads/images/2017/10/24/khai%20quat%20doanh%20nghiep%20cong%20nghe%20cao.jpg" style="width:100%;min-height:350px;height:600px;">
-      <img class="mySlides" src="https://cdn.vietnambiz.vn/stores/news_dataimages/tinnv/122017/08/07/2655_nhan-vien-gan-bo-cong-ty-la-do-van-hoa-doanh-nghiep-9476-1.jpg" style="width:100%;min-height:350px;max-height:600px;">
-      <img class="mySlides" src="https://www.w3schools.com/w3images/sailboat.jpg" alt="boat" style="width:100%;min-height:350px;max-height:600px;"> 
+      <img class="mySlides" src="https://cdn.vietnambiz.vn/stores/news_dataimages/tinnv/122017/08/07/2655_nhan-vien-gan-bo-cong-ty-la-do-van-hoa-doanh-nghiep-9476-1.jpg" style="width:100%;min-height:350px;height:600px;"> 
     </div>
   </div>
   <div id="id01" class="w3-modal">
@@ -60,9 +60,32 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </div>   
   </div>
   <!-- Team Container -->
-<div class="w3-container w3-padding-64 w3-center w3-pale-blue" id="team">
-  <h1><p>Đội ngũ phát triển</p></h1>
-  <h3>Gặp gỡ chúng tôi</h3>
+<div class="w3-container w3-center w3-pale-blue" id="team">
+  <br><br>
+  <h3 class="w3-center">VỀ CHÚNG TÔI</h3>
+    <div class="w3-row-padding w3-center" style="margin-top:30px">
+      <div class="w3-quarter">
+        <i class="fa fa-desktop w3-margin-bottom w3-xxlarge w3-center"></i>
+        <p class="w3-large">Responsive</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div class="w3-quarter">
+        <i class="fa fa-heart w3-margin-bottom w3-xxlarge"></i>
+        <p class="w3-large">Passion</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div class="w3-quarter">
+        <i class="fa fa-diamond w3-margin-bottom w3-xxlarge"></i>
+        <p class="w3-large">Design</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div class="w3-quarter">
+        <i class="fa fa-cog w3-margin-bottom w3-xxlarge"></i>
+        <p class="w3-large">Support</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+    </div>
+  <h4 class="w3-center">Đội ngũ phát triển</h4>
 
   <div class="w3-row w3-pale-blue"><br>
 
@@ -142,32 +165,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   </div>
 </div>
 
-</div>
-<div class="w3-container w3-pale-blue" style="padding:55px 16px" id="about">
-  <h1 class="w3-center">VỀ CHÚNG TÔI</h1>
-  <p class="w3-center w3-large">Key features of our company</p>
-  <div class="w3-row-padding w3-center" style="margin-top:64px">
-    <div class="w3-quarter">
-      <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
-      <p class="w3-large">Responsive</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-    </div>
-    <div class="w3-quarter">
-      <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
-      <p class="w3-large">Passion</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-    </div>
-    <div class="w3-quarter">
-      <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
-      <p class="w3-large">Design</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-    </div>
-    <div class="w3-quarter">
-      <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
-      <p class="w3-large">Support</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-    </div>
-  </div>
 </div>
 
 <!-- Container -->

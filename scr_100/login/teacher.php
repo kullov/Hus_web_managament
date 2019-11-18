@@ -79,151 +79,94 @@
   }
 ?>
 
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
+<!-- Head -->
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <title>Login</title>
-  <style>
-    *, *:before, *:after {
-      box-sizing: border-box;
-    }
 
-    html, body {
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-    }
-    .container_1 {
-      padding: 1px 0;
-      height: 100%;
-      width: 100%;
-      background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/226578/campnou(optimized).jpg");
-      background-size: cover;
-      color: #fff;
-      font-family: "Comfortaa", "Helvetica", sans-serif;
-    }
-    .login {
-      max-width: 400px;
-      min-height: 530px;
-      margin: 40px auto;
-      background-color: rgba(10,10,10,.60);
-    }
-    .login-icon-field {
-      height: 120px;
-      width: 100%;
-    }
-    .login-icon {
-      margin: 35px 65px;
-    }
-    .login-form {
-      padding: 10px 20px 20px;
-      height: 120px;
-      width: 400px;
-    }
-    input {
-      position: absolute;
-      width: 250px;
-      height: 40px;
-      margin: 10px 0;
-      background: transparent;
-      color: rgba(255,255,255,.4);
-      border: none;
-      border-bottom: 1px solid white;
-      border-color: white;   
-    }
-    button {
-      display: block;
-      width: 276px;
-      height: 40px;
-      padding: 0;
-      margin: 10px 20px 10px;
-      font-weight: 700;
-      background-color: #22c08a;
-      border: none;
-      border-radius: 20px;     
-    }
-    button:hover {
-      background-color: #26d69a;
-    }
-    button:active {
-      background-color: #1eaa7a;
-    }
-    p {
-      display: inline-block;
-      width: 300px;
-      margin: 0 20px;
-      font-size: 17px;
-      color: rgba(255,255,255,.4);
-    }
-    @-webkit-keyframes dash {
-      to {
-        stroke-dashoffset: 0;
-      }
-    }
-    @keyframes dash {
-      to {
-        stroke-dashoffset: 0;
-      }
-    }
-    .row-btn {
-      width: 110px;
-      border-radius: 10px;
-    }
-  </style>
-</head>
+<title>LOGIN | TEACHER</title>
 
-<body>
-<div class="container_1">
-  <div id="login" class="login">
-    <div class="login-icon-field w3-center">
-      <div><i class="fa fa-users w3-jumbo login-icon w3-center"></i></div>
-    </div>
-    <div class="login-form">
-    <form class="login-html" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <h2 for="" class="text-white w3-center" style="font-family: Poppins-Medium;">LOGIN TEACHER</h2>
-      <div class="login-form">
-        <div class=" mb-4 form-group <?php echo (!empty($email_teacher_err)) ? 'has-error' : ''; ?>">
-          <label for="username" class=" mt-3 pr-3" style="font-family: Poppins-Medium;"><i class="fa fa-user w3-xlarge w3-left"></i></label>
-          <input class="mb-4" type="text" placeholder="Enter your email" name="email_teacher" value="<?php echo $email_teacher; ?>" required>
-        </div>
-        <span class="w3-text-red w3-center"><?php echo $email_teacher_err; ?></span>
-        <hr style="color:white;">
-        <div class="mt-3 mb-5 group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-          <label for="password" class="mt-3 pr-3 text-white" style="font-family: Poppins-Medium;"><i class="fa fa-key w3-xlarge w3-left"></i></label>
-          <input class="" type="password" placeholder="Enter Password" name="password" required>
-        </div>
-        <span class="w3-text-red"><?php echo $password_err; ?></span>
-        <div class="call-to-action ">
-          <button id="login-button" type="submit">Log In</button>
-        </div>
-        <div class="row">
-          <p>
-            <button type="reset" class="row-btn w3-button w3-red ">Reset</button>
-            <button type="button" onclick="window.location.href='../../'" class="row-btn  w3-blue-gray w3-right ">Cancel</button>
-          </p>
-          <p class="text-white w3-center" style="font-family: Poppins-Medium;">Don't have an account? <a class="w3-text-blue" href="../register/teacher.php">Sign up now</a>.</p>
-        </div>
-      </div>	
-      </form>
-    </div>
-    
-  </div>
-</div>
-<script>
-  // Get the modal
-  
+<!-- Meta-Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+<script type="application/x-javascript">
+addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); 
+function hideURLbar(){ 
+  window.scrollTo(0,1); 
+}
+
 </script>
-</body>
+<!-- //Meta-Tags -->
 
+<link href="../../css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+
+<!-- Style --> <link rel="stylesheet" href="../../css/style.css" type="text/css" media="all">
+
+<!-- Fonts -->
+<!-- //Fonts -->
+
+</head>
+<!-- //Head -->
+
+<!-- Body -->
+<body>
+
+	<h1>TEACHER</h1>
+
+	<div class="w3layoutscontaineragileits">
+	<h2>Login here</h2>
+		<form class="login-html" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+      <div class="<?php echo (!empty($email_teacher_err)) ? 'has-error' : ''; ?>">
+        <input type="text" placeholder="Enter your email" name="email_teacher" value="<?php echo $email_teacher; ?>" required>
+      </div>
+      <div class="<?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+        <input type="password" placeholder="Enter Password" name="password" required>
+        <span class="w3-text-red"><?php echo $password_err; ?></span>
+      </div>
+			<ul class="agileinfotickwthree">
+				<li>
+					<input type="checkbox" id="brand1" value="">
+					<label for="brand1"><span></span>Remember me</label>
+					<a href="#">Forgot password?</a>
+        </li>
+			</ul>
+			<div class="aitssendbuttonw3ls">
+				<input type="submit" value="LOGIN">
+				<p> To register new account <span>→</span> <a href="../register/teacher.php"> Click Here</a></p>
+				<p><a href="../../">Cancel</a></p>
+			</div>
+		</form>
+	</div>
+	
+	
+	<div class="w3footeragile">
+		<p> &copy; 2019 Login Form. All Rights Reserved | Design by <a href="../../" target="_blank">ORIGEN</a></p>
+	</div>
+
+	
+	<script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
+
+	<!-- pop-up-box-js-file -->  
+		<script src="../../js/jquery.magnific-popup.js" type="text/javascript"></script>
+	<!--//pop-up-box-js-file -->
+	<script>
+		$(document).ready(function() {
+		$('.w3_play_icon,.w3_play_icon1,.w3_play_icon2').magnificPopup({
+			type: 'inline',
+			fixedContentPos: false,
+			fixedBgPos: true,
+			overflowY: 'auto',
+			closeBtnInside: true,
+			preloader: false,
+			midClick: true,
+			removalDelay: 300,
+			mainClass: 'my-mfp-zoom-in'
+		});
+																		
+		});
+	</script>
+
+</body>
 </html>

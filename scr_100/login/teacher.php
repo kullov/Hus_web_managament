@@ -84,7 +84,7 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -115,19 +115,19 @@
     }
     .login {
       max-width: 400px;
-      min-height: 600px;
-      margin: 30px auto;
-      background-color: rgba(10,10,10,.68);
+      min-height: 530px;
+      margin: 40px auto;
+      background-color: rgba(10,10,10,.60);
     }
     .login-icon-field {
       height: 120px;
       width: 100%;
     }
     .login-icon {
-      margin: 50px 65px;
+      margin: 35px 65px;
     }
     .login-form {
-      padding: 20px 20px 20px;
+      padding: 10px 20px 20px;
       height: 120px;
       width: 400px;
     }
@@ -200,7 +200,7 @@
         <span class="w3-text-red w3-center"><?php echo $email_teacher_err; ?></span>
         <hr style="color:white;">
         <div class="mt-3 mb-5 group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-          <label for="password" class="mt-3 pr-3 text-white" style="font-family: Poppins-Medium;"><i class="fa fa-plane w3-xlarge w3-left"></i></label>
+          <label for="password" class="mt-3 pr-3 text-white" style="font-family: Poppins-Medium;"><i class="fa fa-key w3-xlarge w3-left"></i></label>
           <input class="" type="password" placeholder="Enter Password" name="password" required>
         </div>
         <span class="w3-text-red"><?php echo $password_err; ?></span>

@@ -314,7 +314,7 @@
             <div class="w3-col s4">
               <div class="form-group <?php echo (!empty($join_date_err)) ? 'has-error' : ''; ?>">
                 <label for="join_date" class="mt-3 pr-2 text-white" style="font-family: Poppins-Medium;"><i class="far fa-calendar-alt w3-large w3-left"></i></label>
-                <input class="" placeholder="Enter join date"  type="password" name="join_date" class="form-control" value="<?php echo $join_date; ?>" required>              
+                <input class="" placeholder="Enter join date"  type="date" name="join_date" class="form-control" value="<?php echo $join_date; ?>" required>              
               </div>
               <span class="w3-text-red"><?php echo $join_date_err; ?></span>
               <div class="form-group <?php echo (!empty($class_name_err)) ? 'has-error' : ''; ?>">
@@ -342,7 +342,7 @@
               <span class="w3-text-red"><?php echo $first_name_err; ?></span>
               <div class="form-group <?php echo (!empty($date_of_birth_err)) ? 'has-error' : ''; ?>">
                 <label for="date_of_birth" class=" mt-3 pr-2" style="font-family: Poppins-Medium;"><i class="far fa-calendar-alt w3-large w3-left"></i></label>
-                <input class="" type="text" placeholder="Enter your birth day" name="date_of_birth" value="<?php echo $date_of_birth; ?>">
+                <input class="" type="date" placeholder="Enter your birth day" name="date_of_birth" value="<?php echo $date_of_birth; ?>">
               </div>
               <span class="w3-text-red"><?php echo $date_of_birth_err; ?></span>
               <div class="form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">

@@ -125,7 +125,7 @@
     }
     .login {
       max-width: 400px;
-      min-height: 530px;
+      min-height: 550px;
       margin: 40px auto;
       background-color: rgba(10,10,10,.60);
     }
@@ -203,17 +203,17 @@
     <form class="login-html" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <h2 for="" class="text-white w3-center" style="font-family: Poppins-Medium;">LOGIN STUDENT</h2>
       <div class="login-form">
-        <div class=" mb-4 group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+        <div class=" mb-2 group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
           <label for="username" class=" mt-3 pr-3" style="font-family: Poppins-Medium;"><i class="fa fa-user w3-xlarge w3-left"></i></label>
-          <input class=" mb-4" type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>" required>
+          <input class=" mb-3" type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>" required>
+          <p class="w3-text-red"><?php echo $username_err; ?></p>
         </div>
-        <span class="w3-text-red"><?php echo $username_err; ?></span>
         <hr style="color:white;">
-        <div class="mt-3 mb-5 group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+        <div class="mt-2 mb-2 group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
           <label for="password" class="mt-3 pr-3 text-white" style="font-family: Poppins-Medium;"><i class="fa fa-key w3-xlarge w3-left"></i></label>
           <input class="" type="password" placeholder="Enter Password" name="password" required>
-        </div>
-        <span class="w3-text-red"><?php echo $password_err; ?></span>
+          <p class="w3-text-red"><?php echo $password_err; ?></p>
+        </div>        
         <div class="call-to-action ">
           <button id="login-button" type="submit">Log In</button>
         </div>

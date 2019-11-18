@@ -38,9 +38,9 @@ if ($_SERVER["PHP_SELF"] == "/web_management/index.php") {
       <!-- <div class="w3-dropdown-hover w3-mobile"> -->
         <!-- <button class="w3-button w3-padding-16">Type <i class="fa fa-caret-down"></i></button> -->
         <!-- <div class="w3-dropdown-content w3-bar-block w3-dark-grey" > -->
-          <a href="/web_management/scr_100x/scr_1001/scr_1001.php" class="w3-bar-item w3-button w3-mobile w3-padding-16 w3-hover-teal <?php if (($_SESSION["role"]) !== "student") { ?> w3-hide <?php }?> " >Student</a>
-          <a href="/web_management/scr_100x/scr_1002/scr_1002.php" class="w3-bar-item w3-button w3-mobile w3-padding-16 <?php if (($_SESSION["role"]) !== "organization") { ?> w3-hide <?php }?> ">Company</a>
-          <a href="/web_management/scr_100x/scr_1003/scr_1003.php" class="w3-bar-item w3-button w3-mobile w3-padding-16 <?php if (($_SESSION["role"]) !== "teacher") { ?> w3-hide <?php }?> ">Teacher</a>
+          <a href="/web_management/scr_100x/scr_1001/scr_1001.php" class="w3-bar-item w3-button w3-mobile w3-padding-16 w3-hover-teal <?php if (($_SESSION["role"]) !== "student") { ?> w3-hide <?php }?> " >Sinh viên</a>
+          <a href="/web_management/scr_100x/scr_1002/scr_1002.php" class="w3-bar-item w3-button w3-mobile w3-padding-16 <?php if (($_SESSION["role"]) !== "organization") { ?> w3-hide <?php }?> ">Doanh nghiệp</a>
+          <a href="/web_management/scr_100x/scr_1003/scr_1003.php" class="w3-bar-item w3-button w3-mobile w3-padding-16 <?php if (($_SESSION["role"]) !== "teacher") { ?> w3-hide <?php }?> ">Giáo viên</a>
           <a href="/web_management/scr_100x/scr_1001/scr_1001B.php" class="w3-padding-16 w3-bar-item w3-button w3-hide-small w3-hover-teal <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> ">Danh sách phiếu yêu cầu</a>
           <a href="/web_management/scr_100x/scr_1002/scr_1002C.php" class="w3-padding-16 w3-bar-item w3-button w3-hide-small w3-hover-white <?php if (($_SESSION["role"]) !== "organization") { ?> w3-hide <?php }?> ">Tạo phiếu yêu cầu</a>
         <!-- </div> -->

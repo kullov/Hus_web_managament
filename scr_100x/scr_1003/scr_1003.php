@@ -3,10 +3,43 @@
 session_start();
 
 // Check if the user is logged in, if not then redirect him to login page
-// if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-//   header("location: scr_100/login/login.php");
-//   exit;
-// }
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["role"] !== "teacher") {
+  header("location: ../../");
+  exit;
+}
+
+// Include config file
+require "../../config.php";
+
+$phone_number = $email = $name = $address = "";
+$id = $_SESSION["id"];
+// Prepare a select statement
+$sql = "SELECT id, contact, email, name, address FROM teacher_profile WHERE id = ?";
+if ($stmt = mysqli_prepare($link, $sql)) {
+  
+  // Bind variables to the prepared statement as parameters
+  mysqli_stmt_bind_param($stmt, "s", $id);
+  // Attempt to execute the prepared statement
+  if (mysqli_stmt_execute($stmt)) {
+    // Store result
+    mysqli_stmt_store_result($stmt);
+    // Check if username exists, if yes then verify password
+    if (mysqli_stmt_num_rows($stmt) == 1) {
+      // Bind result variables
+      mysqli_stmt_bind_result($stmt, $id, $phone_number, $email, $name, $address);
+      mysqli_stmt_fetch($stmt);
+    } else {
+      // Display an error message if username doesn't exist
+      $email_teacher_err = "No account found with that your email!";
+    }
+  } else {
+    echo "Oops! Something went wrong. Please try again later.";
+  }
+  // Close statement
+  mysqli_stmt_close($stmt);
+}
+// Close connection
+mysqli_close($link);
 ?>
 
 <!DOCTYPE html>
@@ -25,12 +58,12 @@ session_start();
 <div style=" margin-top: 55px;">
   <!-- Sidebar/menu -->
   <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px; " id="mySidebar"><br>
-    <div class="w3-container">
+    <div class="w3-container w3-center">
       <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
         <i class="fa fa-remove"></i>
       </a>
       <img src="https://www.w3schools.com/w3images/avatar_g2.jpg" style="width:45%;" class="w3-round"><br><br>
-      <h3><b><?php echo htmlspecialchars($_SESSION["name_teacher"]); ?></b></h3>
+      <h3><b><?php echo htmlspecialchars($name); ?></b></h3>
       <p class="w3-text-grey"><i>Teacher</i></p>
     </div>
     <div class="w3-bar-block">
@@ -63,12 +96,12 @@ session_start();
         <h4><b>THÔNG TIN</b></h1>
         <div class="w3-row-padding">
           <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
-            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Full name: <b><?php echo($_SESSION["name_teacher"]) ?></b></p>
-            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($_SESSION["phone_teacher"]) ?></b></p>
+            <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Full name: <b><?php echo($name) ?></b></p>
+            <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>Phone: <b><?php echo($phone_number) ?></b></p>
           </div>
           <div class=" w3-half w3-container w3-section w3-bottombar w3-padding-16">
-            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Email: <b><?php echo($_SESSION["email_teacher"]) ?></b></p>
-            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Address: <b><?php echo($_SESSION["address_teacher"]) ?></b></p>
+            <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>Email: <b><?php echo($email) ?></b></p>
+            <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>Address: <b><?php echo($address) ?></b></p>
           </div>
         </div>
       </div>
@@ -220,15 +253,15 @@ session_start();
       <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-          <p><?php echo htmlspecialchars($_SESSION["email_teacher"]); ?></p>
+          <p><?php echo htmlspecialchars($email); ?></p>
         </div>
         <div class="w3-third w3-teal">
           <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
-          <p><?php echo htmlspecialchars($_SESSION["address_teacher"]); ?></p>
+          <p><?php echo htmlspecialchars($address); ?></p>
         </div>
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
-          <p><?php echo htmlspecialchars($_SESSION["phone_teacher"]); ?> </p>
+          <p><?php echo htmlspecialchars($phone_number); ?> </p>
         </div>
       </div>
       <hr class="w3-opacity">
@@ -250,43 +283,7 @@ session_start();
     </div>
 
     <!-- Footer -->
-    <footer class="w3-container w3-padding-32 w3-dark-grey">
-      <div class="w3-row-padding">
-        <div class="w3-third">
-          <h3>FOOTER</h3>
-          <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-          <p>Powered by <a href="/web_management/" target="_blank">Origen</a></p>
-        </div>
-      
-        <div class="w3-third">
-          <h3>BLOG POSTS</h3>
-          <ul class="w3-ul w3-hoverable">
-            <li class="w3-padding-16">
-              <img src="/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
-              <span class="w3-large">Lorem</span><br>
-              <span>Sed mattis nunc</span>
-            </li>
-            <li class="w3-padding-16">
-              <img src="/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
-              <span class="w3-large">Ipsum</span><br>
-              <span>Praes tinci sed</span>
-            </li> 
-          </ul>
-        </div>
-
-        <div class="w3-third">
-          <h3>POPULAR TAGS</h3>
-          <p>
-            <span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">London</span>
-            <span class="w3-tag w3-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">DIY</span>
-            <span class="w3-tag w3-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Family</span>
-            <span class="w3-tag w3-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Shopping</span>
-            <span class="w3-tag w3-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Games</span>
-          </p>
-        </div>
-
-      </div>
-    </footer>
+    <?php include("../../footer.php"); ?>
     
     <div class="w3-black w3-center w3-padding-24">Powered by <a href="/web_management/" title="Origen" target="_blank" class="w3-hover-opacity">Origen</a></div>
 

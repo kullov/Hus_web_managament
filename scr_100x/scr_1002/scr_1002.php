@@ -3,10 +3,44 @@
 session_start();
 
 // Check if the user is logged in, if not then redirect him to login page
-// if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-//   header("location: scr_100/login/login.php");
-//   exit;
-// }
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["role"] !== "organization") {
+  header("location: ../../");
+  exit;
+}
+
+// Include config file
+require_once "../../config.php";
+
+// Define variables and initialize with empty values
+$tax_number = $name = $address = $email = $contact = $description = "";
+$id = $_SESSION["id"];
+// Prepare a select statement
+$sql = "SELECT id, tax_number, name, address, email, contact, description FROM organization_profile WHERE id = ?";
+
+if ($stmt = mysqli_prepare($link, $sql)) {
+  
+  // Bind variables to the prepared statement as parameters
+  mysqli_stmt_bind_param($stmt, "s", $id);
+
+  // Attempt to execute the prepared statement
+  if (mysqli_stmt_execute($stmt)) {
+    // Store result
+    mysqli_stmt_store_result($stmt);
+    // Check if tax exists, if yes then verify password
+    if (mysqli_stmt_num_rows($stmt) == 1) {
+      // Bind result variables
+      mysqli_stmt_bind_result($stmt, $id, $tax_number, $name, $address, $email, $contact, $description);
+      mysqli_stmt_fetch($stmt);
+    }
+  } else {
+    echo "Oops! Something went wrong. Please try again later.";
+  }
+  // Close statement
+  mysqli_stmt_close($stmt);
+}
+
+// Close connection
+mysqli_close($link);
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,12 +58,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <div style=" margin-top: 55px;">
   <!-- Sidebar/menu -->
   <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px; " id="mySidebar"><br>
-    <div class="w3-container">
+    <div class="w3-container w3-center">
       <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
         <i class="fa fa-remove"></i>
       </a>
       <img src="https://www.w3schools.com/w3images/avatar_g2.jpg" style="width:45%;" class="w3-round"><br><br>
-      <h3><b><?php echo htmlspecialchars($_SESSION["name_organization"]); ?></b></h3>
+      <h3><b><?php echo htmlspecialchars($name); ?></b></h3>
       <p class="w3-text-grey"><i>Organization</i></p>
     </div>
     
@@ -37,7 +71,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>ABOUT</a> 
       <a href="#list-require" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>DANH SÁCH PHIẾU YÊU CẦU</a> 
       <a href="#assignment" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>BẢNG PHÂN CÔNG (SCR_1002S)</a>
-      <a href="scr_1002E.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>BIÊN TẬP PHIẾU YÊU CẦU (SCR_1002E)</a>
       <a href="scr_1002C.php" class="w3-bar-item w3-button w3-padding">TẠO PHIẾU YÊU CẦU (SCR_1002C)</a>
       <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
     </div>
@@ -67,7 +100,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </header>
 
     <div class="w3-container">
-      <p><?php echo htmlspecialchars($_SESSION["description_organization"]); ?></p>
+      <p><?php echo htmlspecialchars($description); ?></p>
       <div class="w3-container">
         <h4><strong>KHÔNG GIAN</strong></h4>
         <div class="w3-display-container mySlides">
@@ -124,7 +157,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
             <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
@@ -136,7 +168,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
             <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
@@ -148,7 +179,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
             <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
@@ -163,7 +193,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
             <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
@@ -175,7 +204,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
             <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
@@ -187,7 +215,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
             <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
           </div>
@@ -314,15 +341,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-          <p><?php echo htmlspecialchars($_SESSION["email_organization"]); ?></p>
+          <p><?php echo htmlspecialchars($email); ?></p>
         </div>
         <div class="w3-third w3-teal">
           <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
-          <p><?php echo htmlspecialchars($_SESSION["address_organization"]); ?></p>
+          <p><?php echo htmlspecialchars($address); ?></p>
         </div>
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-phone w3-xxlarge w3-text-light-grey"></i></p>
-          <p><?php echo htmlspecialchars($_SESSION["contact_organization"]); ?></p>
+          <p><?php echo htmlspecialchars($contact); ?></p>
         </div>
       </div>
       <hr class="w3-opacity">
@@ -344,43 +371,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </div>
 
     <!-- Footer -->
-    <footer class="w3-container w3-padding-32 w3-dark-grey">
-      <div class="w3-row-padding">
-        <div class="w3-third">
-          <h3>FOOTER</h3>
-          <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-          <p>Powered by <a href="#" target="_blank">Origen</a></p>
-        </div>
-      
-        <div class="w3-third">
-          <h3>BLOG POSTS</h3>
-          <ul class="w3-ul w3-hoverable">
-            <li class="w3-padding-16">
-              <img src="https://www.w3schools.com/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
-              <span class="w3-large">Lorem</span><br>
-              <span>Sed mattis nunc</span>
-            </li>
-            <li class="w3-padding-16">
-              <img src="https://www.w3schools.com/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
-              <span class="w3-large">Ipsum</span><br>
-              <span>Praes tinci sed</span>
-            </li> 
-          </ul>
-        </div>
-
-        <div class="w3-third">
-          <h3>POPULAR TAGS</h3>
-          <p>
-            <span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">London</span>
-            <span class="w3-tag w3-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">DIY</span>
-            <span class="w3-tag w3-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Family</span>
-            <span class="w3-tag w3-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Shopping</span>
-            <span class="w3-tag w3-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Games</span>
-          </p>
-        </div>
-
-      </div>
-    </footer>
+    <?php include("../../footer.php"); ?>
     
     <div class="w3-black w3-center w3-padding-24">Powered by <a href="/web_management/" title="Origen" target="_blank" class="w3-hover-opacity">Origen</a></div>
 

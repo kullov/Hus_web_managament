@@ -31,7 +31,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <a href="#space" onclick="w3_close()" class="w3-bar-item w3-button">KHÔNG GIAN</a> 
       <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">THÔNG TIN</a> 
       <a href="#require" onclick="w3_close()" class="w3-bar-item w3-button">YÊU CẦU</a> 
-      <a href="scr_1001V.php" onclick="w3_close()" class="w3-bar-item w3-button">ĐĂNG KÝ</a> 
+      <a href="scr_1001A.php" onclick="w3_close()" class="w3-bar-item w3-button">ĐĂNG KÝ</a> 
       <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">LIÊN HỆ</a>
     </nav>
 

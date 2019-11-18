@@ -233,17 +233,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </div>
       <div id="about" class="w3-container">
-        <br>
-        <br>
         <h4><strong>THÔNG TIN</strong></h4>
-        <div class="w3-row w3-large">
+        <div class="w3-row w3-large w3-margin-left">
           <div class="w3-col s6">
             <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>30</b> người</p>
             <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: 62</p>
             <p><i class="fa fa-fw fa-clock-o"></i> Check In: 8:30 AM</p>
             <p><i class="fas fa-map-marker-alt"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
           </div>
-          <div class="w3-col s6">
+          <div class="w3-col s5 w3-margin-left">
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>
             <p><i class="fas fa-check-double"></i> Đã được phân công: 10</p>
             <p><i class="fa fa-fw fa-clock-o"></i> Check Out: 5:30 PM</p>
@@ -252,13 +250,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <hr>
         
-        <h4><strong>Mô tả công việc</strong></h4>
+        <h4><strong>MÔ TẢ CÔNG VIỆC</strong></h4>
         <p>• Tham gia triển khai dự án nền tảng ngân hàng số, trực tiếp lập trình và hỗ trợ các thành viên trong nhóm lập trình (Java/JavaScripts)</p>
         <p>• Tiếp nhận chuyển giao công nghệ từ nhà cung cấp giải pháp</p>
         <p>• Chủ động cập nhật các xu hướng, công nghệ, giải pháp mới nhằm đề xuất những ứng dụng đáp ứng tốt hơn nhu cầu của Khách hàng và các bộ phận trong Ngân hàng</p>
         <hr>
 
-        <h4><strong>Phúc lợi</strong></h4>
+        <h4><strong>PHÚC LỢI</strong></h4>
         <div class="w3-row w3-large">
           <div class="w3-col s6">
             <p><i class="fa fa-fw fa-shower"></i> Playing</p>
@@ -277,13 +275,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <p>• Môi trường làm việc chuyên nghiệp</p>
           <p>• Có cơ hội thăng tiến, đào tạo</p>
         </div>
+        <hr>
       </div>
-      <hr>
       
       <!-- Yêu cầu -->
       <div class="w3-container" id="require">
-        <br><br>
-        <h2>YÊU CẦU</h2>
+        <h4><strong>YÊU CẦU</strong></h4>
         <p>• Tốt nghiệp Đại học nước ngoài hoặc tốt nghiệp hệ kỹ sư tài năng các trường Đại học chính quy như ĐH Quốc Gia Hà Nội, ĐH Bách Khoa, ĐH Khoa học tự nhiên, Đại học FPT…</p>
         <p>• Có kinh nghiệm lập trình về <b>Java</b></p>
         <p>• Có thể làm việc bằng tiếng Anh với người nước ngoài – tương đương TOEFL iBT 85 điểm trở lên</p>
@@ -291,26 +288,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p>• Ưu tiên kinh nghiệm với AngularJS (từ 2 trở lên), CSS (SASS), HTML5, Bootstrap</p>
         <p>• Ưu tiên kinh nghiệm với Java 8, Spring Boot, Hibernate, Rest APIs, Micro services, design patterns và TDD</p>
         <p>• Cam kết thực tập tối thiểu 3 tháng</p>
+        <hr>
       </div>
       <!-- Contact -->
       <div class="w3-container" id="contact" style="margin-bottom:120px">
-        <br><br>
-        <h2>LIÊN HỆ</h2>
+        <h4><strong>LIÊN HỆ</strong></h4>
         <i class="fa fa-map-marker" style="width:30px"></i> 334 Nguyễn Trãi, Thanh Xuân, Hà Nội<br>
         <i class="fa fa-phone" style="width:30px"></i> Phone: 0349.749.393<br>
         <i class="fa fa-envelope" style="width:30px"> </i> Email: tranthanhnga_t61@hus.edu.vn<br>
-        <p>Bạn có câu hỏi? Hãy để lại thông tin:</p>
-        <form action="/action_page.php" target="_blank">
-          <p><input class="w3-input w3-border" type="text" placeholder="Tên của bạn" required name="Name"></p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Hãy phản hồi cho chúng tôi" required name="Message"></p>
-        <button type="submit" class="w3-button w3-green w3-third" >Gửi phản hồi</button>
-        </form>
       </div>
       
-      <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by 
+      <footer class="w3-container w3-padding-16 w3-black w3-center" style="margin-top:32px">Powered by 
         <a href="/web_management/" title="Origen" target="_blank" class="w3-hover-text-green">Origen</a>
-        <a href="scr_1001.php" class="w3-button w3-green w3-right" onclick="document.getElementById('subscribe').style.display='block'">Trở về</a>
       </footer>
 
     <!-- End page content -->

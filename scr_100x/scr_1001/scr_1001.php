@@ -47,11 +47,11 @@ if ($stmt = mysqli_prepare($link, $sql)) {
 <title>Student</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 </style>
@@ -222,43 +222,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </div>
 
     <!-- Footer -->
-    <footer class="w3-container w3-padding-32 w3-dark-grey">
-      <div class="w3-row-padding">
-        <div class="w3-third">
-          <h3>FOOTER</h3>
-          <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-          <p>Powered by <a href="/web_management/" target="_blank">Origen</a></p>
-        </div>
-      
-        <div class="w3-third">
-          <h3>BLOG POSTS</h3>
-          <ul class="w3-ul w3-hoverable"></ul>
-            <li class="w3-padding-16">
-              <img src="https://www.w3schools.com/w3images/workshop.jpg" class="w3-left w3-margin-right" style="width:50px">
-              <span class="w3-large">Lorem</span><br>
-              <span>Sed mattis nunc</span>
-            </li>
-            <li class="w3-padding-16">
-              <img src="https://www.w3schools.com/w3images/gondol.jpg" class="w3-left w3-margin-right" style="width:50px">
-              <span class="w3-large">Ipsum</span><br>
-              <span>Praes tinci sed</span>
-            </li> 
-          </ul>
-        </div>
-
-        <div class="w3-third">
-          <h3>POPULAR TAGS</h3>
-          <p>
-            <span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">London</span>
-            <span class="w3-tag w3-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">DIY</span>
-            <span class="w3-tag w3-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Family</span>
-            <span class="w3-tag w3-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Shopping</span>
-            <span class="w3-tag w3-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Games</span>
-          </p>
-        </div>
-
-      </div>
-    </footer>
+    <?php include("../../footer.php"); ?>
     
     <div class="w3-black w3-center w3-padding-24">Powered by <a href="/web_management/" title="W3.CSS" target="_blank" class="w3-hover-opacity">Origen</a></div>
 

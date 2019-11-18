@@ -66,6 +66,7 @@
                 $_SESSION["email_organization"] = $email_organization;
                 $_SESSION["address_organization"] = $address_organization;
                 $_SESSION["contact_organization"] = $contact_organization;
+                $_SESSION["name"] = $name_organization;
 
                 // Redirect user to welcome page
                 header("location: ../../scr_100x/scr_1002/scr_1002.php");

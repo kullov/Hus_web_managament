@@ -7,10 +7,99 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
   header("location: ../../");
   exit;
 }
+
+
+
+  // Include config file
+  require "../../config.php";
+// Define variables and initialize with empty values
+$code = $request_id = $start_date = $end_date = $status = "";
+$request_id_err = $start_date_err = $end_date_err = $status_err = "";
+$student_id = $_SESSION["id"];
+// Prepare a select statement
+// Câu SQL lấy danh sách
+// $sql = "SELECT id, first_name, last_name, email, phone, date_of_birth, class_name, join_date, avatar, description FROM intern_profile WHERE code = ?";
+ 
+// if ($stmt = mysqli_prepare($link, $sql)) {
+  
+//   // Bind variables to the prepared statement as parameters
+//   mysqli_stmt_bind_param($stmt, "s", $username);
+
+//   // Attempt to execute the prepared statement
+//   if (mysqli_stmt_execute($stmt)) {
+//     // Store result
+//     mysqli_stmt_store_result($stmt);
+//     // Check if username exists, if yes then verify password
+//     if (mysqli_stmt_num_rows($stmt) == 1) {
+//       // Bind result variables
+//       mysqli_stmt_bind_result($stmt, $id, $first_name, $last_name, $email, $phone, $date_of_birth, $class_name, $join_date, $avatar, $description);
+//       mysqli_stmt_fetch($stmt);
+//     }
+//   } else {
+//     echo "Oops! Something went wrong. Please try again later.";
+//   }
+//   // Close statement
+//   mysqli_stmt_close($stmt);
+// }
+
+
+
+// Processing form data when form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  // Validate request_id
+  if (empty(trim($_POST["request_id"]))) {
+    $request_id_err = "Please choose the request id!";
+  } else {
+    $request_id = trim($_POST["request_id"]);
+  }
+  
+  // Validate start_date
+  if (empty(trim($_POST["start_date"]))) {
+    $start_date_err = "Please enter your start date!";
+  } else {
+    $start_date = trim($_POST["start_date"]);
+  }
+
+  // Validate end date
+  if (empty(trim($_POST["end_date"]))) {
+    $end_date_err = "Please enter your end date!";
+  } else {
+    $end_date = trim($_POST["end_date"]);
+  }
+
+  // Validate status
+  if (empty(trim($_POST["status"]))) {
+    $status_err = "Please choose status!";
+  } else {
+    $status = trim($_POST["status"]);
+  }
+  // $code = trim($_POST["code"]);
+
+  // Prepare an insert statement
+  $sql = " INSERT INTO `request_assignment` (`request_id`, `intern_id`, `start_date`, `end_date`, `status`) VALUES (?, ?, ?, ?, ?);";
+
+  if ($stmt = mysqli_prepare($link, $sql)) {
+    // Bind variables to the prepared statement as parameters
+    mysqli_stmt_bind_param($stmt, "sssss", $request_id, $student_id, $start_date, $end_date, $status);
+    // Attempt to execute the prepared statement
+    if (mysqli_stmt_execute($stmt)) {
+      // Redirect to login page
+      header("location: scr_1001.php");
+    } else {
+      echo "Something went wrong. Please try again later.";
+    }
+    mysqli_stmt_close($stmt);
+  }
+  // Close connection
+  mysqli_close($link);
+}
+
+
 ?>
 <!DOCTYPE html>
 <html>
-<title>Phiếu yêu cầu</title>
+<title>Đăng ký phiếu yêu cầu</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -38,29 +127,47 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
   <div>
     <!-- Sidebar/menu -->
     <nav class="w3-sidebar w3-light-grey w3-collapse w3-top" style="z-index:3;width:300px;margin-top: 55px;" id="mySidebar">
-      <div class="w3-container w3-display-container w3-padding-16">
+      <div class="w3-container w3-display-container w3-padding-16 w3-margin-bottom">
         <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
-        <h3 class="w3-center">PHIẾU YÊU CẦU</h3>
+        <h3 class="w3-center">PHIẾU ĐĂNG KÝ</h3>
         <p class="w3-center"><i>Sinh viên đăng ký nguyện vọng thực tập vào doanh nghiệp.</i></p>
-        <hr>
-        <form action="/action_page.php" target="_blank">
-          <p><label><i class="fa fa-calendar-check-o"></i> Ngày bắt đầu</label></p>
-          <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="CheckIn" required>
-          <p><label><i class="fa fa-calendar-o"></i> Ngày kết thúc</label></p>
-          <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="CheckOut" required>
-          <p><label><i class="fa fa-male"></i> Trạng thái</label></p>
-          <select class="w3-select w3-border" name="option">
-            <option value="" disabled selected>Chọn trạng thái</option>
-            <option value="0">Đang chờ</option>
-            <option value="1">Đang thực hiện</option>
-            <option value="2">Đã thực hiện xong</option>
-          </select>
+        <form action="scr_1001A.php" method="post">
+          <div class="form-group <?php echo (!empty($request_id_err)) ? 'has-error' : ''; ?>">
+            <p><label><i class="fa fa-qrcode"></i> Mã phiếu yêu cầu</label></p>
+            <select class="w3-select w3-border" name="request_id" required value="<?php echo $request_id; ?>">
+              <option value="" disabled selected>Chọn mã phiếu</option>
+              <option value="0" >1000</option>
+              <option value="1" >1001</option>
+              <option value="2" >1002</option>
+            </select>
+            <span class="w3-text-red"><?php echo $request_id_err; ?></span>
+          </div>
+          <div class="form-group <?php echo (!empty($start_date_err)) ? 'has-error' : ''; ?>">
+            <p><label><i class="fa fa-calendar-check-o"></i> Ngày bắt đầu</label></p>
+            <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="start_date" required value="<?php echo $start_date; ?>">
+            <span class="w3-text-red"><?php echo $start_date_err; ?></span>
+          </div>
+          <div class="form-group <?php echo (!empty($end_date_err)) ? 'has-error' : ''; ?>">
+            <p><label><i class="fa fa-calendar-o"></i> Ngày kết thúc</label></p>
+            <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="end_date" required value="<?php echo $end_date; ?>">
+            <span class="w3-text-red"><?php echo $end_date_err; ?></span>
+          </div>
+          <div class="form-group <?php echo (!empty($status_err)) ? 'has-error' : ''; ?>">
+            <p><label><i class="fa fa-hourglass-start"></i> Trạng thái</label></p>
+            <select class="w3-select w3-border" name="status" required value="<?php echo $status; ?>">
+              <option value="" disabled selected>Chọn trạng thái</option>
+              <option value="0">Đang chờ</option>
+              <option value="1">Đang thực hiện</option>
+              <option value="2">Đã thực hiện xong</option>
+            </select>
+            <span class="w3-text-red"><?php echo $status_err; ?></span>
+          </div>
           <p>
-            <button type="submit" class="w3-button w3-dark-grey w3-block">Sửa</button>
+            <button type="submit" class="w3-button w3-dark-grey w3-block">Đăng ký</button>
           </p>
         </form>
         <p class="w3-center">
-          <a href="scr_1001.php" onclick="w3_close()" class="w3-bar-item w3-button">TRỞ VỂ</a>
+          <a href="scr_1001.php" onclick="w3_close()" class="w3-bar-item w3-button w3-margin-bottom">TRỞ VỂ</a>
         </p>
       </div>
     </nav>
@@ -199,7 +306,6 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
           <p><input class="w3-input w3-border" type="text" placeholder="Hãy phản hồi cho chúng tôi" required name="Message"></p>
         <button type="submit" class="w3-button w3-green w3-third" >Gửi phản hồi</button>
         </form>
-        <button type="submit" class="w3-button w3-red w3-third w3-right" style="width: 100px">Đăng kí</button>
       </div>
       
       <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by 

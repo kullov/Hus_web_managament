@@ -31,7 +31,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <a href="#space" onclick="w3_close()" class="w3-bar-item w3-button">KHÔNG GIAN</a> 
       <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">THÔNG TIN</a> 
       <a href="#require" onclick="w3_close()" class="w3-bar-item w3-button">YÊU CẦU</a> 
-      <a href="#subcribe" onclick="w3_close()" class="w3-bar-item w3-button">ĐĂNG KÝ</a> 
+      <a href="scr_1001V.php" onclick="w3_close()" class="w3-bar-item w3-button">ĐĂNG KÝ</a> 
       <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">LIÊN HỆ</a>
     </nav>
 
@@ -156,10 +156,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
           <li>• Ưu tiên kinh nghiệm với Java 8, Spring Boot, Hibernate, Rest APIs, Micro services, design patterns và TDD</li>
           <li>• Cam kết thực tập tối thiểu 3 tháng</li>
         </ul>
-        <p id="subcribe">
-          <br><br><br>
-          <button class="w3-button w3-green w3-third" onclick="document.getElementById('subscribe').style.display='block'">Subscribe</button>
-        </p>
       </div>
 
       <!-- Contact -->
@@ -175,7 +171,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
           <p><input class="w3-input w3-border" type="text" placeholder="Hãy phản hồi cho chúng tôi" required name="Message"></p>
         <button type="submit" class="w3-button w3-green w3-third">Gửi phản hồi</button>
         </form>
-        <a href="scr_1001A.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-red w3-third w3-right" style="width: 100px">Đăng kí</button></a>
       </div>
       
       <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by 
@@ -184,19 +179,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       </footer>
 
     <!-- End page content -->
-    </div>
-
-    <!-- Subscribe Modal -->
-    <div id="subscribe" class="w3-modal">
-      <div class="w3-modal-content w3-animate-zoom w3-padding-large">
-        <div class="w3-container w3-white w3-center">
-          <i onclick="document.getElementById('subscribe').style.display='none'" class="fa fa-remove w3-button w3-xlarge w3-right w3-transparent"></i>
-          <h2 class="w3-wide">ĐĂNG KÝ</h2>
-          <p>Join our mailing list to receive updates on available dates and special offers.</p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
-          <button type="button" class="w3-button w3-padding-large w3-green w3-margin-bottom" onclick="document.getElementById('subscribe').style.display='none'">Subscribe</button>
-        </div>
-      </div>
     </div>
 
     <script>

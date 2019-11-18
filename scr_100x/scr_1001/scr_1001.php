@@ -72,7 +72,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <a href="#PROFILE" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PROFILE</a> 
       <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>THÔNG TIN</a>
       <a href="scr_1001D.php" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>SỬA THÔNG TIN</a>
-      <a href="scr_1001A.php" class="w3-bar-item w3-button w3-padding">ĐĂNG KÝ YÊU CẦU THỰC TẬP</a> 
       <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button"><i class="fa fa-envelope fa-fw w3-margin-right"></i>LIÊN HỆ</a>
     </div>
     <div class="w3-panel w3-large">

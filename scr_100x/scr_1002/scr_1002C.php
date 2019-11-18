@@ -7,6 +7,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
   header("location: ../../");
   exit;
 }
+
+// INSERT INTO `request` (`id`, `organization_id`, `position`, `amount`, `date_created`, `status`, `description`, `type`) VALUES (NULL, '1', 'Java Dev', '4', '2019-11-18', '1', 'abcde', 'Fulltime');
 ?>
 
 <!DOCTYPE html>

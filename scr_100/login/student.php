@@ -130,19 +130,19 @@
     }
     .login {
       max-width: 400px;
-      min-height: 600px;
-      margin: 30px auto;
-      background-color: rgba(10,10,10,.68);
+      min-height: 530px;
+      margin: 40px auto;
+      background-color: rgba(10,10,10,.60);
     }
     .login-icon-field {
       height: 120px;
       width: 100%;
     }
     .login-icon {
-      margin: 50px 65px;
+      margin: 35px 65px;
     }
     .login-form {
-      padding: 20px 20px 20px;
+      padding: 10px 20px 20px;
       height: 120px;
       width: 400px;
     }
@@ -215,7 +215,7 @@
         <span class="w3-text-red"><?php echo $username_err; ?></span>
         <hr style="color:white;">
         <div class="mt-3 mb-5 group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-          <label for="password" class="mt-3 pr-3 text-white" style="font-family: Poppins-Medium;"><i class="fa fa-plane w3-xlarge w3-left"></i></label>
+          <label for="password" class="mt-3 pr-3 text-white" style="font-family: Poppins-Medium;"><i class="fa fa-key w3-xlarge w3-left"></i></label>
           <input class="" type="password" placeholder="Enter Password" name="password" required>
         </div>
         <span class="w3-text-red"><?php echo $password_err; ?></span>

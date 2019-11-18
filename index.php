@@ -17,6 +17,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style type="text/css">
     body {
       font: 16px sans-serif;
@@ -39,8 +40,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div class="w3-display-container w3-animate-opacity">
       <img class="mySlides" src="http://www.pace.edu.vn/vn/uploads/ImageContent/2019/VHDN-24.04%20(1).jpg" style="width:100%;min-height:350px;height:600px;">
       <img class="mySlides" src="https://khoinghiep.thuvienphapluat.vn/uploads/images/2017/10/24/khai%20quat%20doanh%20nghiep%20cong%20nghe%20cao.jpg" style="width:100%;min-height:350px;height:600px;">
-      <img class="mySlides" src="https://cdn.vietnambiz.vn/stores/news_dataimages/tinnv/122017/08/07/2655_nhan-vien-gan-bo-cong-ty-la-do-van-hoa-doanh-nghiep-9476-1.jpg" style="width:100%;min-height:350px;max-height:600px;">
-      <img class="mySlides" src="https://www.w3schools.com/w3images/sailboat.jpg" alt="boat" style="width:100%;min-height:350px;max-height:600px;"> 
+      <img class="mySlides" src="https://cdn.vietnambiz.vn/stores/news_dataimages/tinnv/122017/08/07/2655_nhan-vien-gan-bo-cong-ty-la-do-van-hoa-doanh-nghiep-9476-1.jpg" style="width:100%;min-height:350px;height:600px;"> 
     </div>
   </div>
   <div id="id01" class="w3-modal">
@@ -60,16 +60,39 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     </div>   
   </div>
   <!-- Team Container -->
-<div class="w3-container w3-padding-64 w3-center w3-pale-blue" id="team">
-  <h1><p>Đội ngũ phát triển</p></h1>
-  <h3>Gặp gỡ chúng tôi</h3>
+<div class="w3-container w3-center w3-pale-blue" id="team">
+  <br><br>
+  <h3 class="w3-center">VỀ CHÚNG TÔI</h3>
+    <div class="w3-row-padding w3-center" style="margin-top:30px">
+      <div class="w3-quarter">
+        <i class="fa fa-desktop w3-xxlarge w3-center"></i>
+        <p class="w3-large">Responsive</p>
+        <p><i>Có trách nhiệm cao trong công việc. Năng suất làm việc hiệu quả và đạt tiêu chuẩn tiên tiến.</i></p>
+      </div>
+      <div class="w3-quarter">
+        <i class="fa fa-heart w3-xxlarge"></i>
+        <p class="w3-large">Passion</p>
+        <p><i>Với đội ngũ phát triển luôn tận tâm, nhiệt tình và hết mình, có tinh thần cao trong công việc.</i></p>
+      </div>
+      <div class="w3-quarter">
+        <i class="fa fa-diamond w3-xxlarge"></i>
+        <p class="w3-large">Design</p>
+        <p><i>Không ngừng sáng tạo, phát triển website hiện đại và đầy đủ chức năng đáp ứng nhu cầu của bạn.</i></p>
+      </div>
+      <div class="w3-quarter">
+        <i class="fa fa-cog w3-xxlarge"></i>
+        <p class="w3-large">Support</p>
+        <p><i>Đội ngũ nhiệt tình, luôn hỗ trợ khách hàng khi gặp vấn đề. Tích cực hợp tác cùng bạn.</i></p>
+      </div>
+    </div>
+  <h4 class="w3-center"><i>Đội ngũ phát triển</i></h4>
 
   <div class="w3-row w3-pale-blue"><br>
 
     <div class="w3-col w3-third">
       <img src="https://www.w3schools.com/w3images/girl_train.jpg" alt="Boss" style="width:110px;height:110px" class="w3-circle w3-hover-opacity">
       <h3>Trần Thanh Nga</h3>
-      <p>Lập trình viên FULLSTACK</p>
+      <p><i>Lập trình viên FULLSTACK</i></p>
       <p>
         <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
         <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
@@ -80,7 +103,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div class="w3-col w3-third" w3-third style="width:%">
       <img src="https://www.w3schools.com/w3images/girl.jpg" alt="Boss" style="width:110px;height:110px" class="w3-circle w3-hover-opacity">
       <h3>Nguyễn Thị Thủy</h3>
-      <p>Lập trình viên FULLSTACK</p>
+      <p><i>Lập trình viên FULLSTACK</i></p>
       <p>
         <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
         <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
@@ -91,7 +114,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div class="w3-col w3-third" w3-third style="width:%">
       <img src="https://www.w3schools.com/w3images/boy.jpg" alt="Boss" style="width:110px;height:110px" class="w3-circle w3-hover-opacity">
       <h3>Đặng Đình Tài</h3>
-      <p>Lập trình viên DATABASE</p>
+      <p><i>Lập trình viên DATABASE</i></p>
       <p>
         <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
         <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
@@ -115,7 +138,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div class="w3-container">
       <h3>Sinh viên</h3>
       <h4></h4>
-      <p>Khi tham gia, sinh viên sẽ tìm được những công việc phù hợp với năng lực, khả năng và yêu cầu của bản thân.</p>
+      <p><i>Khi tham gia, sinh viên sẽ tìm được những công việc phù hợp với năng lực, khả năng và yêu cầu của bản thân.</i></p>
       </div>
     </div>
   </div>
@@ -125,7 +148,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div class="w3-container">
       <h3>Doanh nghiệp</h3>
       <h4></h4>
-      <p>Khi tham gia, doanh nghiệp sẽ tiếp cận và tuyển dụng được các thành viên với năng lực phù hợp, đáp ứng yêu cầu.</p>
+      <p><i>Khi tham gia, doanh nghiệp sẽ tiếp cận và tuyển dụng được các thành viên với năng lực phù hợp, đáp ứng yêu cầu.</i></p>
       <p></p>
     </div>
   </div>
@@ -137,37 +160,11 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
     <div class="w3-container">
       <h3>Giáo viên</h3>
       <h4></h4>
-      <p>Cung cấp thông tin hữu ích về việc làm cho sinh viên và doanh nghiệp. Nắm bắt được cơ hội việc làm của sinh viên.</p>
+      <p><i>Cung cấp thông tin hữu ích về việc làm cho sinh viên và doanh nghiệp. Nắm bắt được cơ hội việc làm của sinh viên.</i></p>
     </div>
   </div>
 </div>
 
-</div>
-<div class="w3-container w3-pale-blue" style="padding:55px 16px" id="about">
-  <h1 class="w3-center">VỀ CHÚNG TÔI</h1>
-  <p class="w3-center w3-large">Key features of our company</p>
-  <div class="w3-row-padding w3-center" style="margin-top:64px">
-    <div class="w3-quarter">
-      <i class="fa fa-desktop w3-margin-bottom w3-jumbo w3-center"></i>
-      <p class="w3-large">Responsive</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-    </div>
-    <div class="w3-quarter">
-      <i class="fa fa-heart w3-margin-bottom w3-jumbo"></i>
-      <p class="w3-large">Passion</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-    </div>
-    <div class="w3-quarter">
-      <i class="fa fa-diamond w3-margin-bottom w3-jumbo"></i>
-      <p class="w3-large">Design</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-    </div>
-    <div class="w3-quarter">
-      <i class="fa fa-cog w3-margin-bottom w3-jumbo"></i>
-      <p class="w3-large">Support</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.</p>
-    </div>
-  </div>
 </div>
 
 <!-- Container -->

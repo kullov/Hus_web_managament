@@ -49,11 +49,11 @@
                 session_start();
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
-                // $_SESSION["id"] = $id;
-                $_SESSION["address_teacher"] = $address_teacher;
-                $_SESSION["name_teacher"] = $name_teacher;
-                $_SESSION["phone_teacher"] = $phone_number;
-                $_SESSION["email_teacher"] = $email_teacher;
+                $_SESSION["id"] = $id;
+                // $_SESSION["address_teacher"] = $address_teacher;
+                $_SESSION["name"] = $name_teacher;
+                // $_SESSION["phone_teacher"] = $phone_number;
+                // $_SESSION["email_teacher"] = $email_teacher;
                 $_SESSION["role"] = "teacher";
                // $_SESSION["first_name"] = $first_name;
                 // Redirect user to scr_1003 page

@@ -192,6 +192,90 @@
     .row-btn {
       width: 110px;
       border-radius: 10px;
+    }*, *:before, *:after {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    .container_1 {
+      padding: 1px 0;
+      height: 100%;
+      width: 100%;
+      background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/226578/campnou(optimized).jpg");
+      background-size: cover;
+      color: #fff;
+      font-family: "Comfortaa", "Helvetica", sans-serif;
+    }
+    .login {
+      max-width: 400px;
+      min-height: 530px;
+      margin: 40px auto;
+      background-color: rgba(10,10,10,.60);
+    }
+    .login-icon-field {
+      height: 120px;
+      width: 100%;
+    }
+    .login-icon {
+      margin: 35px 65px;
+    }
+    .login-form {
+      padding: 10px 20px 20px;
+      height: 120px;
+      width: 400px;
+    }
+    input {
+      position: absolute;
+      width: 250px;
+      height: 40px;
+      margin: 10px 0;
+      background: transparent;
+      color: rgba(255,255,255,.4);
+      border: none;
+      border-bottom: 1px solid white;
+      border-color: white;   
+    }
+    button {
+      display: block;
+      width: 276px;
+      height: 40px;
+      padding: 0;
+      margin: 10px 20px 10px;
+      font-weight: 700;
+      background-color: #22c08a;
+      border: none;
+      border-radius: 20px;     
+    }
+    button:hover {
+      background-color: #26d69a;
+    }
+    button:active {
+      background-color: #1eaa7a;
+    }
+    p {
+      display: inline-block;
+      width: 300px;
+      margin: 0 20px;
+      font-size: 17px;
+      color: rgba(255,255,255,.4);
+    }
+    @-webkit-keyframes dash {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    @keyframes dash {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    .row-btn {
+      width: 110px;
+      border-radius: 10px;
     }
   </style>
 </head>
@@ -213,7 +297,7 @@
         </div>
         <hr style="color:white;">
         <div class="mt-3 mb-5 group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-          <label for="password" class="mt-3 pr-3 text-white" style="font-family: Poppins-Medium;"><i class="fa fa-plane w3-xlarge w3-left"></i></label>
+          <label for="password" class="mt-3 pr-3 text-white" style="font-family: Poppins-Medium;"><i class="fa fa-key w3-xlarge w3-left"></i></label>
           <input class="" type="password" placeholder="Enter Password" name="password" required>
         </div>
         <span class="w3-text-red"><?php echo $password_err; ?></span>

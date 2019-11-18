@@ -6,25 +6,25 @@
 <!-- Footer -->
 <footer class="w3-container w3-padding-32 w3-dark-grey">
   <div class="w3-row-padding">
-    <div class="w3-third w3-center w3-margin-right" style="width:35%;">
+    <div class="w3-third w3-center w3-margin-right" style="width:38%;">
       <h4><strong>ORIGEN</strong></h4>
       <p>Origen - nơi cung cấp dịch vụ an toàn, tiện ích, nhanh chóng về tuyển dụng cũng như tìm kiếm việc làm cho sinh viên và các doanh nghiệp.</p>
     </div>
   
-    <div class="w3-third w3-center w3-border-left w3-border-right <?php if (($_SESSION["role"]) !== "organization") { ?> w3-hide <?php }?> " style="width:20%;">
+    <div class="w3-third w3-center w3-border-left w3-border-right <?php if (($_SESSION["role"]) !== "organization") { ?> w3-hide <?php }?> " style="width:22%;">
       <h4><strong>DOANH NGHIỆP</strong></h4>
       <img src="https://www.w3schools.com/w3images/avatar_g2.jpg" style="width:40%;" class="w3-round">
-      <p><?php echo htmlspecialchars($_SESSION["name"]); ?></p>
+      <p><i><?php echo htmlspecialchars($_SESSION["name"]); ?></i></p>
     </div>
-    <div class="w3-third w3-center w3-border-left w3-border-right <?php if (($_SESSION["role"]) !== "student") { ?> w3-hide <?php }?> " style="width:20%;">
+    <div class="w3-third w3-center w3-border-left w3-border-right <?php if (($_SESSION["role"]) !== "student") { ?> w3-hide <?php }?> " style="width:22%;">
       <h4><strong>SINH VIÊN</strong></h4>
-      <img src="https://www.w3schools.com/w3images/avatar_g2.jpg" style="width:40%;" class="w3-round">
-      <p><?php echo htmlspecialchars($_SESSION["name"]); ?></p>
+      <img src="<?php echo htmlspecialchars($_SESSION["avatar"]); ?>" style="width:40%;" class="w3-round">
+      <p><i><?php echo htmlspecialchars($_SESSION["name"]); ?></i></p>
     </div>
-    <div class="w3-third w3-center w3-border-left w3-border-right <?php if (($_SESSION["role"]) !== "teacher") { ?> w3-hide <?php }?> " style="width:20%;">
+    <div class="w3-third w3-center w3-border-left w3-border-right <?php if (($_SESSION["role"]) !== "teacher") { ?> w3-hide <?php }?> " style="width:22%;">
       <h4><strong>GIÁO VIÊN</strong></h4>
       <img src="https://www.w3schools.com/w3images/avatar_g2.jpg" style="width:40%;" class="w3-round">
-      <p><?php echo htmlspecialchars($_SESSION["name"]); ?></p>
+      <p><i><?php echo htmlspecialchars($_SESSION["name"]); ?></i></p>
     </div>
 
     <div class="w3-third w3-center w3-margin-left" style="width:35%;">

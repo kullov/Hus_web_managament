@@ -64,6 +64,7 @@
                 $_SESSION["code"] = $username;
                 $_SESSION["role"] = "student";
                 $_SESSION["name"] = $first_name . " " . $last_name;
+                $_SESSION["avatar"] = $avatar;
 
                 // Redirect user to scr_1001 page
                 header("location: ../../scr_100x/scr_1001/scr_1001.php");

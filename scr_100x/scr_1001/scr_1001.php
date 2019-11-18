@@ -65,7 +65,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <i class="fa fa-remove"></i>
       </a>
       <img src="<?php echo htmlspecialchars($avatar); ?>" style="width:45%;" class="w3-round"><br><br>
-      <h3><b><?php echo htmlspecialchars($last_name); ?></b></h3>
+      <h3><b><?php echo htmlspecialchars($first_name . " " . $last_name); ?></b></h3>
       <p class="w3-text-grey"><i>Student</i></p>
     </div>
     <div class="w3-bar-block">

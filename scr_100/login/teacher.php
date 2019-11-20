@@ -120,10 +120,11 @@ function hideURLbar(){
 		<form class="login-html" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <div class="<?php echo (!empty($email_teacher_err)) ? 'has-error' : ''; ?>">
         <input type="text" placeholder="Enter your email" name="email_teacher" value="<?php echo $email_teacher; ?>" required>
+          <p class="w3-text-red w3-center"><?php echo $email_teacher_err; ?></p>
+          <p class="w3-text-red"><?php echo $password_err; ?></p>
       </div>
       <div class="<?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
         <input type="password" placeholder="Enter Password" name="password" required>
-        <span class="w3-text-red"><?php echo $password_err; ?></span>
       </div>
 			<ul class="agileinfotickwthree">
 				<li>

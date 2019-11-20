@@ -131,11 +131,11 @@ function hideURLbar(){
 		<form class="login-html" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <div class="<?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
         <input type="text" name="username" placeholder="Enter Student ID" value="<?php echo $username; ?>" required>
-        <span class="w3-text-red"><?php echo $username_err; ?></span>
+          <p class="w3-text-red"><?php echo $username_err; ?></p>
+          <p class="w3-text-red"><?php echo $password_err; ?></p>
       </div>
       <div class="<?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
         <input type="password" placeholder="Enter Password" name="password" required>
-        <span class="w3-text-red"><?php echo $password_err; ?></span>
       </div>
 			<ul class="agileinfotickwthree">
 				<li>

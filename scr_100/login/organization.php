@@ -125,7 +125,7 @@ function hideURLbar(){
 <!-- Body -->
 <body>
 
-	<h1>TEACHER</h1>
+	<h1>ORGANIZATION</h1>
 
 	<div class="w3layoutscontaineragileits">
 	<h2>Login here</h2>
@@ -133,10 +133,11 @@ function hideURLbar(){
       <div class="<?php echo (!empty($tax_err)) ? 'has-error' : ''; ?>">
         <input type="text" placeholder="Enter your tax number" name="tax_number" value="<?php echo $tax_number; ?>" required>
         <span class="w3-text-red"><?php echo $tax_err; ?></span>
+          <p class="w3-text-red"><?php echo $tax_err; ?></p>
+          <p class="w3-text-red"><?php echo $password_err; ?></p>
       </div>
       <div class="<?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
         <input type="password" placeholder="Enter Password" name="password" required>
-        <span class="w3-text-red"><?php echo $password_err; ?></span>
       </div>
 			<ul class="agileinfotickwthree">
 				<li>

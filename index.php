@@ -185,7 +185,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
       <p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i>  thuynt181998@gmail.com</p>
     </div>
     <div class="w3-col m7">
-      <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="/action_page.php" target="_blank">
+      <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="./action_page.php" target="_blank">
         <h2 class="w3-center">Liên hệ</h2>
         <div class="w3-section">      
           <label style="float: left;"><i class="w3-large fa fa-user"></i>   Họ và tên *</label>

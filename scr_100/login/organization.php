@@ -125,7 +125,7 @@ function hideURLbar(){
 <!-- Body -->
 <body>
 
-	<h1>TEACHER</h1>
+	<h1>ORGANIZATION</h1>
 
 	<div class="w3layoutscontaineragileits">
 	<h2>Login here</h2>

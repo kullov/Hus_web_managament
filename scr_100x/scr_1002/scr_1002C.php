@@ -7,8 +7,108 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
   header("location: ../../");
   exit;
 }
+// Include config file
+require "../../config.php";
 
 // INSERT INTO `request` (`id`, `organization_id`, `position`, `amount`, `date_created`, `status`, `description`, `type`) VALUES (NULL, '1', 'Java Dev', '4', '2019-11-18', '1', 'abcde', 'Fulltime');
+
+// Define variables and initialize with empty values
+$id_request = $name = $amount = $position = $type = $status = $description = "";
+$listSkill = "";
+$name_err = $amount_err = $position_err = $type_err = $description_err = $status_err = "";
+$organization_id = $_SESSION["id"];
+// Prepare a select statement
+// Câu SQL lấy danh sách
+// $sql = "SELECT id, first_name, last_name, email, phone, date_of_birth, class_name, join_date, avatar, description FROM intern_profile WHERE code = ?";
+ 
+// if ($stmt = mysqli_prepare($link, $sql)) {
+  
+//   // Bind variables to the prepared statement as parameters
+//   mysqli_stmt_bind_param($stmt, "s", $username);
+
+//   // Attempt to execute the prepared statement
+//   if (mysqli_stmt_execute($stmt)) {
+//     // Store result
+//     mysqli_stmt_store_result($stmt);
+//     // Check if username exists, if yes then verify password
+//     if (mysqli_stmt_num_rows($stmt) == 1) {
+//       // Bind result variables
+//       mysqli_stmt_bind_result($stmt, $id, $first_name, $last_name, $email, $phone, $date_of_birth, $class_name, $join_date, $avatar, $description);
+//       mysqli_stmt_fetch($stmt);
+//     }
+//   } else {
+//     echo "Oops! Something went wrong. Please try again later.";
+//   }
+//   // Close statement
+//   mysqli_stmt_close($stmt);
+// }
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Processing form data when form is submitted
+  // Validate name
+  if (empty(trim($_POST["name"]))) {
+    $name_err = "Please enter name of request!";
+  } else {
+    $name = trim($_POST["name"]);
+  }
+  
+  // Validate description
+  // if (empty(trim($_POST["description"]))) {
+  //   $description_err = "Please enter description!";
+  // } else {
+    $description = trim($_POST["description"]);
+    // }
+    
+  // Validate position
+  if (empty(trim($_POST["position"]))) {
+    $position_err = "Please enter the position!";
+  } else {
+    $position = trim($_POST["position"]);
+  }
+
+  // Validate type
+  if (empty(trim($_POST["type"]))) {
+    $type_err = "Please choose type!";
+  } else {
+    $type = trim($_POST["type"]);
+  }
+
+  // Validate amount
+  if (empty(trim($_POST["amount"]))) {
+    $amount_err = "Please enter the amount of this job!";
+  } else {
+    $amount = trim($_POST["amount"]);
+  }
+
+  // Validate status
+  if (empty(trim($_POST["status"]))) {
+    $status_err = "Please choose status!";
+  } else {
+    $status = trim($_POST["status"]);
+  }
+  // $code = trim($_POST["code"]);
+
+  // Prepare an insert statement
+  $sql = " INSERT INTO `request` (`organization_id`, `position`, `amount`, `status`, `description`, `type`) VALUES (?, ?, ?, ?, ?, ?);";
+
+  if ($stmt = mysqli_prepare($link, $sql)) {
+    // Bind variables to the prepared statement as parameters
+    mysqli_stmt_bind_param($stmt, "ssssss", $organization_id, $position, $amount, $status, $description, $type);
+    // Attempt to execute the prepared statement
+    if (mysqli_stmt_execute($stmt)) {
+      // Redirect to login page
+      header("location: scr_1002.php");
+    } else {
+      echo "<h4 class='w3-center w3-text-red' style='margin-top:100px; z-index:100; margin-left:300px'>Something went wrong. Please try again later. $organization_id, $position , $amount, $status, $description, $type</h1>";
+    }
+    mysqli_stmt_close($stmt);
+  }
+  // Close connection
+  mysqli_close($link);
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -21,54 +121,51 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
-/* Include the padding and border in an element's total width and height */
+  body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+  /* Include the padding and border in an element's total width and height */
 
-/* Remove margins and padding from the list */
-ul {
-  margin: 0;
-  padding: 0;
-}
+  /* Remove margins and padding from the list */
+  ul {
+    margin: 0;
+    padding: 0;
+  }
 
-/* Style the list items */
-ul li {
-  position: relative;
-  padding: 12px 8px 12px 40px;
-  list-style-type: none;
-  background: #eee;
-  transition: 0.2s;
-  
-  /* make the list items unselectable */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+  /* Style the list items */
+  ul li {
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    list-style-type: none;
+    background: #eee;
+    transition: 0.2s;
+    
+    /* make the list items unselectable */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 
-/* Set all odd list items to a different color (zebra-stripes) */
-ul li:nth-child(odd) {
-  background: #f9f9f9;
-}
+  /* Set all odd list items to a different color (zebra-stripes) */
+  ul li:nth-child(odd) {
+    background: #f9f9f9;
+  }
 
-/* Darker background-color on hover */
-ul li:hover {
-  background: #ddd;
-}
+  /* Darker background-color on hover */
+  ul li:hover {
+    background: #ddd;
+  }
 
-/* Style the close button */
-.close {
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 12px 16px 12px 16px;
-}
+  /* Style the close button */
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12px 16px 12px 16px;
+  }
 
-.close:hover {
-  color: white;
-}
-
-
-
+  .close:hover {
+    color: white;
+  }
 </style>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 <?php include("../../navigation.php"); ?>
@@ -90,32 +187,32 @@ ul li:hover {
   <!-- !PAGE CONTENT! -->
   <div class="w3-main" style="margin-left:300px;">
 
-    <form action="/action_page.php" target="_blank">
+    <form action="#" id="form1" method="post">
       <div id="about" class="w3-container">
         <h4><strong>THÔNG TIN</strong></h4>
         <div class="w3-row-padding">
           <div class="w3-padding">
-            <input class="w3-input w3-animate-input" type="text" placeholder="NHẬP TÊN PHIẾU YÊU CẦU"  style="width:30%" />
+            <input class="w3-input w3-animate-input" type="text" name="name" value="<?php echo $name ?>" placeholder="NHẬP TÊN PHIẾU YÊU CẦU" style="width:30%" />
           </div>
         </div>
         <div class="w3-row-padding">
           <div class="w3-half w3-padding">
             <label><i class="fa fa-fw fa-male"></i> Số lượng cần tuyển:</label>
-            <p><input class="w3-input w3-border" type="text" placeholder=""></p>
+            <p><input class="w3-input w3-border" type="text" name="amount" value="<?php echo $amount ?>" placeholder="" required></p>
           </div>
           <div class="w3-half w3-padding">
             <label>Vị trí tuyển dụng:</label>
-            <p><input class="w3-input w3-border" type="text" placeholder=""></p>
+            <p><input class="w3-input w3-border" type="text" placeholder="" name="position" value="<?php echo $position ?>" required></p>
           </div>
         </div>
         <div class="w3-row-padding">
           <div class="w3-half w3-padding">
             <label>Trạng thái:</label>
             <p>
-              <select class="w3-select w3-border" name="option">
+              <select class="w3-select w3-border" name="status" value="<?php echo $status ?>" required>
                 <option value="" disabled selected>Chọn trạng thái</option>
-                <option value="0">Còn hiệu lực</option>
-                <option value="1">Quá hạn</option>
+                <option value="1">Còn hiệu lực</option>
+                <option value="2">Quá hạn</option>
               </select>
             </p>
           </div>
@@ -123,11 +220,11 @@ ul li:hover {
             <label>Hình thức làm việc:</label>
             <p>
               <span>
-                <input class="w3-radio" type="radio" name="gender" value="male" checked>
+                <input class="w3-radio" type="radio" name="type" value="fulltime" checked>
                 <label>Fulltime</label>
               </span>
               <span class="w3-padding">
-                <input class="w3-radio" type="radio" name="gender" value="female">
+                <input class="w3-radio" type="radio" name="type" value="partime">
                 <label>Partime</label>
               </span>
             </p>
@@ -136,27 +233,20 @@ ul li:hover {
         <div class="w3-row-padding">
           <div class="w3-half w3-padding">
             <label><i class="fas fa-map-marker-alt"></i> Địa chỉ làm việc:</label>
-            <p><input class="w3-input w3-border" type="text" placeholder=""></p>
+            <p><input class="w3-input w3-border" type="text" disabled value="<?php echo htmlspecialchars($_SESSION["address_organization"]); ?>" placeholder=""></p>
           </div>
           <div class="w3-half w3-padding">
             <label><i class="fa fa-fw fa-clock-o"></i> Thời gian làm việc:</label>
-            <p><input class="w3-input w3-third" type="time" style="width:120px;" placeholder=""> <span class="w3-center w3-padding w3-third" style="width:50px;">To</span> <input class="w3-input w3-third"  style="width:120px;" type="time" placeholder=""></p>
+            <p><input class="w3-input w3-third" type="time" disabled style="width:125px;" value="08:00" placeholder=""> <span class="w3-center w3-padding w3-third" style="width:50px;">To</span> <input class="w3-input w3-third" disabled style="width:125px;" type="time" placeholder="" value="17:00"></p>
           </div>
         </div>
         <hr>
         
         <h4><strong>Mô tả công việc</strong></h4>
         <div class="w3-row-padding">
-          <div class="w3-padding w3-half">
-            <input class="w3-input w3-border" type="text" placeholder="Thêm mô tả" id="addToDo" onkeyup="if(this.value.length > 0) document.getElementById('submitToDo').disabled = false; else document.getElementById('submitToDo').disabled = true;" />
+          <div class="w3-padding">
+            <textarea class="w3-input w3-border" type="textarea" placeholder="Thêm mô tả" name="description" value="<?php echo $description?>" ></textarea>
           </div>
-          <div class="w3-padding w3-half">
-            <input type="button" class="w3-button w3-black" onclick="addListToDo()" value="Thêm" id="submitToDo" disabled />
-          </div>
-        </div>
-        <div class="results w3-padding">
-          <ul class="w3-ul w3-padding" id="listToDo">
-          </ul>
         </div>
         <hr>
 
@@ -186,44 +276,7 @@ ul li:hover {
       <div class="w3-container" id="require">
         <br><br><br>
         <h4><strong>YÊU CẦU</strong></h4>
-        <div>
-        <h6><strong>Danh sách năng lực:</strong></h6>
-          <div class="w3-row-padding">
-            <div id="myDIV" class="header w3-padding w3-third">
-              <input class="w3-input w3-border" type="text" placeholder="Thêm yêu cầu" id="myInput" name="skill" list="listSkill" />
-              <datalist id="listSkill">
-                <option value="PHP">
-                <option value="JAVA">
-                <option value="HTML">
-                <option value="CSS">
-                <option value="JavaScript">
-                <option value="C/C++">
-                <option value="Python">
-                <option value="MySQL">
-                <option value="NodeJs">
-                <option value="Cấu trúc dữ liệu">
-                <option value="Trí tuệ nhân tạo">
-                <option value="Thiết kế đánh giá thuật toán">
-                <option value="Giải tích">
-                <option value="Mạng máy tính">
-                <option value="Lập trình hướng đối tượng">
-                <option value="TOEFL">
-                <option value="TOEIC">
-                <option value="IELTS">
-              </datalist>
-            </div>
-            <div class="w3-padding w3-half">
-              <input type="button" class="w3-button w3-black" onclick="newElement()" value="Thêm" id="submitSkill" />
-            </div>
-          </div>
-          <div class="w3-padding">
-            <ul class="w3-ul w3-padding" id="myUL">
-            </ul>
-          </div>
-        </div>
-
-        <hr />
-        <div class="w3-row-padding">
+        <!-- <div class="w3-row-padding">
           <div class="w3-padding w3-half">
             <input class="w3-input w3-border" type="text" placeholder="Thêm yêu cầu" id="addRequire" />
           </div>
@@ -232,9 +285,10 @@ ul li:hover {
           </div>
         </div>
         <div class="w3-padding results">
-          <ul id="listRequire" >
+          <ul id="listRequire" name="list_require">
           </ul>
-        </div>
+        </div> -->
+        <h6><strong>Yêu cầu thêm:</strong></h6>
         <ul class="w3-ul w3-padding">
           <li class="item">Tốt nghiệp Đại học nước ngoài hoặc tốt nghiệp hệ kỹ sư tài năng các trường Đại học chính quy như ĐH Quốc Gia Hà Nội, ĐH Bách Khoa, ĐH Khoa học tự nhiên, Đại học FPT…</li>
           <li class="item">Có kinh nghiệm lập trình về <b>Java</b></li>
@@ -246,11 +300,10 @@ ul li:hover {
         </ul>
       </div>
       <p class="w3-center">
-        <button type="submit" class="w3-button w3-teal">Tạo mới</button>
+        <button type="submit" class="w3-button w3-teal" name="submit" value="save">Tạo mới</button>
         <button type="reset" class="w3-button w3-dark-grey">Làm lại</button>
       </p>
     </form>
-
     <!-- Contact Section -->
     <div id="contact" class="w3-container w3-padding-large w3-grey">
       <br>
@@ -293,59 +346,6 @@ function w3_close() {
   document.getElementById("myOverlay").style.display = "none";
 }
 
-function addListToDo() {
-  var li = document.createElement("li");
-  li.className = "item";
-  var inputValue = document.getElementById("addToDo").value; 
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("listToDo").appendChild(li);
-  }
-  document.getElementById("addToDo").value = "";
-
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
-  }
-}
-
-function addListRequire() {
-  var li = document.createElement("li");
-  li.className = "item";
-  var inputValue = document.getElementById("addRequire").value; 
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("listRequire").appendChild(li);
-  }
-  document.getElementById("addRequire").value = "";
-
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
-  }
-}
 
 // Click on a close button to hide the current list item
 var close = document.getElementsByClassName("close");

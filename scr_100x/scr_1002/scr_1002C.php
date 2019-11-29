@@ -211,8 +211,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p>
               <select class="w3-select w3-border" name="status" value="<?php echo $status ?>" required>
                 <option value="" disabled selected>Chọn trạng thái</option>
-                <option value="1">Còn hiệu lực</option>
-                <option value="2">Quá hạn</option>
+                <option value="2">Còn hiệu lực</option>
+                <option value="1">Quá hạn</option>
               </select>
             </p>
           </div>
@@ -312,7 +312,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-          <p><?php echo htmlspecialchars($_SESSION["email_organization"]); ?></p>
+          <p>ttnga912@gmail.com</p>
         </div>
         <div class="w3-third w3-teal">
           <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>

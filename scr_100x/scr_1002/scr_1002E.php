@@ -10,19 +10,16 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
 // Include config file
 require "../../config.php";
 
-// INSERT INTO `request` (`id`, `organization_id`, `position`, `amount`, `date_created`, `status`, `description`, `type`) VALUES (NULL, '1', 'Java Dev', '4', '2019-11-18', '1', 'abcde', 'Fulltime');
-
 // Define variables and initialize with empty values
 $id_request = $name = $amount = $position = $type = $status = $description = "";
-$skill = "";
+$skill = $item = "";
 $name_err = $amount_err = $position_err = $type_err = $description_err = $status_err = "";
 $organization_id = $_SESSION["id"];
-$id_request = 6;
 
 $sql2 = "SELECT `id`, `organization_id`, `position`, `amount`, `status`, `description`, `type` FROM `request` WHERE id = ?";
 if ($stmt2 = mysqli_prepare($link, $sql2)) {
   // Bind variables to the prepared statement as parameters
-  mysqli_stmt_bind_param($stmt2, "s", $id_request);
+  mysqli_stmt_bind_param($stmt2, "s", $_SESSION["request_id"]);
   // Attempt to execute the prepared statement
 
   if (mysqli_stmt_execute($stmt2)) {
@@ -33,46 +30,56 @@ if ($stmt2 = mysqli_prepare($link, $sql2)) {
       // Bind result variables
       mysqli_stmt_bind_result($stmt2, $id_request, $organization_id, $position, $amount, $status, $description, $type);
       mysqli_stmt_fetch($stmt2);
-      echo "<h4 class='w3-center w3-text-red' style='margin-top:100px; z-index:100; margin-left:300px'> $id_request : $skill </h1>";
+      // echo "<h4 class='w3-center w3-text-red' style='margin-top:100px; z-index:100; margin-left:300px'> $id_request : $skill </h1>";
     }
   } else {
     echo "<h4 class='w3-center w3-text-red' style='margin-top:100px; z-index:100; margin-left:300px'>Something went wrong. Please try again later.</h1>";
   }
   mysqli_stmt_close($stmt2);
 }
-
+$id_a = "";
 $ability_id = $ability_required = $description_ability = $toReturn = "";
 function loadSkill() {
-  global $id_request, $link, $toReturn;
-  $arr = [];
-  
-  $stmt4 = $link->prepare("SELECT `ability_id`, `ability_required`, `description` FROM `request_ability` WHERE request_id = ?");
-  $stmt4->bind_param("s", $id_request);
+  global $link, $toReturn;
+  global $id_a;
+  $stmt4 = $link->prepare("SELECT r_b.`ability_id`, a_d.`name` FROM `request_ability` r_b, `ability_dictionary` a_d WHERE r_b.`ability_id` = a_d.`id` AND r_b.`request_id` = ?");
+  $stmt4->bind_param("s", $_SESSION["request_id"]);
   $stmt4->execute();
-  $result = $stmt4->get_result();
-  while($row = $result->fetch_assoc()) {
-    $arr[] = $row;
-    $toReturn = $toReturn. "<li>".$row['ability_id']. "</li>";
+  $result_skill = $stmt4->get_result();
+  while($row = $result_skill->fetch_assoc()) {
+    $toReturn = $toReturn. 
+      "<form action='scr_1002E.php' method='post'><tr>
+        <td value='".$row['ability_id']."'>".$row['name']." 
+          <input type='hidden' name='id' value=".$row["ability_id"]." />
+          
+        </td>
+        <td><button type='submit' name='deletebtn' class='w3-right w3-button w3-red'>Xóa</button></td>
+        </tr></form>";
+    $id_a = $row['ability_id'];
   }
   $stmt4->close();
 }
-
 loadSkill();
-  
-
-// }
-
-
+//Delete skill
+if (isset($_POST['deletebtn'])) {
+  $did=$_POST['id'];
+  $stmt5 = $link->prepare("DELETE FROM `request_ability` WHERE ability_id = ?;");
+  $stmt5->bind_param("s", $did);
+  if ($stmt5->execute()) {
+    echo "<script>alert('Xoa thanh cong!')</script>";
+    header('location: scr_1002E.php');
+    exit;
+  } else {
+    echo "<script>alert('Failed!!')</script>";
+    header('location: scr_1002E.php');
+    exit;
+  }
+  $stmt5->close();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Processing form data when form is submitted
-  if ($_POST['submit'] == 'save') {
-    // Validate name
-    if (empty(trim($_POST["name"]))) {
-      $name_err = "Please enter name of request!";
-    } else {
-      $name = trim($_POST["name"]);
-    }
+  if (isset($_POST['save'])) {
     
     // Validate description
     // if (empty(trim($_POST["description"]))) {
@@ -111,38 +118,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // $code = trim($_POST["code"]);
 
     // Prepare an insert statement
-    $sql = " INSERT INTO `request` (`organization_id`, `position`, `amount`, `status`, `description`, `type`) VALUES (?, ?, ?, ?, ?, ?);";
+    $sql = " UPDATE `request` SET `organization_id` = ?, `position` = ?, `amount` = ?, `status` = ?, `description` = ?, `type` = ? WHERE `request`.`id` = ?;";
 
     if ($stmt = mysqli_prepare($link, $sql)) {
       // Bind variables to the prepared statement as parameters
-      mysqli_stmt_bind_param($stmt, "ssssss", $organization_id, $position, $amount, $status, $description, $type);
+      mysqli_stmt_bind_param($stmt, "sssssss", $organization_id, $position, $amount, $status, $description, $type, $id_request);
       // Attempt to execute the prepared statement
       if (mysqli_stmt_execute($stmt)) {
-        echo "<script language='javascript'>document.getElementById('form1').style.display = 'none';</script>";
+        echo "<script>document.getElementById('form1').style.display = 'none';</script>";
+        echo "<script>alert('Lưu thành công!');</script>";
       } else {
         echo "<h4 class='w3-center w3-text-red' style='margin-top:100px; z-index:100; margin-left:300px'>Something went wrong. Please try again later. $organization_id, $position , $amount, $status, $description, $type</h1>";
       }
       mysqli_stmt_close($stmt);
     }
-  } else if ($_POST['submit'] == 'addSkill') {
-    $skill = trim($_POST["skill"]);
-    $sql3 = "INSERT INTO `request_ability` (`request_id`, `ability_id`, `ability_required`, `description`) VALUES (?, ?, '1', '1');";
-    if ($stmt3 = mysqli_prepare($link, $sql3)) {
-      // Bind variables to the prepared statement as parameters
-      mysqli_stmt_bind_param($stmt3, "ss", $id_request, $skill);
-      // Attempt to execute the prepared statement
-      if (mysqli_stmt_execute($stmt3)) {
-        loadSkill();
-      } else {
-        echo "<h4 class='w3-center w3-text-red' style='margin-top:100px; z-index:100; margin-left:300px'>Something went wrong. Please try again later. $organization_id, $position , $amount, $status, $description, $type</h1>";
-      }
-      mysqli_stmt_close($stmt3);
-    }
   }
 }
-// Close connection
-mysqli_close($link);
-
 
 ?>
 
@@ -221,15 +212,10 @@ mysqli_close($link);
 
   <!-- !PAGE CONTENT! -->
   <div class="w3-main" style="margin-left:300px;">
-
-    <form action="scr_1002E.php" id="form1" method="post">
+    <h3 class="w3-center w3-padding"><strong>BIÊN DỊCH PHIẾU YÊU CẦU</strong></h3>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="form1" method="post">
       <div id="about" class="w3-container">
         <h4><strong>THÔNG TIN</strong></h4>
-        <div class="w3-row-padding">
-          <div class="w3-padding">
-            <input class="w3-input w3-animate-input" type="text" name="name" value="<?php echo $name ?>" placeholder="NHẬP TÊN PHIẾU YÊU CẦU" style="width:30%" />
-          </div>
-        </div>
         <div class="w3-row-padding">
           <div class="w3-half w3-padding">
             <label><i class="fa fa-fw fa-male"></i> Số lượng cần tuyển:</label>
@@ -246,8 +232,8 @@ mysqli_close($link);
             <p>
               <select class="w3-select w3-border" name="status" value="<?php echo $status ?>" required>
                 <option value="" disabled selected>Chọn trạng thái</option>
-                <option value="1">Còn hiệu lực</option>
-                <option value="2">Quá hạn</option>
+                <option value="2">Còn hiệu lực</option>
+                <option value="1">Quá hạn</option>
               </select>
             </p>
           </div>
@@ -311,18 +297,6 @@ mysqli_close($link);
       <div class="w3-container" id="require">
         <br><br><br>
         <h4><strong>YÊU CẦU</strong></h4>
-        <!-- <div class="w3-row-padding">
-          <div class="w3-padding w3-half">
-            <input class="w3-input w3-border" type="text" placeholder="Thêm yêu cầu" id="addRequire" />
-          </div>
-          <div class="w3-padding w3-half">
-            <input type="button" class="w3-button w3-black" onclick="addListRequire()" value="Thêm" id="submitRequire" />
-          </div>
-        </div>
-        <div class="w3-padding results">
-          <ul id="listRequire" name="list_require">
-          </ul>
-        </div> -->
         <h6><strong>Yêu cầu thêm:</strong></h6>
         <ul class="w3-ul w3-padding">
           <li class="item">Tốt nghiệp Đại học nước ngoài hoặc tốt nghiệp hệ kỹ sư tài năng các trường Đại học chính quy như ĐH Quốc Gia Hà Nội, ĐH Bách Khoa, ĐH Khoa học tự nhiên, Đại học FPT…</li>
@@ -335,51 +309,44 @@ mysqli_close($link);
         </ul>
       </div>
       <p class="w3-center">
-        <button type="submit" class="w3-button w3-teal" name="submit" value="save">Tạo mới</button>
+        <button type="submit" class="w3-button w3-teal" name="save" value="Lưu">Lưu</button>
         <button type="reset" class="w3-button w3-dark-grey">Làm lại</button>
       </p>
     </form>
-    <form action="scr_1002E.php" method="post">
-      <div class="w3-padding">
-        <h6><strong>Danh sách năng lực:</strong></h6>
-        <div class="w3-row-padding">
+    <div class="w3-padding">
+      <h6><strong>Danh sách năng lực:</strong></h6>
+      <div class="w3-row-padding">
+        <form action="addSkill.php" method="post">
           <div id="myDIV" class="header w3-padding w3-third">
-            <input class="w3-input w3-border" type="text" placeholder="Thêm yêu cầu" id="myInput" name="skill" value="<?php echo $skill ?>" list="listSkill" />
-            <datalist id="listSkill">
-              <option value="0">PHP</option>
-              <option value="1">JAVA</option>
-              <option value="2">HTML</option>
-              <option value="3">CSS</option>
-              <option value="4">JavaScript</option>
-              <option value="5">C/C++</option>
-              <option value="6">Python</option>
-              <option value="7">MySQL</option>
-              <option value="8">NodeJs</option>
-              <option value="9">Cấu trúc dữ liệu</option>
-              <option value="10">Trí tuệ nhân tạo</option>
-              <option value="11">Thiết kế đánh giá thuật toán</option>
-              <option value="12">Giải tích</option>
-              <option value="13">Mạng máy tính</option>
-              <option value="14">Lập trình hướng đối tượng</option>
-              <option value="15">TOEFL</option>
-              <option value="16">TOEIC</option>
-              <option value="17">IELTS</option>
-            </datalist>
+            <select class="w3-input w3-border" name="item" value="<?php echo $item ?>" >
+              <option value="0" disabled selected>Thêm kỹ năng</option>
+              <?php 
+                $stmt4 = $link->prepare("SELECT a_d.id, a_d.name FROM ability_dictionary a_d WHERE a_d.id NOT IN(SELECT c.ability_id FROM request_ability c GROUP BY c.ability_id)");
+                $stmt4->execute();
+                $result = $stmt4->get_result();
+                while($row = $result->fetch_assoc()) {
+                  echo '<option value="'.$row["id"].'">'.$row["name"].'</option>';
+                }
+                $stmt4->close();
+              ?>
+            </select>
           </div>
           <div class="w3-padding w3-half">
-            <button type="submit" class="w3-button w3-black" name="submit" value="addSkill" id="submitSkill" >Thêm</button>
+            <button type="submit" class="w3-button w3-black" name="addSkill" >Thêm</button>
           </div>
-        </div>
-        <div class="w3-padding">
-          <ul class="w3-ul">
-            <?php echo $toReturn ?>
-          </ul>
-        </div>
+        </form>
       </div>
+      <div class="w3-padding">
+        <table class="w3-table w3-striped w3-bordered w3-hoverable">
+          <?php echo $toReturn ?>
+        </table>
+      </div>
+    </div>
 
-      <hr />
-    </form>
-
+    <hr />
+<?php 
+  
+?>
     <!-- Contact Section -->
     <div id="contact" class="w3-container w3-padding-large w3-grey">
       <br>
@@ -388,7 +355,7 @@ mysqli_close($link);
       <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-          <p><?php echo htmlspecialchars($_SESSION["email_organization"]); ?></p>
+          <p>ttnga912@gmail.com</p>
         </div>
         <div class="w3-third w3-teal">
           <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>
@@ -411,16 +378,16 @@ mysqli_close($link);
 </div>
 
 <script>
-// Script to open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("myOverlay").style.display = "block";
-}
- 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("myOverlay").style.display = "none";
-}
+  // Script to open and close sidebar
+  function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+  }
+  
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+  }
 
 </script>
 

@@ -12,10 +12,10 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
 require_once "../../config.php";
 
 // Define variables and initialize with empty values
-$tax_number = $name = $address = $email = $contact = $description = "";
+$tax_number = $name = $address = $contact = $description = "";
 $id = $_SESSION["id"];
 // Prepare a select statement
-$sql = "SELECT id, tax_number, name, address, email, contact, description FROM organization_profile WHERE id = ?";
+$sql = "SELECT id, tax_number, name, address, contact, description FROM organization_profile WHERE id = ?";
 
 if ($stmt = mysqli_prepare($link, $sql)) {
   
@@ -29,18 +29,15 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     // Check if tax exists, if yes then verify password
     if (mysqli_stmt_num_rows($stmt) == 1) {
       // Bind result variables
-      mysqli_stmt_bind_result($stmt, $id, $tax_number, $name, $address, $email, $contact, $description);
+      mysqli_stmt_bind_result($stmt, $id, $tax_number, $name, $address, $contact, $description);
       mysqli_stmt_fetch($stmt);
     }
   } else {
     echo "Oops! Something went wrong. Please try again later.";
   }
-  // Close statement
-  mysqli_stmt_close($stmt);
 }
-
-// Close connection
-mysqli_close($link);
+// Close statement
+mysqli_stmt_close($stmt);
 ?>
 <!DOCTYPE html>
 <html>
@@ -185,43 +182,55 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </div>
       </div>
       <!-- Second Photo Grid-->
-      <div class="w3-row-padding" id="OPEN">
-        <div class="w3-third w3-container w3-margin-bottom">
-          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-          <div class="w3-container w3-white">
-          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
-            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
-            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
-            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-            <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
-          </div>
-        </div>
-        <div class="w3-third w3-container w3-margin-bottom">
-          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-          <div class="w3-container w3-white">
-          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
-            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
-            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
-            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-            <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
-          </div>
-        </div>
-        <div class="w3-third w3-container">
-          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-          <div class="w3-container w3-white">
-          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
-            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
-            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
-            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-            <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
-          </div>
-        </div>
-      </div>
-
-      <div class="w3-center w3-padding-32">
+      <form action="" method="post">
+        <?php 
+          // echo $listRequest 
+          if ($_SESSION["role"] === "organization") {
+            $stmt4 = $link->prepare("SELECT r.`id`, o.`name`, r.`position`, o.`address`, r.`amount`, r.`date_created`, r.`description`, r.`type`, r.`status` FROM `request` r, organization_profile o WHERE r.`organization_id` = o.id AND o.`id` = 21 ORDER BY r.id DESC LIMIT 6" );
+            // $stmt4->bind_param("s", $id);
+            $stmt4->execute();
+            $result = $stmt4->get_result();
+            echo '<div class="w3-row-padding">';
+            $i = 1;
+            while($row = $result->fetch_assoc()) {
+              echo '
+              <div class="w3-third w3-container w3-margin-bottom">
+                <img src="https://www.ourlincolnpark.com/wp-content/uploads/2014/07/I-wish-it-were-that-easy.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                <div class="w3-container w3-white" style="height:270px;">
+                  <h3 class="w3-center"><i>Vị trí tuyển dụng: </i><b>'.$row['position'].'</b></h3>
+                  <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: '.$row['name'].'</h4>
+                  <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>'.$row['amount'].'</b> người</p>
+                  <p><i "fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+                  <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: '.$row['address'].'</p>
+                  <p><i class="fa fa-fw fa-check"></i> Trạng thái: ';
+              if ( $row['status'] === 1) {
+                echo 'Hết hiệu lực';
+              } else {
+                echo 'Còn hiệu lực';
+              }
+              echo '</p>
+                </div>
+                <div class="w3-white" style="height: 38px;">
+                  <a href="scr_1002E.php" ><button type="submit" name='.$i.' class="w3-button w3-right w3-green">Chi tiết</button></a>
+                </div>
+              </div>';
+              if (isset($_POST[$i])) {
+                session_start();
+                // Store data in session variables
+                $_SESSION["request_id"] = $row["id"];
+                echo '<script>window.location.replace("scr_1002E.php");</script>';
+              }
+              $i++;
+            }
+            echo '</div>';
+            
+            $stmt4->close();
+          }
+          
+        ?>
+      </form>
+      
+      <div class="w3-center w3-padding-32 w3-row-padding">
         <div class="w3-bar">
           <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
           <a href="#" class="w3-bar-item w3-black w3-button">1</a>
@@ -232,7 +241,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </div>
       </div>
     </div>
-    
     <!-- Assignment -->
     <div class="w3-container" id="assignment">
       <hr>
@@ -259,6 +267,31 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <td>Đang thực hiện</td>
           <td>15/10/2019</td>
         </tr>
+        <?php 
+          // echo $listRequest 
+          $stmt = $link->prepare("SELECT ra.`id`, ra.`request_id` as request_id, re.position, o.name AS organization_name, i.code, i.first_name, i.last_name, ra.`start_date`, ra.`end_date`, s.name AS STATUS , ra.`date_created` FROM `request_assignment` ra, request re, organization_profile o, intern_profile i, STATUS s WHERE o.tax_number = ? AND ra.request_id = re.id AND re.organization_id = o.id AND ra.intern_id = i.id AND ra.status = s.id ORDER BY ra.request_id DESC LIMIT 20" );
+          $stmt->bind_param("s", $tax_number);
+          $stmt->execute();
+          $result = $stmt->get_result();
+          while($row = $result->fetch_assoc()) {
+            echo '
+              <tr>
+                <td>'.$row['request_id'].'</td>
+                <td>'.$row['code'].'</td>
+                <td>'.$row['first_name'].' '.$row['last_name'].'</td>
+                <td>'.$row['start_date'].'</td>
+                <td>'.$row['end_date'].'</td>
+                <td>'.$row['position'].'</td>
+                <td>'.$row['STATUS'].'</td>
+                <td>'.$row['date_created'].'</td>
+              </tr>
+            ';
+          }
+          
+          $stmt->close();
+          // Close connection
+          mysqli_close($link);
+        ?>
         <tr>
         <td>1000</td>
           <td>16001111</td>
@@ -341,7 +374,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <div class="w3-row-padding w3-center w3-padding-24" style="margin:0 -16px">
         <div class="w3-third w3-dark-grey">
           <p><i class="fa fa-envelope w3-xxlarge w3-text-light-grey"></i></p>
-          <p><?php echo htmlspecialchars($email); ?></p>
+          <p><?php echo htmlspecialchars($name); ?></p>
         </div>
         <div class="w3-third w3-teal">
           <p><i class="fa fa-map-marker w3-xxlarge w3-text-light-grey"></i></p>

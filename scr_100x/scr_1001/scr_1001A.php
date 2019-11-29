@@ -69,24 +69,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   // Validate status
-  if (empty(trim($_POST["status"]))) {
-    $status_err = "Please choose status!";
-  } else {
-    $status = trim($_POST["status"]);
-  }
+  // if (empty(trim($_POST["status"]))) {
+  //   $status_err = "Please choose status!";
+  // } else {
+  //   $status = trim($_POST["status"]);
+  // }
   // $code = trim($_POST["code"]);
 
   // Prepare an insert statement
-  $sql = " INSERT INTO `request_assignment` (`request_id`, `intern_id`, `start_date`, `end_date`, `status`) VALUES (?, ?, ?, ?, ?);";
+  $sql = " INSERT INTO `register` (`request_id`, `intern_id`, `start_date`, `end_date`) VALUES (?, ?, ?, ?);";
 
   if ($stmt = mysqli_prepare($link, $sql)) {
     // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param($stmt, "sssss", $request_id, $student_id, $start_date, $end_date, $status);
+    mysqli_stmt_bind_param($stmt, "ssss", $request_id, $student_id, $start_date, $end_date);
     // Attempt to execute the prepared statement
     if (mysqli_stmt_execute($stmt)) {
       // Redirect to login page
+      echo "<scrip>alert('Đăng ký thành công!');</scrip>";
       header("location: scr_1001.php");
     } else {
+      echo "<scrip>alert('Đăng ký không thành công!');</scrip>";
       echo "Something went wrong. Please try again later.";
     }
     mysqli_stmt_close($stmt);
@@ -131,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
         <h3 class="w3-center">PHIẾU ĐĂNG KÝ</h3>
         <p class="w3-center"><i>Sinh viên đăng ký nguyện vọng thực tập vào doanh nghiệp.</i></p>
-        <form action="scr_1001A.php" method="post">
+        <form action="" method="post">
           <div class="form-group <?php echo (!empty($request_id_err)) ? 'has-error' : ''; ?>">
             <p><label><i class="fa fa-qrcode"></i> Mã phiếu yêu cầu</label></p>
             <select class="w3-select w3-border" name="request_id" required value="<?php echo $request_id; ?>">
@@ -152,7 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="end_date" required value="<?php echo $end_date; ?>">
             <span class="w3-text-red"><?php echo $end_date_err; ?></span>
           </div>
-          <div class="form-group <?php echo (!empty($status_err)) ? 'has-error' : ''; ?>">
+          <!-- <div class="form-group <?php echo (!empty($status_err)) ? 'has-error' : ''; ?>">
             <p><label><i class="fa fa-hourglass-start"></i> Trạng thái</label></p>
             <select class="w3-select w3-border" name="status" required value="<?php echo $status; ?>">
               <option value="" disabled selected>Chọn trạng thái</option>
@@ -161,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <option value="2">Đã thực hiện xong</option>
             </select>
             <span class="w3-text-red"><?php echo $status_err; ?></span>
-          </div>
+          </div> -->
           <p>
             <button type="submit" class="w3-button w3-dark-grey w3-block">Đăng ký</button>
           </p>

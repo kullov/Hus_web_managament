@@ -101,6 +101,45 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </div>
       </div>
       
+      <?php 
+        // Include config file
+        require "../../config.php";
+        // echo $listRequest 
+        $stmt = $link->prepare("SELECT r.`id`, o.`name`, r.`position`, o.`address`, r.`amount`, r.`date_created`, r.`description`, r.`type`, r.`status` FROM `request` r, organization_profile o WHERE r.`organization_id` = o.id ORDER BY r.status DESC LIMIT 51" );
+        $stmt->execute();
+        $result = $stmt->get_result();
+        echo '<div class="w3-row-padding w3-container">';
+        while($row = $result->fetch_assoc()) {
+          echo '
+          <div class="w3-third w3-container w3-margin-bottom w3-card">
+            <img src="https://newwave.vn/wp-content/uploads/2018/12/15875037_751901071624876_248931472081814559_o.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container w3-white">
+              <h3 class="w3-center"><b>'.$row['position'].'</b></h3>
+              <h4><i class="fa fa-users fa-fw"></i>  Công ty: '.$row['name'].'</h4>
+              <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>'.$row['amount'].'</b> người</p>
+              <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+              <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: '.$row['address'].'</p>
+              <p><i class="fa fa-fw fa-check"></i> Trạng thái: '; 
+              if ($row['status'] == "1") {
+                echo 'Hết hiệu lực';
+              } else {
+                echo 'Còn hiệu lực';
+              }
+              echo '</p>					
+              <a href="scr_1001V.php" ><button type="submit" class="w3-button w3-right w3-green">Chi tiết</button></a>
+              <a href="scr_1001A.php" class=" '; 
+              if (($_SESSION["role"]) !== "student") { echo 'w3-hide'; }; 
+              echo ' "><button type="submit" class="w3-button w3-left w3-blue">Đăng kí</button></a>	
+            </div>
+          </div>';
+        }
+        echo '</div>';
+        
+        $stmt->close();
+        // Close connection
+        mysqli_close($link);
+      ?>
+
       <!-- Second Photo Grid-->
       <div class="w3-row-padding w3-container" id="OPEN">
         <div class="w3-third w3-container w3-margin-bottom w3-card">

@@ -7,6 +7,13 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
   header("location: ../../");
   exit;
 }
+  // Include config file
+  require "../../config.php";
+  // echo $listRequest 
+  $stmt = $link->prepare("SELECT  i.`id`,  i.`code`,  i.`first_name`,  i.`last_name`,  i.`date_of_birth`,  i.`email`, i.`phone`,  i.`class_name`, r.`request_id`, r.`start_date`, r.`end_date` FROM  `intern_profile` i, `register` r WHERE i.`id` = r.`intern_id` AND i.`id` NOT IN(  SELECT  ra.`intern_id`  FROM  request_assignment ra  GROUP BY  ra.`intern_id`) ORDER BY i.`id` ASC" );
+  // $stmt = $link->prepare("SELECT  `id`,  `code`,  `first_name`,  `last_name`,  `date_of_birth`,  `email`, `phone`,  class_name FROM  `intern_profile` WHERE id NOT IN(  SELECT  ra.intern_id  FROM  request_assignment ra  GROUP BY  ra.intern_id) AND id IN(  SELECT  `id` FROM  `register`  GROUP BY  intern_id) ORDER BY id ASC" );
+  $stmt->execute();
+  $result = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -44,80 +51,130 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <br>
       <br>
       <h3 class="w3-container w3-center"><i>Danh sách sinh viên đã đăng ký nhưng chưa được phân công</i></h3>
-      <table class="w3-table w3-striped w3-bordered w3-centered w3-hoverable">
-        <tr>
-          <th name="student_id">Mã sinh viên</th>
-          <th name="name_student">Tên sinh viên</th>
-          <th name="organization_request_id">Mã phiếu đã đăng ký</th>
-          <th name="date_of_birth">Ngày sinh</th>
-          <th name="email">Email</th>
-          <th name="class_name">Lớp</th>
-          <th>Thao tác</th>
-        </tr>
-        <tr>
-          <td>16001111</td>
-          <td>Trần Văn A</td>
-          <td>1000</td>
-          <td>21/10/1998</td>
-          <td>abc@gmail.com</td>
-          <td>K61A3</td>
-          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
-        </tr>
-        <tr>
-          <td>16001111</td>
-          <td>Trần Văn C</td>
-          <td>1000</td>
-          <td>21/10/1998</td>
-          <td>abc@gmail.com</td>
-          <td>K61A3</td>
-          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
-        </tr>
-        <tr>
-          <td>16001113</td>
-          <td>Trần Văn B</td>
-          <td>1000</td>
-          <td>21/10/1998</td>
-          <td>abc@gmail.com</td>
-          <td>K61A3</td>
-          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
-        </tr>
-        <tr>
-          <td>16001115</td>
-          <td>Trần Văn M</td>
-          <td>1000</td>
-          <td>21/10/1998</td>
-          <td>abc@gmail.com</td>
-          <td>K61A3</td>
-          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
-        </tr>
-        <tr>
-          <td>16001115</td>
-          <td>Trần Văn M</td>
-          <td>1000</td>
-          <td>21/10/1998</td>
-          <td>abc@gmail.com</td>
-          <td>K61A3</td>
-          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
-        </tr>
-        <tr>
-          <td>16001115</td>
-          <td>Trần Văn M</td>
-          <td>1000</td>
-          <td>21/10/1998</td>
-          <td>abc@gmail.com</td>
-          <td>K61A3</td>
-          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
-        </tr>
-        <tr>
-          <td>16001115</td>
-          <td>Trần Văn N</td>
-          <td>1000</td>
-          <td>21/10/1998</td>
-          <td>abc@gmail.com</td>
-          <td>K61A3</td>
-          <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
-        </tr>
-      </table>
+      <form action='' method='POST'>
+        <table class="w3-table w3-striped w3-bordered w3-centered w3-hoverable">
+          <tr>
+            <th>STT</th>
+            <th name="student_id">Mã sinh viên</th>
+            <th name="name_student">Tên sinh viên</th>
+            <th name="organization_request_id">Mã phiếu yêu cầu</th>
+            <th name="date_of_birth">Ngày sinh</th>
+            <th name="email">Email</th>
+            <th name="class_name">Lớp</th>
+            <th>Thao tác</th>
+          </tr>
+          <?php 
+            $i = 1;
+            while($row = $result->fetch_assoc()) {
+              echo '
+                <tr class="tblRows" data="'.$row['code'].' '.$row['first_name'].' '.$row['last_name'].' '.$row['request_id'].'">
+                <td>'.$i.'</td>
+                <td>'.$row['code'].'</td>
+                  <td>'.$row['first_name'].' '.$row['last_name'].'</td>
+                  <td>'.$row['request_id'].'</td>
+                  <td>'.$row['date_of_birth'].'</td>
+                  <td>'.$row['email'].'</td>
+                  <td>'.$row['class_name'].'</td>
+                  <td><input type="submit" name='.$i.' class="btn-sm w3-center w3-button w3-teal w3-hover-black" value="Chọn" /></td>
+                </tr>
+              ';
+              if (isset($_POST[$i])) {
+                $intern_id = $row["id"];
+                $request_id = $row["request_id"];
+                $start_date = $row["start_date"];
+                $end_date = $row["end_date"];
+                // Prepare an insert statement
+                $sql = "INSERT INTO `request_assignment` (intern_id, request_id, start_date, end_date) VALUES (?, ?, ?, ?)";
+
+                if ($stmt = mysqli_prepare($link, $sql)) {
+                  // Bind variables to the prepared statement as parameters
+                  mysqli_stmt_bind_param($stmt, "ssss", $intern_id, $request_id, $start_date, $end_date);
+                  // Attempt to execute the prepared statement
+                  if (mysqli_stmt_execute($stmt)) {
+                    echo '<script>alert("Phân công thành công!")</script>';
+                    echo '<script>window.location.replace("scr_1003S.php");</script>';
+                  } else {
+                    echo '<script>alert("Phân công thất bại!")</script>';
+                  }
+                }
+              }
+              $i++;
+            }
+            
+            $stmt->close();
+          ?>
+          <tr>
+            <td>90</td>
+            <td>16001111</td>
+            <td>Trần Văn A</td>
+            <td>1000</td>
+            <td>21/10/1998</td>
+            <td>abc@gmail.com</td>
+            <td>K61A3</td>
+            <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
+          </tr>
+          <tr>
+            <td>90</td>
+            <td>16001111</td>
+            <td>Trần Văn C</td>
+            <td>1000</td>
+            <td>21/10/1998</td>
+            <td>abc@gmail.com</td>
+            <td>K61A3</td>
+            <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
+          </tr>
+          <tr>
+            <td>90</td>
+            <td>16001113</td>
+            <td>Trần Văn B</td>
+            <td>1000</td>
+            <td>21/10/1998</td>
+            <td>abc@gmail.com</td>
+            <td>K61A3</td>
+            <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
+          </tr>
+          <tr>
+            <td>90</td>
+            <td>16001115</td>
+            <td>Trần Văn M</td>
+            <td>1000</td>
+            <td>21/10/1998</td>
+            <td>abc@gmail.com</td>
+            <td>K61A3</td>
+            <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
+          </tr>
+          <tr>
+            <td>90</td>
+            <td>16001115</td>
+            <td>Trần Văn M</td>
+            <td>1000</td>
+            <td>21/10/1998</td>
+            <td>abc@gmail.com</td>
+            <td>K61A3</td>
+            <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
+          </tr>
+          <tr>
+            <td>90</td>
+            <td>16001115</td>
+            <td>Trần Văn M</td>
+            <td>1000</td>
+            <td>21/10/1998</td>
+            <td>abc@gmail.com</td>
+            <td>K61A3</td>
+            <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
+          </tr>
+          <tr>
+            <td>90</td>
+            <td>16001115</td>
+            <td>Trần Văn N</td>
+            <td>1000</td>
+            <td>21/10/1998</td>
+            <td>abc@gmail.com</td>
+            <td>K61A3</td>
+            <td><a href="scr_1003S.php" class="w3-center w3-button w3-teal w3-hover-black">Chọn</a></td>
+          </tr>
+        </table>
+      </form>
     </div>
 
     <!-- Footer -->
@@ -128,8 +185,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   <!-- End page content -->
   </div>
 </div>
-
 <script>
+
 // Script to open and close sidebar
 function w3_open() {
   document.getElementById("mySidebar").style.display = "block";

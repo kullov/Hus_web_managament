@@ -12,7 +12,7 @@
   require_once "../../config.php";
 
   // Define variables and initialize with empty values
-  $password = $tax_number = $name_organization = $address_organization = $email_organization = $contact_organization = $description_organization = "";
+  $password = $tax_number = $name_organization = $address_organization = $contact_organization = $description_organization = "";
   $tax_err = $password_err = "";
 
   // Processing form data when form is submitted
@@ -35,7 +35,7 @@
     // Validate credentials
     if (empty($tax_err) && empty($password_err)) {
       // Prepare a select statement
-      $sql = "SELECT id, tax_number, name, password, address, email, contact, description FROM organization_profile WHERE tax_number = ?";
+      $sql = "SELECT id, tax_number, name, password, address, contact, description FROM organization_profile WHERE tax_number = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         
@@ -52,7 +52,7 @@
           // Check if tax exists, if yes then verify password
           if (mysqli_stmt_num_rows($stmt) == 1) {
             // Bind result variables
-            mysqli_stmt_bind_result($stmt, $id, $tax_number, $name_organization, $hashed_password, $address_organization, $email_organization, $contact_organization, $description_organization);
+            mysqli_stmt_bind_result($stmt, $id, $tax_number, $name_organization, $hashed_password, $address_organization, $contact_organization, $description_organization);
             if (mysqli_stmt_fetch($stmt)) {
               if (password_verify($password, $hashed_password)) {
                 // Password is correct, so start a new session
@@ -63,7 +63,6 @@
                 $_SESSION["id"] = $id;
                 $_SESSION["tax_number"] = $tax_number;
                 $_SESSION["role"] = "organization";
-                $_SESSION["email_organization"] = $email_organization;
                 $_SESSION["address_organization"] = $address_organization;
                 $_SESSION["contact_organization"] = $contact_organization;
                 $_SESSION["name"] = $name_organization;

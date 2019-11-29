@@ -3,8 +3,8 @@
   require_once "../../config.php";
 
   // Define variables and initialize with empty values
-  $tax_number = $name = $email = $employee_count = $gross_revenue = $address = $contact = $password = $confirm_password = "";
-  $employee_count_err = $gross_revenue_err = $name_err = $tax_err = $email_err = $address_err = $contact_err = $password_err = $confirm_password_err = "";
+  $tax_number = $name = $employee_count = $gross_revenue = $address = $contact = $password = $confirm_password = "";
+  $employee_count_err = $gross_revenue_err = $name_err = $tax_err = $address_err = $contact_err = $password_err = $confirm_password_err = "";
 
   // Processing form data when form is submitted
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -83,13 +83,6 @@
       $name = trim($_POST["name"]);
     }
 
-    // Validate email
-    if (empty(trim($_POST["email"]))) {
-      $email_err = "Please enter your email!";
-    } else {
-      $email = trim($_POST["email"]);
-    }
-
     // Validate address
     if (empty(trim($_POST["address"]))) {
       $address_err = "Please enter your address!";
@@ -108,11 +101,11 @@
     if (empty($tax_err) && empty($password_err) && empty($confirm_password_err)) {
 
       // Prepare an insert statement
-      $sql = "INSERT INTO organization_profile (password, name, tax_number, email, address, employee_count, gross_revenue, contact ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+      $sql = "INSERT INTO organization_profile (password, name, tax_number, address, employee_count, gross_revenue, contact ) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "ssssssss", $param_password, $name, $param_tax, $email, $address, $employee_count, $gross_revenue, $contact);
+        mysqli_stmt_bind_param($stmt, "sssssss", $param_password, $name, $param_tax, $address, $employee_count, $gross_revenue, $contact);
 
         // Set parameters
         $param_tax = $tax_number;
@@ -176,10 +169,10 @@ function hideURLbar(){
 
 	<h1>DOANH NGHIỆP</h1>
 
-	<div class="w3layoutscontaineragileits" style="width:65%">
+	<span class="w3layoutscontaineragileits" style="width:65%">
 	<h2>Register here</h2>
     <form class="login-html" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <div class="login-form w3-row ">
+      <span class="login-form w3-row ">
         <div class="w3-col s4">
           <div class="form-group <?php echo (!empty($tax_err)) ? 'has-error' : ''; ?>">
             <label for="tax_number" class=" mt-3 pr-2" style="font-family: Poppins-Medium;"><i class="	fa fa-print w3-xlarge w3-left"></i></label>
@@ -188,7 +181,7 @@ function hideURLbar(){
           <span class="w3-text-red"><?php echo $tax_err; ?></span>
           <div class="form-group <?php echo (!empty($name_err)) ? 'has-error' : ''; ?>">
             <label for="name" class="mt-3 pr-2 text-white" style="font-family: Poppins-Medium;"><i class="fa fa-user w3-xlarge w3-left"></i></label>
-            <input placeholder="Enter your organization name"  type="password" name="name" class="form-control" value="<?php echo $name; ?>" required>              
+            <input placeholder="Enter your organization name"  type="text" name="name" class="form-control" value="<?php echo $name; ?>" required>              
           </div>
           <span class="w3-text-red"><?php echo $name_err; ?></span>
           <div class="form-group <?php echo (!empty($employee_count_err)) ? 'has-error' : ''; ?>">
@@ -197,7 +190,7 @@ function hideURLbar(){
           </div>
           <span class="w3-text-red"><?php echo $employee_count_err; ?></span>
         </div>
-        <div class="w3-col s4">
+        <span class="w3-col s4">
           <div class="form-group <?php echo (!empty($gross_revenue_err)) ? 'has-error' : ''; ?>">
             <label for="gross_revenue" class=" mt-3 pr-2" style="font-family: Poppins-Medium;"><i class="fa fa-male w3-xlarge w3-left "></i></label>
             <input type="text" placeholder="Enter your gross revenue" name="gross_revenue" value="<?php echo $gross_revenue; ?>">             
@@ -209,11 +202,11 @@ function hideURLbar(){
           </div>
           <span class="w3-text-red"><?php echo $address_err; ?></span>
           <div class="form-group <?php echo (!empty($contact_err)) ? 'has-error' : ''; ?>">
-            <label for="contact" class=" mt-3 pr-2" style="font-family: Poppins-Medium;"><i class="fa fa-phone w3-xlarge w3-left"></i></label>
+            <label for="contact" class=" mt-3 pr-2" style="font-family: Poppins-Medium;"><i class="fa fa-envelope-o w3-large w3-left"></i></label>
             <input type="text" placeholder="Enter your contact" name="contact" value="<?php echo $contact; ?>">
           </div>
           <span class="w3-text-red"><?php echo $contact_err; ?></span>
-        </div>
+        </span>
         <div class="w3-col s4">
           <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
             <label for="password" class="mt-3 pr-2 text-white" style="font-family: Poppins-Medium;"><i class="fa fa-key w3-xlarge w3-left"></i></label>
@@ -225,13 +218,8 @@ function hideURLbar(){
             <input placeholder="Enter Confirm Password"  type="password" name="confirm_password" value="<?php echo $confirm_password; ?>" required>             
           </div>
           <span class="w3-text-red"><?php echo $confirm_password_err; ?></span>
-          <div class="form-group <?php echo (!empty($email_err)) ? 'has-error' : ''; ?>">
-            <label for="email" class=" mt-3 pr-2" style="font-family: Poppins-Medium;"><i class="fa fa-envelope-o w3-large w3-left"></i></label>
-            <input type="text" placeholder="Enter your email" name="email" value="<?php echo $email; ?>">
-          </div>
-          <span class="w3-text-red"><?php echo $email_err; ?></span>
         </div>
-      </div>
+      </span>
       <div class="w3-row ">
         <div class="aitssendbuttonw3ls">
           <input type="submit" value="REGISTER">
@@ -240,7 +228,7 @@ function hideURLbar(){
         </div>
       </div>
     </form>
-	</div>
+	</span>
 	
 	<div class="w3footeragile">
 		<p> &copy; 2019 Login Form. All Rights Reserved | Design by <a href="../../" target="_blank">ORIGEN</a></p>

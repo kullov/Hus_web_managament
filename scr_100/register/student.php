@@ -231,7 +231,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
           <span class="w3-text-red"><?php echo $join_date_err; ?></span>
           <div class="form-group <?php echo (!empty($class_name_err)) ? 'has-error' : ''; ?>">
             <label for="class_name" class=" mt-3 pr-2" style="font-family: Poppins-Medium;"><i class="far fa-id-card w3-large w3-left"></i></label>
-            <input placeholder="Enter your class name" type="password" name="class_name" value="<?php echo $class_name; ?>" required>
+            <input placeholder="Enter your class name" type="text" name="class_name" value="<?php echo $class_name; ?>" required>
           </div>
           <span class="w3-text-red"><?php echo $class_name_err; ?></span>
           <div class="form-group <?php echo (!empty($avatar_err)) ? 'has-error' : ''; ?>">

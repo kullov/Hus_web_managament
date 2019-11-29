@@ -7,6 +7,47 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
   header("location: ../../");
   exit;
 }
+// Include config file
+require "../../config.php";
+$code = $request_id = $start_date = $end_date = "";
+$request_id_err = $code_err = "";
+
+// Processing form data when form is submitted
+if (isset($_POST["submitbtn"])) {
+
+  // Validate request_id
+  if (empty(trim($_POST["request_id"]))) {
+    $request_id_err = "Please choose the request id!";
+  } else {
+    $request_id = trim($_POST["request_id"]);
+  }
+  
+  // $code = trim($_POST["code"]);
+  // Validate start_date
+  if (!empty(trim($_POST["start_date"]))) {
+    $start_date = trim($_POST["start_date"]);
+  }
+  // Validate end date
+  if (!empty(trim($_POST["end_date"]))) {
+    $end_date = trim($_POST["end_date"]);
+  }
+
+  // // Prepare an insert statement
+  // $sql = " INSERT INTO `request_assignment` (`request_id`, `intern_id`, `start_date`, `end_date`, `status`) VALUES (?, ?, ?, ?, ?);";
+
+  // if ($stmt = mysqli_prepare($link, $sql)) {
+  //   // Bind variables to the prepared statement as parameters
+  //   mysqli_stmt_bind_param($stmt, "sssss", $request_id, $student_id, $start_date, $end_date, $status);
+  //   // Attempt to execute the prepared statement
+  //   if (mysqli_stmt_execute($stmt)) {
+  //     // Redirect to login page
+  //     header("location: scr_1001.php");
+  //   } else {
+  //     echo "Something went wrong. Please try again later.";
+  //   }
+  //   mysqli_stmt_close($stmt);
+  // }
+}
 ?>
 
 <!DOCTYPE html>
@@ -53,12 +94,34 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <th name="organization_request_id">Mã phiếu yêu cầu</th>
           <th name="student_id">Mã sinh viên</th>
           <th name="name_student">Tên sinh viên</th>
-          <th name="start_date">Ngày bắt đầu thực tập</th>
-          <th name="end_date">Ngày kết thúc thực tập</th>
+          <th >Ngày bắt đầu thực tập</th>
+          <th >Ngày kết thúc thực tập</th>
           <th name="organization_name">Công ty thực tập</th>
           <th name="status">Trạng thái</th>
           <th name="create_date">Thời gian phân công</th>
         </tr>
+        <?php 
+          // echo $listRequest 
+          $stmt = $link->prepare("SELECT ra.`id`, ra.`request_id` as request_id, o.name AS organization_name, i.code, i.first_name, i.last_name, ra.`start_date`, ra.`end_date`, s.name AS STATUS , ra.`date_created` FROM `request_assignment` ra, request re, organization_profile o, intern_profile i, STATUS s WHERE ra.request_id = re.id AND re.organization_id = o.id AND ra.intern_id = i.id AND ra.status = s.id ORDER BY ra.request_id DESC LIMIT 5" );
+          $stmt->execute();
+          $result = $stmt->get_result();
+          while($row = $result->fetch_assoc()) {
+            echo '
+              <tr>
+                <td>'.$row['request_id'].'</td>
+                <td>'.$row['code'].'</td>
+                <td>'.$row['first_name'].' '.$row['last_name'].'</td>
+                <td>'.$row['start_date'].'</td>
+                <td>'.$row['end_date'].'</td>
+                <td>'.$row['organization_name'].'</td>
+                <td>'.$row['STATUS'].'</td>
+                <td>'.$row['date_created'].'</td>
+              </tr>
+            ';
+          }
+          
+          $stmt->close();
+        ?>
         <tr>
           <td>1000</td>
           <td>16001111</td>
@@ -137,64 +200,39 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <br>
       <br>
       <h3 class="w3-container w3-center"><i>Danh sách chưa phân công</i></h3>
-      <a href="scr_1003S2.php" class="w3-button w3-teal w3-margin-bottom w3-right"><i class="fas fa-user-plus w3-margin-right"></i>Thêm sinh viên</a>
+      <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-teal w3-margin-bottom w3-right"><i class="fas fa-user-plus w3-margin-right"></i>Thêm sinh viên</button>
       <table class="w3-table w3-striped w3-bordered w3-centered w3-hoverable">
         <tr>
-          <th name="organization_request_id">Mã phiếu yêu cầu</th>
           <th name="student_id">Mã sinh viên</th>
           <th name="name_student">Tên sinh viên</th>
           <th name="class_name">Lớp</th>
-          <th name="status">Trạng thái</th>
+          <th>Ngày sinh</th>
+          <th>Email</th>
+          <th>Số điện thoại</th>
         </tr>
-        <tr>
-          <td>1000</td>
-          <td>16001111</td>
-          <td>Trần Văn A</td>
-          <td>K61A3</td>
-          <td>Chưa phân công</td>
-        </tr>
-        <tr>
-          <td>1000</td>
-          <td>16001111</td>
-          <td>Trần Văn C</td>
-          <td>K61A3</td>
-          <td>Chưa phân công</td>
-        </tr>
-        <tr>
-          <td>1001</td>
-          <td>16001113</td>
-          <td>Trần Văn B</td>
-          <td>K61A3</td>
-          <td>Chưa phân công</td>
-        </tr>
-        <tr>
-          <td>1002</td>
-          <td>16001115</td>
-          <td>Trần Văn M</td>
-          <td>K61A3</td>
-          <td>Chưa phân công</td>
-        </tr>
-        <tr>
-          <td>1002</td>
-          <td>16001115</td>
-          <td>Trần Văn B</td>
-          <td>K61A3</td>
-          <td>Chưa phân công</td>
-        </tr>
-        <tr>
-          <td>1002</td>
-          <td>16001115</td>
-          <td>Trần Văn M</td>
-          <td>K61A3</td>
-          <td>Chưa phân công</td>
-        </tr>
-        <tr>
-          <td>1002</td>
-          <td>16001115</td>
-          <td>Trần Văn N</td>
-          <td>K61A3</td>
-          <td>Chưa phân công</td>
-        </tr>
+        <?php 
+          $str = "";
+          // echo $listRequest 
+          $stmt1 = $link->prepare("SELECT `id`, `code`, `first_name`, `last_name`, `date_of_birth`, `email`, `phone`, class_name FROM `intern_profile` WHERE id NOT IN( SELECT ra.intern_id FROM request_assignment ra GROUP BY ra.intern_id) ORDER BY id ASC LIMIT 20" );
+          $stmt1->execute();
+          $result = $stmt1->get_result();
+          $i = 0;
+          while($row = $result->fetch_assoc()) {
+            $str = $str . '<option value="'.$row['id'].'" >'.$row['code']. ' | '.$row['first_name'].' '.$row['last_name'].'</option>';
+            echo '
+              <tr>
+                <td>'.$row['code'].'</td>
+                <td>'.$row['first_name'].' '.$row['last_name'].'</td>
+                <td>'.$row['class_name'].'</td>
+                <td>'.$row['date_of_birth'].'</td>
+                <td>'.$row['email'].'</td>
+                <td>'.$row['phone'].'</td>
+              </tr>
+            ';
+          }
+          
+          $stmt1->close();
+        ?>
       </table>
       <hr>
     </div>
@@ -244,6 +282,62 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   <!-- End page content -->
   </div>
 </div>
+<!-- SCR_1003S2 -->
+<div id="id01" class="mfp-hide w3-modal">
+  <div class="contact-form1 w3-modal-content">
+    <div class="w3-row-padding w3-center w3-container">
+      <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+      <h3>Phân công sinh viên</h3>
+      <form action="#" method="post">
+        <div class="w3-half w3-padding-large <?php echo (!empty($code_err)) ? 'has-error' : ''; ?>">
+          <select class="w3-select w3-border" name="code" required value="<?php echo $code; ?>">
+            <option value="" disabled selected>Chọn sinh viên</option>
+            <option value="0" >10001001 | Nguyễn Thị Thủy</option>
+            <option value="1" >10011002 | Trần Thanh Nga</option>
+            <option value="2" >10021003 | Đặng Đình Tài</option>
+            <?php echo $str ?>
+          </select>
+          <span class="w3-text-red"><?php echo $code_err; ?></span>
+        </div>
+        <div class="w3-half w3-padding-large <?php echo (!empty($request_id_err)) ? 'has-error' : ''; ?>">
+          <select class="w3-select w3-border" name="code" required value="<?php echo $request_id; ?>">
+            <option value="" disabled selected>Chọn phiếu yêu cầu</option>
+            <option value="0" >10001002 | Newwave Solutions</option>
+            <option value="1" >10011002 | FSoft</option>
+            <option value="2" >10021002 | Framgia</option>
+            <?php 
+              $str = "";
+              // echo $listRequest 
+              $stmt1 = $link->prepare("SELECT `id`, `code`, `first_name`, `last_name`, `date_of_birth`, `email`, `phone`, class_name FROM `intern_profile` WHERE id NOT IN( SELECT ra.intern_id FROM request_assignment ra GROUP BY ra.intern_id) ORDER BY id ASC LIMIT 20" );
+              $stmt1->execute();
+              $result = $stmt1->get_result();
+              $i = 0;
+              while($row = $result->fetch_assoc()) {
+                echo '<option value="'.$row['code'].'" >'.$row['code']. ' | '.$row['first_name'].' '.$row['last_name'].'</option>';
+              }
+              
+              $stmt1->close();
+              // Close connection
+              mysqli_close($link);
+            ?>
+          </select>
+          <span class="w3-text-red"><?php echo $request_id_err; ?></span>
+        </div>
+        <div class="w3-half w3-padding-large">
+          <p><label><i class="fa fa-calendar-check-o"></i> Ngày bắt đầu</label></p>
+          <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="start_date" required value="<?php echo $start_date; ?>">
+        </div>
+        <div class="w3-half w3-padding-large">
+          <p><label><i class="fa fa-calendar-o"></i> Ngày kết thúc</label></p>
+          <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="end_date" required value="<?php echo $end_date; ?>">
+        </div>
+        <div class="w3-padding-large">
+          <input class="w3-button w3-teal" name="submitbtn" type="submit" value="Phân công">
+        </div>
+      </form>
+    </div>
+  </div>	
+</div>
 
 <script>
 // Script to open and close sidebar
@@ -256,7 +350,6 @@ function w3_close() {
   document.getElementById("mySidebar").style.display = "none";
   document.getElementById("myOverlay").style.display = "none";
 }
-
 </script>
 
 </body>

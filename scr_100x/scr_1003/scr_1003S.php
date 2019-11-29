@@ -10,7 +10,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
 // Include config file
 require "../../config.php";
 $code = $request_id = $start_date = $end_date = "";
-$request_id_err = $code_err = "";
+$request_id_err = $student_id_err = $code_err = "";
 
 // Processing form data when form is submitted
 if (isset($_POST["submitbtn"])) {
@@ -20,6 +20,13 @@ if (isset($_POST["submitbtn"])) {
     $request_id_err = "Please choose the request id!";
   } else {
     $request_id = trim($_POST["request_id"]);
+  }
+
+  // Validate student_id
+  if (empty(trim($_POST["student_id"]))) {
+    $student_id_err = "Please choose the student id!";
+  } else {
+    $student_id = trim($_POST["student_id"]);
   }
   
   // $code = trim($_POST["code"]);
@@ -32,21 +39,23 @@ if (isset($_POST["submitbtn"])) {
     $end_date = trim($_POST["end_date"]);
   }
 
-  // // Prepare an insert statement
-  // $sql = " INSERT INTO `request_assignment` (`request_id`, `intern_id`, `start_date`, `end_date`, `status`) VALUES (?, ?, ?, ?, ?);";
+  // Prepare an insert statement
+  $sql = " INSERT INTO `request_assignment` (`request_id`, `intern_id`, `start_date`, `end_date`, `status`) VALUES (?, ?, ?, ?, '2');";
 
-  // if ($stmt = mysqli_prepare($link, $sql)) {
-  //   // Bind variables to the prepared statement as parameters
-  //   mysqli_stmt_bind_param($stmt, "sssss", $request_id, $student_id, $start_date, $end_date, $status);
-  //   // Attempt to execute the prepared statement
-  //   if (mysqli_stmt_execute($stmt)) {
-  //     // Redirect to login page
-  //     header("location: scr_1001.php");
-  //   } else {
-  //     echo "Something went wrong. Please try again later.";
-  //   }
-  //   mysqli_stmt_close($stmt);
-  // }
+  if ($stmt = mysqli_prepare($link, $sql)) {
+    // Bind variables to the prepared statement as parameters
+    mysqli_stmt_bind_param($stmt, "ssss", $request_id, $student_id, $start_date, $end_date);
+    // Attempt to execute the prepared statement
+    if (mysqli_stmt_execute($stmt)) {
+      // Redirect to login page
+      echo "<script>alert('Thành công!')</script>";
+      header("location: scr_1003S.php");
+    } else {
+      echo "<script>alert('Thất bại!')</script>";
+      echo "Something went wrong. Please try again later.";
+    }
+    mysqli_stmt_close($stmt);
+  }
 }
 ?>
 
@@ -92,7 +101,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <table class="w3-table w3-striped w3-bordered w3-centered w3-hoverable">
         <tr>
           <th name="organization_request_id">Mã phiếu yêu cầu</th>
-          <th name="student_id">Mã sinh viên</th>
+          <th>Mã sinh viên</th>
           <th name="name_student">Tên sinh viên</th>
           <th >Ngày bắt đầu thực tập</th>
           <th >Ngày kết thúc thực tập</th>
@@ -101,7 +110,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <th name="create_date">Thời gian phân công</th>
         </tr>
         <?php 
-          // echo $listRequest 
           $stmt = $link->prepare("SELECT ra.`id`, ra.`request_id` as request_id, o.name AS organization_name, i.code, i.first_name, i.last_name, ra.`start_date`, ra.`end_date`, s.name AS STATUS , ra.`date_created` FROM `request_assignment` ra, request re, organization_profile o, intern_profile i, STATUS s WHERE ra.request_id = re.id AND re.organization_id = o.id AND ra.intern_id = i.id AND ra.status = s.id ORDER BY ra.request_id DESC LIMIT 5" );
           $stmt->execute();
           $result = $stmt->get_result();
@@ -203,7 +211,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-teal w3-margin-bottom w3-right"><i class="fas fa-user-plus w3-margin-right"></i>Thêm sinh viên</button>
       <table class="w3-table w3-striped w3-bordered w3-centered w3-hoverable">
         <tr>
-          <th name="student_id">Mã sinh viên</th>
+          <th>Mã sinh viên</th>
           <th name="name_student">Tên sinh viên</th>
           <th name="class_name">Lớp</th>
           <th>Ngày sinh</th>
@@ -288,32 +296,27 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     <div class="w3-row-padding w3-center w3-container">
       <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
       <h3>Phân công sinh viên</h3>
-      <form action="#" method="post">
-        <div class="w3-half w3-padding-large <?php echo (!empty($code_err)) ? 'has-error' : ''; ?>">
-          <select class="w3-select w3-border" name="code" required value="<?php echo $code; ?>">
+      <form action="scr_1003S.php" method="post">
+        <div class="w3-half w3-padding-large <?php echo (!empty($student_id_err)) ? 'has-error' : ''; ?>">
+          <select class="w3-select w3-border" name="student_id" required value="<?php echo $student_id; ?>">
             <option value="" disabled selected>Chọn sinh viên</option>
-            <option value="0" >10001001 | Nguyễn Thị Thủy</option>
-            <option value="1" >10011002 | Trần Thanh Nga</option>
-            <option value="2" >10021003 | Đặng Đình Tài</option>
             <?php echo $str ?>
           </select>
-          <span class="w3-text-red"><?php echo $code_err; ?></span>
         </div>
         <div class="w3-half w3-padding-large <?php echo (!empty($request_id_err)) ? 'has-error' : ''; ?>">
-          <select class="w3-select w3-border" name="code" required value="<?php echo $request_id; ?>">
+          <select class="w3-select w3-border" name="request_id" required value="<?php echo $request_id; ?>">
             <option value="" disabled selected>Chọn phiếu yêu cầu</option>
-            <option value="0" >10001002 | Newwave Solutions</option>
-            <option value="1" >10011002 | FSoft</option>
-            <option value="2" >10021002 | Framgia</option>
             <?php 
               $str = "";
-              // echo $listRequest 
-              $stmt1 = $link->prepare("SELECT `id`, `code`, `first_name`, `last_name`, `date_of_birth`, `email`, `phone`, class_name FROM `intern_profile` WHERE id NOT IN( SELECT ra.intern_id FROM request_assignment ra GROUP BY ra.intern_id) ORDER BY id ASC LIMIT 20" );
-              $stmt1->execute();
-              $result = $stmt1->get_result();
+              $stmt = $link->prepare("SELECT r.`id`, r.`organization_id`, r.`position`, r.`amount`, ( SELECT COUNT(*) FROM `request_assignment` ra WHERE ra.request_id = r.id ) assignment, r.`date_created`, r.`description`, r.`type` FROM `request` r, request_assignment ra WHERE r.status = 2 AND r.amount >( SELECT COUNT(*) FROM `request_assignment` ra WHERE ra.request_id = r.id ) GROUP BY r.id DESC" );
+              $stmt->execute();
+              $result = $stmt->get_result();
               $i = 0;
               while($row = $result->fetch_assoc()) {
-                echo '<option value="'.$row['code'].'" >'.$row['code']. ' | '.$row['first_name'].' '.$row['last_name'].'</option>';
+                $amount = $row['amount'];
+                $assignment = $row['assignment'];
+                $opening = $amount - $assignment;
+                echo '<option value="'.$row['id'].'" > Mã: '.$row['id']. ' | Vị trí: '.$row['position'].' | Số lượng: '.$opening.'</option>';
               }
               
               $stmt1->close();
@@ -321,7 +324,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
               mysqli_close($link);
             ?>
           </select>
-          <span class="w3-text-red"><?php echo $request_id_err; ?></span>
         </div>
         <div class="w3-half w3-padding-large">
           <p><label><i class="fa fa-calendar-check-o"></i> Ngày bắt đầu</label></p>

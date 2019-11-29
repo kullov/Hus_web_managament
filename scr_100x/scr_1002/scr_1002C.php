@@ -191,9 +191,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div id="about" class="w3-container">
         <h4><strong>THÔNG TIN</strong></h4>
         <div class="w3-row-padding">
-          <div class="w3-padding">
-            <input class="w3-input w3-animate-input" type="text" name="name" value="<?php echo $name ?>" placeholder="NHẬP TÊN PHIẾU YÊU CẦU" style="width:30%" />
-          </div>
         </div>
         <div class="w3-row-padding">
           <div class="w3-half w3-padding">
@@ -212,7 +209,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               <select class="w3-select w3-border" name="status" value="<?php echo $status ?>" required>
                 <option value="" disabled selected>Chọn trạng thái</option>
                 <option value="2">Còn hiệu lực</option>
-                <option value="1">Quá hạn</option>
+                <option value="1">Hết hiệu lực</option>
               </select>
             </p>
           </div>
@@ -250,55 +247,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <hr>
 
-        <h4><strong>Phúc lợi</strong></h4>
-        <div class="w3-row w3-large">
-          <div class="w3-col s6">
-            <p><i class="fa fa-fw fa-shower"></i> Playing</p>
-            <p><i class="fa fa-fw fa-wifi"></i> WiFi</p>
-            <p><i class="fa fa-fw fa-tv"></i> TV</p>
-          </div>
-          <div class="w3-col s6">
-            <p><i class="fa fa-fw fa-cutlery"></i> Kitchen</p>
-            <p><i class="fa fa-fw fa-thermometer"></i> Heating</p>
-            <p><i class="fa fa-fw fa-wheelchair"></i> Accessible</p>
-          </div>
-        </div>
-        <div>
-          <h4>Ngoài ra, bạn sẽ được hưởng:</h4>
-          <p>• Mức lương hỗ trợ từ 3 triệu VND trở lên</p>
-          <p>• Môi trường làm việc chuyên nghiệp</p>
-          <p>• Có cơ hội thăng tiến, đào tạo</p>
-        </div>
       </div>
       <hr>
       
-      <!-- Yêu cầu -->
-      <div class="w3-container" id="require">
-        <br><br><br>
-        <h4><strong>YÊU CẦU</strong></h4>
-        <!-- <div class="w3-row-padding">
-          <div class="w3-padding w3-half">
-            <input class="w3-input w3-border" type="text" placeholder="Thêm yêu cầu" id="addRequire" />
-          </div>
-          <div class="w3-padding w3-half">
-            <input type="button" class="w3-button w3-black" onclick="addListRequire()" value="Thêm" id="submitRequire" />
-          </div>
-        </div>
-        <div class="w3-padding results">
-          <ul id="listRequire" name="list_require">
-          </ul>
-        </div> -->
-        <h6><strong>Yêu cầu thêm:</strong></h6>
-        <ul class="w3-ul w3-padding">
-          <li class="item">Tốt nghiệp Đại học nước ngoài hoặc tốt nghiệp hệ kỹ sư tài năng các trường Đại học chính quy như ĐH Quốc Gia Hà Nội, ĐH Bách Khoa, ĐH Khoa học tự nhiên, Đại học FPT…</li>
-          <li class="item">Có kinh nghiệm lập trình về <b>Java</b></li>
-          <li class="item">Có thể làm việc bằng tiếng Anh với người nước ngoài – tương đương TOEFL iBT 85 điểm trở lên</li>
-          <li class="item">Có kỹ năng làm việc nhóm, có tinh thần trách nhiệm cao.</li>
-          <li class="item">Ưu tiên kinh nghiệm với AngularJS (từ 2 trở lên), CSS (SASS), HTML5, Bootstrap</li>
-          <li class="item">Ưu tiên kinh nghiệm với Java 8, Spring Boot, Hibernate, Rest APIs, Micro services, design patterns và TDD</li>
-          <li class="item">Cam kết thực tập tối thiểu 3 tháng</li>
-        </ul>
-      </div>
       <p class="w3-center">
         <button type="submit" class="w3-button w3-teal" name="submit" value="save">Tạo mới</button>
         <button type="reset" class="w3-button w3-dark-grey">Làm lại</button>

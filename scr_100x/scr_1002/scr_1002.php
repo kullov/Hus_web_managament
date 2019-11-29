@@ -65,10 +65,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </div>
     
     <div class="w3-bar-block">
-      <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>ABOUT</a> 
-      <a href="#list-require" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>DANH SÁCH PHIẾU YÊU CẦU</a> 
-      <a href="#assignment" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>BẢNG PHÂN CÔNG (SCR_1002S)</a>
-      <a href="scr_1002C.php" class="w3-bar-item w3-button w3-padding">TẠO PHIẾU YÊU CẦU (SCR_1002C)</a>
+      <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a> 
+      <a href="#list-require" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-th-large fa-fw w3-margin-right"></i>DANH SÁCH PHIẾU YÊU CẦU</a> 
+      <a href="#assignment" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sitemap w3-margin-right"></i>BẢNG PHÂN CÔNG</a>
+      <a href="scr_1002C.php" class="w3-bar-item w3-button w3-padding"><i class="	fas fa-folder-plus w3-margin-right"></i>TẠO PHIẾU YÊU CẦU</a>
       <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right"></i>CONTACT</a>
     </div>
     <div class="w3-panel w3-large">
@@ -146,47 +146,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <br>
       <h3 class="w3-container"><b>Danh sách phiếu yêu cầu</b></h3>
       <!-- Second Photo Grid-->
-      <div class="w3-row-padding" id="OPEN">
-        <div class="w3-third w3-container w3-margin-bottom">
-          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-          <div class="w3-container w3-white">
-          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
-            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
-            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
-            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-            <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
-          </div>
-        </div>
-        <div class="w3-third w3-container w3-margin-bottom">
-          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-          <div class="w3-container w3-white">
-          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
-            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
-            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
-            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-            <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
-          </div>
-        </div>
-        <div class="w3-third w3-container">
-          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-          <div class="w3-container w3-white">
-          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
-            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
-            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
-            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>					
-            <a href="scr_1002E.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
-          </div>
-        </div>
-      </div>
-      <!-- Second Photo Grid-->
       <form action="" method="post">
         <?php 
           // echo $listRequest 
           if ($_SESSION["role"] === "organization") {
-            $stmt4 = $link->prepare("SELECT r.`id`, o.`name`, r.`position`, o.`address`, r.`amount`, r.`date_created`, r.`description`, r.`type`, r.`status` FROM `request` r, organization_profile o WHERE r.`organization_id` = o.id AND o.`id` = 21 ORDER BY r.id DESC LIMIT 6" );
+            $stmt4 = $link->prepare("SELECT r.`id`, o.`name`, r.`position`, o.`address`, r.`amount`, r.`date_created`, r.`description`, r.`type`, r.`status`, ( SELECT COUNT(*) FROM `request_assignment` ra WHERE ra.request_id = r.id ) assignment FROM `request` r, organization_profile o WHERE r.`organization_id` = o.id AND o.`id` = 21 ORDER BY r.id DESC LIMIT 6" );
             // $stmt4->bind_param("s", $id);
             $stmt4->execute();
             $result = $stmt4->get_result();
@@ -197,10 +161,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
               <div class="w3-third w3-container w3-margin-bottom">
                 <img src="https://www.ourlincolnpark.com/wp-content/uploads/2014/07/I-wish-it-were-that-easy.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
                 <div class="w3-container w3-white" style="height:270px;">
-                  <h3 class="w3-center"><i>Vị trí tuyển dụng: </i><b>'.$row['position'].'</b></h3>
+                  <h3 class="w3-center"><i>Vị trí: </i><b>'.$row['position'].'</b></h3>
                   <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: '.$row['name'].'</h4>
                   <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>'.$row['amount'].'</b> người</p>
-                  <p><i "fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
+                  <p><i "fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>'.$row['assignment'].'</b></p>
                   <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: '.$row['address'].'</p>
                   <p><i class="fa fa-fw fa-check"></i> Trạng thái: ';
               if ( $row['status'] === 1) {
@@ -246,7 +210,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <hr>
       <br>
       <h3><b>Bảng phân công</b></h3>
-      <table class="w3-table w3-striped w3-bordered w3-centered w3-hoverable">
+      <table class="w3-table w3-striped w3-bordered w3-centered w3-hoverable w3-margin-bottom">
         <tr>
           <th name="organization_request_id">Mã phiếu yêu cầu</th>
           <th name="student_id">Mã sinh viên</th>
@@ -256,16 +220,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           <th name="position">Vị trí thực tập</th>
           <th name="status">Trạng thái</th>
           <th name="create_date">Thời gian phân công</th>
-        </tr>
-        <tr>
-          <td>1000</td>
-          <td>16001111</td>
-          <td>Trần Văn A</td>
-          <td>21/10/2019</td>
-          <td>01/12/2019</td>
-          <td>Java WEB</td>
-          <td>Đang thực hiện</td>
-          <td>15/10/2019</td>
         </tr>
         <?php 
           // echo $listRequest 
@@ -292,80 +246,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
           // Close connection
           mysqli_close($link);
         ?>
-        <tr>
-        <td>1000</td>
-          <td>16001111</td>
-          <td>Trần Văn C</td>
-          <td>21/10/2019</td>
-          <td>01/12/2019</td>
-          <td>Java WEB</td>
-          <td>Đang thực hiện</td>
-          <td>15/10/2019</td>
-        </tr>
-        <tr>
-        <td>1001</td>
-          <td>16001113</td>
-          <td>Trần Văn B</td>
-          <td>21/10/2019</td>
-          <td>01/12/2019</td>
-          <td>Java WEB</td>
-          <td>Đang thực hiện</td>
-          <td>15/10/2019</td>
-        </tr>
-        <tr>
-        <td>1002</td>
-          <td>16001115</td>
-          <td>Trần Văn M</td>
-          <td>21/10/2019</td>
-          <td>01/12/2019</td>
-          <td>Java WEB</td>
-          <td>Đang thực hiện</td>
-          <td>15/10/2019</td>
-        </tr>
-        <tr>
-        <td>1002</td>
-          <td>16001115</td>
-          <td>Trần Văn M</td>
-          <td>21/10/2019</td>
-          <td>01/12/2019</td>
-          <td>Java WEB</td>
-          <td>Đang thực hiện</td>
-          <td>15/10/2019</td>
-        </tr>
-        <tr>
-        <td>1002</td>
-          <td>16001115</td>
-          <td>Trần Văn M</td>
-          <td>21/10/2019</td>
-          <td>01/12/2019</td>
-          <td>Java WEB</td>
-          <td>Đang thực hiện</td>
-          <td>15/10/2019</td>
-        </tr>
-        <tr>
-        <td>1002</td>
-          <td>16001115</td>
-          <td>Trần Văn N</td>
-          <td>21/10/2019</td>
-          <td>01/12/2019</td>
-          <td>Java WEB</td>
-          <td>Đang thực hiện</td>
-          <td>15/10/2019</td>
-        </tr>
       </table>
-      <!-- Pagination -->
-      <div class="w3-center w3-padding-32">
-        <div class="w3-bar">
-          <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-          <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-          <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-          <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-          <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-          <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
-        </div>
-      </div>
+      <br><br>
     </div>
-
     <!-- Contact Section -->
     <div id="contact" class="w3-container w3-padding-large w3-grey">
       <br>
@@ -386,21 +269,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </div>
       </div>
       <hr class="w3-opacity">
-      <form action="https://www.w3schools.com/w3images/action_page.php" target="_blank">
-        <div class="w3-section">
-          <label>Name</label>
-          <input class="w3-input w3-border" type="text" name="Name" required>
-        </div>
-        <div class="w3-section">
-          <label>Email</label>
-          <input class="w3-input w3-border" type="text" name="Email" required>
-        </div>
-        <div class="w3-section">
-          <label>Message</label>
-          <input class="w3-input w3-border" type="text" name="Message" required>
-        </div>
-        <button type="submit" class="w3-button w3-black w3-margin-bottom"><i class="fa fa-paper-plane w3-margin-right"></i>Send Message</button>
-      </form>
     </div>
 
     <!-- Footer -->

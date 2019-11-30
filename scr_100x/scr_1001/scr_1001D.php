@@ -18,7 +18,6 @@ $username = $_SESSION["code"];
 // Prepare a select statement
 // Câu SQL lấy danh sách
 $sql = "SELECT id, first_name, last_name, email, phone, date_of_birth, class_name, join_date, avatar, description FROM intern_profile WHERE code = ?";
- 
 if ($stmt = mysqli_prepare($link, $sql)) {
   
   // Bind variables to the prepared statement as parameters
@@ -44,46 +43,45 @@ if ($stmt = mysqli_prepare($link, $sql)) {
 $id_a = "";
 $ability_id = $ability_required = $description_ability = $toReturn = "";
 function loadSkill() {
-  global $link, $toReturn;
+  global $link, $toReturn, $id;
   global $id_a;
   $stmt4 = $link->prepare("SELECT r_b.`ability_id`, a_d.`name`, r_b.`rate` FROM `intern_ability` r_b, `ability_dictionary` a_d WHERE r_b.`ability_id` = a_d.`id` AND r_b.`intern_id` = ?");
-  $stmt4->bind_param("s", $_SESSION["intern_id"]);
+  $stmt4->bind_param("s", $id);
   $stmt4->execute();
   $result_skill = $stmt4->get_result();
   while($row = $result_skill->fetch_assoc()) {
     $toReturn = $toReturn. 
-      "<form action='scr_1001D.php' method='post'><tr>
-        <td value='".$row['ability_id']."'>".$row['name']." 
-          <input type='' name='id' value=".$row["ability_id"]." />
-          
-        </td>
-        <td value='".$row['rate']."'>
-          <input type='' name='' value=".$row["rate"]." />
-          
-        </td>
-        <td><button type='submit' name='deletebtn' class='w3-right w3-button w3-red'>Xóa</button></td>
-        </tr></form>";
+      "<form action='scr_1001D.php' method='post'>
+        <tr>
+          <td value='".$row['ability_id']."'>".$row['name']."</td>
+          <td value='".$row['rate']."'>".$row["rate"]."%</td>
+          <td>
+            <input type='hidden' name='id' value=".$row["ability_id"]." />
+            <button type='submit' name='deletebtn' class='w3-right w3-button w3-red'>Xóa</button>
+          </td>
+        </tr>
+      </form>";
     $id_a = $row['ability_id'];
   }
   $stmt4->close();
 }
 loadSkill();
 //Delete skill
-/* if (isset($_POST['deletebtn'])) {
-  $did=$_POST['id'];
-  $stmt5 = $link->prepare("DELETE FROM `request_ability` WHERE ability_id = ?;");
+if (isset($_POST['deletebtn'])) {
+  $did= $_POST['id'];
+  $stmt5 = $link->prepare("DELETE FROM `intern_ability` WHERE ability_id = ?;");
   $stmt5->bind_param("s", $did);
   if ($stmt5->execute()) {
-    echo "<script>alert('Xoa thanh cong!')</script>";
-    header('location: scr_1002E.php');
+    echo "<script>alert('Xóa kỹ năng thành công!')</script>";
+    header('location: scr_1001D.php');
     exit;
   } else {
     echo "<script>alert('Failed!!')</script>";
-    header('location: scr_1002E.php');
+    header('location: scr_1001D.php');
     exit;
   }
   $stmt5->close();
-} */
+}
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -157,11 +155,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       }
       mysqli_stmt_close($stmt);
     }
-    // Close connection
-    mysqli_close($link);
   }
   
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -242,14 +239,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <!-- !PAGE CONTENT! -->
   <div class="w3-main" style="margin-left:250px;">
 
-    <form action="scr_1001D.php" method="post">
-      <div id="about" class="w3-container">
-        <h4><strong>THÔNG TIN</strong></h4>
-        <div class="w3-row-padding w3-center">
-          <div class="w3-padding">
-            <h4><i class="far fa-address-card"></i> Mã sinh viên: <?php echo $username; ?></h4>
-          </div>
+    <div id="about" class="w3-container">
+      <h4><strong>THÔNG TIN</strong></h4>
+      <div class="w3-row-padding w3-center">
+        <div class="w3-padding">
+          <h4><i class="far fa-address-card"></i> Mã sinh viên: <?php echo $username; ?></h4>
         </div>
+      </div>
+      <form action="scr_1001D.php" method="post">
         <div class="w3-row-padding">
           <div class="w3-half w3-padding form-group <?php echo (!empty($first_name_err)) ? 'has-error' : ''; ?>">
             <p style="width:30%; display: inline-block"><i class='far fa-address-card'></i> First name:</p>
@@ -303,52 +300,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <textarea class="w3-input w3-margin-top" type="textarea" placeholder="" name="description" style="width:95.5%; height:200px"><?php echo $description; ?></textarea>
           </div>
         </div>
-      </div>
-      <!-- Yêu cầu -->
-      <div class="w3-container" id="require">
-        <br><br><br>
-        <h4><strong>KỸ NĂNG</strong></h4>
-        <div>
-          <div class="w3-row-padding">
-            <div >
-              <form action="addSkillStudent.php" method="post">
-                <div id="myDIV" class="header w3-padding w3-third">
-                  <select class="w3-input w3-border" name="item" value="<?php echo $item ?>" >
-                    <option value="0" disabled selected>Thêm kỹ năng</option>
-                      <?php 
-                        $stmt4 = $link->prepare("SELECT id, name FROM ability_dictionary");
-                        $stmt4->execute();
-                        $result = $stmt4->get_result();
-                        while($row = $result->fetch_assoc()) {
-                          echo '<option value="'.$row["id"].'">'.$row["name"].'</option>';
-                        }
-                        $stmt4->close();
-                      ?>
-                  </select>
-                </div>
-                <div class="w3-padding w3-third">
-                  <input class="w3-input w3-border w3-third" type="text" placeholder="%" id="" name="skill"  />
-                </div>
-                <div class="w3-padding  w3-third">
-                  <button type="submit" class="w3-button w3-black " name="addSkill" >Thêm</button> 
-                </div>  
-                                    
-              </form> 
-            </div>
-            
-          </div>
-          <div class="w3-padding">
-            <table class="w3-table w3-striped w3-bordered w3-hoverable">
-              <?php echo $toReturn ?>
-            </table>
-          </div>
+        <div class="w3-center">
+          <button type="submit" name="save" class="w3-button w3-teal">Lưu thông tin</button>
         </div>
+      </form>
+    </div>
+    <!-- Yêu cầu -->
+    <div class="w3-container" id="require">
+      <br><br><br>
+      <h4><strong>KỸ NĂNG</strong></h4>
+      <form action="addSkillStudent.php?id=<?php echo $id ?>" method="post">
+        <div class="w3-row-padding">
+          <div class="w3-padding w3-third">
+            <select class="w3-input w3-border" name="item" value="<?php echo $item ?>" >
+              <option value="0" disabled selected>Thêm kỹ năng</option>
+                <?php 
+                  $stmt4 = $link->prepare("SELECT a_d.id, name FROM ability_dictionary a_d WHERE a_d.id NOT IN(SELECT c.ability_id FROM intern_ability c  WHERE c.intern_id = ? GROUP BY c.ability_id)");
+                  $stmt4->bind_param("s", $id);
+                  $stmt4->execute();
+                  $result = $stmt4->get_result();
+                  while($row = $result->fetch_assoc()) {
+                    echo '<option value="'.$row["id"].'">'.$row["name"].'</option>';
+                  }
+                  $stmt4->close();
+                ?>
+            </select>
+          </div>
+          <div class="w3-padding w3-third">
+            <span class="w3-left w3-padding">Đánh giá: </span>
+            <input class="w3-input w3-border w3-third" min="1" max="100" type="number" placeholder="%" name="rate" required />
+          </div>
+          <div class="w3-padding w3-third">
+            <button type="submit" class="w3-button w3-black " name="addSkill" >Thêm</button> 
+          </div>  
+        </div>
+      </form> 
+      <div class="w3-padding">
+        <table class="w3-table w3-striped w3-bordered w3-hoverable">
+          <?php echo $toReturn ?>
+        </table>
       </div>
-      <p class="w3-center">
-        <button type="submit" class="w3-button w3-teal">Lưu thông tin</button>
-        <button type="reset" class="w3-button w3-dark-grey">Làm lại</button>
-      </p>
-    </form>
+    </div>
 
     <!-- Footer -->
     <?php include("../../footer.php"); ?>

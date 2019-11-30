@@ -11,6 +11,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
   require "../../config.php";
 // Define variables and initialize with empty values
 $first_name = $last_name = $class_name = $join_date = $phone = $email = $address = $date_of_birth = $avatar = $description = "";
+$skill = $item = "";
 $first_name_err = $last_name_err = $class_name_err = $join_date_err = $phone_err = $email_err = $address_err = $date_of_birth_err = $avatar_err = "";
 
 $username = $_SESSION["code"];
@@ -40,82 +41,126 @@ if ($stmt = mysqli_prepare($link, $sql)) {
   mysqli_stmt_close($stmt);
 }
 
-
+$id_a = "";
+$ability_id = $ability_required = $description_ability = $toReturn = "";
+function loadSkill() {
+  global $link, $toReturn;
+  global $id_a;
+  $stmt4 = $link->prepare("SELECT r_b.`ability_id`, a_d.`name`, r_b.`rate` FROM `intern_ability` r_b, `ability_dictionary` a_d WHERE r_b.`ability_id` = a_d.`id` AND r_b.`intern_id` = ?");
+  $stmt4->bind_param("s", $_SESSION["intern_id"]);
+  $stmt4->execute();
+  $result_skill = $stmt4->get_result();
+  while($row = $result_skill->fetch_assoc()) {
+    $toReturn = $toReturn. 
+      "<form action='scr_1001D.php' method='post'><tr>
+        <td value='".$row['ability_id']."'>".$row['name']." 
+          <input type='' name='id' value=".$row["ability_id"]." />
+          
+        </td>
+        <td value='".$row['rate']."'>
+          <input type='' name='' value=".$row["rate"]." />
+          
+        </td>
+        <td><button type='submit' name='deletebtn' class='w3-right w3-button w3-red'>Xóa</button></td>
+        </tr></form>";
+    $id_a = $row['ability_id'];
+  }
+  $stmt4->close();
+}
+loadSkill();
+//Delete skill
+/* if (isset($_POST['deletebtn'])) {
+  $did=$_POST['id'];
+  $stmt5 = $link->prepare("DELETE FROM `request_ability` WHERE ability_id = ?;");
+  $stmt5->bind_param("s", $did);
+  if ($stmt5->execute()) {
+    echo "<script>alert('Xoa thanh cong!')</script>";
+    header('location: scr_1002E.php');
+    exit;
+  } else {
+    echo "<script>alert('Failed!!')</script>";
+    header('location: scr_1002E.php');
+    exit;
+  }
+  $stmt5->close();
+} */
 
 // Processing form data when form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if (isset($_POST['save'])) {
+    // Validate phone
+    if (empty(trim($_POST["phone"]))) {
+      $phone_err = "Please enter your phone number!";
+    } elseif (strlen(trim($_POST["phone"])) < 6) {
+      $phone_err = "Your phone number is incorrect!";
+    } else {
+      $phone = trim($_POST["phone"]);
+    }
+    
+    // Validate first name
+    if (empty(trim($_POST["first_name"]))) {
+      $first_name_err = "Please enter your first name!";
+    } else {
+      $first_name = trim($_POST["first_name"]);
+    }
 
-  // Validate phone
-  if (empty(trim($_POST["phone"]))) {
-    $phone_err = "Please enter your phone number!";
-  } elseif (strlen(trim($_POST["phone"])) < 6) {
-    $phone_err = "Your phone number is incorrect!";
-  } else {
-    $phone = trim($_POST["phone"]);
+    // Validate last name
+    if (empty(trim($_POST["last_name"]))) {
+      $last_name_err = "Please enter your last name!";
+    } else {
+      $last_name = trim($_POST["last_name"]);
+    }
+
+    // Validate email
+    if (empty(trim($_POST["email"]))) {
+      $email_err = "Please enter your email!";
+    } else {
+      $email = trim($_POST["email"]);
+    }
+
+    // Validate class_name
+    if (empty(trim($_POST["class_name"]))) {
+      $class_name_err = "Please enter your class name!";
+    } else {
+      $class_name = trim($_POST["class_name"]);
+    }
+
+    // Validate address
+    // if (empty(trim($_POST["address"]))) {
+    //   $address_err = "Please enter your address!";
+    // } else {
+    //   $address = trim($_POST["address"]);
+    // }
+
+    // Validate birth_day
+    if (empty(trim($_POST["date_of_birth"]))) {
+      $date_of_birth_err = "Please enter your birthday!";
+    } else {
+      $date_of_birth = trim($_POST["date_of_birth"]);
+    }
+
+    $avatar = trim($_POST["avatar"]);
+    $description = trim($_POST["description"]);
+
+    // Prepare an insert statement
+    $sql = "UPDATE `intern_profile` SET `first_name` = ?, `last_name` = ?, `date_of_birth` = ?, `class_name` = ?, `avatar` = ?, `email` = ?, `phone` = ?, `description` = ? WHERE `intern_profile`.`code` = ?;";
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+      // Bind variables to the prepared statement as parameters
+      mysqli_stmt_bind_param($stmt, "sssssssss", $first_name, $last_name, $date_of_birth, $class_name, $avatar, $email, $phone, $description, $username);
+      // Attempt to execute the prepared statement
+      if (mysqli_stmt_execute($stmt)) {
+        // Redirect to login page
+        header("location: scr_1001.php");
+      } else {
+        echo "Something went wrong. Please try again later.";
+      }
+      mysqli_stmt_close($stmt);
+    }
+    // Close connection
+    mysqli_close($link);
   }
   
-  // Validate first name
-  if (empty(trim($_POST["first_name"]))) {
-    $first_name_err = "Please enter your first name!";
-  } else {
-    $first_name = trim($_POST["first_name"]);
-  }
-
-  // Validate last name
-  if (empty(trim($_POST["last_name"]))) {
-    $last_name_err = "Please enter your last name!";
-  } else {
-    $last_name = trim($_POST["last_name"]);
-  }
-
-  // Validate email
-  if (empty(trim($_POST["email"]))) {
-    $email_err = "Please enter your email!";
-  } else {
-    $email = trim($_POST["email"]);
-  }
-
-  // Validate class_name
-  if (empty(trim($_POST["class_name"]))) {
-    $class_name_err = "Please enter your class name!";
-  } else {
-    $class_name = trim($_POST["class_name"]);
-  }
-
-  // Validate address
-  // if (empty(trim($_POST["address"]))) {
-  //   $address_err = "Please enter your address!";
-  // } else {
-  //   $address = trim($_POST["address"]);
-  // }
-
-  // Validate birth_day
-  if (empty(trim($_POST["date_of_birth"]))) {
-    $date_of_birth_err = "Please enter your birthday!";
-  } else {
-    $date_of_birth = trim($_POST["date_of_birth"]);
-  }
-
-  $avatar = trim($_POST["avatar"]);
-  $description = trim($_POST["description"]);
-
-  // Prepare an insert statement
-  $sql = "UPDATE `intern_profile` SET `first_name` = ?, `last_name` = ?, `date_of_birth` = ?, `class_name` = ?, `avatar` = ?, `email` = ?, `phone` = ?, `description` = ? WHERE `intern_profile`.`code` = ?;";
-
-  if ($stmt = mysqli_prepare($link, $sql)) {
-    // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param($stmt, "sssssssss", $first_name, $last_name, $date_of_birth, $class_name, $avatar, $email, $phone, $description, $username);
-    // Attempt to execute the prepared statement
-    if (mysqli_stmt_execute($stmt)) {
-      // Redirect to login page
-      header("location: scr_1001.php");
-    } else {
-      echo "Something went wrong. Please try again later.";
-    }
-    mysqli_stmt_close($stmt);
-  }
-  // Close connection
-  mysqli_close($link);
 }
 ?>
 
@@ -265,36 +310,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h4><strong>KỸ NĂNG</strong></h4>
         <div>
           <div class="w3-row-padding">
-            <div id="myDIV" class="header w3-padding w3-third">
-              <input class="w3-input w3-border" type="text" placeholder="Thêm năng lực" id="myInput" list="listSkill" />
-              <datalist id="listSkill">
-                <option value="PHP">
-                <option value="JAVA">
-                <option value="HTML">
-                <option value="CSS">
-                <option value="JavaScript">
-                <option value="C/C++">
-                <option value="Python">
-                <option value="MySQL">
-                <option value="NodeJs">
-                <option value="Cấu trúc dữ liệu">
-                <option value="Trí tuệ nhân tạo">
-                <option value="Thiết kế đánh giá thuật toán">
-                <option value="Giải tích">
-                <option value="Mạng máy tính">
-                <option value="Lập trình hướng đối tượng">
-                <option value="TOEFL">
-                <option value="TOEIC">
-                <option value="IELTS">
-              </datalist>
+            <div >
+              <form action="addSkillStudent.php" method="post">
+                <div id="myDIV" class="header w3-padding w3-third">
+                  <select class="w3-input w3-border" name="item" value="<?php echo $item ?>" >
+                    <option value="0" disabled selected>Thêm kỹ năng</option>
+                      <?php 
+                        $stmt4 = $link->prepare("SELECT id, name FROM ability_dictionary");
+                        $stmt4->execute();
+                        $result = $stmt4->get_result();
+                        while($row = $result->fetch_assoc()) {
+                          echo '<option value="'.$row["id"].'">'.$row["name"].'</option>';
+                        }
+                        $stmt4->close();
+                      ?>
+                  </select>
+                </div>
+                <div class="w3-padding w3-third">
+                  <input class="w3-input w3-border w3-third" type="text" placeholder="%" id="" name="skill"  />
+                </div>
+                <div class="w3-padding  w3-third">
+                  <button type="submit" class="w3-button w3-black " name="addSkill" >Thêm</button> 
+                </div>  
+                                    
+              </form> 
             </div>
-            <div class="w3-padding w3-half">
-              <input type="button" class="w3-button w3-black" onclick="newElement()" value="Thêm" id="submitSkill" />
-            </div>
+            
           </div>
           <div class="w3-padding">
-            <ul class="w3-ul w3-padding" id="myUL">
-            </ul>
+            <table class="w3-table w3-striped w3-bordered w3-hoverable">
+              <?php echo $toReturn ?>
+            </table>
           </div>
         </div>
       </div>
@@ -336,32 +382,7 @@ for (i = 0; i < close.length; i++) {
 }
 
 // Create a new list item when clicking on the "Add" button
-function newElement() {
-  var li = document.createElement("li");
-  li.className = "item";
-  var inputValue = document.getElementById("myInput").value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("myUL").appendChild(li);
-  }
-  document.getElementById("myInput").value = "";
-
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-    }
-  }
-}
+/*  */
 </script>
 
 </body>

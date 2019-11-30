@@ -4,7 +4,7 @@
 
   // Check if the user is already logged in, if yes then redirect him to welcome page
   if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: ../../welcome.php");
+    header("location: ../../");
     exit;
   }
 
@@ -12,7 +12,7 @@
   require_once "../../config.php";
 
   // Define variables and initialize with empty values
-  $username = $password = $first_name = $last_name = "";
+  $username = $password = $first_name = $last_name = $email = $phone = $date_of_birth = $class_name = $join_date = $avatar = $description_student = "";
   $username_err = $password_err = "";
 
   // Processing form data when form is submitted
@@ -35,7 +35,7 @@
     // Validate credentials
     if (empty($username_err) && empty($password_err)) {
       // Prepare a select statement
-      $sql = "SELECT id, intern_id, first_name, last_name, password FROM intern_profile WHERE intern_id = ?";
+      $sql = "SELECT id, code, first_name, last_name, password, email, phone, date_of_birth, class_name, join_date, avatar, description FROM intern_profile WHERE code = ?";
 
       if ($stmt = mysqli_prepare($link, $sql)) {
         
@@ -52,7 +52,7 @@
           // Check if username exists, if yes then verify password
           if (mysqli_stmt_num_rows($stmt) == 1) {
             // Bind result variables
-            mysqli_stmt_bind_result($stmt, $id, $username, $first_name, $last_name, $hashed_password);
+            mysqli_stmt_bind_result($stmt, $id, $username, $first_name, $last_name, $hashed_password, $email, $phone, $date_of_birth, $class_name, $join_date, $avatar, $description_student);
             if (mysqli_stmt_fetch($stmt)) {
               if (password_verify($password, $hashed_password)) {
                 // Password is correct, so start a new session
@@ -61,12 +61,13 @@
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
                 $_SESSION["id"] = $id;
-                $_SESSION["intern_id"] = $username;
-                $_SESSION["last_name"] = $last_name;
-                $_SESSION["first_name"] = $first_name;
+                $_SESSION["code"] = $username;
+                $_SESSION["role"] = "student";
+                $_SESSION["name"] = $first_name . " " . $last_name;
+                $_SESSION["avatar"] = $avatar;
 
-                // Redirect user to welcome page
-                header("location: ../../welcome.php");
+                // Redirect user to scr_1001 page
+                header("location: ../../scr_100x/scr_1001/scr_1001.php");
               } else {
                 // Display an error message if password is not valid
                 $password_err = "The password you entered was not valid.";
@@ -90,131 +91,94 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
+<!-- Head -->
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login</title>
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      text-align: center;
-    }
 
-    button:hover {
-      opacity: 0.8;
-    }
+<title>LOGIN | STUDENT</title>
 
-    /* Extra styles for the cancel button */
-    .custom-btn {
-      width: auto;
-      padding: 10px 18px;
-      background-color: #f44336;
-    }
+<!-- Meta-Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+<script type="application/x-javascript">
+addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); 
+function hideURLbar(){ 
+  window.scrollTo(0,1); 
+}
 
-    span.password {
-      float: right;
-      padding-top: 16px;
-    }
+</script>
+<!-- //Meta-Tags -->
 
-    /* The Modal (background) */
-    .modal {
-      background-color: rgba(0, 0, 0, 0.4);
-      /* Black w/ opacity */
-    }
+<link href="../../css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
 
-    /* Modal Content/Box */
-    .modal-content {
-      margin: 5% auto 15% auto;
-      /* 5% from the top, 15% from the bottom and centered */
-      width: 40%;
-      /* Could be more or less, depending on screen size */
-    }
+<!-- Style --> <link rel="stylesheet" href="../../css/style.css" type="text/css" media="all">
 
-    /* Add Zoom Animation */
-    .animate {
-      -webkit-animation: animatezoom 0.6s;
-      animation: animatezoom 0.6s
-    }
+<!-- Fonts -->
+<!-- //Fonts -->
 
-    @-webkit-keyframes animatezoom {
-      from {
-        -webkit-transform: scale(0)
-      }
-
-      to {
-        -webkit-transform: scale(1)
-      }
-    }
-
-    @keyframes animatezoom {
-      from {
-        transform: scale(0)
-      }
-
-      to {
-        transform: scale(1)
-      }
-    }
-
-    /* Change styles for span and cancel button on extra small screens */
-    @media screen and (max-width: 300px) {
-      span.password {
-        display: block;
-        float: none;
-      }
-
-      .custom-btn {
-        width: 100%;
-      }
-    }
-  </style>
 </head>
+<!-- //Head -->
 
+<!-- Body -->
 <body>
-  <h1>STUDENT</h1>
-  <h2>Login Form</h2>
-  <button onclick="document.getElementById('dialog').style.display='block'" class="w3-button w3-green">Login</button>
-  <a href="../../welcome.php" type="button" class="w3-button w3-dark">Back</a>
-  <div id="dialog" class="modal">
-    <form class="modal-content animate"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <div class="w3-padding-large">
-        <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-          <label for="userName"><b>Student ID</b></label>
-          <input class="w3-input w3-padding-large" type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>" required>
-          <span class="w3-text-red"><?php echo $username_err; ?></span>
-        </div>
-        <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
-          <label for="password"><b>Password</b></label>
-          <input class="w3-input w3-padding-large" type="password" placeholder="Enter Password" name="password" required>
-          <span class="w3-text-red"><?php echo $password_err; ?></span>
-        </div>
-        <button type="submit" class="w3-button w3-blue w3-block">Login</button>
-        <!-- <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label> -->
-        <p>Don't have an account? <a href="../register/student.php">Sign up now</a>.</p>
-      </div>
-      <div class="w3-padding" style="background-color:#f1f1f1">
-        <button type="reset" class="w3-btn w3-red">Reset</button>
-        <button type="button" onclick="document.getElementById('dialog').style.display='none'"  class="w3-btn w3-blue-gray">Cancel</button>
-      </div>
-    </form>
-  </div>
-  <script>
-    // Get the modal
-    var modal = document.getElementById('dialog');
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
-  </script>
-</body>
 
+	<h1>STUDENT</h1>
+
+	<div class="w3layoutscontaineragileits">
+	<h2>Login here</h2>
+		<form class="login-html" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+      <div class="<?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+        <input type="text" name="username" placeholder="Enter Student ID" value="<?php echo $username; ?>" required>
+          <p class="w3-text-red"><?php echo $username_err; ?></p>
+          <p class="w3-text-red"><?php echo $password_err; ?></p>
+      </div>
+      <div class="<?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+        <input type="password" placeholder="Enter Password" name="password" required>
+      </div>
+			<ul class="agileinfotickwthree">
+				<li>
+					<input type="checkbox" id="brand1" value="">
+					<label for="brand1"><span></span>Remember me</label>
+					<a href="#">Forgot password?</a>
+        </li>
+			</ul>
+			<div class="aitssendbuttonw3ls">
+				<input type="submit" value="LOGIN">
+				<p> To register new account <span>→</span> <a href="../register/student.php"> Click Here</a></p>
+				<p><a href="../../">Cancel</a></p>
+			</div>
+		</form>
+	</div>
+	
+	
+	<div class="w3footeragile">
+		<p> &copy; 2019 Login Form. All Rights Reserved | Design by <a href="../../" target="_blank">ORIGEN</a></p>
+	</div>
+
+	
+	<script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
+
+	<!-- pop-up-box-js-file -->  
+		<script src="../../js/jquery.magnific-popup.js" type="text/javascript"></script>
+	<!--//pop-up-box-js-file -->
+	<script>
+		$(document).ready(function() {
+		$('.w3_play_icon,.w3_play_icon1,.w3_play_icon2').magnificPopup({
+			type: 'inline',
+			fixedContentPos: false,
+			fixedBgPos: true,
+			overflowY: 'auto',
+			closeBtnInside: true,
+			preloader: false,
+			midClick: true,
+			removalDelay: 300,
+			mainClass: 'my-mfp-zoom-in'
+		});
+																		
+		});
+	</script>
+
+</body>
 </html>

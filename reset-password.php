@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="w3-padding-large">
           <input type="submit" class="w3-btn w3-red" value="Submit">
-          <a class="w3-btn w3-blue-gray" href="welcome.php">Cancel</a>
+          <a class="w3-btn w3-blue-gray" href="../">Cancel</a>
         </div>
       </form>
     </div>

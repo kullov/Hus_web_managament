@@ -8,52 +8,29 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
   exit;
 }
 
-
-
-  // Include config file
-  require "../../config.php";
+// Include config file
+require "../../config.php";
 // Define variables and initialize with empty values
-$code = $request_id = $start_date = $end_date = $status = "";
-$request_id_err = $start_date_err = $end_date_err = $status_err = "";
+$request_id = $start_date = $end_date = "";
+$start_date_err = $end_date_err = "";
 $student_id = $_SESSION["id"];
-// Prepare a select statement
-// Câu SQL lấy danh sách
-// $sql = "SELECT id, first_name, last_name, email, phone, date_of_birth, class_name, join_date, avatar, description FROM intern_profile WHERE code = ?";
- 
-// if ($stmt = mysqli_prepare($link, $sql)) {
-  
-//   // Bind variables to the prepared statement as parameters
-//   mysqli_stmt_bind_param($stmt, "s", $username);
-
-//   // Attempt to execute the prepared statement
-//   if (mysqli_stmt_execute($stmt)) {
-//     // Store result
-//     mysqli_stmt_store_result($stmt);
-//     // Check if username exists, if yes then verify password
-//     if (mysqli_stmt_num_rows($stmt) == 1) {
-//       // Bind result variables
-//       mysqli_stmt_bind_result($stmt, $id, $first_name, $last_name, $email, $phone, $date_of_birth, $class_name, $join_date, $avatar, $description);
-//       mysqli_stmt_fetch($stmt);
-//     }
-//   } else {
-//     echo "Oops! Something went wrong. Please try again later.";
-//   }
-//   // Close statement
-//   mysqli_stmt_close($stmt);
-// }
-
-
+$amount = $register = $assignment = $position = $date_created = $description = $type = $status = "";
+$id_request = trim($_GET["id"]);
+$stmt = $link->prepare("SELECT rq.`amount`, ( SELECT COUNT(*) FROM `register` rg WHERE rg.request_id = rq.id ) register, ( SELECT COUNT(*) FROM `request_assignment` ra WHERE ra.request_id = rq.id ) assigment, rq.`position`, rq.`date_created`, rq.`description`, rq.`type`, s.name 'status' FROM `request` rq, STATUS s WHERE rq.id = ? AND s.id = rq.status");
+$stmt->bind_param("s", $id_request);
+if ($stmt->execute()) {
+  $stmt->bind_result($amount, $register, $assignment, $position, $date_created, $description, $type, $status);
+  $stmt->fetch();
+} else {
+  echo "<script>alert('Failed!!')</script>";
+  header('location: scr_1001B.php');
+  exit;
+}
+$stmt->close();
 
 // Processing form data when form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (isset($_POST['btnSmt'])) {
 
-  // Validate request_id
-  if (empty(trim($_POST["request_id"]))) {
-    $request_id_err = "Please choose the request id!";
-  } else {
-    $request_id = trim($_POST["request_id"]);
-  }
-  
   // Validate start_date
   if (empty(trim($_POST["start_date"]))) {
     $start_date_err = "Please enter your start date!";
@@ -67,36 +44,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $end_date = trim($_POST["end_date"]);
   }
-
-  // Validate status
-  // if (empty(trim($_POST["status"]))) {
-  //   $status_err = "Please choose status!";
-  // } else {
-  //   $status = trim($_POST["status"]);
-  // }
-  // $code = trim($_POST["code"]);
+  $request_id = trim($_POST["request_id"]);
+  $student_id = trim($_POST["student_id"]);
 
   // Prepare an insert statement
-  $sql = " INSERT INTO `register` (`request_id`, `intern_id`, `start_date`, `end_date`) VALUES (?, ?, ?, ?);";
-
-  if ($stmt = mysqli_prepare($link, $sql)) {
-    // Bind variables to the prepared statement as parameters
-    mysqli_stmt_bind_param($stmt, "ssss", $request_id, $student_id, $start_date, $end_date);
-    // Attempt to execute the prepared statement
-    if (mysqli_stmt_execute($stmt)) {
-      // Redirect to login page
-      echo "<scrip>alert('Đăng ký thành công!');</scrip>";
-      header("location: scr_1001.php");
-    } else {
-      echo "<scrip>alert('Đăng ký không thành công!');</scrip>";
-      echo "Something went wrong. Please try again later.";
-    }
-    mysqli_stmt_close($stmt);
+  $stmt = $link->prepare("INSERT INTO `register` (`request_id`, `intern_id`, `start_date`, `end_date`) VALUES (?, ?, ?, ?);");
+  $stmt->bind_param("ssss", $id_request, $student_id, $start_date, $end_date);
+  if ($stmt->execute()) {
+    echo "<scrip>alert('Đăng ký thành công!');</scrip>";
+    header("location: scr_1001.php");
+    exit;
+  } else {
+    echo "<script>alert('Đăng ký không thành công!');</script>";
+    echo "Something went wrong. Please try again later.";
+    exit;
   }
-  // Close connection
-  mysqli_close($link);
+  $stmt->close();
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -133,16 +97,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-transparent w3-display-topright"></i>
         <h3 class="w3-center">PHIẾU ĐĂNG KÝ</h3>
         <p class="w3-center"><i>Sinh viên đăng ký nguyện vọng thực tập vào doanh nghiệp.</i></p>
-        <form action="" method="post">
-          <div class="form-group <?php echo (!empty($request_id_err)) ? 'has-error' : ''; ?>">
+        <form action="scr_1001A.php?id=<?php echo $id_request ?>" method="post">
+          <div>
             <p><label><i class="fa fa-qrcode"></i> Mã phiếu yêu cầu</label></p>
-            <select class="w3-select w3-border" name="request_id" required value="<?php echo $request_id; ?>">
-              <option value="" disabled selected>Chọn mã phiếu</option>
-              <option value="0" >1000</option>
-              <option value="1" >1001</option>
-              <option value="2" >1002</option>
-            </select>
-            <span class="w3-text-red"><?php echo $request_id_err; ?></span>
+            <input class="w3-input w3-border" type="text" name="request_id" disabled value="<?php echo $id_request; ?>">
+            <input class="w3-input w3-border w3-hide" type="text" name="student_id" value="<?php echo $student_id; ?>">
           </div>
           <div class="form-group <?php echo (!empty($start_date_err)) ? 'has-error' : ''; ?>">
             <p><label><i class="fa fa-calendar-check-o"></i> Ngày bắt đầu</label></p>
@@ -154,22 +113,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input class="w3-input w3-border" type="date" placeholder="DD MM YYYY" name="end_date" required value="<?php echo $end_date; ?>">
             <span class="w3-text-red"><?php echo $end_date_err; ?></span>
           </div>
-          <!-- <div class="form-group <?php echo (!empty($status_err)) ? 'has-error' : ''; ?>">
-            <p><label><i class="fa fa-hourglass-start"></i> Trạng thái</label></p>
-            <select class="w3-select w3-border" name="status" required value="<?php echo $status; ?>">
-              <option value="" disabled selected>Chọn trạng thái</option>
-              <option value="0">Đang chờ</option>
-              <option value="1">Đang thực hiện</option>
-              <option value="2">Đã thực hiện xong</option>
-            </select>
-            <span class="w3-text-red"><?php echo $status_err; ?></span>
-          </div> -->
           <p>
-            <button type="submit" class="w3-button w3-dark-grey w3-block">Đăng ký</button>
+            <button type="submit" name="btnSmt" class="w3-button w3-dark-grey w3-block">Đăng ký</button>
           </p>
         </form>
         <p class="w3-center">
-          <a href="scr_1001.php" onclick="w3_close()" class="w3-bar-item w3-button w3-margin-bottom">TRỞ VỂ</a>
+          <a href="scr_1001B.php" onclick="w3_close()" class="w3-bar-item w3-button w3-margin-bottom">TRỞ VỂ</a>
         </p>
       </div>
     </nav>
@@ -191,8 +140,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       <!-- Slideshow Header -->
       <div class="w3-container" id="space">
-        <h1 class="w3-text-green">Java Job</h1>
-        <h6>Mã phiếu: <b>1012</b></h6>
+        <h1 class="w3-text-green w3-center"><strong><?php echo $position ?></strong></h1>
+        <h6>Mã phiếu: <b><?php echo $id_request ?></b></h6>
         <hr>
         <h4><strong>KHÔNG GIAN</strong></h4>
         <div class="w3-display-container mySlides">
@@ -235,24 +184,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </div>
       <div id="about" class="w3-container">
+        <br><br><br>
         <h4><strong>THÔNG TIN</strong></h4>
-        <div class="w3-row w3-large w3-margin-left">
-          <div class="w3-col s6">
-            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>30</b> người</p>
-            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: 62</p>
+        <div class="w3-row w3-large">
+          <div class="w3-col s6" style="padding-left: 50px;">
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b><?php echo $amount ?></b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <?php echo $register ?></p>
             <p><i class="fa fa-fw fa-clock-o"></i> Check In: 8:30 AM</p>
             <p><i class="fas fa-map-marker-alt"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
           </div>
-          <div class="w3-col s5 w3-margin-left">
+          <div class="w3-col s6" style="padding-left: 100px;">
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>
-            <p><i class="fas fa-check-double"></i> Đã được phân công: 10</p>
+            <p><i class="fas fa-check-double"></i> Đã được phân công: <?php echo $assignment ?></p>
             <p><i class="fa fa-fw fa-clock-o"></i> Check Out: 5:30 PM</p>
-            <p><i class="fas fa-calendar-alt"></i> Hình thức làm việc: Fulltime</p>
+            <p><i class="fas fa-calendar-alt"></i> Hình thức làm việc: <?php echo $type ?></p>
           </div>
         </div>
         <hr>
         
         <h4><strong>MÔ TẢ CÔNG VIỆC</strong></h4>
+        <p>• <?php echo $description ?></p>
         <p>• Tham gia triển khai dự án nền tảng ngân hàng số, trực tiếp lập trình và hỗ trợ các thành viên trong nhóm lập trình (Java/JavaScripts)</p>
         <p>• Tiếp nhận chuyển giao công nghệ từ nhà cung cấp giải pháp</p>
         <p>• Chủ động cập nhật các xu hướng, công nghệ, giải pháp mới nhằm đề xuất những ứng dụng đáp ứng tốt hơn nhu cầu của Khách hàng và các bộ phận trong Ngân hàng</p>
@@ -260,13 +211,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <h4><strong>PHÚC LỢI</strong></h4>
         <div class="w3-row w3-large">
-          <div class="w3-col s6">
-            <p><i class="fa fa-fw fa-shower"></i> Playing</p>
+          <div class="w3-col s6" style="padding-left: 50px;">
+            <p><i class="fas fa-volleyball-ball"></i> Playing</p>
             <p><i class="fa fa-fw fa-wifi"></i> WiFi</p>
-            <p><i class="fa fa-fw fa-tv"></i> TV</p>
+            <p><i class="fa fa-fw fa-tv"></i> Equipment</p>
           </div>
-          <div class="w3-col s6">
-            <p><i class="fa fa-fw fa-cutlery"></i> Kitchen</p>
+          <div class="w3-col s6"style="padding-left: 100px;">
+            <p><i class="fa fa-fw fa-cutlery"></i> Banquet</p>
             <p><i class="fa fa-fw fa-thermometer"></i> Heating</p>
             <p><i class="fa fa-fw fa-wheelchair"></i> Accessible</p>
           </div>
@@ -277,31 +228,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <p>• Môi trường làm việc chuyên nghiệp</p>
           <p>• Có cơ hội thăng tiến, đào tạo</p>
         </div>
-        <hr>
       </div>
+      <hr>
       
       <!-- Yêu cầu -->
       <div class="w3-container" id="require">
+        <br><br><br>
         <h4><strong>YÊU CẦU</strong></h4>
-        <p>• Tốt nghiệp Đại học nước ngoài hoặc tốt nghiệp hệ kỹ sư tài năng các trường Đại học chính quy như ĐH Quốc Gia Hà Nội, ĐH Bách Khoa, ĐH Khoa học tự nhiên, Đại học FPT…</p>
-        <p>• Có kinh nghiệm lập trình về <b>Java</b></p>
-        <p>• Có thể làm việc bằng tiếng Anh với người nước ngoài – tương đương TOEFL iBT 85 điểm trở lên</p>
-        <p>• Có kỹ năng làm việc nhóm, có tinh thần trách nhiệm cao.</p>
-        <p>• Ưu tiên kinh nghiệm với AngularJS (từ 2 trở lên), CSS (SASS), HTML5, Bootstrap</p>
-        <p>• Ưu tiên kinh nghiệm với Java 8, Spring Boot, Hibernate, Rest APIs, Micro services, design patterns và TDD</p>
-        <p>• Cam kết thực tập tối thiểu 3 tháng</p>
-        <hr>
+        <h5><strong>Danh sách năng lực yêu cầu:</strong></h5>
+        <ul style="padding-left: 270px;">
+          <?php 
+            $stmt = $link->prepare("SELECT ra.`request_id`, ra.`ability_id`, dic.name FROM `request_ability` ra, ability_dictionary dic WHERE ra.`request_id` = ? and ra.`ability_id`= dic.id");
+            $stmt->bind_param("s", $id_request);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while($row = $result->fetch_assoc()) {
+              echo '<li value="'.$row["ability_id"].'">'.$row["name"].'</li><hr style="width: 20%;">';
+            }
+            $stmt->close();
+            // Close connection
+            mysqli_close($link);
+          ?>
+        </ul>
+        <h5><strong>Yêu cầu thêm:</strong></h5>
+        <ul class="w3-ul">
+          <li>• Tốt nghiệp Đại học nước ngoài hoặc tốt nghiệp hệ kỹ sư tài năng các trường Đại học chính quy như ĐH Quốc Gia Hà Nội, ĐH Bách Khoa, ĐH Khoa học tự nhiên, Đại học FPT…</li>
+          <li>• Có kinh nghiệm lập trình về <b>Java</b></li>
+          <li>• Có thể làm việc bằng tiếng Anh với người nước ngoài – tương đương TOEFL iBT 85 điểm trở lên</li>
+          <li>• Có kỹ năng làm việc nhóm, có tinh thần trách nhiệm cao.</li>
+          <li>• Ưu tiên kinh nghiệm với AngularJS (từ 2 trở lên), CSS (SASS), HTML5, Bootstrap</li>
+          <li>• Ưu tiên kinh nghiệm với Java 8, Spring Boot, Hibernate, Rest APIs, Micro services, design patterns và TDD</li>
+          <li>• Cam kết thực tập tối thiểu 3 tháng</li>
+        </ul>
       </div>
+
       <!-- Contact -->
       <div class="w3-container" id="contact" style="margin-bottom:120px">
-        <h4><strong>LIÊN HỆ</strong></h4>
+        <h2>LIÊN HỆ</h2>
         <i class="fa fa-map-marker" style="width:30px"></i> 334 Nguyễn Trãi, Thanh Xuân, Hà Nội<br>
         <i class="fa fa-phone" style="width:30px"></i> Phone: 0349.749.393<br>
         <i class="fa fa-envelope" style="width:30px"> </i> Email: tranthanhnga_t61@hus.edu.vn<br>
       </div>
       
-      <footer class="w3-container w3-padding-16 w3-black w3-center" style="margin-top:32px">Powered by 
+      <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by 
         <a href="/web_management/" title="Origen" target="_blank" class="w3-hover-text-green">Origen</a>
+        <a class="w3-button w3-green w3-right" href="scr_1001B.php">Trở về</a>
       </footer>
 
     <!-- End page content -->

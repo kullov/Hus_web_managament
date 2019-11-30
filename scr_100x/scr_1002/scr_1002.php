@@ -146,53 +146,51 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <br>
       <h3 class="w3-container"><b>Danh sách phiếu yêu cầu</b></h3>
       <!-- Second Photo Grid-->
-      <form action="" method="post">
-        <?php 
-          // echo $listRequest 
-          if ($_SESSION["role"] === "organization") {
-            $stmt4 = $link->prepare("SELECT r.`id`, o.`name`, r.`position`, o.`address`, r.`amount`, r.`date_created`, r.`description`, r.`type`, r.`status`, ( SELECT COUNT(*) FROM `request_assignment` ra WHERE ra.request_id = r.id ) assignment FROM `request` r, organization_profile o WHERE r.`organization_id` = o.id AND o.`id` = 21 ORDER BY r.id DESC LIMIT 6" );
-            // $stmt4->bind_param("s", $id);
-            $stmt4->execute();
-            $result = $stmt4->get_result();
-            echo '<div class="w3-row-padding">';
-            $i = 1;
-            while($row = $result->fetch_assoc()) {
-              echo '
-              <div class="w3-third w3-container w3-margin-bottom">
-                <img src="https://www.ourlincolnpark.com/wp-content/uploads/2014/07/I-wish-it-were-that-easy.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-                <div class="w3-container w3-white" style="height:270px;">
-                  <h3 class="w3-center"><i>Vị trí: </i><b>'.$row['position'].'</b></h3>
-                  <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: '.$row['name'].'</h4>
-                  <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>'.$row['amount'].'</b> người</p>
-                  <p><i "fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>'.$row['assignment'].'</b></p>
-                  <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: '.$row['address'].'</p>
-                  <p><i class="fa fa-fw fa-check"></i> Trạng thái: ';
-              if ( $row['status'] === 1) {
-                echo 'Hết hiệu lực';
-              } else {
-                echo 'Còn hiệu lực';
-              }
-              echo '</p>
-                </div>
-                <div class="w3-white" style="height: 38px;">
-                  <a href="scr_1002E.php" ><button type="submit" name='.$i.' class="w3-button w3-right w3-green">Chi tiết</button></a>
-                </div>
-              </div>';
-              if (isset($_POST[$i])) {
-                session_start();
-                // Store data in session variables
-                $_SESSION["request_id"] = $row["id"];
-                echo '<script>window.location.replace("scr_1002E.php");</script>';
-              }
-              $i++;
+      <?php 
+        // echo $listRequest 
+        if ($_SESSION["role"] === "organization") {
+          $stmt4 = $link->prepare("SELECT r.`id`, o.`name`, r.`position`, o.`address`, r.`amount`, r.`date_created`, r.`description`, r.`type`, r.`status`, ( SELECT COUNT(*) FROM `request_assignment` ra WHERE ra.request_id = r.id ) assignment FROM `request` r, organization_profile o WHERE r.`organization_id` = o.id AND o.`id` = 21 ORDER BY r.id DESC LIMIT 6" );
+          // $stmt4->bind_param("s", $id);
+          $stmt4->execute();
+          $result = $stmt4->get_result();
+          echo '<div class="w3-row-padding">';
+          $i = 1;
+          while($row = $result->fetch_assoc()) {
+            echo '
+            <div class="w3-third w3-container w3-margin-bottom">
+              <img src="https://www.ourlincolnpark.com/wp-content/uploads/2014/07/I-wish-it-were-that-easy.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+              <div class="w3-container w3-white" style="height:270px;">
+                <h3 class="w3-center"><i>Vị trí: </i><b>'.$row['position'].'</b></h3>
+                <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: '.$row['name'].'</h4>
+                <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>'.$row['amount'].'</b> người</p>
+                <p><i "fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>'.$row['assignment'].'</b></p>
+                <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: '.$row['address'].'</p>
+                <p><i class="fa fa-fw fa-check"></i> Trạng thái: ';
+            if ( $row['status'] === 2) {
+              echo 'Hết hiệu lực';
+            } else {
+              echo 'Còn hiệu lực';
             }
-            echo '</div>';
-            
-            $stmt4->close();
+            echo '</p>
+              </div>
+              <div class="w3-white" style="height: 38px;">
+                <form action="scr_1002E.php?id='.$row["id"].'" method="post"><button type="submit" name='.$i.' class="w3-button w3-right w3-green">Chi tiết</button></form>
+              </div>
+            </div>';
+            // if (isset($_POST[$i])) {
+            //   session_start();
+            //   // Store data in session variables
+            //   $_SESSION["request_id"] = $row["id"];
+            //   echo '<script>window.location.replace("scr_1002E.php?id='.$row['id'].'");</script>';
+            // }
+            $i++;
           }
+          echo '</div>';
           
-        ?>
-      </form>
+          $stmt4->close();
+        }
+        
+      ?>
       
       <div class="w3-center w3-padding-32 w3-row-padding">
         <div class="w3-bar">

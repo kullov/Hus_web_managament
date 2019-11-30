@@ -37,9 +37,11 @@ if ($stmt = mysqli_prepare($link, $sql)) {
   } else {
     echo "Oops! Something went wrong. Please try again later.";
   }
-  // Close statement
-  mysqli_stmt_close($stmt);
 }
+
+// Close connection
+mysqli_close($link);
+
 ?>
 
 <!DOCTYPE html>

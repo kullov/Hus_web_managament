@@ -1,12 +1,28 @@
 <?php
 // Initialize the session
 session_start();
-
+// Include config file
+require "../../config.php";
 // Check if the user is logged in, if not then redirect him to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   header("location: ../../");
   exit;
 }
+$amount = $register = $assignment = $position = $date_created = $description = $type = $status = "";
+$id_request = trim($_GET["id"]);
+$stmt = $link->prepare("SELECT rq.`amount`, ( SELECT COUNT(*) FROM `register` rg WHERE rg.request_id = rq.id ) register, ( SELECT COUNT(*) FROM `request_assignment` ra WHERE ra.request_id = rq.id ) assigment, rq.`position`, rq.`date_created`, rq.`description`, rq.`type`, s.name 'status' FROM `request` rq, STATUS s WHERE rq.id = ? AND s.id = rq.status");
+$stmt->bind_param("s", $id_request);
+if ($stmt->execute()) {
+  $stmt->bind_result($amount, $register, $assignment, $position, $date_created, $description, $type, $status);
+  $stmt->fetch();
+} else {
+  echo "<script>alert('Failed!!')</script>";
+  header('location: scr_1001B.php');
+  exit;
+}
+$stmt->close();
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,14 +41,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
   <?php include("../../navigation.php"); ?>
   <div style="margin-top: 55px;">
     <!-- Sidebar/menu -->
-    <nav class="w3-sidebar w3-light-grey w3-bar-block w3-collapse w3-top w3-center" style="z-index:3;width:250px; margin-top: 55px;" id="mySidebar">
+    <nav class="w3-sidebar w3-light-grey w3-bar-block w3-collapse w3-top w3-center" style="z-index:3;width:250px; padding-top: 55px;padding-bottom: 55px;" id="mySidebar">
       <h3 class="w3-padding-64 w3-center"><b>NEWWAVE <br>Solution JSC</b></h3>
       <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-hide-large">ĐÓNG</a>
       <a href="#space" onclick="w3_close()" class="w3-bar-item w3-button">KHÔNG GIAN</a> 
       <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">THÔNG TIN</a> 
       <a href="#require" onclick="w3_close()" class="w3-bar-item w3-button">YÊU CẦU</a> 
-      <a href="scr_1001A.php" onclick="w3_close()" class="w3-bar-item w3-button">ĐĂNG KÝ</a> 
+      <form action="scr_1001A.php?id=<?php echo $id_request?>" method="post"><button type="submit" name="registerBtnSmt" onclick="w3_close()" class="w3-bar-item w3-button  <?php if (($_SESSION["role"]) !== "student") { ?> w3-hide <?php }?> ">ĐĂNG KÝ</button></form> 
       <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">LIÊN HỆ</a>
+      <a href="scr_1001B.php" onclick="w3_close()" class="w3-bar-item w3-button">TRỞ VỀ</a>
     </nav>
 
     <!-- Top menu on small screens -->
@@ -51,8 +68,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <div class="w3-hide-large" style="margin-top:80px"></div>
 
       <!-- Slideshow Header -->
-        <h1 class="w3-center">Phiếu yêu cầu của doanh nghiệp</h1>
-      <h6>Mã phiếu: <b>1012</b></h6>
+      <h3 class="w3-center"><i>PHIẾU YÊU CẦU CỦA DOANH NGHIỆP</i></h3>
+      <h3 class="w3-center"><i><span>VỊ TRÍ TUYỂN DỤNG:</span> <strong style="font-size: xx-large;" class="w3-text-red"><?php echo $position ?></strong></i></h3>
+      <h6>Mã phiếu: <b><?php echo $id_request ?></b></h6>
       <div class="w3-container" id="space">
         <hr>
         <br>
@@ -100,36 +118,37 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
         <br><br><br>
         <h4><strong>THÔNG TIN</strong></h4>
         <div class="w3-row w3-large">
-          <div class="w3-col s6">
-            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>30</b> người</p>
-            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: 62</p>
+          <div class="w3-col s6" style="padding-left: 50px;">
+            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b><?php echo $amount ?></b> người</p>
+            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <?php echo $register ?></p>
             <p><i class="fa fa-fw fa-clock-o"></i> Check In: 8:30 AM</p>
             <p><i class="fas fa-map-marker-alt"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
           </div>
-          <div class="w3-col s6">
+          <div class="w3-col s6" style="padding-left: 100px;">
             <p><i class="fa fa-fw fa-check"></i> Trạng thái: Còn hiệu lực</p>
-            <p><i class="fas fa-check-double"></i> Đã được phân công: 10</p>
+            <p><i class="fas fa-check-double"></i> Đã được phân công: <?php echo $assignment ?></p>
             <p><i class="fa fa-fw fa-clock-o"></i> Check Out: 5:30 PM</p>
-            <p><i class="fas fa-calendar-alt"></i> Hình thức làm việc: Fulltime</p>
+            <p><i class="fas fa-calendar-alt"></i> Hình thức làm việc: <?php echo $type ?></p>
           </div>
         </div>
         <hr>
         
-        <h4><strong>Mô tả công việc</strong></h4>
+        <h4><strong>MÔ TẢ CÔNG VIỆC</strong></h4>
+        <p>• <?php echo $description ?></p>
         <p>• Tham gia triển khai dự án nền tảng ngân hàng số, trực tiếp lập trình và hỗ trợ các thành viên trong nhóm lập trình (Java/JavaScripts)</p>
         <p>• Tiếp nhận chuyển giao công nghệ từ nhà cung cấp giải pháp</p>
         <p>• Chủ động cập nhật các xu hướng, công nghệ, giải pháp mới nhằm đề xuất những ứng dụng đáp ứng tốt hơn nhu cầu của Khách hàng và các bộ phận trong Ngân hàng</p>
         <hr>
 
-        <h4><strong>Phúc lợi</strong></h4>
+        <h4><strong>PHÚC LỢI</strong></h4>
         <div class="w3-row w3-large">
-          <div class="w3-col s6">
-            <p><i class="fa fa-fw fa-shower"></i> Playing</p>
+          <div class="w3-col s6" style="padding-left: 50px;">
+            <p><i class="fas fa-volleyball-ball"></i> Playing</p>
             <p><i class="fa fa-fw fa-wifi"></i> WiFi</p>
-            <p><i class="fa fa-fw fa-tv"></i> TV</p>
+            <p><i class="fa fa-fw fa-tv"></i> Equipment</p>
           </div>
-          <div class="w3-col s6">
-            <p><i class="fa fa-fw fa-cutlery"></i> Kitchen</p>
+          <div class="w3-col s6"style="padding-left: 100px;">
+            <p><i class="fa fa-fw fa-cutlery"></i> Banquet</p>
             <p><i class="fa fa-fw fa-thermometer"></i> Heating</p>
             <p><i class="fa fa-fw fa-wheelchair"></i> Accessible</p>
           </div>
@@ -146,7 +165,21 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
       <!-- Yêu cầu -->
       <div class="w3-container" id="require">
         <br><br><br>
-        <h2>YÊU CẦU</h2>
+        <h4><strong>YÊU CẦU</strong></h4>
+        <h5><strong>Danh sách năng lực yêu cầu:</strong></h5>
+        <ul style="padding-left: 270px;">
+          <?php 
+            $stmt = $link->prepare("SELECT ra.`request_id`, ra.`ability_id`, dic.name FROM `request_ability` ra, ability_dictionary dic WHERE ra.`request_id` = ? and ra.`ability_id`= dic.id");
+            $stmt->bind_param("s", $id_request);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while($row = $result->fetch_assoc()) {
+              echo '<li value="'.$row["ability_id"].'">'.$row["name"].'</li><hr style="width: 20%;">';
+            }
+            $stmt->close();
+          ?>
+        </ul>
+        <h5><strong>Yêu cầu thêm:</strong></h5>
         <ul class="w3-ul">
           <li>• Tốt nghiệp Đại học nước ngoài hoặc tốt nghiệp hệ kỹ sư tài năng các trường Đại học chính quy như ĐH Quốc Gia Hà Nội, ĐH Bách Khoa, ĐH Khoa học tự nhiên, Đại học FPT…</li>
           <li>• Có kinh nghiệm lập trình về <b>Java</b></li>
@@ -164,13 +197,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", Arial, Helvetica, sans-serif}
         <i class="fa fa-map-marker" style="width:30px"></i> 334 Nguyễn Trãi, Thanh Xuân, Hà Nội<br>
         <i class="fa fa-phone" style="width:30px"></i> Phone: 0349.749.393<br>
         <i class="fa fa-envelope" style="width:30px"> </i> Email: tranthanhnga_t61@hus.edu.vn<br>
-        <p>Bạn có câu hỏi? Hãy để lại thông tin:</p>
-        <form action="/action_page.php" target="_blank">
-          <p><input class="w3-input w3-border" type="text" placeholder="Tên của bạn" required name="Name"></p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Hãy phản hồi cho chúng tôi" required name="Message"></p>
-        <button type="submit" class="w3-button w3-green w3-third">Gửi phản hồi</button>
-        </form>
       </div>
       
       <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by 

@@ -198,23 +198,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p><input class="w3-input w3-border" type="text" name="amount" value="<?php echo $amount ?>" placeholder="" required></p>
           </div>
           <div class="w3-half w3-padding">
-            <label>Vị trí tuyển dụng:</label>
+            <label><i class="far fa-dot-circle"></i> Vị trí tuyển dụng:</label>
             <p><input class="w3-input w3-border" type="text" placeholder="" name="position" value="<?php echo $position ?>" required></p>
           </div>
         </div>
         <div class="w3-row-padding">
           <div class="w3-half w3-padding">
-            <label>Trạng thái:</label>
+            <label><i class="fas fa-check-square"></i> Trạng thái:</label>
             <p>
               <select class="w3-select w3-border" name="status" value="<?php echo $status ?>" required>
                 <option value="" disabled selected>Chọn trạng thái</option>
-                <option value="2">Còn hiệu lực</option>
-                <option value="1">Hết hiệu lực</option>
+                <option value="1">Còn hiệu lực</option>
+                <option value="2">Hết hiệu lực</option>
               </select>
             </p>
           </div>
           <div class="w3-half w3-padding">
-            <label>Hình thức làm việc:</label>
+            <label><i class="fa fa-star-half-full"></i> Hình thức làm việc:</label>
             <p>
               <span>
                 <input class="w3-radio" type="radio" name="type" value="fulltime" checked>

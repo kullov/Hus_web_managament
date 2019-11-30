@@ -11,45 +11,37 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION
 require "../../config.php";
 
 // Define variables and initialize with empty values
-$id_request = $name = $amount = $position = $type = $status = $description = "";
+$name = $amount = $position = $type = $status = $description = "";
 $skill = $item = "";
 $name_err = $amount_err = $position_err = $type_err = $description_err = $status_err = "";
 $organization_id = $_SESSION["id"];
 
-$sql2 = "SELECT `id`, `organization_id`, `position`, `amount`, `status`, `description`, `type` FROM `request` WHERE id = ?";
-if ($stmt2 = mysqli_prepare($link, $sql2)) {
-  // Bind variables to the prepared statement as parameters
-  mysqli_stmt_bind_param($stmt2, "s", $_SESSION["request_id"]);
-  // Attempt to execute the prepared statement
+$id_request = trim($_GET["id"]);
 
-  if (mysqli_stmt_execute($stmt2)) {
-    // Store result
-    mysqli_stmt_store_result($stmt2);
-    // Check if username exists, if yes then verify password
-    if (mysqli_stmt_num_rows($stmt2) == 1) {
-      // Bind result variables
-      mysqli_stmt_bind_result($stmt2, $id_request, $organization_id, $position, $amount, $status, $description, $type);
-      mysqli_stmt_fetch($stmt2);
-      // echo "<h4 class='w3-center w3-text-red' style='margin-top:100px; z-index:100; margin-left:300px'> $id_request : $skill </h1>";
-    }
-  } else {
-    echo "<h4 class='w3-center w3-text-red' style='margin-top:100px; z-index:100; margin-left:300px'>Something went wrong. Please try again later.</h1>";
-  }
-  mysqli_stmt_close($stmt2);
+$stmt = $link->prepare("SELECT r.`id`, r.`organization_id`, r.`position`, r.`amount`, r.`status`, r.`description`, r.`type` FROM `status` s, `request` r WHERE s.id = r.status AND r.id = ?");
+$stmt->bind_param("s", $id_request);
+if ($stmt->execute()) {
+  $stmt->bind_result($id_request, $organization_id, $position, $amount, $status, $description, $type);
+  $stmt->fetch();
+} else {
+  echo "<script>alert('Failed!!')</script>";
+  exit;
 }
+$stmt->close();
+
 $id_a = "";
 $ability_id = $ability_required = $description_ability = $toReturn = "";
 function loadSkill() {
-  global $link, $toReturn;
+  global $link, $toReturn,$id_request;
   global $id_a;
-  $stmt4 = $link->prepare("SELECT r_b.`ability_id`, a_d.`name` FROM `request_ability` r_b, `ability_dictionary` a_d WHERE r_b.`ability_id` = a_d.`id` AND r_b.`request_id` = ?");
-  $stmt4->bind_param("s", $_SESSION["request_id"]);
+  $stmt4 = $link->prepare("SELECT r_b.`ability_id`, a_d.`name`, r_b.`request_id` FROM `request_ability` r_b, `ability_dictionary` a_d WHERE r_b.`ability_id` = a_d.`id` AND r_b.`request_id` = ?");
+  $stmt4->bind_param("s", $id_request);
   $stmt4->execute();
   $result_skill = $stmt4->get_result();
   while($row = $result_skill->fetch_assoc()) {
     $toReturn = $toReturn. 
-      "<form action='scr_1002E.php' method='post'><tr>
-        <td value='".$row['ability_id']."'>".$row['name']." 
+      "<form action='scr_1002E.php?id=".$row['request_id']."' method='post'><tr>
+        <td value='".$row['ability_id']."'><i class='fas fa-star'></i>   ".$row['name']." 
           <input type='hidden' name='id' value=".$row["ability_id"]." />
           
         </td>
@@ -66,12 +58,12 @@ if (isset($_POST['deletebtn'])) {
   $stmt5 = $link->prepare("DELETE FROM `request_ability` WHERE ability_id = ?;");
   $stmt5->bind_param("s", $did);
   if ($stmt5->execute()) {
-    echo "<script>alert('Xoa thanh cong!')</script>";
-    header('location: scr_1002E.php');
+    echo "<script>alert('Xóa kỹ năng thành công!')</script>";
+    header('location: scr_1002E.php?id='.$id_request);
     exit;
   } else {
     echo "<script>alert('Failed!!')</script>";
-    header('location: scr_1002E.php');
+    header('location: scr_1002E.php?id='.$id_request);
     exit;
   }
   $stmt5->close();
@@ -81,12 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Processing form data when form is submitted
   if (isset($_POST['save'])) {
     
-    // Validate description
-    // if (empty(trim($_POST["description"]))) {
-    //   $description_err = "Please enter description!";
-    // } else {
-      $description = trim($_POST["description"]);
-      // }
+    $description = trim($_POST["description"]);
       
     // Validate position
     if (empty(trim($_POST["position"]))) {
@@ -139,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html>
-<title>Tạo phiếu yêu cầu</title>
+<title>Biên tập phiếu yêu cầu</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -213,7 +200,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <!-- !PAGE CONTENT! -->
   <div class="w3-main" style="margin-left:300px;">
     <h3 class="w3-center w3-padding"><strong>BIÊN DỊCH PHIẾU YÊU CẦU</strong></h3>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" id="form1" method="post">
+    <form action="scr_1002E.php?id=<?php echo $id_request ?>" method="post">
       <div id="about" class="w3-container">
         <h4><strong>THÔNG TIN</strong></h4>
         <div class="w3-row-padding">
@@ -222,32 +209,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p><input class="w3-input w3-border" type="text" name="amount" value="<?php echo $amount ?>" placeholder="" required></p>
           </div>
           <div class="w3-half w3-padding">
-            <label>Vị trí tuyển dụng:</label>
+            <label><i class="far fa-dot-circle"></i> Vị trí tuyển dụng:</label>
             <p><input class="w3-input w3-border" type="text" placeholder="" name="position" value="<?php echo $position ?>" required></p>
           </div>
         </div>
         <div class="w3-row-padding">
           <div class="w3-half w3-padding">
-            <label>Trạng thái:</label>
+            <label><i class="fas fa-check-square"></i> Trạng thái:</label>
             <p>
               <select class="w3-select w3-border" name="status" value="<?php echo $status ?>" required>
-                <option value="" disabled selected>Chọn trạng thái</option>
-                <option value="2">Còn hiệu lực</option>
-                <option value="1">Hết hiệu lực</option>
+                <option <?php if ($status == 1) { ?> selected <?php }?> value="1">Còn hiệu lực</option>
+                <option <?php if ($status == 2) { ?> selected <?php }?> value="2">Hết hiệu lực</option>
               </select>
             </p>
           </div>
           <div class="w3-half w3-padding">
-            <label>Hình thức làm việc:</label>
+            <label><i class="fa fa-star-half-full"></i> Hình thức làm việc:</label>
             <p>
-              <span>
-                <input class="w3-radio" type="radio" name="type" value="fulltime" checked>
-                <label>Fulltime</label>
-              </span>
-              <span class="w3-padding">
-                <input class="w3-radio" type="radio" name="type" value="partime">
-                <label>Partime</label>
-              </span>
+              <select class="w3-select w3-border" name="type" value="<?php echo $type ?>" required>
+                <option <?php if ($type == "Fulltime") { ?> selected <?php }?> value="Fulltime">Fulltime</option>
+                <option <?php if ($type == "Partime") { ?> selected <?php }?> value="Partime">Partime</option>
+              </select>
             </p>
           </div>
         </div>
@@ -266,23 +248,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h4><strong>Mô tả công việc</strong></h4>
         <div class="w3-row-padding">
           <div class="w3-padding">
-            <textarea class="w3-input w3-border" type="textarea" placeholder="Thêm mô tả" name="description" value="<?php echo $description?>" ></textarea>
+            <textarea class="w3-input w3-border" type="text" placeholder="Thêm mô tả" name="description" value="<?php echo $description?>" ><?php echo $description?></textarea>
           </div>
         </div>
         <hr>
       </div>
-      
+      <div class="w3-row-padding w3-center">
+        <button type="submit" class=" w3-button w3-teal" name="save" >Lưu lại</button>
+      </div>
     </form>
     <div class="w3-padding" id="require">
       <br><br>
       <h4><strong>Danh sách năng lực</strong></h4>
       <div class="w3-row-padding">
-        <form action="addSkill.php" method="post">
+        <form action="addSkill.php?id=<?php echo $id_request?>" method="post">
           <div id="myDIV" class="header w3-padding w3-third">
             <select class="w3-input w3-border" name="item" value="<?php echo $item ?>" >
               <option value="0" disabled selected>Thêm kỹ năng</option>
               <?php 
-                $stmt4 = $link->prepare("SELECT a_d.id, a_d.name FROM ability_dictionary a_d WHERE a_d.id NOT IN(SELECT c.ability_id FROM request_ability c GROUP BY c.ability_id)");
+                $stmt4 = $link->prepare("SELECT a_d.id, a_d.name FROM ability_dictionary a_d WHERE a_d.id NOT IN(SELECT c.ability_id FROM request_ability c  WHERE c.request_id = ? GROUP BY c.ability_id)");
+                $stmt4->bind_param("s", $id_request);
                 $stmt4->execute();
                 $result = $stmt4->get_result();
                 while($row = $result->fetch_assoc()) {

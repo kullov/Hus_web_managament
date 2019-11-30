@@ -141,19 +141,21 @@ $name_organization = $address_organization = $toReturn = $r_date_created = $r_po
           echo '<div class="w3-row-padding">';
           while($row = $result->fetch_assoc()) {
             echo '
-            <div class="w3-third w3-container w3-margin-bottom">
-              <img src="https://www.ourlincolnpark.com/wp-content/uploads/2014/07/I-wish-it-were-that-easy.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-              <div class="w3-container w3-white" style="height:270px;">
-                <h3 class="w3-center"><i>Vị trí tuyển dụng: </i><b>'.$row['position'].'</b></h3>
-                <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: '.$row['name'].'</h4>
-                <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>'.$row['amount'].'</b> người</p>
-                <p><i "fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>'.$row['assignment'].'</b></p>
-                <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: '.$row['address'].'</p>
-                </div>
-                <div class="w3-white" style="height: 38px;">
-                  <a href="../scr_1001/scr_1001V.php"><button type="submit" class="w3-button w3-right w3-green">Chi tiết</button></a>
-                </div>
-            </div>';
+            <form action="../scr_1001/scr_1001V.php?id='.$row['id'].'" method="post">
+              <div class="w3-third w3-container w3-margin-bottom">
+                <img src="https://www.ourlincolnpark.com/wp-content/uploads/2014/07/I-wish-it-were-that-easy.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                <div class="w3-container w3-white" style="height:270px;">
+                  <h3 class="w3-center"><i>Vị trí tuyển dụng: </i><b>'.$row['position'].'</b></h3>
+                  <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: '.$row['name'].'</h4>
+                  <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>'.$row['amount'].'</b> người</p>
+                  <p><i "fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>'.$row['assignment'].'</b></p>
+                  <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: '.$row['address'].'</p>
+                  </div>
+                  <div class="w3-white" style="height: 38px;">
+                    <button type="submit" class="w3-button w3-right w3-green">Chi tiết</button>
+                  </div>
+              </div>
+            </form>';
           }
           echo '</div>';
           
@@ -162,44 +164,6 @@ $name_organization = $address_organization = $toReturn = $r_date_created = $r_po
         // Close connection
         mysqli_close($link);
       ?>
-      <!-- Second Photo Grid-->
-      
-      <div class="w3-row-padding" id="OPEN">
-        <div class="w3-third w3-container w3-margin-bottom">
-          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-          <div class="w3-container w3-white">
-          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
-            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
-            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
-            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
-            <a href="../scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
-          </div>
-        </div>
-        <div class="w3-third w3-container w3-margin-bottom">
-          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-          <div class="w3-container w3-white">
-          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
-            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
-            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
-            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
-            <a href="../scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
-          </div>
-        </div>
-        <div class="w3-third w3-container">
-          <img src="https://www.w3schools.com/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-          <div class="w3-container w3-white">
-          <h3 class="w3-center"><b>Lập trình viên Java (Angularjs, Javascript, Java)</b></h3>
-            <h4><i class="fa fa-diamond fa-fw"></i>  Công ty: New Wave</h4>
-            <p><i class="fa fa-fw fa-male"></i> Chúng tôi cần: <b>3</b> người</p>
-            <p><i class="fa fa-fw fa-check-square"></i> Số lượng đã đăng ký: <b>20</b></p>
-            <p><i class="fa fa-map-pin fa-fw"></i> Địa điểm làm việc: 334 Nguyễn Trãi, Thanh Xuân, Hà Nội</p>
-            <a href="../scr_1001/scr_1001V.php" class=" <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><button type="submit" class="w3-button w3-right  w3-green">Chi tiết</button></a>	
-          </div>
-        </div>
-      </div>
-
       <div class="w3-center w3-padding-32">
         <div class="w3-bar">
           <a href="#list-require" class="w3-bar-item w3-button w3-hover-black">«</a>

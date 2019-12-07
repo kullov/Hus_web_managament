@@ -50,9 +50,9 @@ if ($_SERVER["PHP_SELF"] == "/web_management/index.php") {
         </div>
       </div>
       <div class="w3-dropdown-hover w3-hide-small w3-mobile w3-light-grey w3-right" <?php echo($displayLogout); ?>>
-        <a href="/web_management/scr_100x/scr_1001/scr_1001.php" class="w3-bar-item w3-pale-red w3-button w3-mobile w3-padding-16 <?php if (($_SESSION["role"]) !== "student") { ?> w3-hide <?php }?> " ><i class='far fa-address-card w3-margin-right'></i>Sinh viên: <i><?php echo $_SESSION["name"] ?></i></a>
-        <a href="/web_management/scr_100x/scr_1002/scr_1002.php" class="w3-bar-item w3-pale-yellow w3-button w3-mobile w3-padding-16 <?php if (($_SESSION["role"]) !== "organization") { ?> w3-hide <?php }?> "><i class="fa fa-th-large fa-fw w3-margin-right"></i>Doanh nghiệp: <i><?php echo $_SESSION["name"] ?></i></a>
-        <a href="/web_management/scr_100x/scr_1003/scr_1003.php" class="w3-bar-item w3-pale-blue w3-button w3-mobile w3-padding-16 <?php if (($_SESSION["role"]) !== "teacher") { ?> w3-hide <?php }?> "><i class='far fa-address-card w3-margin-right'></i>Giáo viên: <i><?php echo $_SESSION["name"] ?></i></a>
+        <a href="/web_management/scr_100x/scr_1001/scr_1001.php" class="w3-bar-item w3-pale-red w3-button w3-mobile w3-padding-16 <?php if (($_SESSION["role"]) !== "student") { ?> w3-hide <?php }?> " ><i class='far fa-address-card w3-margin-right'></i>Sinh viên: <strong><i><?php echo $_SESSION["name"] ?></i></strong></a>
+        <a href="/web_management/scr_100x/scr_1002/scr_1002.php" class="w3-bar-item w3-pale-yellow w3-button w3-mobile w3-padding-16 <?php if (($_SESSION["role"]) !== "organization") { ?> w3-hide <?php }?> "><i class="fa fa-th-large fa-fw w3-margin-right"></i>Doanh nghiệp: <strong><i><?php echo $_SESSION["name"] ?></i></strong></a>
+        <a href="/web_management/scr_100x/scr_1003/scr_1003.php" class="w3-bar-item w3-pale-blue w3-button w3-mobile w3-padding-16 <?php if (($_SESSION["role"]) !== "teacher") { ?> w3-hide <?php }?> "><i class='far fa-address-card w3-margin-right'></i>Giáo viên: <strong><i><?php echo $_SESSION["name"] ?></i></strong></a>
         <a href="/web_management/scr_100/logout/logout.php"><button class="w3-button w3-padding-16 w3-teal">Logout <i class="fa fa-sign-out"></i></button></a>
       </div>
       

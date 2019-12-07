@@ -149,8 +149,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
       <?php 
         // echo $listRequest 
         if ($_SESSION["role"] === "organization") {
-          $stmt4 = $link->prepare("SELECT r.`id`, o.`name`, r.`position`, o.`address`, r.`amount`, r.`date_created`, r.`description`, r.`type`, r.`status`, ( SELECT COUNT(*) FROM `request_assignment` ra WHERE ra.request_id = r.id ) assignment FROM `request` r, organization_profile o WHERE r.`organization_id` = o.id AND o.`id` = 21 ORDER BY r.id DESC LIMIT 6" );
-          // $stmt4->bind_param("s", $id);
+          $stmt4 = $link->prepare("SELECT r.`id`, o.`name`, r.`position`, o.`address`, r.`amount`, r.`date_created`, r.`description`, r.`type`, r.`status`, ( SELECT COUNT(*) FROM `request_assignment` ra WHERE ra.request_id = r.id ) assignment FROM `request` r, organization_profile o WHERE r.`organization_id` = o.id AND o.`id` = ? ORDER BY r.id DESC LIMIT 6" );
+          $stmt4->bind_param("s", $id);
           $stmt4->execute();
           $result = $stmt4->get_result();
           echo '<div class="w3-row-padding">';

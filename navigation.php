@@ -38,15 +38,15 @@ if ($_SERVER["PHP_SELF"] == "/web_management/index.php") {
       <!-- <div class="w3-dropdown-hover w3-mobile"> -->
       <!-- <button class="w3-button w3-padding-16">Type <i class="fa fa-caret-down"></i></button> -->
       <!-- <div class="w3-dropdown-content w3-bar-block w3-dark-grey" > -->
-        <a href="<?php echo $_SERVER['DOCUMENT_ROOT'] ?>scr_100x/scr_1001/scr_1001B.php" class="w3-padding-16 w3-bar-item w3-button w3-hide-small w3-hover-teal <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><i class='fas fa-list-ul w3-margin-right'></i>Danh sách phiếu yêu cầu</a>
+        <a href="<?php echo $_SERVER['DOCUMENT_ROOT'] ?>/scr_100x/scr_1001/scr_1001B.php" class="w3-padding-16 w3-bar-item w3-button w3-hide-small w3-hover-teal <?php if (($_SESSION["role"]) == "") { ?> w3-hide <?php }?> "><i class='fas fa-list-ul w3-margin-right'></i>Danh sách phiếu yêu cầu</a>
       <!-- </div> -->
       <!-- </div> -->
       <div class="w3-dropdown-hover w3-hide-small w3-mobile w3-light-grey w3-right" <?php echo($displayLogin); ?>>
         <button class="w3-button w3-padding-16 w3-teal"> <i class="fa fa-sign-in"></i> Login</button>
         <div class="w3-dropdown-content w3-bar-block w3-light-grey">
-          <a href="/web_management/scr_100/login/student.php" class="w3-bar-item w3-button w3-mobile w3-padding-16">Student</a>
-          <a href="/web_management/scr_100/login/organization.php" class="w3-bar-item w3-button w3-mobile w3-padding-16">Company</a>
-          <a href="/web_management/scr_100/login/teacher.php" class="w3-bar-item w3-button w3-mobile w3-padding-16">Teacher</a>
+          <a href="<?php echo $_SERVER['DOCUMENT_ROOT'] ?>/scr_100/login/student.php" class="w3-bar-item w3-button w3-mobile w3-padding-16">Student</a>
+          <a href="<?php echo $_SERVER['DOCUMENT_ROOT'] ?>/scr_100/login/organization.php" class="w3-bar-item w3-button w3-mobile w3-padding-16">Company</a>
+          <a href="<?php echo $_SERVER['DOCUMENT_ROOT'] ?>/scr_100/login/teacher.php" class="w3-bar-item w3-button w3-mobile w3-padding-16">Teacher</a>
         </div>
       </div>
       <div class="w3-dropdown-hover w3-hide-small w3-mobile w3-light-grey w3-right" <?php echo($displayLogout); ?>>

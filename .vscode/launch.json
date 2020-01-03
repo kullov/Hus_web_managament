@@ -23,7 +23,7 @@
       "type": "chrome",
       "request": "launch",
       "name": "Launch Chrome against localhost",
-      "url": "http://localhost/web_management/",
+      "url": "http://localhost./",
       "webRoot": "${workspaceFolder}"
     }
   ]

@@ -271,7 +271,7 @@ if (isset($_POST['btnSmt'])) {
       </div>
       
       <footer class="w3-container w3-padding-16" style="margin-top:32px">Powered by 
-        <a href="/web_management/" title="Origen" target="_blank" class="w3-hover-text-green">Origen</a>
+        <a href="./" title="Origen" target="_blank" class="w3-hover-text-green">Origen</a>
         <a class="w3-button w3-green w3-right" href="scr_1001B.php">Trở về</a>
       </footer>
 

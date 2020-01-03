@@ -201,7 +201,7 @@ $name_organization = $address_organization = $toReturn = $r_date_created = $r_po
     <!-- Footer -->
     <?php include("../../footer.php"); ?>
     
-    <div class="w3-black w3-center w3-padding-24">Powered by <a href="/web_management/" title="Origen" target="_blank" class="w3-hover-opacity">Origen</a></div>
+    <div class="w3-black w3-center w3-padding-24">Powered by <a href="./" title="Origen" target="_blank" class="w3-hover-opacity">Origen</a></div>
 
   <!-- End page content -->
   </div>
